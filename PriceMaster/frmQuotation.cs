@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.IO;
+using System.Diagnostics;
 
 namespace PriceMaster
 {
@@ -21,6 +23,19 @@ namespace PriceMaster
             InitializeComponent();
             _quote_id = quote_id;
             skipSQL = -1;
+
+            //get the max rev 
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+                //very quickly get the max issue of this quote
+                string sql = "select max(issue_id) FROM dbo.sl_quotation where quote_id = " + _quote_id;
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    cmbIssue.Text = cmd.ExecuteScalar().ToString();
+
+                conn.Close();
+            }
             loadData();
             fillCombo();
             lblTitle.Text = "Quote " + _quote_id.ToString();
@@ -34,16 +49,11 @@ namespace PriceMaster
                 conn.Open();
 
                 //very quickly get the max issue of this quote
-                string sql = "select max(issue_id) FROM dbo.sl_quotation where quote_id = " + _quote_id;
-
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
-                {
-                    cmbIssue.Text = cmd.ExecuteScalar().ToString();
-                }
-                sql = "select customer_acc_ref,quotation_ref,a.customer_contact,customer_email,fitting_quote_id,price,prio.priority_description,quoted_by.forename + ' ' + quoted_by.surname as created_by, " +
+                string sql = "select s.[NAME],quotation_ref,a.customer_contact,customer_email,fitting_quote_id,price,prio.priority_description,quoted_by.forename + ' ' + quoted_by.surname as created_by, " +
                     "quote_date,followed_up_yn,CAST(follow_up_date as date) as follow_up_date,sl_status.description as status,loss.description as reason_for_loss,material.material_description as material_Type, " +
                     "supplier.company_name,supplier_reference, sys_1.system_name,sys_2.system_name,sys_3.system_name,sys_4.system_name,sys_5.system_name,note " +
                     "from dbo.sl_quotation a " +
+                    "LEFT JOIN [dsl_fitting].dbo.[SALES_LEDGER] s on s.ACCOUNT_REF = a.customer_acc_ref " +
                     "left join dbo.sl_priority prio on prio.id = a.priority_id " +
                     "left join dbo.sl_material_suppliers supplier on supplier.id = a.material_supplier_id " +
                     "LEFT JOIN dbo.sl_material material on material.id = a.material_type_id " +
@@ -72,7 +82,7 @@ namespace PriceMaster
                     txtPrice.Text = dt.Rows[0][5].ToString();
                     cmbPriority.Text = dt.Rows[0][6].ToString();
                     cmbQuotedBy.Text = dt.Rows[0][7].ToString();
-                    dteQuoteDate.Value = Convert.ToDateTime(dt.Rows[0][8].ToString());
+                    dteQuoteDate.Text = dt.Rows[0][8].ToString();
                     if (dt.Rows[0][9].ToString() == "-1")
                         chkFollowUp.Checked = true;
                     else
@@ -170,6 +180,15 @@ namespace PriceMaster
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                         cmbLoss.Items.Add(reader.GetString(0));
+                    reader.Close();
+                }
+                //fill issue box
+                sql = "select cast(issue_id as nvarchar(max)) FROM dbo.sl_quotation where quote_id = " + _quote_id;
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                        cmbIssue.Items.Add(reader.GetString(0));
                     reader.Close();
                 }
                 conn.Close();
@@ -462,6 +481,7 @@ namespace PriceMaster
 
         private void txtPrice_Leave(object sender, EventArgs e)
         {
+            txtPrice.Text = txtPrice.Text.Replace(",", "");
             txtPrice.Text = txtPrice.Text.Replace("'", "");
             if (txtPrice.Text.Length > 0)
             {
@@ -474,6 +494,7 @@ namespace PriceMaster
         {
             if (e.KeyCode == Keys.Enter)
             {
+                txtPrice.Text = txtPrice.Text.Replace(",", "");
                 txtPrice.Text = txtPrice.Text.Replace("'", "");
                 if (txtPrice.Text.Length > 0)
                 {
@@ -513,8 +534,8 @@ namespace PriceMaster
                 value = -1;
             else
                 value = 0;
-             string sql = "UPDATE dbo.sl_quotation SET followed_up_yn = " + value + " WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
-                    runSQL(sql, 0);
+            string sql = "UPDATE dbo.sl_quotation SET followed_up_yn = " + value + " WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
+            runSQL(sql, 0);
         }
 
         private void dteFollowUp_ValueChanged(object sender, EventArgs e)
@@ -528,5 +549,91 @@ namespace PriceMaster
         {
 
         }
+
+        private void cmbIssue_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadData();
+        }
+
+        private void btnAddNote_Click(object sender, EventArgs e)
+        {
+            frmNote note = new frmNote();
+            note.ShowDialog();
+            if (CONNECT.note == "cancel clicked")
+            { MessageBox.Show("Note Cancelled", "", MessageBoxButtons.OK); }
+            else
+            {
+                //update the note then refresh the box
+                if (txtNote.Text.Length < 1)
+                    txtNote.Text = CONNECT.note;
+                else
+                    txtNote.Text = txtNote.Text + Environment.NewLine + CONNECT.note;
+                string sql = "UPDATE dbo.sl_quotation SET note = '" + txtNote.Text + "'  WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
+                runSQL(sql, 0);
+            }
+        }
+
+        private void btnViewQuote_Click(object sender, EventArgs e)
+        {
+            string filePath = @"S:\SLIMLINE QUOTES\SL" + _quote_id.ToString();
+
+            if (Convert.ToInt32(cmbIssue.Text) > 1) //issue has some extra stuff
+                filePath = filePath + "I" + cmbIssue.Text;
+
+            filePath = filePath + ".rtf";
+
+            //check if file exists 
+            if (File.Exists(filePath))
+                Process.Start(filePath);
+            else
+                MessageBox.Show("The quotation for " + _quote_id.ToString() + " does not exist!", "Missing File", MessageBoxButtons.OK);
+        }
+
+        private void btnRevise_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to revise this quote?", "Revise Quote: " + _quote_id.ToString() + " issue: " + cmbIssue.Text, MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                //run usp_revise_quote + quote id + issue_id
+                SqlConnection conn = new SqlConnection(CONNECT.ConnectionString);
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("usp_revise_quote", conn))
+                {
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@quote_id", SqlDbType.Int).Value = _quote_id;
+                    cmd.Parameters.AddWithValue("@issue_id", SqlDbType.Int).Value = Convert.ToInt32(cmbIssue.Text);
+                    cmd.ExecuteNonQuery();
+                }
+
+                
+                //very quickly get the max issue of this quote
+
+                string sql = "select max(issue_id) FROM dbo.sl_quotation where quote_id = " + _quote_id;
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmbIssue.Text = cmd.ExecuteScalar().ToString();
+                    cmbIssue.Items.Add(cmd.ExecuteScalar().ToString());
+                }
+
+                //update the quoted date + the quoted by
+                sql = "UPDATE dbo.sl_quotation SET quote_date = GETDATE(),created_by_id = " + CONNECT.staffID.ToString() + " WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
+                runSQL(sql, 0);
+                loadData();
+                conn.Close();
+            }
+        }
+
+        private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&        (e.KeyChar != '.'))
+                e.Handled = true;
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
+

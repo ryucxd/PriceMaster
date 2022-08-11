@@ -19,5 +19,10 @@ namespace PriceMaster
                                "Trusted_Connection=no;" +
                                "database=user_info; " +
                                "connection timeout=30";
+
+        public static string note;
+        public static string materialType;
+        public static int staffID;
+        public static string staffFullName;
     }
 }

@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Globalization;
+using System.IO;
+using System.Diagnostics;
+
 namespace PriceMaster
 {
     public partial class frmMain : Form
     {
-
+        public string sql_where { get; set; }
         //datagridview column variables
         public int quote_id_index { get; set; }
         public int view_index { get; set; }
@@ -88,8 +91,7 @@ namespace PriceMaster
                 sql = sql + " AND quote_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND quote_date <= '" + dteEnd.Value.ToString("yyyyMMdd") + "' ";
 
 
-
-
+            sql_where = sql.Substring(sql.LastIndexOf("-1") + 2);
 
 
             //  AND quote_date >= '20220701 00:00' AND quote_date <= '20220731'   ORDER BY quote_id DESC, issue_id";
@@ -277,7 +279,6 @@ namespace PriceMaster
                             cmbQuotedBy.Items.Add(reader.GetString(0));
                         reader.Close();
                     }
-
                     conn.Close();
                 }
             }
@@ -290,7 +291,24 @@ namespace PriceMaster
             {
                 frmQuotation frm = new frmQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()));
                 frm.ShowDialog();
+            }  //opens quotation screen
+
+            if (e.ColumnIndex == view_button_index)
+            {
+                string filePath = @"S:\SLIMLINE QUOTES\SL" + dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString();
+
+                if (Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[issue_id_index].Value.ToString()) > 1) //issue has some extra stuff
+                    filePath = filePath + "I" + dataGridView1.Rows[e.RowIndex].Cells[issue_id_index].Value.ToString();
+
+                filePath = filePath + ".rtf";
+
+                //check if file exists 
+                if (File.Exists(filePath))
+                    Process.Start(filePath);
+                else
+                    MessageBox.Show("The quotation for " + dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString() + " does not exist!", "Missing File", MessageBoxButtons.OK);
             }
+
         }
 
         private void txtQuoteID_TextChanged(object sender, EventArgs e)
@@ -340,7 +358,7 @@ namespace PriceMaster
 
         private void txtQuotedBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadData();  
+            loadData();
         }
 
         private void dteStart_ValueChanged(object sender, EventArgs e)
@@ -370,6 +388,98 @@ namespace PriceMaster
             dateFilter = 0;
             loadData();
 
+        }
+
+        private void btnEmail_Click(object sender, EventArgs e)
+        {
+
+            if (sql_where == " ")
+            {
+                MessageBox.Show("Please filter the grid before clicking [Email Report] - Currently there are too many records to email.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (dataGridView1.Rows.Count < 1)
+            {
+                MessageBox.Show("There is currently no data to email - Please filter the report to show records before attempting to email.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            //first we need to store the where statement
+            //replace all the ' with something more friendly (gets reverted back on the access side)
+            sql_where = sql_where.Replace("'", "replaceme");
+            string sql = "UPDATE dbo.sl_sql SET sql = '" + sql_where + "' where id = 1";
+
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+
+            string price_master_email = @"\\designsvr1\apps\Design and Supply MS ACCESS\Frontend\Price_Log_Program\price_master_report.accdb";
+            Process.Start(price_master_email);
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSupplier_Click(object sender, EventArgs e)
+        {
+            frmSupplier frm = new frmSupplier();
+            frm.ShowDialog();
+        }
+
+        private void btnMaterial_Click(object sender, EventArgs e)
+        {
+            frmMaterial frm = new frmMaterial();
+            frm.ShowDialog();
+        }
+
+        private void btnCustomer_Click(object sender, EventArgs e)
+        {
+            frmCustomerList frm = new frmCustomerList();
+            frm.ShowDialog();
+        }
+
+        private void btnNewQuote_Click(object sender, EventArgs e)
+        {
+            //insert a new quote and then open it
+            DialogResult result = MessageBox.Show("Are you sure you want to create a new quote number?", "New Quote", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (result == DialogResult.Yes)
+            {
+                string sql = "SELECT max(quote_id) + 1 FROM dbo.sl_quotation";
+
+                using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                {
+                    conn.Open();
+                    int max_id = 0;
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                        max_id = Convert.ToInt32(cmd.ExecuteScalar());
+
+
+
+                    sql = "insert into dbo.sl_quotation (quote_id,issue_id,quote_date,highest_issue,created_by_id,status_id)" +
+                    " VALUES (" + max_id.ToString() + ",1,getdate(),-1," + CONNECT.staffID.ToString() + ",8)";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    frmQuotation frm = new frmQuotation(max_id);
+                    frm.ShowDialog();
+                    loadData();
+                }
+            }
+        }
+
+        private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                e.Handled = true;
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

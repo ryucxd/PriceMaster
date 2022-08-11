@@ -52,6 +52,11 @@
             this.dteStart = new System.Windows.Forms.DateTimePicker();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.btnNewQuote = new PriceMaster.buttonFormatting();
+            this.btnCustomer = new PriceMaster.buttonFormatting();
+            this.btnMaterial = new PriceMaster.buttonFormatting();
+            this.btnSupplier = new PriceMaster.buttonFormatting();
+            this.btnEmail = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -61,6 +66,8 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -105,6 +112,8 @@
             // 
             // cmbStatus
             // 
+            this.cmbStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbStatus.FormattingEnabled = true;
             this.cmbStatus.Location = new System.Drawing.Point(445, 116);
             this.cmbStatus.Name = "cmbStatus";
@@ -114,6 +123,8 @@
             // 
             // cmbSystem
             // 
+            this.cmbSystem.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbSystem.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbSystem.FormattingEnabled = true;
             this.cmbSystem.Location = new System.Drawing.Point(699, 116);
             this.cmbSystem.Name = "cmbSystem";
@@ -123,6 +134,8 @@
             // 
             // cmbMaterial
             // 
+            this.cmbMaterial.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbMaterial.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbMaterial.FormattingEnabled = true;
             this.cmbMaterial.Location = new System.Drawing.Point(572, 116);
             this.cmbMaterial.Name = "cmbMaterial";
@@ -235,6 +248,7 @@
             this.txtPrice.Size = new System.Drawing.Size(112, 21);
             this.txtPrice.TabIndex = 25;
             this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
+            this.txtPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrice_KeyPress);
             // 
             // label12
             // 
@@ -249,6 +263,8 @@
             // 
             // cmbQuotedBy
             // 
+            this.cmbQuotedBy.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbQuotedBy.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbQuotedBy.FormattingEnabled = true;
             this.cmbQuotedBy.Location = new System.Drawing.Point(1243, 116);
             this.cmbQuotedBy.Name = "cmbQuotedBy";
@@ -294,6 +310,96 @@
             this.label14.Text = "to";
             this.label14.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // btnNewQuote
+            // 
+            this.btnNewQuote.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnNewQuote.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNewQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewQuote.ForeColor = System.Drawing.Color.White;
+            this.btnNewQuote.Location = new System.Drawing.Point(1420, 9);
+            this.btnNewQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnNewQuote.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnNewQuote.Name = "btnNewQuote";
+            this.btnNewQuote.Padding = new System.Windows.Forms.Padding(3);
+            this.btnNewQuote.Size = new System.Drawing.Size(146, 30);
+            this.btnNewQuote.TabIndex = 38;
+            this.btnNewQuote.Text = "New Quote";
+            this.btnNewQuote.UseVisualStyleBackColor = false;
+            this.btnNewQuote.Click += new System.EventHandler(this.btnNewQuote_Click);
+            // 
+            // btnCustomer
+            // 
+            this.btnCustomer.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnCustomer.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCustomer.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCustomer.ForeColor = System.Drawing.Color.White;
+            this.btnCustomer.Location = new System.Drawing.Point(1264, 9);
+            this.btnCustomer.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnCustomer.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnCustomer.Name = "btnCustomer";
+            this.btnCustomer.Padding = new System.Windows.Forms.Padding(3);
+            this.btnCustomer.Size = new System.Drawing.Size(146, 30);
+            this.btnCustomer.TabIndex = 37;
+            this.btnCustomer.Text = "Customer";
+            this.btnCustomer.UseVisualStyleBackColor = false;
+            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
+            // 
+            // btnMaterial
+            // 
+            this.btnMaterial.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnMaterial.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnMaterial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMaterial.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMaterial.ForeColor = System.Drawing.Color.White;
+            this.btnMaterial.Location = new System.Drawing.Point(1108, 9);
+            this.btnMaterial.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnMaterial.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnMaterial.Name = "btnMaterial";
+            this.btnMaterial.Padding = new System.Windows.Forms.Padding(3);
+            this.btnMaterial.Size = new System.Drawing.Size(146, 30);
+            this.btnMaterial.TabIndex = 36;
+            this.btnMaterial.Text = "Material Settings";
+            this.btnMaterial.UseVisualStyleBackColor = false;
+            this.btnMaterial.Click += new System.EventHandler(this.btnMaterial_Click);
+            // 
+            // btnSupplier
+            // 
+            this.btnSupplier.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnSupplier.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSupplier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSupplier.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSupplier.ForeColor = System.Drawing.Color.White;
+            this.btnSupplier.Location = new System.Drawing.Point(944, 9);
+            this.btnSupplier.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnSupplier.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnSupplier.Name = "btnSupplier";
+            this.btnSupplier.Padding = new System.Windows.Forms.Padding(3);
+            this.btnSupplier.Size = new System.Drawing.Size(154, 30);
+            this.btnSupplier.TabIndex = 35;
+            this.btnSupplier.Text = "Material Suppliers";
+            this.btnSupplier.UseVisualStyleBackColor = false;
+            this.btnSupplier.Click += new System.EventHandler(this.btnSupplier_Click);
+            // 
+            // btnEmail
+            // 
+            this.btnEmail.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnEmail.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEmail.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEmail.ForeColor = System.Drawing.Color.White;
+            this.btnEmail.Location = new System.Drawing.Point(788, 9);
+            this.btnEmail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnEmail.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnEmail.Name = "btnEmail";
+            this.btnEmail.Padding = new System.Windows.Forms.Padding(3);
+            this.btnEmail.Size = new System.Drawing.Size(146, 30);
+            this.btnEmail.TabIndex = 34;
+            this.btnEmail.Text = "Email Report";
+            this.btnEmail.UseVisualStyleBackColor = false;
+            this.btnEmail.Click += new System.EventHandler(this.btnEmail_Click);
+            // 
             // btnClear
             // 
             this.btnClear.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -317,6 +423,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnNewQuote);
+            this.Controls.Add(this.btnCustomer);
+            this.Controls.Add(this.btnMaterial);
+            this.Controls.Add(this.btnSupplier);
+            this.Controls.Add(this.btnEmail);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.dteEnd);
             this.Controls.Add(this.dteStart);
@@ -341,9 +452,11 @@
             this.Controls.Add(this.lblTotalCost);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pictureBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Price Log";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -377,6 +490,11 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private buttonFormatting btnClear;
+        private buttonFormatting btnEmail;
+        private buttonFormatting btnSupplier;
+        private buttonFormatting btnMaterial;
+        private buttonFormatting btnCustomer;
+        private buttonFormatting btnNewQuote;
     }
 }
 
