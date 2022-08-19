@@ -76,10 +76,14 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label22 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.dteQuoteDate = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txtEnquiry = new System.Windows.Forms.TextBox();
+            this.btnEnquiry = new PriceMaster.buttonFormatting();
+            this.btnAttachments = new PriceMaster.buttonFormatting();
+            this.btnAddNote = new PriceMaster.buttonFormatting();
             this.btnViewQuote = new PriceMaster.buttonFormatting();
             this.btnRevise = new PriceMaster.buttonFormatting();
-            this.btnAddNote = new PriceMaster.buttonFormatting();
-            this.dteQuoteDate = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -132,7 +136,7 @@
             // 
             // txtSupplierRef
             // 
-            this.txtSupplierRef.Location = new System.Drawing.Point(409, 267);
+            this.txtSupplierRef.Location = new System.Drawing.Point(409, 296);
             this.txtSupplierRef.Name = "txtSupplierRef";
             this.txtSupplierRef.Size = new System.Drawing.Size(206, 20);
             this.txtSupplierRef.TabIndex = 7;
@@ -176,7 +180,7 @@
             this.cmbStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(409, 134);
+            this.cmbStatus.Location = new System.Drawing.Point(409, 163);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(206, 21);
             this.cmbStatus.TabIndex = 11;
@@ -187,7 +191,7 @@
             this.cmbLoss.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbLoss.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbLoss.FormattingEnabled = true;
-            this.cmbLoss.Location = new System.Drawing.Point(409, 167);
+            this.cmbLoss.Location = new System.Drawing.Point(409, 196);
             this.cmbLoss.Name = "cmbLoss";
             this.cmbLoss.Size = new System.Drawing.Size(206, 21);
             this.cmbLoss.TabIndex = 12;
@@ -198,7 +202,7 @@
             this.cmbMatieralType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbMatieralType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbMatieralType.FormattingEnabled = true;
-            this.cmbMatieralType.Location = new System.Drawing.Point(409, 200);
+            this.cmbMatieralType.Location = new System.Drawing.Point(409, 229);
             this.cmbMatieralType.Name = "cmbMatieralType";
             this.cmbMatieralType.Size = new System.Drawing.Size(206, 21);
             this.cmbMatieralType.TabIndex = 13;
@@ -209,7 +213,7 @@
             this.cmbMatieralSupplier.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbMatieralSupplier.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbMatieralSupplier.FormattingEnabled = true;
-            this.cmbMatieralSupplier.Location = new System.Drawing.Point(409, 233);
+            this.cmbMatieralSupplier.Location = new System.Drawing.Point(409, 262);
             this.cmbMatieralSupplier.Name = "cmbMatieralSupplier";
             this.cmbMatieralSupplier.Size = new System.Drawing.Size(206, 21);
             this.cmbMatieralSupplier.TabIndex = 14;
@@ -220,7 +224,7 @@
             this.cmbSys1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbSys1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbSys1.FormattingEnabled = true;
-            this.cmbSys1.Location = new System.Drawing.Point(409, 299);
+            this.cmbSys1.Location = new System.Drawing.Point(409, 328);
             this.cmbSys1.Name = "cmbSys1";
             this.cmbSys1.Size = new System.Drawing.Size(206, 21);
             this.cmbSys1.TabIndex = 15;
@@ -231,7 +235,7 @@
             this.cmbSys2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbSys2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbSys2.FormattingEnabled = true;
-            this.cmbSys2.Location = new System.Drawing.Point(409, 333);
+            this.cmbSys2.Location = new System.Drawing.Point(409, 362);
             this.cmbSys2.Name = "cmbSys2";
             this.cmbSys2.Size = new System.Drawing.Size(206, 21);
             this.cmbSys2.TabIndex = 16;
@@ -242,7 +246,7 @@
             this.cmbSys3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbSys3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbSys3.FormattingEnabled = true;
-            this.cmbSys3.Location = new System.Drawing.Point(409, 367);
+            this.cmbSys3.Location = new System.Drawing.Point(409, 396);
             this.cmbSys3.Name = "cmbSys3";
             this.cmbSys3.Size = new System.Drawing.Size(206, 21);
             this.cmbSys3.TabIndex = 17;
@@ -253,7 +257,7 @@
             this.cmbSys4.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbSys4.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbSys4.FormattingEnabled = true;
-            this.cmbSys4.Location = new System.Drawing.Point(409, 400);
+            this.cmbSys4.Location = new System.Drawing.Point(409, 429);
             this.cmbSys4.Name = "cmbSys4";
             this.cmbSys4.Size = new System.Drawing.Size(206, 21);
             this.cmbSys4.TabIndex = 18;
@@ -264,7 +268,7 @@
             this.cmbSys5.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbSys5.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbSys5.FormattingEnabled = true;
-            this.cmbSys5.Location = new System.Drawing.Point(409, 433);
+            this.cmbSys5.Location = new System.Drawing.Point(409, 462);
             this.cmbSys5.Name = "cmbSys5";
             this.cmbSys5.Size = new System.Drawing.Size(206, 21);
             this.cmbSys5.TabIndex = 19;
@@ -362,7 +366,7 @@
             // 
             // label11
             // 
-            this.label11.Location = new System.Drawing.Point(318, 134);
+            this.label11.Location = new System.Drawing.Point(318, 163);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(85, 21);
             this.label11.TabIndex = 30;
@@ -371,7 +375,7 @@
             // 
             // label12
             // 
-            this.label12.Location = new System.Drawing.Point(310, 167);
+            this.label12.Location = new System.Drawing.Point(310, 196);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(93, 21);
             this.label12.TabIndex = 31;
@@ -380,7 +384,7 @@
             // 
             // label13
             // 
-            this.label13.Location = new System.Drawing.Point(310, 200);
+            this.label13.Location = new System.Drawing.Point(310, 229);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(93, 21);
             this.label13.TabIndex = 32;
@@ -389,7 +393,7 @@
             // 
             // label14
             // 
-            this.label14.Location = new System.Drawing.Point(310, 233);
+            this.label14.Location = new System.Drawing.Point(310, 262);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(93, 21);
             this.label14.TabIndex = 33;
@@ -398,7 +402,7 @@
             // 
             // label15
             // 
-            this.label15.Location = new System.Drawing.Point(310, 267);
+            this.label15.Location = new System.Drawing.Point(310, 296);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(93, 21);
             this.label15.TabIndex = 34;
@@ -407,7 +411,7 @@
             // 
             // label16
             // 
-            this.label16.Location = new System.Drawing.Point(310, 299);
+            this.label16.Location = new System.Drawing.Point(310, 328);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(93, 21);
             this.label16.TabIndex = 35;
@@ -416,7 +420,7 @@
             // 
             // label17
             // 
-            this.label17.Location = new System.Drawing.Point(310, 333);
+            this.label17.Location = new System.Drawing.Point(310, 362);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(93, 21);
             this.label17.TabIndex = 36;
@@ -425,7 +429,7 @@
             // 
             // label18
             // 
-            this.label18.Location = new System.Drawing.Point(310, 367);
+            this.label18.Location = new System.Drawing.Point(310, 396);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(93, 21);
             this.label18.TabIndex = 37;
@@ -434,7 +438,7 @@
             // 
             // label19
             // 
-            this.label19.Location = new System.Drawing.Point(310, 400);
+            this.label19.Location = new System.Drawing.Point(310, 429);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(93, 21);
             this.label19.TabIndex = 38;
@@ -443,7 +447,7 @@
             // 
             // label20
             // 
-            this.label20.Location = new System.Drawing.Point(310, 433);
+            this.label20.Location = new System.Drawing.Point(310, 462);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(93, 21);
             this.label20.TabIndex = 39;
@@ -533,41 +537,68 @@
             this.lblTitle.Text = "Quote 7879";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnViewQuote
+            // dteQuoteDate
             // 
-            this.btnViewQuote.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnViewQuote.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnViewQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViewQuote.ForeColor = System.Drawing.Color.White;
-            this.btnViewQuote.Location = new System.Drawing.Point(461, 70);
-            this.btnViewQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnViewQuote.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnViewQuote.Name = "btnViewQuote";
-            this.btnViewQuote.Padding = new System.Windows.Forms.Padding(3);
-            this.btnViewQuote.Size = new System.Drawing.Size(123, 30);
-            this.btnViewQuote.TabIndex = 47;
-            this.btnViewQuote.Text = "View Quote";
-            this.btnViewQuote.UseVisualStyleBackColor = false;
-            this.btnViewQuote.Click += new System.EventHandler(this.btnViewQuote_Click);
+            this.dteQuoteDate.Enabled = false;
+            this.dteQuoteDate.Location = new System.Drawing.Point(97, 400);
+            this.dteQuoteDate.Name = "dteQuoteDate";
+            this.dteQuoteDate.Size = new System.Drawing.Size(206, 20);
+            this.dteQuoteDate.TabIndex = 56;
             // 
-            // btnRevise
+            // label23
             // 
-            this.btnRevise.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnRevise.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnRevise.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRevise.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRevise.ForeColor = System.Drawing.Color.White;
-            this.btnRevise.Location = new System.Drawing.Point(461, 30);
-            this.btnRevise.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnRevise.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnRevise.Name = "btnRevise";
-            this.btnRevise.Padding = new System.Windows.Forms.Padding(3);
-            this.btnRevise.Size = new System.Drawing.Size(123, 30);
-            this.btnRevise.TabIndex = 46;
-            this.btnRevise.Text = "Revise Quote";
-            this.btnRevise.UseVisualStyleBackColor = false;
-            this.btnRevise.Click += new System.EventHandler(this.btnRevise_Click);
+            this.label23.Location = new System.Drawing.Point(318, 134);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(85, 21);
+            this.label23.TabIndex = 59;
+            this.label23.Text = "EnquiryID:";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtEnquiry
+            // 
+            this.txtEnquiry.Location = new System.Drawing.Point(409, 134);
+            this.txtEnquiry.Name = "txtEnquiry";
+            this.txtEnquiry.Size = new System.Drawing.Size(149, 20);
+            this.txtEnquiry.TabIndex = 60;
+            this.txtEnquiry.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEnquiry_KeyDown);
+            this.txtEnquiry.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEnquiry_KeyPress);
+            this.txtEnquiry.Leave += new System.EventHandler(this.txtEnquiry_Leave);
+            // 
+            // btnEnquiry
+            // 
+            this.btnEnquiry.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnEnquiry.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnEnquiry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEnquiry.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEnquiry.ForeColor = System.Drawing.Color.White;
+            this.btnEnquiry.Location = new System.Drawing.Point(561, 130);
+            this.btnEnquiry.Margin = new System.Windows.Forms.Padding(0);
+            this.btnEnquiry.MinimumSize = new System.Drawing.Size(50, 25);
+            this.btnEnquiry.Name = "btnEnquiry";
+            this.btnEnquiry.Padding = new System.Windows.Forms.Padding(3);
+            this.btnEnquiry.Size = new System.Drawing.Size(54, 28);
+            this.btnEnquiry.TabIndex = 61;
+            this.btnEnquiry.Text = "OPEN";
+            this.btnEnquiry.UseVisualStyleBackColor = false;
+            this.btnEnquiry.Click += new System.EventHandler(this.btnEnquiry_Click);
+            // 
+            // btnAttachments
+            // 
+            this.btnAttachments.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAttachments.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnAttachments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAttachments.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAttachments.ForeColor = System.Drawing.Color.White;
+            this.btnAttachments.Location = new System.Drawing.Point(461, 89);
+            this.btnAttachments.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnAttachments.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnAttachments.Name = "btnAttachments";
+            this.btnAttachments.Padding = new System.Windows.Forms.Padding(3);
+            this.btnAttachments.Size = new System.Drawing.Size(123, 30);
+            this.btnAttachments.TabIndex = 57;
+            this.btnAttachments.Text = "Attachments";
+            this.btnAttachments.UseVisualStyleBackColor = false;
+            this.btnAttachments.Click += new System.EventHandler(this.btnAttachments_Click);
             // 
             // btnAddNote
             // 
@@ -587,19 +618,51 @@
             this.btnAddNote.UseVisualStyleBackColor = false;
             this.btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
             // 
-            // dteQuoteDate
+            // btnViewQuote
             // 
-            this.dteQuoteDate.Enabled = false;
-            this.dteQuoteDate.Location = new System.Drawing.Point(97, 400);
-            this.dteQuoteDate.Name = "dteQuoteDate";
-            this.dteQuoteDate.Size = new System.Drawing.Size(206, 20);
-            this.dteQuoteDate.TabIndex = 56;
+            this.btnViewQuote.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnViewQuote.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnViewQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewQuote.ForeColor = System.Drawing.Color.White;
+            this.btnViewQuote.Location = new System.Drawing.Point(461, 49);
+            this.btnViewQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnViewQuote.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnViewQuote.Name = "btnViewQuote";
+            this.btnViewQuote.Padding = new System.Windows.Forms.Padding(3);
+            this.btnViewQuote.Size = new System.Drawing.Size(123, 30);
+            this.btnViewQuote.TabIndex = 47;
+            this.btnViewQuote.Text = "View Quote";
+            this.btnViewQuote.UseVisualStyleBackColor = false;
+            this.btnViewQuote.Click += new System.EventHandler(this.btnViewQuote_Click);
+            // 
+            // btnRevise
+            // 
+            this.btnRevise.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnRevise.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnRevise.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRevise.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRevise.ForeColor = System.Drawing.Color.White;
+            this.btnRevise.Location = new System.Drawing.Point(461, 9);
+            this.btnRevise.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnRevise.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnRevise.Name = "btnRevise";
+            this.btnRevise.Padding = new System.Windows.Forms.Padding(3);
+            this.btnRevise.Size = new System.Drawing.Size(123, 30);
+            this.btnRevise.TabIndex = 46;
+            this.btnRevise.Text = "Revise Quote";
+            this.btnRevise.UseVisualStyleBackColor = false;
+            this.btnRevise.Click += new System.EventHandler(this.btnRevise_Click);
             // 
             // frmQuotation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(627, 757);
+            this.Controls.Add(this.btnEnquiry);
+            this.Controls.Add(this.txtEnquiry);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.btnAttachments);
             this.Controls.Add(this.dteQuoteDate);
             this.Controls.Add(this.btnAddNote);
             this.Controls.Add(this.lblTitle);
@@ -717,5 +780,9 @@
         private System.Windows.Forms.Label lblTitle;
         private buttonFormatting btnAddNote;
         private System.Windows.Forms.TextBox dteQuoteDate;
+        private buttonFormatting btnAttachments;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox txtEnquiry;
+        private buttonFormatting btnEnquiry;
     }
 }

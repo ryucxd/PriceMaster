@@ -51,7 +51,7 @@ namespace PriceMaster
                 //very quickly get the max issue of this quote
                 string sql = "select s.[NAME],quotation_ref,a.customer_contact,customer_email,fitting_quote_id,price,prio.priority_description,quoted_by.forename + ' ' + quoted_by.surname as created_by, " +
                     "quote_date,followed_up_yn,CAST(follow_up_date as date) as follow_up_date,sl_status.description as status,loss.description as reason_for_loss,material.material_description as material_Type, " +
-                    "supplier.company_name,supplier_reference, sys_1.system_name,sys_2.system_name,sys_3.system_name,sys_4.system_name,sys_5.system_name,note " +
+                    "supplier.company_name,supplier_reference, sys_1.system_name,sys_2.system_name,sys_3.system_name,sys_4.system_name,sys_5.system_name,note,enquiry_id " +
                     "from dbo.sl_quotation a " +
                     "LEFT JOIN [dsl_fitting].dbo.[SALES_LEDGER] s on s.ACCOUNT_REF = a.customer_acc_ref " +
                     "left join dbo.sl_priority prio on prio.id = a.priority_id " +
@@ -100,6 +100,7 @@ namespace PriceMaster
                     cmbSys4.Text = dt.Rows[0][19].ToString();
                     cmbSys5.Text = dt.Rows[0][20].ToString();
                     txtNote.Text = dt.Rows[0][21].ToString();
+                    txtEnquiry.Text = dt.Rows[0][22].ToString();
 
                 }
                 conn.Close();
@@ -606,7 +607,7 @@ namespace PriceMaster
                     cmd.ExecuteNonQuery();
                 }
 
-                
+
                 //very quickly get the max issue of this quote
 
                 string sql = "select max(issue_id) FROM dbo.sl_quotation where quote_id = " + _quote_id;
@@ -627,13 +628,80 @@ namespace PriceMaster
 
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&        (e.KeyChar != '.'))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
                 e.Handled = true;
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
             }
         }
+
+        private void btnAttachments_Click(object sender, EventArgs e)
+        {
+            //creates a path for this quote so the users can store whatever they want
+            string file_path = @"\\DESIGNSVR1\Public\Slimline_Price_Log\" + _quote_id.ToString();
+
+            DirectoryInfo di = Directory.CreateDirectory(file_path);
+            Process.Start(file_path);
+        }
+
+        private void txtEnquiry_Leave(object sender, EventArgs e)
+        {
+            if (txtEnquiry.Text.Length > 0)
+            {
+                string sql = "SELECT id FROM  [EnquiryLog].dbo.Enquiry_Log where id = " + txtEnquiry.Text;
+                runSQL(sql, -1);
+                if (temp == "no record")
+                {
+                    MessageBox.Show("The number you have entered does not match any enquiry. Please double check the number and try again", "Invalid ID", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtEnquiry.Text = "";
+                    return;
+                }
+                
+                sql = "UPDATE dbo.sl_quotation SET enquiry_id = " + txtEnquiry.Text + " WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
+                runSQL(sql, 0);
+            }
+        }
+
+        private void txtEnquiry_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (txtEnquiry.Text.Length > 0)
+                {
+                    string sql = "SELECT id FROM  [EnquiryLog].dbo.Enquiry_Log where id = " + txtEnquiry.Text;
+                    runSQL(sql, -1);
+                    if (temp == "no record")
+                    {
+                        MessageBox.Show("The number you have entered does not match any enquiry. Please double check the number and try again","Invalid ID",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        txtEnquiry.Text = "";
+                        return;
+                    }
+
+                        sql = "UPDATE dbo.sl_quotation SET enquiry_id = " + txtEnquiry.Text + " WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
+                    runSQL(sql, 0);
+                }
+            }
+        }
+
+        private void btnEnquiry_Click(object sender, EventArgs e)
+        {
+
+            if (txtEnquiry.Text.Length < 1)
+            {
+                MessageBox.Show("Please enter an enquiry log ID before clicking the open button.", "No data", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            frmEnquiry frm = new frmEnquiry(Convert.ToInt32(txtEnquiry.Text));
+            frm.ShowDialog();
+        }
+
+        private void txtEnquiry_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
     }
+
 }
 
