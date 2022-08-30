@@ -643,6 +643,9 @@ namespace PriceMaster
 
             DirectoryInfo di = Directory.CreateDirectory(file_path);
             Process.Start(file_path);
+
+            
+
         }
 
         private void txtEnquiry_Leave(object sender, EventArgs e)
@@ -657,7 +660,7 @@ namespace PriceMaster
                     txtEnquiry.Text = "";
                     return;
                 }
-                
+
                 sql = "UPDATE dbo.sl_quotation SET enquiry_id = " + txtEnquiry.Text + " WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
                 runSQL(sql, 0);
             }
@@ -673,12 +676,12 @@ namespace PriceMaster
                     runSQL(sql, -1);
                     if (temp == "no record")
                     {
-                        MessageBox.Show("The number you have entered does not match any enquiry. Please double check the number and try again","Invalid ID",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        MessageBox.Show("The number you have entered does not match any enquiry. Please double check the number and try again", "Invalid ID", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         txtEnquiry.Text = "";
                         return;
                     }
 
-                        sql = "UPDATE dbo.sl_quotation SET enquiry_id = " + txtEnquiry.Text + " WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
+                    sql = "UPDATE dbo.sl_quotation SET enquiry_id = " + txtEnquiry.Text + " WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
                     runSQL(sql, 0);
                 }
             }
@@ -686,7 +689,6 @@ namespace PriceMaster
 
         private void btnEnquiry_Click(object sender, EventArgs e)
         {
-
             if (txtEnquiry.Text.Length < 1)
             {
                 MessageBox.Show("Please enter an enquiry log ID before clicking the open button.", "No data", MessageBoxButtons.OK, MessageBoxIcon.Error);

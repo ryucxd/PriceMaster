@@ -459,8 +459,7 @@ namespace PriceMaster
                         max_id = Convert.ToInt32(cmd.ExecuteScalar());
 
 
-                    sql = "insert into dbo.sl_quotation (quote_id,issue_id,quote_date,highest_issue,created_by_id,status_id)" +
-                    " VALUES (" + max_id.ToString() + ",1,getdate(),-1," + CONNECT.staffID.ToString() + ",8)";
+                    sql = "insert into dbo.sl_quotation (quote_id,issue_id,quote_date,highest_issue,created_by_id,status_id) VALUES (" + max_id.ToString() + ",1,getdate(),-1," + CONNECT.staffID.ToString() + ",8)";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                         cmd.ExecuteNonQuery();
                         conn.Close();
