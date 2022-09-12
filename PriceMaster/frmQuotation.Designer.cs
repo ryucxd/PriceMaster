@@ -84,12 +84,14 @@
             this.btnAddNote = new PriceMaster.buttonFormatting();
             this.btnViewQuote = new PriceMaster.buttonFormatting();
             this.btnRevise = new PriceMaster.buttonFormatting();
+            this.label24 = new System.Windows.Forms.Label();
+            this.cmbType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtQuoteRef
             // 
-            this.txtQuoteRef.Location = new System.Drawing.Point(97, 168);
+            this.txtQuoteRef.Location = new System.Drawing.Point(97, 193);
             this.txtQuoteRef.Name = "txtQuoteRef";
             this.txtQuoteRef.Size = new System.Drawing.Size(206, 20);
             this.txtQuoteRef.TabIndex = 0;
@@ -99,7 +101,7 @@
             // 
             // txtCustomerContact
             // 
-            this.txtCustomerContact.Location = new System.Drawing.Point(97, 201);
+            this.txtCustomerContact.Location = new System.Drawing.Point(97, 226);
             this.txtCustomerContact.Name = "txtCustomerContact";
             this.txtCustomerContact.Size = new System.Drawing.Size(206, 20);
             this.txtCustomerContact.TabIndex = 1;
@@ -108,7 +110,7 @@
             // 
             // txtCustomerEmail
             // 
-            this.txtCustomerEmail.Location = new System.Drawing.Point(97, 234);
+            this.txtCustomerEmail.Location = new System.Drawing.Point(97, 259);
             this.txtCustomerEmail.Name = "txtCustomerEmail";
             this.txtCustomerEmail.Size = new System.Drawing.Size(206, 20);
             this.txtCustomerEmail.TabIndex = 2;
@@ -117,7 +119,7 @@
             // 
             // txtFittingQuote
             // 
-            this.txtFittingQuote.Location = new System.Drawing.Point(97, 267);
+            this.txtFittingQuote.Location = new System.Drawing.Point(97, 292);
             this.txtFittingQuote.Name = "txtFittingQuote";
             this.txtFittingQuote.Size = new System.Drawing.Size(206, 20);
             this.txtFittingQuote.TabIndex = 3;
@@ -126,7 +128,7 @@
             // 
             // txtPrice
             // 
-            this.txtPrice.Location = new System.Drawing.Point(97, 300);
+            this.txtPrice.Location = new System.Drawing.Point(97, 325);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(206, 20);
             this.txtPrice.TabIndex = 4;
@@ -159,7 +161,7 @@
             this.cmbPriority.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbPriority.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbPriority.FormattingEnabled = true;
-            this.cmbPriority.Location = new System.Drawing.Point(97, 333);
+            this.cmbPriority.Location = new System.Drawing.Point(97, 358);
             this.cmbPriority.Name = "cmbPriority";
             this.cmbPriority.Size = new System.Drawing.Size(206, 21);
             this.cmbPriority.TabIndex = 9;
@@ -169,7 +171,7 @@
             // 
             this.cmbQuotedBy.Enabled = false;
             this.cmbQuotedBy.FormattingEnabled = true;
-            this.cmbQuotedBy.Location = new System.Drawing.Point(97, 367);
+            this.cmbQuotedBy.Location = new System.Drawing.Point(97, 392);
             this.cmbQuotedBy.Name = "cmbQuotedBy";
             this.cmbQuotedBy.Size = new System.Drawing.Size(206, 21);
             this.cmbQuotedBy.TabIndex = 10;
@@ -285,7 +287,7 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(-15, 168);
+            this.label2.Location = new System.Drawing.Point(-15, 193);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 21);
             this.label2.TabIndex = 21;
@@ -294,7 +296,7 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(-15, 201);
+            this.label3.Location = new System.Drawing.Point(-15, 226);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(106, 21);
             this.label3.TabIndex = 22;
@@ -303,7 +305,7 @@
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(-15, 234);
+            this.label4.Location = new System.Drawing.Point(-15, 259);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(106, 21);
             this.label4.TabIndex = 23;
@@ -312,7 +314,7 @@
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(-15, 267);
+            this.label5.Location = new System.Drawing.Point(-15, 292);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(106, 21);
             this.label5.TabIndex = 24;
@@ -321,7 +323,7 @@
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(-15, 300);
+            this.label6.Location = new System.Drawing.Point(-15, 325);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(106, 21);
             this.label6.TabIndex = 25;
@@ -330,7 +332,7 @@
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(-15, 333);
+            this.label7.Location = new System.Drawing.Point(-15, 358);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(106, 21);
             this.label7.TabIndex = 26;
@@ -339,7 +341,7 @@
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(-15, 367);
+            this.label8.Location = new System.Drawing.Point(-15, 392);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(106, 21);
             this.label8.TabIndex = 27;
@@ -348,7 +350,7 @@
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(-15, 462);
+            this.label9.Location = new System.Drawing.Point(-15, 480);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(106, 21);
             this.label9.TabIndex = 28;
@@ -357,7 +359,7 @@
             // 
             // label10
             // 
-            this.label10.Location = new System.Drawing.Point(-15, 400);
+            this.label10.Location = new System.Drawing.Point(-15, 425);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(106, 21);
             this.label10.TabIndex = 29;
@@ -457,7 +459,7 @@
             // chkFollowUp
             // 
             this.chkFollowUp.AutoSize = true;
-            this.chkFollowUp.Location = new System.Drawing.Point(201, 433);
+            this.chkFollowUp.Location = new System.Drawing.Point(201, 458);
             this.chkFollowUp.Name = "chkFollowUp";
             this.chkFollowUp.Size = new System.Drawing.Size(15, 14);
             this.chkFollowUp.TabIndex = 40;
@@ -466,7 +468,7 @@
             // 
             // label21
             // 
-            this.label21.Location = new System.Drawing.Point(-15, 433);
+            this.label21.Location = new System.Drawing.Point(-15, 458);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(106, 21);
             this.label21.TabIndex = 41;
@@ -484,7 +486,7 @@
             // 
             // dteFollowUp
             // 
-            this.dteFollowUp.Location = new System.Drawing.Point(280, 463);
+            this.dteFollowUp.Location = new System.Drawing.Point(280, 481);
             this.dteFollowUp.Name = "dteFollowUp";
             this.dteFollowUp.Size = new System.Drawing.Size(23, 20);
             this.dteFollowUp.TabIndex = 45;
@@ -502,7 +504,7 @@
             // 
             // txtFollowUp
             // 
-            this.txtFollowUp.Location = new System.Drawing.Point(97, 463);
+            this.txtFollowUp.Location = new System.Drawing.Point(97, 481);
             this.txtFollowUp.Name = "txtFollowUp";
             this.txtFollowUp.Size = new System.Drawing.Size(189, 20);
             this.txtFollowUp.TabIndex = 50;
@@ -540,7 +542,7 @@
             // dteQuoteDate
             // 
             this.dteQuoteDate.Enabled = false;
-            this.dteQuoteDate.Location = new System.Drawing.Point(97, 400);
+            this.dteQuoteDate.Location = new System.Drawing.Point(97, 425);
             this.dteQuoteDate.Name = "dteQuoteDate";
             this.dteQuoteDate.Size = new System.Drawing.Size(206, 20);
             this.dteQuoteDate.TabIndex = 56;
@@ -654,11 +656,33 @@
             this.btnRevise.UseVisualStyleBackColor = false;
             this.btnRevise.Click += new System.EventHandler(this.btnRevise_Click);
             // 
+            // label24
+            // 
+            this.label24.Location = new System.Drawing.Point(-15, 163);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(106, 21);
+            this.label24.TabIndex = 63;
+            this.label24.Text = "Customer Type:";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cmbType
+            // 
+            this.cmbType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbType.Enabled = false;
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Location = new System.Drawing.Point(97, 163);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(206, 21);
+            this.cmbType.TabIndex = 62;
+            // 
             // frmQuotation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(627, 757);
+            this.Controls.Add(this.label24);
+            this.Controls.Add(this.cmbType);
             this.Controls.Add(this.btnEnquiry);
             this.Controls.Add(this.txtEnquiry);
             this.Controls.Add(this.label23);
@@ -784,5 +808,7 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox txtEnquiry;
         private buttonFormatting btnEnquiry;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.ComboBox cmbType;
     }
 }

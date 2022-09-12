@@ -51,7 +51,7 @@ namespace PriceMaster
                 //very quickly get the max issue of this quote
                 string sql = "select s.[NAME],quotation_ref,a.customer_contact,customer_email,fitting_quote_id,price,prio.priority_description,quoted_by.forename + ' ' + quoted_by.surname as created_by, " +
                     "quote_date,followed_up_yn,CAST(follow_up_date as date) as follow_up_date,sl_status.description as status,loss.description as reason_for_loss,material.material_description as material_Type, " +
-                    "supplier.company_name,supplier_reference, sys_1.system_name,sys_2.system_name,sys_3.system_name,sys_4.system_name,sys_5.system_name,note,enquiry_id " +
+                    "supplier.company_name,supplier_reference, sys_1.system_name,sys_2.system_name,sys_3.system_name,sys_4.system_name,sys_5.system_name,note,enquiry_id,s.type " +
                     "from dbo.sl_quotation a " +
                     "LEFT JOIN [dsl_fitting].dbo.[SALES_LEDGER] s on s.ACCOUNT_REF = a.customer_acc_ref " +
                     "left join dbo.sl_priority prio on prio.id = a.priority_id " +
@@ -101,6 +101,7 @@ namespace PriceMaster
                     cmbSys5.Text = dt.Rows[0][20].ToString();
                     txtNote.Text = dt.Rows[0][21].ToString();
                     txtEnquiry.Text = dt.Rows[0][22].ToString();
+                    cmbType.Text = dt.Rows[0][23].ToString();
 
                 }
                 conn.Close();
@@ -236,7 +237,13 @@ namespace PriceMaster
             {
                 sql = "UPDATE dbo.sl_quotation SET customer_acc_ref = '" + temp + "' WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
                 runSQL(sql, 0);
+
+                //get the new  type
+                sql = "SELECT type FROM [dsl_fitting].dbo.SALES_LEDGER WHERE ACCOUNT_REF = '" + temp + "'";
+                runSQL(sql, -1);
+                cmbType.Text = temp;
             }
+            
             temp = null;
         }
 

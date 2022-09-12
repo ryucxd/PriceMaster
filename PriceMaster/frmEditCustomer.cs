@@ -22,7 +22,7 @@ namespace PriceMaster
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
-                string sql = "SELECT rtrim(ACCOUNT_REF),NAME,ADDRESS_1,ADDRESS_2,ADDRESS_3,ADDRESS_4,ADDRESS_5,TELEPHONE,TELEPHONE_2,FAX,E_MAIL FROM [dsl_fitting].dbo.[SALES_LEDGER] ";
+                string sql = "SELECT rtrim(ACCOUNT_REF),NAME,ADDRESS_1,ADDRESS_2,ADDRESS_3,ADDRESS_4,ADDRESS_5,TELEPHONE,TELEPHONE_2,FAX,E_MAIL,type FROM [dsl_fitting].dbo.[SALES_LEDGER] ";
                 if (account_ref == 0)
                     sql = sql + " WHERE [NAME] = ";
                 else
@@ -46,6 +46,7 @@ namespace PriceMaster
                     txtTelephone2.Text = dt.Rows[0][8].ToString();
                     txtFax.Text = dt.Rows[0][9].ToString();
                     txtEmail.Text = dt.Rows[0][10].ToString();
+                    cmbType.Text = dt.Rows[0][11].ToString();
                 }
                 conn.Close();
             }
@@ -63,11 +64,12 @@ namespace PriceMaster
                     string sql = "UPDATE [dsl_fitting].dbo.[SALES_LEDGER] SET  NAME = '" + txtCustName.Text + "'," +
                         " ADDRESS_1 = '" + txtAddress1.Text + "', ADDRESS_2 = '" + txtAddress2.Text + "', ADDRESS_3 = '" + txtAddress3.Text + "'," +
                         " ADDRESS_4 = '" + txtAddress4.Text + "', ADDRESS_5 = '" + txtPostCode.Text + "', TELEPHONE = '" + txtTelephone.Text + "'," +
-                        " TELEPHONE_2 = '" + txtTelephone2.Text + "', FAX = '" + txtFax.Text + "', E_MAIL = '" + txtEmail.Text + "'  WHERE ACCOUNT_REF = '" + txtAccRef.Text + "'";
+                        " TELEPHONE_2 = '" + txtTelephone2.Text + "', FAX = '" + txtFax.Text + "', E_MAIL = '" + txtEmail.Text + "', type = '" + cmbType.Text + "'  WHERE ACCOUNT_REF = '" + txtAccRef.Text + "'";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
                         cmd.ExecuteNonQuery();
                     }
+
                     conn.Close();
                 }
                 this.Close();

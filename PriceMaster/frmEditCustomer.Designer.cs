@@ -49,6 +49,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnSave = new PriceMaster.buttonFormatting();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -238,7 +240,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(139, 395);
+            this.btnSave.Location = new System.Drawing.Point(147, 426);
             this.btnSave.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSave.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSave.Name = "btnSave";
@@ -249,11 +251,35 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label7.Location = new System.Drawing.Point(1, 396);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(127, 23);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Type of Customer:";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cmbType
+            // 
+            this.cmbType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Items.AddRange(new object[] {
+            "Main Contractor",
+            "Trade"});
+            this.cmbType.Location = new System.Drawing.Point(132, 394);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(239, 25);
+            this.cmbType.TabIndex = 23;
+            // 
             // frmEditCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 434);
+            this.ClientSize = new System.Drawing.Size(404, 462);
+            this.Controls.Add(this.cmbType);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.label9);
@@ -309,5 +335,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblTitle;
         private buttonFormatting btnSave;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbType;
     }
 }

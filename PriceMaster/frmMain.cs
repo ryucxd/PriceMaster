@@ -36,6 +36,7 @@ namespace PriceMaster
         public int price_index { get; set; }
         public int quoted_by_index { get; set; }
         public int quote_date_index { get; set; }
+        public int type_index { get; set; }
 
         //date stuffs
         public int dateFilter { get; set; }
@@ -51,7 +52,7 @@ namespace PriceMaster
         {
             string sql = "SELECT top 150 quote_id,'View' as [view_temp],'Email' as email_temp,issue_id,CASE WHEN highest_issue = 0 THEN CAST(0 AS BIT) WHEN highest_issue IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [current] ,p.priority_description as priority_id,st.description,m.material_description, " +
                                 "COALESCE(slimline_systems_1.system_name, '') + ' - ' + COALESCE(slimline_systems_2.system_name, '') + ' - ' + COALESCE(slimline_systems_3.system_name, '') + ' - ' + " +
-                                "COALESCE(slimline_systems_4.system_name, '') + ' - ' + COALESCE(slimline_systems_5.system_name, '') as [system_row] , rtrim(s.[NAME]) as customer,u_2.forename + ' ' + u_2.surname as  email_sent_by,email_sent_date,quotation_ref,COALESCE(price,0) as price," +
+                                "COALESCE(slimline_systems_4.system_name, '') + ' - ' + COALESCE(slimline_systems_5.system_name, '') as [system_row] , rtrim(s.[NAME]) as customer,s.type,u_2.forename + ' ' + u_2.surname as  email_sent_by,email_sent_date,quotation_ref,COALESCE(price,0) as price," +
                                 "u.forename + ' ' + u.surname as [quoted_by],quote_date FROM dbo.sl_quotation a " +
                                 "LEFT JOIN[dsl_fitting].dbo.[SALES_LEDGER] s on s.ACCOUNT_REF = a.customer_acc_ref " +
                                 "left join[user_info].dbo.[user] u on u.id = a.created_by_id " +
@@ -86,6 +87,9 @@ namespace PriceMaster
                 sql = sql + " AND price >= " + txtPrice.Text + " ";
             if (cmbQuotedBy.Text.Length > 0)
                 sql = sql + " AND u.forename + ' ' + u.surname LIKE '%" + cmbQuotedBy.Text + "%'";
+
+            if (cmbType.Text.Length > 0)
+                sql = sql + " AND s.type = '" + cmbType.Text + "'";
 
             if (dateFilter == -1)
                 sql = sql + " AND quote_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND quote_date <= '" + dteEnd.Value.ToString("yyyyMMdd") + "' ";
@@ -141,6 +145,7 @@ namespace PriceMaster
             price_index = dataGridView1.Columns["price"].Index;
             quoted_by_index = dataGridView1.Columns["quoted_by"].Index;
             quote_date_index = dataGridView1.Columns["quote_date"].Index;
+            type_index = dataGridView1.Columns["type"].Index;
 
 
             ////checkbox for revision
@@ -205,7 +210,9 @@ namespace PriceMaster
             dataGridView1.Columns[email_sent_date_index].HeaderText = "Email Sent Date";
             dataGridView1.Columns[quotation_ref_index].HeaderText = "Quotation Ref";
             dataGridView1.Columns[price_index].HeaderText = "Price";
+            dataGridView1.Columns[quoted_by_index].HeaderText = "Quoted By";
             dataGridView1.Columns[quote_date_index].HeaderText = "Quote Date";
+            dataGridView1.Columns[type_index].HeaderText = "Type";
 
             foreach (DataGridViewColumn col in dataGridView1.Columns)
                 col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -383,6 +390,7 @@ namespace PriceMaster
             txtQuoteRef.Text = "";
             txtPrice.Text = "";
             cmbQuotedBy.Text = "";
+            cmbType.Text = "";
             dteStart.Value = DateTime.Now;
             dteEnd.Value = DateTime.Now;
             dateFilter = 0;
@@ -478,6 +486,11 @@ namespace PriceMaster
             {
                 e.Handled = true;
             }
+        }
+
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadData();
         }
     }
 }

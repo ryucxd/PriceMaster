@@ -58,6 +58,8 @@
             this.btnSupplier = new PriceMaster.buttonFormatting();
             this.btnEmail = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -275,7 +277,7 @@
             // 
             // dteEnd
             // 
-            this.dteEnd.Location = new System.Drawing.Point(1370, 116);
+            this.dteEnd.Location = new System.Drawing.Point(1496, 117);
             this.dteEnd.Name = "dteEnd";
             this.dteEnd.Size = new System.Drawing.Size(121, 20);
             this.dteEnd.TabIndex = 31;
@@ -283,7 +285,7 @@
             // 
             // dteStart
             // 
-            this.dteStart.Location = new System.Drawing.Point(1370, 80);
+            this.dteStart.Location = new System.Drawing.Point(1496, 81);
             this.dteStart.Name = "dteStart";
             this.dteStart.Size = new System.Drawing.Size(121, 20);
             this.dteStart.TabIndex = 30;
@@ -293,7 +295,7 @@
             // 
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label13.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label13.Location = new System.Drawing.Point(1367, 50);
+            this.label13.Location = new System.Drawing.Point(1493, 51);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(124, 23);
             this.label13.TabIndex = 29;
@@ -304,7 +306,7 @@
             // 
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label14.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label14.Location = new System.Drawing.Point(1366, 90);
+            this.label14.Location = new System.Drawing.Point(1492, 91);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(124, 23);
             this.label14.TabIndex = 32;
@@ -408,7 +410,7 @@
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(1498, 106);
+            this.btnClear.Location = new System.Drawing.Point(1624, 107);
             this.btnClear.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnClear.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnClear.Name = "btnClear";
@@ -419,11 +421,38 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label2.Location = new System.Drawing.Point(1366, 90);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(124, 23);
+            this.label2.TabIndex = 40;
+            this.label2.Text = "Customer Type";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // cmbType
+            // 
+            this.cmbType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Items.AddRange(new object[] {
+            "Main Contractor",
+            "Trade"});
+            this.cmbType.Location = new System.Drawing.Point(1369, 116);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(121, 21);
+            this.cmbType.TabIndex = 39;
+            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.cmbType);
             this.Controls.Add(this.btnNewQuote);
             this.Controls.Add(this.btnCustomer);
             this.Controls.Add(this.btnMaterial);
@@ -496,6 +525,8 @@
         private buttonFormatting btnMaterial;
         private buttonFormatting btnCustomer;
         private buttonFormatting btnNewQuote;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmbType;
     }
 }
 
