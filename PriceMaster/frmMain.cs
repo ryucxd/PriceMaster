@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.IO;
 using System.Diagnostics;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace PriceMaster
 {
@@ -278,7 +279,7 @@ namespace PriceMaster
                             cmbCustomer.Items.Add(reader.GetString(0));
                         reader.Close();
                     }
-                    sql = "SELECT DISTINCT u_2.forename + ' ' + u_2.surname as email_sent_by FROM dbo.sl_quotation a left join[user_info].dbo.[user] u_2 on u_2.id = a.email_sent_by where u_2.forename is not null";
+                    sql = "SELECT DISTINCT u_2.forename + ' ' + u_2.surname as email_sent_by FROM dbo.sl_quotation a left join[user_info].dbo.[user] u_2 on u_2.id = a.created_by_id where u_2.forename is not null";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
                         SqlDataReader reader = cmd.ExecuteReader();
@@ -400,6 +401,19 @@ namespace PriceMaster
 
         private void btnEmail_Click(object sender, EventArgs e)
         {
+            string temp = "";
+            string sql = "select top 150 quote_id,rtrim(s.[NAME]) as customer,a.customer_contact,s.TELEPHONE,enquiry_id,e.sender_email_address,e.priority as [priority_class],'                                                           ' as notes " +
+                "from dbo.sl_quotation a " +
+                "left join [dsl_fitting].dbo.SALES_LEDGER s on a.customer_acc_ref = s.ACCOUNT_REF " +
+                "left join[EnquiryLog].dbo.[Enquiry_Log] e on e.id = a.enquiry_id left join[user_info].dbo.[user] u on u.id = a.created_by_id " +
+                "left join[user_info].dbo.[user] u_2 on u_2.id = a.email_sent_by left join dbo.sl_status st on st.id = a.status_id " +
+                "left join dbo.sl_material m on m.id = a.material_type_id left join dbo.sl_priority p on p.id = a.priority_id " +
+                "LEFT JOIN dbo.slimline_systems as slimline_systems_1 ON a.system_id_1 = slimline_systems_1.id " +
+                "LEFT JOIN dbo.slimline_systems AS slimline_systems_2 ON a.system_id_2 = slimline_systems_2.id " +
+                "LEFT JOIN dbo.slimline_systems AS slimline_systems_3 ON a.system_id_3 = slimline_systems_3.id " +
+                "LEFT JOIN dbo.slimline_systems AS slimline_systems_4 ON a.system_id_4 = slimline_systems_4.id " +
+                "LEFT JOIN dbo.slimline_systems AS slimline_systems_5 ON a.system_id_5 = slimline_systems_5.id" +
+                " WHERE highest_issue = -1 ";
 
             if (sql_where == " ")
             {
@@ -411,21 +425,127 @@ namespace PriceMaster
                 MessageBox.Show("There is currently no data to email - Please filter the report to show records before attempting to email.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            //first we need to store the where statement
-            //replace all the ' with something more friendly (gets reverted back on the access side)
-            sql_where = sql_where.Replace("'", "replaceme");
-            string sql = "UPDATE dbo.sl_sql SET sql = '" + sql_where + "' where id = 1";
 
+            sql = sql + sql_where;
+
+            //get it into a datatable
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
-                    cmd.ExecuteNonQuery();
-                conn.Close();
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        if (row[4].ToString().Contains("EXCHANGELABS/OU=EXCHANGE"))
+                        {
+                            //remove all the clutter
+                            string temp_string = row[4].ToString();
+                            row[4] = temp_string.Substring(temp_string.IndexOf("-") + 1);
+                        }
+                    }
+
+                    //dataGridView1.DataSource = dt;
+                    //open the excel doc here and start inserting 
+                    // Store the Excel processes before opening.
+                    Process[] processesBefore = Process.GetProcessesByName("excel");
+                    // Open the file in Excel.
+
+                    System.IO.Directory.CreateDirectory(@"C:\temp");
+
+                     temp = @"\\designsvr1\apps\Design and Supply CSharp\price_log_template.xlsx";
+                    System.IO.File.Copy(temp, @"C:\temp\price_log.xlsx", true);
+
+                    temp = @"C:\temp\price_log.xlsx";
+
+                    var xlApp = new Excel.Application();
+                    var xlWorkbooks = xlApp.Workbooks;
+                    var xlWorkbook = xlWorkbooks.Open(temp);
+                    var xlWorksheet = xlWorkbook.Sheets[1]; // assume it is the first sheet
+                                                            // Get Excel processes after opening the file.
+                    Process[] processesAfter = Process.GetProcessesByName("excel");
+
+                    int excel_row = 2;
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        xlWorksheet.Cells[1][excel_row].Value2 = row[0].ToString();
+                        xlWorksheet.Cells[2][excel_row].Value2 = row[1].ToString();
+                        xlWorksheet.Cells[3][excel_row].Value2 = row[2].ToString();
+                        xlWorksheet.Cells[4][excel_row].Value2 = row[3].ToString();
+                        xlWorksheet.Cells[5][excel_row].Value2 = row[4].ToString();
+                        xlWorksheet.Cells[6][excel_row].Value2 = row[5].ToString();
+                        xlWorksheet.Cells[7][excel_row].Value2 = row[6].ToString();
+                        xlWorksheet.Cells[8][excel_row].Value2 = row[7].ToString();
+                        excel_row++;
+                    }
+
+                    //border them all
+                    Excel.Range xlRange = xlWorksheet.UsedRange;
+                    xlRange.Cells.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+
+                    //autosize 
+                    xlWorksheet.Columns.AutoFit();
+
+                    //print it
+                    //xlWorksheet.PrintOut(Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+
+                    xlWorkbook.Close(true); //close the excel sheet without saving
+                                             // xlApp.Quit();
+
+
+                    // Manual disposal because of COM
+                    xlApp.Quit();
+
+                    // Now find the process id that was created, and store it.
+                    int processID = 0;
+                    foreach (Process process in processesAfter)
+                    {
+                        if (!processesBefore.Select(p => p.Id).Contains(process.Id))
+                        {
+                            processID = process.Id;
+                        }
+                    }
+                    // And now kill the process.
+                    if (processID != 0)
+                    {
+                        Process process = Process.GetProcessById(processID);
+                        process.Kill();
+                    }
+
+                }
+                    conn.Close();
             }
 
-            string price_master_email = @"\\designsvr1\apps\Design and Supply MS ACCESS\Frontend\Price_Log_Program\price_master_report.accdb";
-            Process.Start(price_master_email);
+            Process.Start(temp);
+
+            //vvv old code for access report
+            ////if (sql_where == " ")
+            ////{
+            ////    MessageBox.Show("Please filter the grid before clicking [Email Report] - Currently there are too many records to email.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            ////    return;
+            ////}
+            ////if (dataGridView1.Rows.Count < 1)
+            ////{
+            ////    MessageBox.Show("There is currently no data to email - Please filter the report to show records before attempting to email.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            ////    return;
+            ////}
+            //////first we need to store the where statement
+            //////replace all the ' with something more friendly (gets reverted back on the access side)
+            ////sql_where = sql_where.Replace("'", "replaceme");
+            ////string sql = "UPDATE dbo.sl_sql SET sql = '" + sql_where + "' where id = 1";
+
+            ////using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            ////{
+            ////    conn.Open();
+            ////    using (SqlCommand cmd = new SqlCommand(sql, conn))
+            ////        cmd.ExecuteNonQuery();
+            ////    conn.Close();
+            ////}
+
+            ////string price_master_email = @"\\designsvr1\apps\Design and Supply MS ACCESS\Frontend\Price_Log_Program\price_master_report.accdb";
+            ////Process.Start(price_master_email);
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -470,7 +590,7 @@ namespace PriceMaster
                     sql = "insert into dbo.sl_quotation (quote_id,issue_id,quote_date,highest_issue,created_by_id,status_id) VALUES (" + max_id.ToString() + ",1,getdate(),-1," + CONNECT.staffID.ToString() + ",8)";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                         cmd.ExecuteNonQuery();
-                        conn.Close();
+                    conn.Close();
                     frmQuotation frm = new frmQuotation(max_id);
                     frm.ShowDialog();
                     loadData();
