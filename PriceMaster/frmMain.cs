@@ -402,7 +402,7 @@ namespace PriceMaster
         private void btnEmail_Click(object sender, EventArgs e)
         {
             string temp = "";
-            string sql = "select top 150 quote_id,rtrim(s.[NAME]) as customer,a.customer_contact,s.TELEPHONE,enquiry_id,e.sender_email_address,e.priority as [priority_class],'                                                           ' as notes " +
+            string sql = "select top 150 quote_id,rtrim(s.[NAME]) as customer,a.quotation_ref,a.customer_contact,s.TELEPHONE,enquiry_id,e.sender_email_address,e.priority as [priority_class],'                                                           ' as notes " +
                 "from dbo.sl_quotation a " +
                 "left join [dsl_fitting].dbo.SALES_LEDGER s on a.customer_acc_ref = s.ACCOUNT_REF " +
                 "left join[EnquiryLog].dbo.[Enquiry_Log] e on e.id = a.enquiry_id left join[user_info].dbo.[user] u on u.id = a.created_by_id " +
@@ -439,11 +439,11 @@ namespace PriceMaster
                     da.Fill(dt);
                     foreach (DataRow row in dt.Rows)
                     {
-                        if (row[4].ToString().Contains("EXCHANGELABS/OU=EXCHANGE"))
+                        if (row[6].ToString().Contains("EXCHANGELABS/OU=EXCHANGE"))
                         {
                             //remove all the clutter
-                            string temp_string = row[4].ToString();
-                            row[4] = temp_string.Substring(temp_string.IndexOf("-") + 1);
+                            string temp_string = row[6].ToString();
+                            row[6] = temp_string.Substring(temp_string.IndexOf("-") + 1);
                         }
                     }
 
@@ -478,6 +478,7 @@ namespace PriceMaster
                         xlWorksheet.Cells[6][excel_row].Value2 = row[5].ToString();
                         xlWorksheet.Cells[7][excel_row].Value2 = row[6].ToString();
                         xlWorksheet.Cells[8][excel_row].Value2 = row[7].ToString();
+                        xlWorksheet.Cells[9][excel_row].Value2 = row[7].ToString();
                         excel_row++;
                     }
 

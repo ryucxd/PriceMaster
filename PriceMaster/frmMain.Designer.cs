@@ -399,7 +399,7 @@
             this.btnEmail.Padding = new System.Windows.Forms.Padding(3);
             this.btnEmail.Size = new System.Drawing.Size(146, 30);
             this.btnEmail.TabIndex = 34;
-            this.btnEmail.Text = "Email Report";
+            this.btnEmail.Text = "Excel Report";
             this.btnEmail.UseVisualStyleBackColor = false;
             this.btnEmail.Click += new System.EventHandler(this.btnEmail_Click);
             // 
