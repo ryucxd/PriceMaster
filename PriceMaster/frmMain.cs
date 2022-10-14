@@ -477,7 +477,7 @@ namespace PriceMaster
                         xlWorksheet.Cells[5][excel_row].Value2 = row[4].ToString();
                         xlWorksheet.Cells[6][excel_row].Value2 = row[5].ToString();
                         xlWorksheet.Cells[7][excel_row].Value2 = row[6].ToString();
-                        xlWorksheet.Cells[8][excel_row].Value2 = row[7].ToString();
+                        xlWorksheet.Cells[8][excel_row].Value2 = row[7].ToString();   
                         xlWorksheet.Cells[9][excel_row].Value2 = row[7].ToString();
                         excel_row++;
                     }
@@ -612,6 +612,16 @@ namespace PriceMaster
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadData();
+        }
+
+        private void btnTraditional_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmTraditional frm = new frmTraditional();
+            frm.ShowDialog();
+            this.Show();
+
+
         }
     }
 }

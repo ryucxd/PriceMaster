@@ -52,14 +52,15 @@
             this.dteStart = new System.Windows.Forms.DateTimePicker();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbType = new System.Windows.Forms.ComboBox();
+            this.btnTraditional = new PriceMaster.buttonFormatting();
             this.btnNewQuote = new PriceMaster.buttonFormatting();
             this.btnCustomer = new PriceMaster.buttonFormatting();
             this.btnMaterial = new PriceMaster.buttonFormatting();
             this.btnSupplier = new PriceMaster.buttonFormatting();
             this.btnEmail = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -313,6 +314,49 @@
             this.label14.Text = "to";
             this.label14.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label2.Location = new System.Drawing.Point(1366, 90);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(124, 23);
+            this.label2.TabIndex = 40;
+            this.label2.Text = "Customer Type";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // cmbType
+            // 
+            this.cmbType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Items.AddRange(new object[] {
+            "Main Contractor",
+            "Trade"});
+            this.cmbType.Location = new System.Drawing.Point(1369, 116);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(121, 21);
+            this.cmbType.TabIndex = 39;
+            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
+            // 
+            // btnTraditional
+            // 
+            this.btnTraditional.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnTraditional.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnTraditional.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTraditional.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTraditional.ForeColor = System.Drawing.Color.White;
+            this.btnTraditional.Location = new System.Drawing.Point(632, 9);
+            this.btnTraditional.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnTraditional.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnTraditional.Name = "btnTraditional";
+            this.btnTraditional.Padding = new System.Windows.Forms.Padding(3);
+            this.btnTraditional.Size = new System.Drawing.Size(146, 30);
+            this.btnTraditional.TabIndex = 41;
+            this.btnTraditional.Text = "Traditional Log";
+            this.btnTraditional.UseVisualStyleBackColor = false;
+            this.btnTraditional.Click += new System.EventHandler(this.btnTraditional_Click);
+            // 
             // btnNewQuote
             // 
             this.btnNewQuote.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -421,36 +465,12 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(1366, 90);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(124, 23);
-            this.label2.TabIndex = 40;
-            this.label2.Text = "Customer Type";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // cmbType
-            // 
-            this.cmbType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.cmbType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbType.FormattingEnabled = true;
-            this.cmbType.Items.AddRange(new object[] {
-            "Main Contractor",
-            "Trade"});
-            this.cmbType.Location = new System.Drawing.Point(1369, 116);
-            this.cmbType.Name = "cmbType";
-            this.cmbType.Size = new System.Drawing.Size(121, 21);
-            this.cmbType.TabIndex = 39;
-            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnTraditional);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbType);
             this.Controls.Add(this.btnNewQuote);
@@ -527,6 +547,7 @@
         private buttonFormatting btnNewQuote;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbType;
+        private buttonFormatting btnTraditional;
     }
 }
 

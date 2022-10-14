@@ -86,6 +86,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CONNECT.cs" />
+    <Compile Include="frmChaseHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChaseHistory.Designer.cs">
+      <DependentUpon>frmChaseHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCustomerList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,8 +152,41 @@
     <Compile Include="frmSupplier.Designer.cs">
       <DependentUpon>frmSupplier.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTraditional.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTraditional.Designer.cs">
+      <DependentUpon>frmTraditional.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTraditionalChase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTraditionalChase.Designer.cs">
+      <DependentUpon>frmTraditionalChase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTraditionalChaseUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTraditionalChaseUpdate.Designer.cs">
+      <DependentUpon>frmTraditionalChaseUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTraditionalLossReason.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTraditionalLossReason.Designer.cs">
+      <DependentUpon>frmTraditionalLossReason.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTraditionalQuotation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTraditionalQuotation.Designer.cs">
+      <DependentUpon>frmTraditionalQuotation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmChaseHistory.resx">
+      <DependentUpon>frmChaseHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCustomerList.resx">
       <DependentUpon>frmCustomerList.cs</DependentUpon>
     </EmbeddedResource>
@@ -177,6 +216,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSupplier.resx">
       <DependentUpon>frmSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTraditional.resx">
+      <DependentUpon>frmTraditional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTraditionalChase.resx">
+      <DependentUpon>frmTraditionalChase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTraditionalChaseUpdate.resx">
+      <DependentUpon>frmTraditionalChaseUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTraditionalLossReason.resx">
+      <DependentUpon>frmTraditionalLossReason.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTraditionalQuotation.resx">
+      <DependentUpon>frmTraditionalQuotation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

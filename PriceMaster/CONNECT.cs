@@ -24,5 +24,6 @@ namespace PriceMaster
         public static string materialType;
         public static int staffID;
         public static string staffFullName;
+        public static int skipLoss;
     }
 }
