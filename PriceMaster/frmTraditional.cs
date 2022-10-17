@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.Diagnostics;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace PriceMaster
 {
@@ -26,6 +28,7 @@ namespace PriceMaster
         public int dateFilter { get; set; }
         public int quote_button_index { get; set; }
         public int status_index { get; set; }
+        public string sql_report { get; set; }
 
         public frmTraditional()
         {
@@ -69,11 +72,11 @@ namespace PriceMaster
             if (cmbStatus.Text.Length > 0)
                 sql = sql + "  status = '" + cmbStatus.Text + "'   AND ";
 
-
-
             sql = sql.Substring(0, sql.Length - 6);
 
             sql = sql + " order by quote_id desc";
+
+            sql_report = sql;
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -336,6 +339,106 @@ namespace PriceMaster
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             apply_filter();
+        }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            string temp = "";
+            string sql = sql_report;
+
+            //get it into a datatable
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    foreach (DataRow row in dt.Rows)
+                    {
+                            if (row[6].ToString().Contains("@designandsupply.co.uk"))
+                                row[6] = row[6].ToString().Replace("@designandsupply.co.uk", "");
+                            if (row[6].ToString().Contains("sales@sealantonline.co.uk"))
+                                row[6] = row[6].ToString().Replace("sales@sealantonline.co.uk", "tomasz");
+
+                        
+                    }
+
+                    //dataGridView1.DataSource = dt;
+                    //open the excel doc here and start inserting 
+                    // Store the Excel processes before opening.
+                    Process[] processesBefore = Process.GetProcessesByName("excel");
+                    // Open the file in Excel.
+
+                    System.IO.Directory.CreateDirectory(@"C:\temp");
+
+                    temp = @"\\designsvr1\apps\Design and Supply CSharp\price_log_template_traditional.xlsx";
+                    System.IO.File.Copy(temp, @"C:\temp\price_log_traditional.xlsx", true);
+
+                    temp = @"C:\temp\price_log_traditional.xlsx";
+
+                    var xlApp = new Excel.Application();
+                    var xlWorkbooks = xlApp.Workbooks;
+                    var xlWorkbook = xlWorkbooks.Open(temp);
+                    var xlWorksheet = xlWorkbook.Sheets[1]; // assume it is the first sheet
+                                                            // Get Excel processes after opening the file.
+                    Process[] processesAfter = Process.GetProcessesByName("excel");
+
+                    int excel_row = 2;
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        xlWorksheet.Cells[1][excel_row].Value2 = row[0].ToString();
+                        xlWorksheet.Cells[2][excel_row].Value2 = row[1].ToString();
+                        xlWorksheet.Cells[3][excel_row].Value2 = row[2].ToString();
+                        xlWorksheet.Cells[4][excel_row].Value2 = row[3].ToString();
+                        xlWorksheet.Cells[5][excel_row].Value2 = row[4].ToString();
+                        xlWorksheet.Cells[6][excel_row].Value2 = row[5].ToString();
+                        xlWorksheet.Cells[7][excel_row].Value2 = row[6].ToString();
+                        xlWorksheet.Cells[8][excel_row].Value2 = row[7].ToString();
+                        xlWorksheet.Cells[9][excel_row].Value2 = row[8].ToString();
+                        xlWorksheet.Cells[10][excel_row].Value2 = row[9].ToString();
+                        excel_row++;
+                    }
+
+                    //border them all
+                    Excel.Range xlRange = xlWorksheet.UsedRange;
+                    xlRange.Cells.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+
+                    //autosize 
+                    xlWorksheet.Columns.AutoFit();
+
+                    //print it
+                    //xlWorksheet.PrintOut(Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+
+                    xlWorkbook.Close(true); //close the excel sheet without saving
+                                            // xlApp.Quit();
+
+
+                    // Manual disposal because of COM
+                    xlApp.Quit();
+
+                    // Now find the process id that was created, and store it.
+                    int processID = 0;
+                    foreach (Process process in processesAfter)
+                    {
+                        if (!processesBefore.Select(p => p.Id).Contains(process.Id))
+                        {
+                            processID = process.Id;
+                        }
+                    }
+                    // And now kill the process.
+                    if (processID != 0)
+                    {
+                        Process process = Process.GetProcessById(processID);
+                        process.Kill();
+                    }
+
+                }
+                conn.Close();
+            }
+
+            Process.Start(temp);
         }
     }
 }

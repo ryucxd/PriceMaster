@@ -50,7 +50,7 @@
             this.txtValue = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtQuotedBy = new System.Windows.Forms.TextBox();
-            this.btnTraditional = new PriceMaster.buttonFormatting();
+            this.btnReport = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
             this.label8 = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
@@ -284,22 +284,23 @@
             this.txtQuotedBy.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtQuotedBy_KeyDown);
             this.txtQuotedBy.Leave += new System.EventHandler(this.txtQuotedBy_Leave);
             // 
-            // btnTraditional
+            // btnReport
             // 
-            this.btnTraditional.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnTraditional.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnTraditional.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTraditional.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTraditional.ForeColor = System.Drawing.Color.White;
-            this.btnTraditional.Location = new System.Drawing.Point(690, 9);
-            this.btnTraditional.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnTraditional.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnTraditional.Name = "btnTraditional";
-            this.btnTraditional.Padding = new System.Windows.Forms.Padding(3);
-            this.btnTraditional.Size = new System.Drawing.Size(146, 30);
-            this.btnTraditional.TabIndex = 80;
-            this.btnTraditional.Text = "Export Report";
-            this.btnTraditional.UseVisualStyleBackColor = false;
+            this.btnReport.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnReport.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReport.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReport.ForeColor = System.Drawing.Color.White;
+            this.btnReport.Location = new System.Drawing.Point(690, 9);
+            this.btnReport.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnReport.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Padding = new System.Windows.Forms.Padding(3);
+            this.btnReport.Size = new System.Drawing.Size(146, 30);
+            this.btnReport.TabIndex = 80;
+            this.btnReport.Text = "Export Report";
+            this.btnReport.UseVisualStyleBackColor = false;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // btnClear
             // 
@@ -353,7 +354,7 @@
             this.ClientSize = new System.Drawing.Size(1901, 673);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cmbStatus);
-            this.Controls.Add(this.btnTraditional);
+            this.Controls.Add(this.btnReport);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtQuotedBy);
             this.Controls.Add(this.label6);
@@ -409,7 +410,7 @@
         private System.Windows.Forms.TextBox txtValue;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtQuotedBy;
-        private buttonFormatting btnTraditional;
+        private buttonFormatting btnReport;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbStatus;
     }
