@@ -35,6 +35,9 @@ namespace PriceMaster
             InitializeComponent();
             apply_filter();
             fillCombo();
+
+
+
         }
 
         private void apply_filter()
@@ -439,6 +442,38 @@ namespace PriceMaster
             }
 
             Process.Start(temp);
+        }
+
+        private void btnOutstanding_Click(object sender, EventArgs e)
+        {
+            frmOutstandingChase frm = new frmOutstandingChase();
+            frm.ShowDialog();
+        }
+
+        private void frmTraditional_Shown(object sender, EventArgs e)
+        {
+            //check if there is any outstanding chases ----
+            string sql = "SELECT CAST(quote_id as nvarchar(max)) FROM [order_database].dbo.quotation_chase_log where next_chase_date <= CAST(GETDATE() as date) and " +
+                "dont_chase = 0 and(chase_followed_up is null or chase_followed_up = 0) AND chased_by =  " + CONNECT.staffID.ToString();
+
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    string temp = (string)cmd.ExecuteScalar();
+                    if (temp != null)
+                    {
+                        DialogResult result = MessageBox.Show("You have current outstanding chases, would you like to view them?", "Outstanding Chases", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (result == DialogResult.Yes)
+                        {
+                            frmOutstandingChase frm = new frmOutstandingChase();
+                            frm.ShowDialog();
+                        }
+                    }
+                }
+                conn.Close();
+            }
         }
     }
 }

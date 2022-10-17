@@ -50,10 +50,11 @@
             this.txtValue = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtQuotedBy = new System.Windows.Forms.TextBox();
-            this.btnReport = new PriceMaster.buttonFormatting();
-            this.btnClear = new PriceMaster.buttonFormatting();
             this.label8 = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
+            this.btnOutstanding = new PriceMaster.buttonFormatting();
+            this.btnReport = new PriceMaster.buttonFormatting();
+            this.btnClear = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -284,6 +285,51 @@
             this.txtQuotedBy.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtQuotedBy_KeyDown);
             this.txtQuotedBy.Leave += new System.EventHandler(this.txtQuotedBy_Leave);
             // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label8.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label8.Location = new System.Drawing.Point(1460, 89);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(133, 23);
+            this.label8.TabIndex = 82;
+            this.label8.Text = "Status";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // cmbStatus
+            // 
+            this.cmbStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Items.AddRange(new object[] {
+            "Pending",
+            "Chasing",
+            "Won",
+            "Lost"});
+            this.cmbStatus.Location = new System.Drawing.Point(1460, 116);
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(133, 21);
+            this.cmbStatus.TabIndex = 81;
+            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // btnOutstanding
+            // 
+            this.btnOutstanding.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnOutstanding.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnOutstanding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutstanding.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOutstanding.ForeColor = System.Drawing.Color.White;
+            this.btnOutstanding.Location = new System.Drawing.Point(846, 9);
+            this.btnOutstanding.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnOutstanding.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnOutstanding.Name = "btnOutstanding";
+            this.btnOutstanding.Padding = new System.Windows.Forms.Padding(3);
+            this.btnOutstanding.Size = new System.Drawing.Size(179, 30);
+            this.btnOutstanding.TabIndex = 83;
+            this.btnOutstanding.Text = "Outstanding Chases";
+            this.btnOutstanding.UseVisualStyleBackColor = false;
+            this.btnOutstanding.Click += new System.EventHandler(this.btnOutstanding_Click);
+            // 
             // btnReport
             // 
             this.btnReport.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -320,38 +366,12 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // label8
-            // 
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label8.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label8.Location = new System.Drawing.Point(1460, 89);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(133, 23);
-            this.label8.TabIndex = 82;
-            this.label8.Text = "Status";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // cmbStatus
-            // 
-            this.cmbStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.cmbStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Items.AddRange(new object[] {
-            "Pending",
-            "Chasing",
-            "Won",
-            "Lost"});
-            this.cmbStatus.Location = new System.Drawing.Point(1460, 116);
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(133, 21);
-            this.cmbStatus.TabIndex = 81;
-            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnOutstanding);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cmbStatus);
             this.Controls.Add(this.btnReport);
@@ -377,9 +397,11 @@
             this.Controls.Add(this.txtQuoteID);
             this.Controls.Add(this.lblTotalCost);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmTraditional";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Traditional Quote Log";
+            this.Shown += new System.EventHandler(this.frmTraditional_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -413,5 +435,6 @@
         private buttonFormatting btnReport;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbStatus;
+        private buttonFormatting btnOutstanding;
     }
 }
