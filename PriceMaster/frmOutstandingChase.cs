@@ -114,8 +114,12 @@ namespace PriceMaster
             }
             else
             {
-                frmTraditionalChase frm = new frmTraditionalChase(0, -1, Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()));
-                frm.ShowDialog();
+                try
+                {
+                    frmTraditionalChase frm = new frmTraditionalChase(0, -1, Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()));
+                    frm.ShowDialog();
+                }
+                catch { }
             }
         }
     }
