@@ -55,6 +55,7 @@
             this.btnOutstanding = new PriceMaster.buttonFormatting();
             this.btnReport = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
+            this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -366,11 +367,30 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // buttonFormatting1
+            // 
+            this.buttonFormatting1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.buttonFormatting1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
+            this.buttonFormatting1.Location = new System.Drawing.Point(1035, 9);
+            this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
+            this.buttonFormatting1.Name = "buttonFormatting1";
+            this.buttonFormatting1.Padding = new System.Windows.Forms.Padding(3);
+            this.buttonFormatting1.Size = new System.Drawing.Size(213, 30);
+            this.buttonFormatting1.TabIndex = 84;
+            this.buttonFormatting1.Text = "Admin Outstanding Chases";
+            this.buttonFormatting1.UseVisualStyleBackColor = false;
+            this.buttonFormatting1.Click += new System.EventHandler(this.buttonFormatting1_Click);
+            // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.buttonFormatting1);
             this.Controls.Add(this.btnOutstanding);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cmbStatus);
@@ -436,5 +456,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbStatus;
         private buttonFormatting btnOutstanding;
+        private buttonFormatting buttonFormatting1;
     }
 }

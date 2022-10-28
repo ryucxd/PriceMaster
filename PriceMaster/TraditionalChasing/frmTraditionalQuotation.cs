@@ -375,6 +375,29 @@ namespace PriceMaster
             txtCustom.Text = txtCustom.Text.Replace("'", "");
             string sql = "UPDATE [order_database].dbo.quotation_feed_back SET custom_feedback = '" + txtCustom.Text + "' WHERE quote_id = " + quote_id.ToString();
             sql_update(sql);
+
+
+            if (cmbStatus.Text == "Lost")
+            {
+                int cancel_close = -1;
+
+                if (chkLeadTimeTooLong.Checked == true)
+                    cancel_close = 0;
+                if (chkQuoteTookTooLong.Checked == true)
+                    cancel_close = 0;
+                if (chkTooExpensive.Checked == true)
+                    cancel_close = 0;
+                if (chkUnableToMeetSpec.Checked == true)
+                    cancel_close = 0;
+
+                if (cancel_close == -1)
+                {
+                    MessageBox.Show("You must select a reason for loss (check box) before closing this form.", "Reason for loss missing.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
         }
     }
 }

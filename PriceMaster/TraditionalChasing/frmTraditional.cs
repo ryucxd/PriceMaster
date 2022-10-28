@@ -216,12 +216,15 @@ namespace PriceMaster
         private void btnClear_Click(object sender, EventArgs e)
         {
             txtQuoteID.Text = "";
+            cmbStatus.Text = "";
+            txtQuotedBy.Text = "";
             dateFilter = 0;
             txtItemCount.Text = "";
             cmbCustomer.Text = "";
             txtCustomerReference.Text = "";
             txtDeliveryAddress.Text = "";
             txtValue.Text = "";
+            apply_filter();
         }
 
 
@@ -265,6 +268,7 @@ namespace PriceMaster
 
                 frmTraditionalQuotation frm = new frmTraditionalQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString()), dataGridView1.Rows[e.RowIndex].Cells[customer_index].Value.ToString());
                 frm.ShowDialog();
+                apply_filter();
             }  //opens quotation screen
         }
 
@@ -446,7 +450,7 @@ namespace PriceMaster
 
         private void btnOutstanding_Click(object sender, EventArgs e)
         {
-            frmOutstandingChase frm = new frmOutstandingChase();
+            frmOutstandingChase frm = new frmOutstandingChase(0);
             frm.ShowDialog();
         }
 
@@ -467,13 +471,19 @@ namespace PriceMaster
                         DialogResult result = MessageBox.Show("You have current outstanding chases, would you like to view them?", "Outstanding Chases", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (result == DialogResult.Yes)
                         {
-                            frmOutstandingChase frm = new frmOutstandingChase();
+                            frmOutstandingChase frm = new frmOutstandingChase(0);
                             frm.ShowDialog();
                         }
                     }
                 }
                 conn.Close();
             }
+        }
+
+        private void buttonFormatting1_Click(object sender, EventArgs e)
+        {
+            frmOutstandingChase frm = new frmOutstandingChase(-1);
+            frm.ShowDialog();
         }
     }
 }

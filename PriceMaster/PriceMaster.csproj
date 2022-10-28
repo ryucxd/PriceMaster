@@ -25,7 +25,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>18</ApplicationRevision>
+    <ApplicationRevision>23</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -86,11 +86,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CONNECT.cs" />
-    <Compile Include="frmChaseHistory.cs">
+    <Compile Include="TraditionalChasing\frmTraditionalChaseHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmChaseHistory.Designer.cs">
-      <DependentUpon>frmChaseHistory.cs</DependentUpon>
+    <Compile Include="TraditionalChasing\frmTraditionalChaseHistory.Designer.cs">
+      <DependentUpon>frmTraditionalChaseHistory.cs</DependentUpon>
     </Compile>
     <Compile Include="frmCustomerList.cs">
       <SubType>Form</SubType>
@@ -134,11 +134,11 @@
     <Compile Include="frmNote.Designer.cs">
       <DependentUpon>frmNote.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmOutstandingChase.cs">
+    <Compile Include="TraditionalChasing\frmTraditionalOutstandingChase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmOutstandingChase.Designer.cs">
-      <DependentUpon>frmOutstandingChase.cs</DependentUpon>
+    <Compile Include="TraditionalChasing\frmTraditionalOutstandingChase.Designer.cs">
+      <DependentUpon>frmTraditionalOutstandingChase.cs</DependentUpon>
     </Compile>
     <Compile Include="frmQuotation.cs">
       <SubType>Form</SubType>
@@ -158,40 +158,40 @@
     <Compile Include="frmSupplier.Designer.cs">
       <DependentUpon>frmSupplier.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTraditional.cs">
+    <Compile Include="TraditionalChasing\frmTraditional.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTraditional.Designer.cs">
+    <Compile Include="TraditionalChasing\frmTraditional.Designer.cs">
       <DependentUpon>frmTraditional.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTraditionalChase.cs">
+    <Compile Include="TraditionalChasing\frmTraditionalChase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTraditionalChase.Designer.cs">
+    <Compile Include="TraditionalChasing\frmTraditionalChase.Designer.cs">
       <DependentUpon>frmTraditionalChase.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTraditionalChaseUpdate.cs">
+    <Compile Include="TraditionalChasing\frmTraditionalChaseUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTraditionalChaseUpdate.Designer.cs">
+    <Compile Include="TraditionalChasing\frmTraditionalChaseUpdate.Designer.cs">
       <DependentUpon>frmTraditionalChaseUpdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTraditionalLossReason.cs">
+    <Compile Include="TraditionalChasing\frmTraditionalLossReason.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTraditionalLossReason.Designer.cs">
+    <Compile Include="TraditionalChasing\frmTraditionalLossReason.Designer.cs">
       <DependentUpon>frmTraditionalLossReason.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTraditionalQuotation.cs">
+    <Compile Include="TraditionalChasing\frmTraditionalQuotation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTraditionalQuotation.Designer.cs">
+    <Compile Include="TraditionalChasing\frmTraditionalQuotation.Designer.cs">
       <DependentUpon>frmTraditionalQuotation.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmChaseHistory.resx">
-      <DependentUpon>frmChaseHistory.cs</DependentUpon>
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalChaseHistory.resx">
+      <DependentUpon>frmTraditionalChaseHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCustomerList.resx">
       <DependentUpon>frmCustomerList.cs</DependentUpon>
@@ -214,8 +214,8 @@
     <EmbeddedResource Include="frmNote.resx">
       <DependentUpon>frmNote.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOutstandingChase.resx">
-      <DependentUpon>frmOutstandingChase.cs</DependentUpon>
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalOutstandingChase.resx">
+      <DependentUpon>frmTraditionalOutstandingChase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuotation.resx">
       <DependentUpon>frmQuotation.cs</DependentUpon>
@@ -226,19 +226,19 @@
     <EmbeddedResource Include="frmSupplier.resx">
       <DependentUpon>frmSupplier.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTraditional.resx">
+    <EmbeddedResource Include="TraditionalChasing\frmTraditional.resx">
       <DependentUpon>frmTraditional.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTraditionalChase.resx">
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalChase.resx">
       <DependentUpon>frmTraditionalChase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTraditionalChaseUpdate.resx">
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalChaseUpdate.resx">
       <DependentUpon>frmTraditionalChaseUpdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTraditionalLossReason.resx">
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalLossReason.resx">
       <DependentUpon>frmTraditionalLossReason.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTraditionalQuotation.resx">
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalQuotation.resx">
       <DependentUpon>frmTraditionalQuotation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
