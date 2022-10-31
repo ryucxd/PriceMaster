@@ -86,6 +86,30 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CONNECT.cs" />
+    <Compile Include="SlimlineChasing\frmSlimlineQuotation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineQuotation.Designer.cs">
+      <DependentUpon>frmSlimlineQuotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineChase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineChase.Designer.cs">
+      <DependentUpon>frmSlimlineChase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineChaseHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineChaseHistory.Designer.cs">
+      <DependentUpon>frmSlimlineChaseHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineEnquiryHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineEnquiryHistory.Designer.cs">
+      <DependentUpon>frmSlimlineEnquiryHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="TraditionalChasing\frmTraditionalChaseHistory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +220,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineQuotation.resx">
+      <DependentUpon>frmSlimlineQuotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineChase.resx">
+      <DependentUpon>frmSlimlineChase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineChaseHistory.resx">
+      <DependentUpon>frmSlimlineChaseHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineEnquiryHistory.resx">
+      <DependentUpon>frmSlimlineEnquiryHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TraditionalChasing\frmTraditionalChaseHistory.resx">
       <DependentUpon>frmTraditionalChaseHistory.cs</DependentUpon>
     </EmbeddedResource>
