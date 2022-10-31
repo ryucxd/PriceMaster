@@ -47,6 +47,7 @@
             this.lblLost = new System.Windows.Forms.Label();
             this.btnChase = new PriceMaster.buttonFormatting();
             this.btnChaseHistory = new PriceMaster.buttonFormatting();
+            this.btnRelatedEnquiries = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -314,11 +315,31 @@
             this.btnChaseHistory.UseVisualStyleBackColor = false;
             this.btnChaseHistory.Click += new System.EventHandler(this.btnChaseHistory_Click);
             // 
+            // btnRelatedEnquiries
+            // 
+            this.btnRelatedEnquiries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRelatedEnquiries.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnRelatedEnquiries.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnRelatedEnquiries.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRelatedEnquiries.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRelatedEnquiries.ForeColor = System.Drawing.Color.White;
+            this.btnRelatedEnquiries.Location = new System.Drawing.Point(1061, 12);
+            this.btnRelatedEnquiries.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnRelatedEnquiries.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnRelatedEnquiries.Name = "btnRelatedEnquiries";
+            this.btnRelatedEnquiries.Padding = new System.Windows.Forms.Padding(3);
+            this.btnRelatedEnquiries.Size = new System.Drawing.Size(151, 30);
+            this.btnRelatedEnquiries.TabIndex = 60;
+            this.btnRelatedEnquiries.Text = "Related Enquiries";
+            this.btnRelatedEnquiries.UseVisualStyleBackColor = false;
+            this.btnRelatedEnquiries.Click += new System.EventHandler(this.btnRelatedEnquiries_Click);
+            // 
             // frmTraditionalQuotation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1224, 599);
+            this.Controls.Add(this.btnRelatedEnquiries);
             this.Controls.Add(this.btnChaseHistory);
             this.Controls.Add(this.btnChase);
             this.Controls.Add(this.lblLost);
@@ -370,5 +391,6 @@
         private System.Windows.Forms.Label lblLost;
         private buttonFormatting btnChase;
         private buttonFormatting btnChaseHistory;
+        private buttonFormatting btnRelatedEnquiries;
     }
 }

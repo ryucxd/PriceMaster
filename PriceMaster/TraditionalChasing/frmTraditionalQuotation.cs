@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Globalization;
+using PriceMaster.TraditionalChasing;
 
 namespace PriceMaster
 {
@@ -398,6 +399,15 @@ namespace PriceMaster
                 }
             }
 
+        }
+
+        private void btnRelatedEnquiries_Click(object sender, EventArgs e)
+        {
+            string sql = "select id,subject,sender_email_address from [EnquiryLog].dbo.[Enquiry_Log] where related_quote = '" + quote_id.ToString() + "-" + cmbRev.Text + "'";
+
+            frmTraditionalEnquiryHistory frm = new frmTraditionalEnquiryHistory(quote_id.ToString() + "-" + cmbRev.Text);
+
+            frm.ShowDialog();
         }
     }
 }

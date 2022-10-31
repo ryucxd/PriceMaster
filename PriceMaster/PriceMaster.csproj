@@ -134,6 +134,12 @@
     <Compile Include="frmNote.Designer.cs">
       <DependentUpon>frmNote.cs</DependentUpon>
     </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalEnquiryHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalEnquiryHistory.Designer.cs">
+      <DependentUpon>frmTraditionalEnquiryHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="TraditionalChasing\frmTraditionalOutstandingChase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNote.resx">
       <DependentUpon>frmNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalEnquiryHistory.resx">
+      <DependentUpon>frmTraditionalEnquiryHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TraditionalChasing\frmTraditionalOutstandingChase.resx">
       <DependentUpon>frmTraditionalOutstandingChase.cs</DependentUpon>
