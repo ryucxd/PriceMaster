@@ -60,6 +60,7 @@ namespace PriceMaster
             if (cmbCustomer.Text.Length > 0)
                 sql = sql + "  customer = '" + cmbCustomer.Text + "'   AND ";
 
+
             if (txtCustomerReference.Text.Length > 0)
                 sql = sql + "  customer_ref LIKE '%" + txtCustomerReference.Text + "%'    AND ";
 
@@ -165,8 +166,10 @@ namespace PriceMaster
             dataGridView1.Columns[status_index].HeaderText = "Status";
 
             foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
                 col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
             //////////quote ref is far too big sometimes so we need to force this to be less -- same for sys
             ////////dataGridView1.Columns[quotation_ref_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             ////////dataGridView1.Columns[quotation_ref_index].Width = 250;

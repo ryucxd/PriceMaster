@@ -110,7 +110,10 @@ namespace PriceMaster
             }
             //format
             foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
                 col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
             dataGridView1.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dataGridView1.Columns[9].DefaultCellStyle.Format = "c2";

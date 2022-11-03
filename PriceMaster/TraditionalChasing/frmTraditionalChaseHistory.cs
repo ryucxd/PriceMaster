@@ -30,7 +30,10 @@ namespace PriceMaster
                     da.Fill(dt);
                     dataGridView1.DataSource = dt;
                     foreach (DataGridViewColumn col in dataGridView1.Columns)
+                    {
                         col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                    }
                     dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     dataGridView1.Columns[0].Visible = false;
 
@@ -42,6 +45,8 @@ namespace PriceMaster
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1)
+                return;
             frmTraditionalChase frm = new frmTraditionalChase(0, -1, Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()));
             frm.ShowDialog();
 

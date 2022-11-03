@@ -60,6 +60,10 @@ namespace PriceMaster
                         chkHiddenFollowup.Checked = true;
                         chkHiddenFollowup.AutoCheck = false;
                     }
+                    else
+                    {
+                        chkNoFollowup.Visible = false;
+                    }
                     btnSave.Visible = false;
                     btnCancel.Location = new Point(215, 334);
                 }
@@ -124,7 +128,7 @@ namespace PriceMaster
                 conn.Close();
 
                 //also update the status to chasing >> incase they forgot 
-                frmTraditionalChaseUpdate frm = new frmTraditionalChaseUpdate(quote_id);
+                frmSlimlineChaseUpdate frm = new frmSlimlineChaseUpdate(quote_id);
                 frm.ShowDialog();
                 MessageBox.Show("Chase updated!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
@@ -138,7 +142,7 @@ namespace PriceMaster
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            frmTraditionalChase frm = new frmTraditionalChase(0, -1, Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()));
+            frmSlimlineChase frm = new frmSlimlineChase(0, -1, Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()));
             frm.ShowDialog();
         }
 

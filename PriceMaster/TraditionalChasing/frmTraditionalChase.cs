@@ -60,6 +60,8 @@ namespace PriceMaster
                         chkHiddenFollowup.Checked = true;
                         chkHiddenFollowup.AutoCheck = false;
                     }
+                    else
+                        chkNoFollowup.Visible = false;
                     btnSave.Visible = false;
                     btnCancel.Location = new Point(215, 334);
                 }

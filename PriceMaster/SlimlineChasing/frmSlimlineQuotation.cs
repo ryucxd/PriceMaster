@@ -25,7 +25,7 @@ namespace PriceMaster
             //get the max rev and fill the combobox
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
-                string sql = "select issue_id from [price_master].dbo.sl_quotation where quote_id = " + quote_id.ToString() + " Order by issue_id ";
+                string sql = "select CAST(issue_id as nvarchar(max)) from [price_master].dbo.sl_quotation where quote_id = " + quote_id.ToString() + " Order by issue_id ";
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
@@ -34,7 +34,7 @@ namespace PriceMaster
                         cmbRev.Items.Add(reader.GetString(0));
                     reader.Close();
                     //select the max one 
-                    sql = "SELECT max(rev_num) FROM [order_database].dbo.solidworks_quotation_log_details WHERE quote_id = " + quote_id.ToString();
+                    sql = "SELECT max(issue_id) FROM [price_master].dbo.sl_quotation WHERE quote_id = " + quote_id.ToString();
                     using (SqlCommand cmdMax = new SqlCommand(sql, conn))
                         cmbRev.Text = cmdMax.ExecuteScalar().ToString();
 
@@ -156,8 +156,8 @@ namespace PriceMaster
                 {
                     sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET status = '" + cmbStatus.Text + "' WHERE quote_id = " + quote_id.ToString();
                     sql_update(sql);
-                    //frmSlimlineLossReason frm = new frmSlimlineLossReason(quote_id);
-                   // frm.ShowDialog();
+                    frmSlimlineLossReason frm = new frmSlimlineLossReason(quote_id);
+                    frm.ShowDialog();
                     sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET status = '" + cmbStatus.Text + "',too_expensive = 0,lead_time_too_long = 0,quote_took_too_long = 0,unable_to_meet_spec = 0 WHERE quote_id = " + quote_id.ToString();
                     using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
                     {
@@ -362,9 +362,34 @@ namespace PriceMaster
 
         private void btnRelatedEnquiries_Click(object sender, EventArgs e)
         {
-            string sql = "select id,subject,sender_email_address from [EnquiryLog].dbo.[Enquiry_Log] where related_quote = '" + quote_id.ToString() + "-" + cmbRev.Text + "'";
+            string sql = "select enquiry_id,issue_id from [price_master].dbo.[sl_quotation]  where quote_id = " + quote_id.ToString() + " AND issue_id = " + cmbRev.Text + " ";
+            int enquiry_id = 0;
 
-            frmSlimlineEnquiryHistory frm = new frmSlimlineEnquiryHistory(quote_id.ToString() + "-" + cmbRev.Text);
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    if (dt.Rows.Count == 0)
+                    {
+                        MessageBox.Show("There is no linked enquiry for this quote + issue.", "Missing data.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else if (string.IsNullOrEmpty(dt.Rows[0][0].ToString()))
+                        {
+                        MessageBox.Show("There is no linked enquiry for this quote + issue.", "Missing data.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else
+                        enquiry_id = Convert.ToInt32(dt.Rows[0][0].ToString());
+                }
+                conn.Close();
+            }
+
+            frmSlimlineEnquiryHistory frm = new frmSlimlineEnquiryHistory(enquiry_id);
 
             frm.ShowDialog();
         }

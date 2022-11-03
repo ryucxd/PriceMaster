@@ -24,6 +24,7 @@ namespace PriceMaster
         public int view_button_index { get; set; }
         public int email_index { get; set; }
         public int email_button_index { get; set; }
+        public int chase_button_index { get; set; }
         public int issue_id_index { get; set; }
         public int current_index { get; set; }
         public int priority_id_index { get; set; }
@@ -38,6 +39,7 @@ namespace PriceMaster
         public int quoted_by_index { get; set; }
         public int quote_date_index { get; set; }
         public int type_index { get; set; }
+        public int chasing_status_index { get; set; }
 
         //date stuffs
         public int dateFilter { get; set; }
@@ -51,7 +53,7 @@ namespace PriceMaster
 
         private void loadData()
         {
-            string sql = "SELECT top 150 quote_id,'View' as [view_temp],'Email' as email_temp,issue_id,CASE WHEN highest_issue = 0 THEN CAST(0 AS BIT) WHEN highest_issue IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [current] ,p.priority_description as priority_id,st.description,m.material_description, " +
+            string sql = "SELECT top 150 a.quote_id,q.status,'View' as [view_temp],'Email' as email_temp,issue_id,CASE WHEN highest_issue = 0 THEN CAST(0 AS BIT) WHEN highest_issue IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [current] ,p.priority_description as priority_id,st.description,m.material_description, " +
                                 "COALESCE(slimline_systems_1.system_name, '') + ' - ' + COALESCE(slimline_systems_2.system_name, '') + ' - ' + COALESCE(slimline_systems_3.system_name, '') + ' - ' + " +
                                 "COALESCE(slimline_systems_4.system_name, '') + ' - ' + COALESCE(slimline_systems_5.system_name, '') as [system_row] , rtrim(s.[NAME]) as customer,s.type,u_2.forename + ' ' + u_2.surname as  email_sent_by,email_sent_date,quotation_ref,COALESCE(price,0) as price," +
                                 "u.forename + ' ' + u.surname as [quoted_by],quote_date FROM dbo.sl_quotation a " +
@@ -61,6 +63,7 @@ namespace PriceMaster
                                 "left join dbo.sl_status st on st.id = a.status_id " +
                                 "left join dbo.sl_material m on m.id = a.material_type_id " +
                                 "left join dbo.sl_priority p on p.id = a.priority_id " +
+                                "left join [order_database].dbo.quotation_feed_back_slimline q on a.quote_id = q.quote_id " +
                                 "LEFT JOIN dbo.slimline_systems as slimline_systems_1 ON a.system_id_1 = slimline_systems_1.id " +
                                 "LEFT JOIN dbo.slimline_systems AS slimline_systems_2 ON a.system_id_2 = slimline_systems_2.id " +
                                 "LEFT JOIN dbo.slimline_systems AS slimline_systems_3 ON a.system_id_3 = slimline_systems_3.id " +
@@ -71,7 +74,11 @@ namespace PriceMaster
             sql = sql + " WHERE highest_issue = -1 ";
 
             if (txtQuoteID.Text.Length > 0)
-                sql = sql + " AND quote_id like '%" + txtQuoteID.Text + "%' ";
+                sql = sql + " AND a.quote_id like '%" + txtQuoteID.Text + "%' ";
+
+            if (cmbChasingStatus.Text.Length > 0)
+                sql = sql + " AND q.status LIKE '%" + cmbChasingStatus.Text + "%'";
+
 
             if (cmbStatus.Text.Length > 0)
                 sql = sql + " AND st.description = '" + cmbStatus.Text + "' ";
@@ -133,6 +140,12 @@ namespace PriceMaster
             if (dataGridView1.Columns.Contains("Email") == true)
                 email_button_index = dataGridView1.Columns["Email"].Index;
 
+            if (dataGridView1.Columns.Contains("Chase") == true)
+                chase_button_index = dataGridView1.Columns["Chase"].Index;
+
+            chasing_status_index = dataGridView1.Columns["status"].Index;
+
+
             issue_id_index = dataGridView1.Columns["issue_id"].Index;
             current_index = dataGridView1.Columns["current"].Index;
             priority_id_index = dataGridView1.Columns["priority_id"].Index;
@@ -184,6 +197,16 @@ namespace PriceMaster
                 dataGridView1.Columns.Insert(column_index, email_button);
             }
 
+            column_index = email_button_index + 1 ;
+            DataGridViewButtonColumn chase_button = new DataGridViewButtonColumn();
+            chase_button.Name = "Chase";
+            chase_button.Text = "Chase";
+            chase_button.UseColumnTextForButtonValue = true;
+            if (dataGridView1.Columns["Chase"] == null)
+            {
+                dataGridView1.Columns.Insert(column_index, chase_button);
+            }
+
         }
 
         private void format()
@@ -200,6 +223,7 @@ namespace PriceMaster
 
             //headertext stuff
             dataGridView1.Columns[quote_id_index].HeaderText = "Quote ID";
+            dataGridView1.Columns[chasing_status_index].HeaderText = "Chasing Status";
             dataGridView1.Columns[issue_id_index].HeaderText = "Issue";
             dataGridView1.Columns[current_index].HeaderText = "Current";
             dataGridView1.Columns[priority_id_index].HeaderText = "Priority";
@@ -235,6 +259,10 @@ namespace PriceMaster
             dataGridView1.Columns[price_index].DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("en-GB");
 
             dataGridView1.Columns[quotation_ref_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+
         }
 
         private void fillComboBox()
@@ -294,6 +322,10 @@ namespace PriceMaster
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
+            if (e.RowIndex == -1)
+                return;
+            string sql = "";
             column_index_refresh();
             if (e.ColumnIndex == quote_id_index)
             {
@@ -317,6 +349,31 @@ namespace PriceMaster
                     MessageBox.Show("The quotation for " + dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString() + " does not exist!", "Missing File", MessageBoxButtons.OK);
             }
 
+            if (e.ColumnIndex == chase_button_index)
+            {
+
+                //if there is no entry in quotation_feed_back then make one
+                sql = "select cast(quote_id as nvarchar(max)) FROM [order_database].dbo.quotation_feed_back_slimline WHERE quote_id = " + dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString();
+                using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        string data = (string)cmd.ExecuteScalar();
+                        if (data == null)
+                        {
+                            sql = "INSERT INTO [order_database].dbo.quotation_feed_back_slimline (quote_id) VALUES (" + dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString() + ")";
+                            cmd.CommandText = sql;
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    conn.Close();
+                }
+
+                frmSlimlineQuotation frm = new frmSlimlineQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString()), dataGridView1.Rows[e.RowIndex].Cells[customer_index].Value.ToString());
+                frm.ShowDialog();
+                loadData();
+            }
         }
 
         private void txtQuoteID_TextChanged(object sender, EventArgs e)
@@ -391,6 +448,7 @@ namespace PriceMaster
             txtQuoteRef.Text = "";
             txtPrice.Text = "";
             cmbQuotedBy.Text = "";
+            cmbChasingStatus.Text = "";
             cmbType.Text = "";
             dteStart.Value = DateTime.Now;
             dteEnd.Value = DateTime.Now;
@@ -622,6 +680,49 @@ namespace PriceMaster
             this.Show();
 
 
+        }
+
+        private void frmMain_Shown(object sender, EventArgs e)
+        {
+            //check if there is any outstanding chases ----
+            string sql = "SELECT CAST(quote_id as nvarchar(max)) FROM [order_database].dbo.quotation_chase_log_slimline where next_chase_date <= CAST(GETDATE() as date) and " +
+                "dont_chase = 0 and(chase_followed_up is null or chase_followed_up = 0) AND chased_by =  " + CONNECT.staffID.ToString();
+
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    string temp = (string)cmd.ExecuteScalar();
+                    if (temp != null)
+                    {
+                        DialogResult result = MessageBox.Show("You have current outstanding chases, would you like to view them?", "Outstanding Chases", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (result == DialogResult.Yes)
+                        {
+                            frmSlimlineOutstandingChase frm = new frmSlimlineOutstandingChase(0);
+                            frm.ShowDialog();
+                        }
+                    }
+                }
+                conn.Close();
+            }
+        }
+
+        private void btnAdmin_Click(object sender, EventArgs e)
+        {
+            frmSlimlineOutstandingChase frm = new frmSlimlineOutstandingChase(-1);
+            frm.ShowDialog();
+        }
+
+        private void btnOutstanding_Click(object sender, EventArgs e)
+        {
+            frmSlimlineOutstandingChase frm = new frmSlimlineOutstandingChase(0);
+            frm.ShowDialog();
+        }
+
+        private void cmbChasingStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadData();
         }
     }
 }

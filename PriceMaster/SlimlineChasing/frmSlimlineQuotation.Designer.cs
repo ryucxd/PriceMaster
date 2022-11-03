@@ -49,7 +49,7 @@
             // cmbRev
             // 
             this.cmbRev.FormattingEnabled = true;
-            this.cmbRev.Location = new System.Drawing.Point(588, 50);
+            this.cmbRev.Location = new System.Drawing.Point(578, 50);
             this.cmbRev.Name = "cmbRev";
             this.cmbRev.Size = new System.Drawing.Size(49, 21);
             this.cmbRev.TabIndex = 0;
@@ -61,7 +61,7 @@
             this.lblCustomer.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblCustomer.Location = new System.Drawing.Point(12, 9);
             this.lblCustomer.Name = "lblCustomer";
-            this.lblCustomer.Size = new System.Drawing.Size(1141, 29);
+            this.lblCustomer.Size = new System.Drawing.Size(1120, 29);
             this.lblCustomer.TabIndex = 43;
             this.lblCustomer.Text = "label1";
             this.lblCustomer.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -71,7 +71,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.label1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label1.Location = new System.Drawing.Point(504, 51);
+            this.label1.Location = new System.Drawing.Point(518, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(54, 20);
             this.label1.TabIndex = 44;
@@ -85,7 +85,7 @@
             this.btnQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQuote.ForeColor = System.Drawing.Color.White;
-            this.btnQuote.Location = new System.Drawing.Point(1064, 205);
+            this.btnQuote.Location = new System.Drawing.Point(1043, 205);
             this.btnQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnQuote.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnQuote.Name = "btnQuote";
@@ -98,7 +98,7 @@
             // 
             // txtCustom
             // 
-            this.txtCustom.Location = new System.Drawing.Point(365, 99);
+            this.txtCustom.Location = new System.Drawing.Point(344, 99);
             this.txtCustom.Name = "txtCustom";
             this.txtCustom.Size = new System.Drawing.Size(691, 139);
             this.txtCustom.TabIndex = 49;
@@ -109,7 +109,7 @@
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(365, 77);
+            this.label2.Location = new System.Drawing.Point(344, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(691, 20);
             this.label2.TabIndex = 50;
@@ -140,7 +140,7 @@
             // chkTooExpensive
             // 
             this.chkTooExpensive.AutoSize = true;
-            this.chkTooExpensive.Location = new System.Drawing.Point(15, 177);
+            this.chkTooExpensive.Location = new System.Drawing.Point(40, 180);
             this.chkTooExpensive.Name = "chkTooExpensive";
             this.chkTooExpensive.Size = new System.Drawing.Size(99, 17);
             this.chkTooExpensive.TabIndex = 53;
@@ -152,7 +152,7 @@
             // chkUnableToMeetSpec
             // 
             this.chkUnableToMeetSpec.AutoSize = true;
-            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(146, 204);
+            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(171, 207);
             this.chkUnableToMeetSpec.Name = "chkUnableToMeetSpec";
             this.chkUnableToMeetSpec.Size = new System.Drawing.Size(127, 17);
             this.chkUnableToMeetSpec.TabIndex = 54;
@@ -164,7 +164,7 @@
             // chkQuoteTookTooLong
             // 
             this.chkQuoteTookTooLong.AutoSize = true;
-            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(15, 204);
+            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(40, 207);
             this.chkQuoteTookTooLong.Name = "chkQuoteTookTooLong";
             this.chkQuoteTookTooLong.Size = new System.Drawing.Size(123, 17);
             this.chkQuoteTookTooLong.TabIndex = 55;
@@ -176,7 +176,7 @@
             // chkLeadTimeTooLong
             // 
             this.chkLeadTimeTooLong.AutoSize = true;
-            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(146, 177);
+            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(171, 180);
             this.chkLeadTimeTooLong.Name = "chkLeadTimeTooLong";
             this.chkLeadTimeTooLong.Size = new System.Drawing.Size(116, 17);
             this.chkLeadTimeTooLong.TabIndex = 56;
@@ -189,7 +189,7 @@
             // 
             this.lblLost.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblLost.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblLost.Location = new System.Drawing.Point(15, 141);
+            this.lblLost.Location = new System.Drawing.Point(40, 144);
             this.lblLost.Name = "lblLost";
             this.lblLost.Size = new System.Drawing.Size(247, 17);
             this.lblLost.TabIndex = 57;
@@ -222,7 +222,7 @@
             this.btnChaseHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChaseHistory.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChaseHistory.ForeColor = System.Drawing.Color.White;
-            this.btnChaseHistory.Location = new System.Drawing.Point(1064, 144);
+            this.btnChaseHistory.Location = new System.Drawing.Point(1043, 144);
             this.btnChaseHistory.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnChaseHistory.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnChaseHistory.Name = "btnChaseHistory";
@@ -240,7 +240,7 @@
             this.btnRelatedEnquiries.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRelatedEnquiries.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRelatedEnquiries.ForeColor = System.Drawing.Color.White;
-            this.btnRelatedEnquiries.Location = new System.Drawing.Point(1002, 12);
+            this.btnRelatedEnquiries.Location = new System.Drawing.Point(981, 12);
             this.btnRelatedEnquiries.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnRelatedEnquiries.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnRelatedEnquiries.Name = "btnRelatedEnquiries";
@@ -255,7 +255,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1164, 246);
+            this.ClientSize = new System.Drawing.Size(1144, 246);
             this.Controls.Add(this.btnRelatedEnquiries);
             this.Controls.Add(this.btnChaseHistory);
             this.Controls.Add(this.btnChase);
@@ -272,6 +272,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblCustomer);
             this.Controls.Add(this.cmbRev);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmSlimlineQuotation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

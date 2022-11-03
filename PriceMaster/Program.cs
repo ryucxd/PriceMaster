@@ -84,6 +84,8 @@ namespace PriceMaster
                     CONNECT.staffFullName = cmd.ExecuteScalar().ToString();
                 }
 
+                //admin login here
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new frmMain());

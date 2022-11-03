@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,55 +16,17 @@ namespace PriceMaster.SlimlinelChasing
     public partial class frmSlimlineEnquiryHistory : Form
     {
         public int enquiry_id { get; set; }
-        public frmSlimlineEnquiryHistory(string quote)
+        public frmSlimlineEnquiryHistory(int quote)
         {
             InitializeComponent();
-            loadEnquiry(quote);
-
-            if (dataGridView1.Rows.Count > 0)
-                loadData(Convert.ToInt32(dataGridView1.Rows[0].Cells[0].Value.ToString()),dataGridView1.Rows[0].Cells[2].Value.ToString());
-        }
-
-        private void loadEnquiry(string quote)
-        {
-            string sql = "select id, recieved_time,sender_email_address from[EnquiryLog].dbo.[Enquiry_Log] where related_quote = '" + quote + "' order by recieved_time desc";
-            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
-            {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
-                {
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    dataGridView1.DataSource = dt;
-                    dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                    dataGridView1.Columns[0].HeaderText = "Enquiry ID";
-                    dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView1.Columns[1].HeaderText = "Related Quote";
-                    dataGridView1.Columns[2].Visible = false;
-
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        if (row[2].ToString().Contains("EXCHANGELABS/OU=EXCHANGE"))
-                        {
-                            //remove all the clutter
-                            string temp_string = row[2].ToString();
-                            row[2] = temp_string.Substring(temp_string.IndexOf("-") + 1);
-                        }
-                    }
-
-
-                }
-                conn.Close();
-            }
+            loadData(quote);
 
         }
 
-        private void loadData(int enquiry_id,string sent_by)
+        private void loadData(int enquiry_id)
         {
-            string sql = "select body from [EnquiryLog].dbo.Enquiry_Log where id = " + enquiry_id.ToString();
-
+            string sql = "select body,sender_email_address from [EnquiryLog].dbo.Enquiry_Log where id = " + enquiry_id.ToString();
+            string sent_by = "";
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
@@ -76,6 +38,7 @@ namespace PriceMaster.SlimlinelChasing
                     da.Fill(dt);
                     //use this dt to fill out all the  boxes
                     webBrowser1.DocumentText = dt.Rows[0][0].ToString();
+                    sent_by = dt.Rows[0][1].ToString();
                 }
 
                 //load the attachements
@@ -91,6 +54,12 @@ namespace PriceMaster.SlimlinelChasing
                 conn.Close();
             }
 
+            if (sent_by.Contains("EXCHANGELABS/OU=EXCHANGE"))
+            {
+                //remove all the clutter
+                string temp_string = sent_by;
+                sent_by = temp_string.Substring(temp_string.IndexOf("-") + 1);
+            }
             lblSentBy.Text = "Email Body  -  Sent by: " + sent_by;
 
         }
@@ -110,9 +79,6 @@ namespace PriceMaster.SlimlinelChasing
             { }
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            loadData(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()),dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString());
-        }
+
     }
 }

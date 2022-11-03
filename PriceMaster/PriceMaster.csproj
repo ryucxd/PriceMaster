@@ -110,6 +110,24 @@
     <Compile Include="SlimlineChasing\frmSlimlineEnquiryHistory.Designer.cs">
       <DependentUpon>frmSlimlineEnquiryHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineLossReason.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineLossReason.Designer.cs">
+      <DependentUpon>frmSlimlineLossReason.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineChaseUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineChaseUpdate.Designer.cs">
+      <DependentUpon>frmSlimlineChaseUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineOutstandingChase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineOutstandingChase.Designer.cs">
+      <DependentUpon>frmSlimlineOutstandingChase.cs</DependentUpon>
+    </Compile>
     <Compile Include="TraditionalChasing\frmTraditionalChaseHistory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -231,6 +249,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineEnquiryHistory.resx">
       <DependentUpon>frmSlimlineEnquiryHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineLossReason.resx">
+      <DependentUpon>frmSlimlineLossReason.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineChaseUpdate.resx">
+      <DependentUpon>frmSlimlineChaseUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineOutstandingChase.resx">
+      <DependentUpon>frmSlimlineOutstandingChase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TraditionalChasing\frmTraditionalChaseHistory.resx">
       <DependentUpon>frmTraditionalChaseHistory.cs</DependentUpon>
