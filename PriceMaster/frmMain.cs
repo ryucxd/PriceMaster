@@ -535,8 +535,8 @@ namespace PriceMaster
                         xlWorksheet.Cells[5][excel_row].Value2 = row[4].ToString();
                         xlWorksheet.Cells[6][excel_row].Value2 = row[5].ToString();
                         xlWorksheet.Cells[7][excel_row].Value2 = row[6].ToString();
-                        xlWorksheet.Cells[8][excel_row].Value2 = row[7].ToString();   
-                        xlWorksheet.Cells[9][excel_row].Value2 = row[7].ToString();
+                        xlWorksheet.Cells[8][excel_row].Value2 = row[7].ToString();
+                        xlWorksheet.Cells[9][excel_row].Value2 = "";
                         excel_row++;
                     }
 
