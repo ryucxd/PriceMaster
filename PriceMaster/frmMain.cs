@@ -685,8 +685,14 @@ namespace PriceMaster
         private void frmMain_Shown(object sender, EventArgs e)
         {
             //check if there is any outstanding chases ----
-            string sql = "SELECT CAST(quote_id as nvarchar(max)) FROM [order_database].dbo.quotation_chase_log_slimline where next_chase_date <= CAST(GETDATE() as date) and " +
-                "dont_chase = 0 and(chase_followed_up is null or chase_followed_up = 0) AND chased_by =  " + CONNECT.staffID.ToString();
+            //string sql = "SELECT CAST(quote_id as nvarchar(max)) FROM [order_database].dbo.quotation_chase_log_slimline where next_chase_date <= CAST(GETDATE() as date) and " +
+            //    "dont_chase = 0 and(chase_followed_up is null or chase_followed_up = 0) AND chased_by =  " + CONNECT.staffID.ToString();
+
+            string sql = "SELECT CAST(a.quote_id as nvarchar(max)) " +
+    "FROM [order_database].dbo.quotation_chase_log_slimline a " +
+    "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
+    "left join [user_info].dbo.[user] u on a.chased_by = u.id " +
+     "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {

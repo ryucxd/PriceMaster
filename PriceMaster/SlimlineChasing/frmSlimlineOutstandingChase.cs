@@ -54,10 +54,11 @@ namespace PriceMaster
         private void load_data()
         {
             dataGridView1.DataSource = null;
-            string sql = "SELECT a.id,quote_id,chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by " +
+            string sql = "SELECT a.id,a.quote_id,chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by " +
                 "FROM [order_database].dbo.quotation_chase_log_slimline a " +
+                "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
                 "left join [user_info].dbo.[user] u on a.chased_by = u.id " +
-                "where next_chase_date <= CAST(GETDATE() as date) ";
+                 "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
 
             if (admin == 0)
                 sql = sql + "AND chased_by = " + CONNECT.staffID.ToString();
