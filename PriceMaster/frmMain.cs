@@ -460,18 +460,44 @@ namespace PriceMaster
         private void btnEmail_Click(object sender, EventArgs e)
         {
             string temp = "";
-            string sql = "select top 150 quote_id,rtrim(s.[NAME]) as customer,a.quotation_ref,a.customer_contact,s.TELEPHONE,enquiry_id,e.sender_email_address,e.priority as [priority_class],'                                                           ' as notes " +
+            string sql = "select top 150 a.quote_id,rtrim(s.[NAME]) as customer,a.quotation_ref,a.customer_contact,s.TELEPHONE,enquiry_id,e.sender_email_address,e.priority as [priority_class],'                                                           ' as notes " +
                 "from dbo.sl_quotation a " +
                 "left join [dsl_fitting].dbo.SALES_LEDGER s on a.customer_acc_ref = s.ACCOUNT_REF " +
-                "left join[EnquiryLog].dbo.[Enquiry_Log] e on e.id = a.enquiry_id left join[user_info].dbo.[user] u on u.id = a.created_by_id " +
-                "left join[user_info].dbo.[user] u_2 on u_2.id = a.email_sent_by left join dbo.sl_status st on st.id = a.status_id " +
-                "left join dbo.sl_material m on m.id = a.material_type_id left join dbo.sl_priority p on p.id = a.priority_id " +
+                "left join[EnquiryLog].dbo.[Enquiry_Log] e on e.id = a.enquiry_id " +
+                "left join[user_info].dbo.[user] u on u.id = a.created_by_id " +
+                //"LEFT JOIN[dsl_fitting].dbo.[SALES_LEDGER] s on s.ACCOUNT_REF = a.customer_acc_ref " +
+                "left join[user_info].dbo.[user] u_2 on u_2.id = a.email_sent_by " +
+                "left join dbo.sl_status st on st.id = a.status_id " +
+                "left join dbo.sl_material m on m.id = a.material_type_id " +
+                "left join dbo.sl_priority p on p.id = a.priority_id " +
+                "left join [order_database].dbo.quotation_feed_back_slimline q on a.quote_id = q.quote_id " +
                 "LEFT JOIN dbo.slimline_systems as slimline_systems_1 ON a.system_id_1 = slimline_systems_1.id " +
                 "LEFT JOIN dbo.slimline_systems AS slimline_systems_2 ON a.system_id_2 = slimline_systems_2.id " +
                 "LEFT JOIN dbo.slimline_systems AS slimline_systems_3 ON a.system_id_3 = slimline_systems_3.id " +
                 "LEFT JOIN dbo.slimline_systems AS slimline_systems_4 ON a.system_id_4 = slimline_systems_4.id " +
-                "LEFT JOIN dbo.slimline_systems AS slimline_systems_5 ON a.system_id_5 = slimline_systems_5.id" +
+                "LEFT JOIN dbo.slimline_systems AS slimline_systems_5 ON a.system_id_5 = slimline_systems_5.id " +
                 " WHERE highest_issue = -1 ";
+
+
+                                //"SELECT top 150 a.quote_id,q.status,'View' as [view_temp],'Email' as email_temp,issue_id,CASE WHEN highest_issue = 0 THEN CAST(0 AS BIT) WHEN highest_issue IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [current] ,p.priority_description as priority_id,st.description,m.material_description, " +
+                                //"COALESCE(slimline_systems_1.system_name, '') + ' - ' + COALESCE(slimline_systems_2.system_name, '') + ' - ' + COALESCE(slimline_systems_3.system_name, '') + ' - ' + " +
+                                //"COALESCE(slimline_systems_4.system_name, '') + ' - ' + COALESCE(slimline_systems_5.system_name, '') as [system_row] , rtrim(s.[NAME]) as customer,s.type,u_2.forename + ' ' + u_2.surname as  email_sent_by,email_sent_date,quotation_ref,COALESCE(price,0) as price," +
+                                //"u.forename + ' ' + u.surname as [quoted_by],quote_date FROM dbo.sl_quotation a " +
+                                //"LEFT JOIN[dsl_fitting].dbo.[SALES_LEDGER] s on s.ACCOUNT_REF = a.customer_acc_ref " +
+                                //"left join[user_info].dbo.[user] u on u.id = a.created_by_id " +
+                                //"left join[user_info].dbo.[user] u_2 on u_2.id = a.email_sent_by " +
+                                //"left join dbo.sl_status st on st.id = a.status_id " +
+                                //"left join dbo.sl_material m on m.id = a.material_type_id " +
+                                //"left join dbo.sl_priority p on p.id = a.priority_id " +
+                                //"left join [order_database].dbo.quotation_feed_back_slimline q on a.quote_id = q.quote_id " +
+                                //"LEFT JOIN dbo.slimline_systems as slimline_systems_1 ON a.system_id_1 = slimline_systems_1.id " +
+                                //"LEFT JOIN dbo.slimline_systems AS slimline_systems_2 ON a.system_id_2 = slimline_systems_2.id " +
+                                //"LEFT JOIN dbo.slimline_systems AS slimline_systems_3 ON a.system_id_3 = slimline_systems_3.id " +
+                                //"LEFT JOIN dbo.slimline_systems AS slimline_systems_4 ON a.system_id_4 = slimline_systems_4.id " +
+                                //"LEFT JOIN dbo.slimline_systems AS slimline_systems_5 ON a.system_id_5 = slimline_systems_5.id ";
+
+
+
 
             if (sql_where == " ")
             {
@@ -689,10 +715,10 @@ namespace PriceMaster
             //    "dont_chase = 0 and(chase_followed_up is null or chase_followed_up = 0) AND chased_by =  " + CONNECT.staffID.ToString();
 
             string sql = "SELECT CAST(a.quote_id as nvarchar(max)) " +
-    "FROM [order_database].dbo.quotation_chase_log_slimline a " +
-    "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
-    "left join [user_info].dbo.[user] u on a.chased_by = u.id " +
-     "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
+                                "FROM [order_database].dbo.quotation_chase_log_slimline a " +
+                                "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
+                                "left join [user_info].dbo.[user] u on a.chased_by = u.id " +
+                                 "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -711,7 +737,7 @@ namespace PriceMaster
                     }
                 }
                 conn.Close();
-            }
+            } 
         }
 
         private void btnAdmin_Click(object sender, EventArgs e)

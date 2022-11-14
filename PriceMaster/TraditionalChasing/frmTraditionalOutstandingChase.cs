@@ -54,16 +54,20 @@ namespace PriceMaster
         private void load_data()
         {
             dataGridView1.DataSource = null;
-            string sql = "SELECT a.id,a.quote_id,chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by " +
+            string sql = "SELECT a.id,a.quote_id,chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by ,rtrim(q.customer) as customer,e.sender_email_address " +
                 "FROM [order_database].dbo.quotation_chase_log a " +
                 "left join [order_database].dbo.quotation_feed_back b on a.quote_id = b.quote_id " +
                 "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
+                "left join (select quote_id,max(revision_number) as revision_number from [order_database].dbo.solidworks_quotation_log group by quote_id) sw on a.quote_id = sw.quote_id " +
+                "left join [order_database].dbo.solidworks_quotation_log q on sw.quote_id = q.quote_id and sw.revision_number = q.revision_number " +
+                "left join (select max(id) as enquiry_id, left(related_quote, CHARINDEX('-', related_quote) - 1) as related_quote from [EnquiryLog].dbo.[Enquiry_Log] WHERE related_quote<> 'No Related Quote' group by LEFT(related_quote, CHARINDEX('-', related_quote) - 1)) el on el.related_quote like '%' + cast(q.quote_id as nvarchar) + '%' " +
+                "left join [EnquiryLog].dbo.[Enquiry_Log] e on el.enquiry_id = e.id " +
                 "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
 
             if (admin == 0)
                 sql = sql + "AND chased_by = " + CONNECT.staffID.ToString();
 
-            sql = sql + " order by next_chase_date asc, quote_id ";
+            sql = sql + " order by rtrim(q.customer) ,next_chase_date asc, quote_id ";
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
