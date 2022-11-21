@@ -21,6 +21,8 @@ namespace PriceMaster
         public int chased_by_index { get; set; }
         public int button_index { get; set; }
         public int admin { get; set; }
+        public int customer_index { get; set; }
+        public int sender_email_address_index { get; set; }
         public frmSlimlineOutstandingChase(int _admin)
         {
             InitializeComponent();
@@ -28,6 +30,15 @@ namespace PriceMaster
             load_data();
             if (admin == -1)
                 this.Text = "Admin Outstanding Chases";
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (cmbCustomerSearch.Items.Contains(row.Cells[6].Value.ToString()))
+                { } //nothing
+                else
+                    cmbCustomerSearch.Items.Add(row.Cells[6].Value.ToString());
+            }
+
         }
 
         private void format()
@@ -37,6 +48,20 @@ namespace PriceMaster
             dataGridView1.Columns[chase_date_index].HeaderText = "Chase Date";
             dataGridView1.Columns[chase_description_index].HeaderText = "Chase Description";
             dataGridView1.Columns[next_chase_date_index].HeaderText = "Next Chase Date";
+            dataGridView1.Columns[customer_index].HeaderText = "Customer";
+            dataGridView1.Columns[sender_email_address_index].HeaderText = "Sender Email Address";
+
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells[sender_email_address_index].Value.ToString().Contains("EXCHANGELABS/OU=EXCHANGE"))
+                {
+                    //remove all the clutter
+                    string temp = row.Cells[sender_email_address_index].Value.ToString();
+                    row.Cells[sender_email_address_index].Value = temp.Substring(temp.IndexOf("-") + 1);
+                }
+            }
+
 
             if (admin == 0)
                 dataGridView1.Columns[chased_by_index].Visible = false;
@@ -54,16 +79,22 @@ namespace PriceMaster
         private void load_data()
         {
             dataGridView1.DataSource = null;
-            string sql = "SELECT a.id,a.quote_id,chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by " +
+            string sql = "SELECT a.id,a.quote_id,chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by,rtrim(s.[NAME]) as [customer] ,e.sender_email_address " +
                 "FROM [order_database].dbo.quotation_chase_log_slimline a " +
                 "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
-                "left join [user_info].dbo.[user] u on a.chased_by = u.id " +
-                 "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
+                "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
+                "left join[price_master].dbo.[sl_quotation] sl on sl.quote_id = a.quote_id " +
+                "left join[EnquiryLog].dbo.[Enquiry_Log] e on sl.enquiry_id = e.id " +
+                "left join[dsl_fitting].dbo.SALES_LEDGER s on sl.customer_acc_ref = s.ACCOUNT_REF " +
+                "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
+
+            if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
+                sql = sql + " AND rtrim(s.NAME) = '" + cmbCustomerSearch.Text + "'  ";
 
             if (admin == 0)
                 sql = sql + "AND chased_by = " + CONNECT.staffID.ToString();
 
-            sql = sql + " order by next_chase_date asc, quote_id ";
+            sql = sql + " order by rtrim(s.[NAME]), next_chase_date asc, quote_id ";
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
@@ -108,6 +139,8 @@ namespace PriceMaster
             chase_description_index = dataGridView1.Columns["chase_description"].Index;
             next_chase_date_index = dataGridView1.Columns["next_chase_date"].Index;
             chased_by_index = dataGridView1.Columns["chased_by"].Index;
+            customer_index = dataGridView1.Columns["customer"].Index;
+            sender_email_address_index = dataGridView1.Columns["sender_email_address"].Index;
 
             if (dataGridView1.Columns.Contains("Complete") == true)
                 button_index = dataGridView1.Columns["Complete"].Index;
@@ -160,6 +193,11 @@ namespace PriceMaster
             //}
             //    catch { }
             //}
+        }
+
+        private void cmbCustomerSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            load_data();
         }
     }
 }

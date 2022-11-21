@@ -40,9 +40,12 @@ namespace PriceMaster
         public int quote_date_index { get; set; }
         public int type_index { get; set; }
         public int chasing_status_index { get; set; }
+        public int last_chased_date_index { get; set; }
+        public int last_chased_by_index { get; set; }
 
         //date stuffs
         public int dateFilter { get; set; }
+        public int ChaseDateFilter { get; set; }
         public frmMain()
         {
             InitializeComponent();
@@ -53,7 +56,7 @@ namespace PriceMaster
 
         private void loadData()
         {
-            string sql = "SELECT top 150 a.quote_id,q.status,'View' as [view_temp],'Email' as email_temp,issue_id,CASE WHEN highest_issue = 0 THEN CAST(0 AS BIT) WHEN highest_issue IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [current] ,p.priority_description as priority_id,st.description,m.material_description, " +
+            string sql = "SELECT top 150 a.quote_id,q.status,last_chase.chase_date,last_chase.chased_by,'View' as [view_temp],'Email' as email_temp,issue_id,CASE WHEN highest_issue = 0 THEN CAST(0 AS BIT) WHEN highest_issue IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [current] ,p.priority_description as priority_id,st.description,m.material_description, " +
                                 "COALESCE(slimline_systems_1.system_name, '') + ' - ' + COALESCE(slimline_systems_2.system_name, '') + ' - ' + COALESCE(slimline_systems_3.system_name, '') + ' - ' + " +
                                 "COALESCE(slimline_systems_4.system_name, '') + ' - ' + COALESCE(slimline_systems_5.system_name, '') as [system_row] , rtrim(s.[NAME]) as customer,s.type,u_2.forename + ' ' + u_2.surname as  email_sent_by,email_sent_date,quotation_ref,COALESCE(price,0) as price," +
                                 "u.forename + ' ' + u.surname as [quoted_by],quote_date FROM dbo.sl_quotation a " +
@@ -68,7 +71,11 @@ namespace PriceMaster
                                 "LEFT JOIN dbo.slimline_systems AS slimline_systems_2 ON a.system_id_2 = slimline_systems_2.id " +
                                 "LEFT JOIN dbo.slimline_systems AS slimline_systems_3 ON a.system_id_3 = slimline_systems_3.id " +
                                 "LEFT JOIN dbo.slimline_systems AS slimline_systems_4 ON a.system_id_4 = slimline_systems_4.id " +
-                                "LEFT JOIN dbo.slimline_systems AS slimline_systems_5 ON a.system_id_5 = slimline_systems_5.id ";
+                                "LEFT JOIN dbo.slimline_systems AS slimline_systems_5 ON a.system_id_5 = slimline_systems_5.id " +
+                                "left join (SELECT a.quote_id,chase_date,u.forename + ' ' + u.surname as chased_by from [order_database].dbo.quotation_chase_log_slimline a " +
+                                "right join(select max(id) as id,quote_id from[order_database].dbo.quotation_chase_log_slimline " +
+                                "where(dont_chase = 0 or dont_chase is null) " +
+                                "group by quote_id) b on a.quote_id = b.quote_id AND a.id = b.id left join[user_info].dbo.[user] u on a.chased_by = u.id ) as last_chase on a.quote_id = last_chase.quote_id ";
 
 
             sql = sql + " WHERE highest_issue = -1 ";
@@ -102,6 +109,11 @@ namespace PriceMaster
             if (dateFilter == -1)
                 sql = sql + " AND quote_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND quote_date <= '" + dteEnd.Value.ToString("yyyyMMdd") + "' ";
 
+            if (ChaseDateFilter == -1)
+                sql = sql + " AND last_chase.chase_date >= '" + dteChaseStart.Value.ToString("yyyyMMdd") + "' AND last_chase.chase_date <= '" + dteChaseEnd.Value.ToString("yyyyMMdd") + "' ";
+
+            if (cmbChasedBy.Text.Length > 0)
+                sql = sql + " AND last_chase.chased_by = '" + cmbChasedBy.Text + "' ";
 
             sql_where = sql.Substring(sql.LastIndexOf("-1") + 2);
 
@@ -144,6 +156,8 @@ namespace PriceMaster
                 chase_button_index = dataGridView1.Columns["Chase"].Index;
 
             chasing_status_index = dataGridView1.Columns["status"].Index;
+            last_chased_date_index = dataGridView1.Columns["chase_date"].Index;
+            last_chased_by_index = dataGridView1.Columns["chased_by"].Index;
 
 
             issue_id_index = dataGridView1.Columns["issue_id"].Index;
@@ -224,6 +238,8 @@ namespace PriceMaster
             //headertext stuff
             dataGridView1.Columns[quote_id_index].HeaderText = "Quote ID";
             dataGridView1.Columns[chasing_status_index].HeaderText = "Chasing Status";
+            dataGridView1.Columns[last_chased_date_index].HeaderText = "Last Chase Date";
+            dataGridView1.Columns[last_chased_by_index].HeaderText = "Last Chased By";
             dataGridView1.Columns[issue_id_index].HeaderText = "Issue";
             dataGridView1.Columns[current_index].HeaderText = "Current";
             dataGridView1.Columns[priority_id_index].HeaderText = "Priority";
@@ -313,6 +329,15 @@ namespace PriceMaster
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                             cmbQuotedBy.Items.Add(reader.GetString(0));
+                        reader.Close();
+                    }  
+                    sql = "SELECT distinct u.forename + ' ' + u.surname as chased_by from [order_database].dbo.quotation_chase_log_slimline a " +
+                             "left join[user_info].dbo.[user] u on a.chased_by = u.id order by chased_by asc";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                            cmbChasedBy.Items.Add(reader.GetString(0));
                         reader.Close();
                     }
                     conn.Close();
@@ -753,6 +778,23 @@ namespace PriceMaster
         }
 
         private void cmbChasingStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadData();
+        }
+
+        private void dteChaseStart_ValueChanged(object sender, EventArgs e)
+        {
+            ChaseDateFilter = -1;
+            loadData();
+        }
+
+        private void dteChaseEnd_ValueChanged(object sender, EventArgs e)
+        {
+            ChaseDateFilter = -1;
+            loadData();
+        }
+
+        private void cmbChasedBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadData();
         }

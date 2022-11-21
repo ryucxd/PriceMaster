@@ -54,6 +54,16 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbType = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbChasingStatus = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cmbChasedBy = new System.Windows.Forms.ComboBox();
+            this.dteChaseEnd = new System.Windows.Forms.DateTimePicker();
+            this.dteChaseStart = new System.Windows.Forms.DateTimePicker();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.btnOutstanding = new PriceMaster.buttonFormatting();
+            this.btnAdmin = new PriceMaster.buttonFormatting();
             this.btnTraditional = new PriceMaster.buttonFormatting();
             this.btnNewQuote = new PriceMaster.buttonFormatting();
             this.btnCustomer = new PriceMaster.buttonFormatting();
@@ -61,10 +71,6 @@
             this.btnSupplier = new PriceMaster.buttonFormatting();
             this.btnEmail = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
-            this.btnAdmin = new PriceMaster.buttonFormatting();
-            this.btnOutstanding = new PriceMaster.buttonFormatting();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cmbChasingStatus = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -112,9 +118,9 @@
             // txtQuoteID
             // 
             this.txtQuoteID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.txtQuoteID.Location = new System.Drawing.Point(327, 117);
+            this.txtQuoteID.Location = new System.Drawing.Point(216, 110);
             this.txtQuoteID.Name = "txtQuoteID";
-            this.txtQuoteID.Size = new System.Drawing.Size(112, 21);
+            this.txtQuoteID.Size = new System.Drawing.Size(84, 21);
             this.txtQuoteID.TabIndex = 3;
             this.txtQuoteID.TextChanged += new System.EventHandler(this.txtQuoteID_TextChanged);
             // 
@@ -123,7 +129,7 @@
             this.cmbStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(572, 116);
+            this.cmbStatus.Location = new System.Drawing.Point(659, 111);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(121, 21);
             this.cmbStatus.TabIndex = 6;
@@ -134,7 +140,7 @@
             this.cmbSystem.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbSystem.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbSystem.FormattingEnabled = true;
-            this.cmbSystem.Location = new System.Drawing.Point(826, 116);
+            this.cmbSystem.Location = new System.Drawing.Point(913, 113);
             this.cmbSystem.Name = "cmbSystem";
             this.cmbSystem.Size = new System.Drawing.Size(121, 21);
             this.cmbSystem.TabIndex = 7;
@@ -145,7 +151,7 @@
             this.cmbMaterial.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbMaterial.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbMaterial.FormattingEnabled = true;
-            this.cmbMaterial.Location = new System.Drawing.Point(699, 116);
+            this.cmbMaterial.Location = new System.Drawing.Point(786, 113);
             this.cmbMaterial.Name = "cmbMaterial";
             this.cmbMaterial.Size = new System.Drawing.Size(121, 21);
             this.cmbMaterial.TabIndex = 8;
@@ -155,9 +161,9 @@
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label1.Location = new System.Drawing.Point(327, 90);
+            this.label1.Location = new System.Drawing.Point(216, 83);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 23);
+            this.label1.Size = new System.Drawing.Size(84, 23);
             this.label1.TabIndex = 9;
             this.label1.Text = "Quote ID";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -166,7 +172,7 @@
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label3.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label3.Location = new System.Drawing.Point(572, 90);
+            this.label3.Location = new System.Drawing.Point(659, 85);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(121, 23);
             this.label3.TabIndex = 11;
@@ -177,7 +183,7 @@
             // 
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label4.Location = new System.Drawing.Point(696, 90);
+            this.label4.Location = new System.Drawing.Point(783, 87);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(124, 23);
             this.label4.TabIndex = 12;
@@ -188,7 +194,7 @@
             // 
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label5.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label5.Location = new System.Drawing.Point(823, 90);
+            this.label5.Location = new System.Drawing.Point(910, 87);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(124, 23);
             this.label5.TabIndex = 13;
@@ -199,7 +205,7 @@
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label6.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label6.Location = new System.Drawing.Point(950, 90);
+            this.label6.Location = new System.Drawing.Point(1037, 87);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(178, 23);
             this.label6.TabIndex = 15;
@@ -211,7 +217,7 @@
             this.cmbCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCustomer.FormattingEnabled = true;
-            this.cmbCustomer.Location = new System.Drawing.Point(953, 116);
+            this.cmbCustomer.Location = new System.Drawing.Point(1040, 113);
             this.cmbCustomer.Name = "cmbCustomer";
             this.cmbCustomer.Size = new System.Drawing.Size(175, 21);
             this.cmbCustomer.TabIndex = 14;
@@ -221,9 +227,9 @@
             // 
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label10.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label10.Location = new System.Drawing.Point(1134, 89);
+            this.label10.Location = new System.Drawing.Point(1221, 88);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(109, 23);
+            this.label10.Size = new System.Drawing.Size(97, 23);
             this.label10.TabIndex = 24;
             this.label10.Text = "Quotation Ref";
             this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -231,9 +237,9 @@
             // txtQuoteRef
             // 
             this.txtQuoteRef.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.txtQuoteRef.Location = new System.Drawing.Point(1134, 116);
+            this.txtQuoteRef.Location = new System.Drawing.Point(1221, 115);
             this.txtQuoteRef.Name = "txtQuoteRef";
-            this.txtQuoteRef.Size = new System.Drawing.Size(112, 21);
+            this.txtQuoteRef.Size = new System.Drawing.Size(100, 21);
             this.txtQuoteRef.TabIndex = 23;
             this.txtQuoteRef.TextChanged += new System.EventHandler(this.txtQuoteRef_TextChanged);
             // 
@@ -241,7 +247,7 @@
             // 
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label11.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label11.Location = new System.Drawing.Point(1252, 89);
+            this.label11.Location = new System.Drawing.Point(1327, 88);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(109, 23);
             this.label11.TabIndex = 26;
@@ -251,7 +257,7 @@
             // txtPrice
             // 
             this.txtPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.txtPrice.Location = new System.Drawing.Point(1252, 116);
+            this.txtPrice.Location = new System.Drawing.Point(1327, 115);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(112, 21);
             this.txtPrice.TabIndex = 25;
@@ -262,7 +268,7 @@
             // 
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label12.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label12.Location = new System.Drawing.Point(1367, 90);
+            this.label12.Location = new System.Drawing.Point(1442, 89);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(124, 23);
             this.label12.TabIndex = 28;
@@ -274,7 +280,7 @@
             this.cmbQuotedBy.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbQuotedBy.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbQuotedBy.FormattingEnabled = true;
-            this.cmbQuotedBy.Location = new System.Drawing.Point(1370, 116);
+            this.cmbQuotedBy.Location = new System.Drawing.Point(1445, 115);
             this.cmbQuotedBy.Name = "cmbQuotedBy";
             this.cmbQuotedBy.Size = new System.Drawing.Size(121, 21);
             this.cmbQuotedBy.TabIndex = 27;
@@ -282,7 +288,7 @@
             // 
             // dteEnd
             // 
-            this.dteEnd.Location = new System.Drawing.Point(1623, 117);
+            this.dteEnd.Location = new System.Drawing.Point(1684, 117);
             this.dteEnd.Name = "dteEnd";
             this.dteEnd.Size = new System.Drawing.Size(121, 20);
             this.dteEnd.TabIndex = 31;
@@ -290,7 +296,7 @@
             // 
             // dteStart
             // 
-            this.dteStart.Location = new System.Drawing.Point(1623, 81);
+            this.dteStart.Location = new System.Drawing.Point(1684, 81);
             this.dteStart.Name = "dteStart";
             this.dteStart.Size = new System.Drawing.Size(121, 20);
             this.dteStart.TabIndex = 30;
@@ -300,7 +306,7 @@
             // 
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label13.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label13.Location = new System.Drawing.Point(1621, 51);
+            this.label13.Location = new System.Drawing.Point(1682, 51);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(124, 23);
             this.label13.TabIndex = 29;
@@ -311,7 +317,7 @@
             // 
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label14.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label14.Location = new System.Drawing.Point(1619, 91);
+            this.label14.Location = new System.Drawing.Point(1680, 91);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(124, 23);
             this.label14.TabIndex = 32;
@@ -322,9 +328,9 @@
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(1493, 90);
+            this.label2.Location = new System.Drawing.Point(1568, 89);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(124, 23);
+            this.label2.Size = new System.Drawing.Size(110, 23);
             this.label2.TabIndex = 40;
             this.label2.Text = "Customer Type";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -337,11 +343,134 @@
             this.cmbType.Items.AddRange(new object[] {
             "Main Contractor",
             "Trade"});
-            this.cmbType.Location = new System.Drawing.Point(1496, 116);
+            this.cmbType.Location = new System.Drawing.Point(1571, 115);
             this.cmbType.Name = "cmbType";
-            this.cmbType.Size = new System.Drawing.Size(121, 21);
+            this.cmbType.Size = new System.Drawing.Size(107, 21);
             this.cmbType.TabIndex = 39;
             this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label7.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label7.Location = new System.Drawing.Point(306, 84);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(93, 23);
+            this.label7.TabIndex = 88;
+            this.label7.Text = "Chase Status";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // cmbChasingStatus
+            // 
+            this.cmbChasingStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbChasingStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbChasingStatus.FormattingEnabled = true;
+            this.cmbChasingStatus.Items.AddRange(new object[] {
+            "Pending",
+            "Chasing",
+            "Won",
+            "Lost"});
+            this.cmbChasingStatus.Location = new System.Drawing.Point(306, 110);
+            this.cmbChasingStatus.Name = "cmbChasingStatus";
+            this.cmbChasingStatus.Size = new System.Drawing.Size(93, 21);
+            this.cmbChasingStatus.TabIndex = 87;
+            this.cmbChasingStatus.SelectedIndexChanged += new System.EventHandler(this.cmbChasingStatus_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label9.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label9.Location = new System.Drawing.Point(532, 85);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(121, 23);
+            this.label9.TabIndex = 92;
+            this.label9.Text = "Last Chased By";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // cmbChasedBy
+            // 
+            this.cmbChasedBy.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbChasedBy.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbChasedBy.FormattingEnabled = true;
+            this.cmbChasedBy.Location = new System.Drawing.Point(532, 111);
+            this.cmbChasedBy.Name = "cmbChasedBy";
+            this.cmbChasedBy.Size = new System.Drawing.Size(121, 21);
+            this.cmbChasedBy.TabIndex = 91;
+            this.cmbChasedBy.SelectedIndexChanged += new System.EventHandler(this.cmbChasedBy_SelectedIndexChanged);
+            // 
+            // dteChaseEnd
+            // 
+            this.dteChaseEnd.Location = new System.Drawing.Point(405, 111);
+            this.dteChaseEnd.Name = "dteChaseEnd";
+            this.dteChaseEnd.Size = new System.Drawing.Size(121, 20);
+            this.dteChaseEnd.TabIndex = 95;
+            this.dteChaseEnd.ValueChanged += new System.EventHandler(this.dteChaseEnd_ValueChanged);
+            // 
+            // dteChaseStart
+            // 
+            this.dteChaseStart.Location = new System.Drawing.Point(405, 75);
+            this.dteChaseStart.Name = "dteChaseStart";
+            this.dteChaseStart.Size = new System.Drawing.Size(121, 20);
+            this.dteChaseStart.TabIndex = 94;
+            this.dteChaseStart.ValueChanged += new System.EventHandler(this.dteChaseStart_ValueChanged);
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label8.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label8.Location = new System.Drawing.Point(403, 45);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(124, 23);
+            this.label8.TabIndex = 93;
+            this.label8.Text = "Last Chase Date";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label15.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label15.Location = new System.Drawing.Point(401, 85);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(124, 23);
+            this.label15.TabIndex = 96;
+            this.label15.Text = "to";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // btnOutstanding
+            // 
+            this.btnOutstanding.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnOutstanding.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnOutstanding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutstanding.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOutstanding.ForeColor = System.Drawing.Color.White;
+            this.btnOutstanding.Location = new System.Drawing.Point(679, 44);
+            this.btnOutstanding.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnOutstanding.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnOutstanding.Name = "btnOutstanding";
+            this.btnOutstanding.Padding = new System.Windows.Forms.Padding(3);
+            this.btnOutstanding.Size = new System.Drawing.Size(179, 30);
+            this.btnOutstanding.TabIndex = 86;
+            this.btnOutstanding.Text = "Outstanding Chases";
+            this.btnOutstanding.UseVisualStyleBackColor = false;
+            this.btnOutstanding.Click += new System.EventHandler(this.btnOutstanding_Click);
+            // 
+            // btnAdmin
+            // 
+            this.btnAdmin.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAdmin.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdmin.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdmin.ForeColor = System.Drawing.Color.White;
+            this.btnAdmin.Location = new System.Drawing.Point(868, 44);
+            this.btnAdmin.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnAdmin.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnAdmin.Name = "btnAdmin";
+            this.btnAdmin.Padding = new System.Windows.Forms.Padding(3);
+            this.btnAdmin.Size = new System.Drawing.Size(213, 30);
+            this.btnAdmin.TabIndex = 85;
+            this.btnAdmin.Text = "Admin Outstanding Chases";
+            this.btnAdmin.UseVisualStyleBackColor = false;
+            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
             // 
             // btnTraditional
             // 
@@ -350,7 +479,7 @@
             this.btnTraditional.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTraditional.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTraditional.ForeColor = System.Drawing.Color.White;
-            this.btnTraditional.Location = new System.Drawing.Point(632, 9);
+            this.btnTraditional.Location = new System.Drawing.Point(679, 9);
             this.btnTraditional.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnTraditional.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnTraditional.Name = "btnTraditional";
@@ -368,7 +497,7 @@
             this.btnNewQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNewQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNewQuote.ForeColor = System.Drawing.Color.White;
-            this.btnNewQuote.Location = new System.Drawing.Point(1420, 9);
+            this.btnNewQuote.Location = new System.Drawing.Point(1467, 9);
             this.btnNewQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnNewQuote.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnNewQuote.Name = "btnNewQuote";
@@ -386,7 +515,7 @@
             this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCustomer.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCustomer.ForeColor = System.Drawing.Color.White;
-            this.btnCustomer.Location = new System.Drawing.Point(1264, 9);
+            this.btnCustomer.Location = new System.Drawing.Point(1311, 9);
             this.btnCustomer.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnCustomer.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnCustomer.Name = "btnCustomer";
@@ -404,7 +533,7 @@
             this.btnMaterial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMaterial.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMaterial.ForeColor = System.Drawing.Color.White;
-            this.btnMaterial.Location = new System.Drawing.Point(1108, 9);
+            this.btnMaterial.Location = new System.Drawing.Point(1155, 9);
             this.btnMaterial.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnMaterial.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnMaterial.Name = "btnMaterial";
@@ -422,7 +551,7 @@
             this.btnSupplier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSupplier.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSupplier.ForeColor = System.Drawing.Color.White;
-            this.btnSupplier.Location = new System.Drawing.Point(944, 9);
+            this.btnSupplier.Location = new System.Drawing.Point(991, 9);
             this.btnSupplier.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSupplier.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSupplier.Name = "btnSupplier";
@@ -440,7 +569,7 @@
             this.btnEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEmail.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEmail.ForeColor = System.Drawing.Color.White;
-            this.btnEmail.Location = new System.Drawing.Point(788, 9);
+            this.btnEmail.Location = new System.Drawing.Point(835, 9);
             this.btnEmail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnEmail.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnEmail.Name = "btnEmail";
@@ -458,7 +587,7 @@
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(1751, 107);
+            this.btnClear.Location = new System.Drawing.Point(1812, 107);
             this.btnClear.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnClear.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnClear.Name = "btnClear";
@@ -469,74 +598,17 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // btnAdmin
-            // 
-            this.btnAdmin.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAdmin.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdmin.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdmin.ForeColor = System.Drawing.Color.White;
-            this.btnAdmin.Location = new System.Drawing.Point(821, 44);
-            this.btnAdmin.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnAdmin.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnAdmin.Name = "btnAdmin";
-            this.btnAdmin.Padding = new System.Windows.Forms.Padding(3);
-            this.btnAdmin.Size = new System.Drawing.Size(213, 30);
-            this.btnAdmin.TabIndex = 85;
-            this.btnAdmin.Text = "Admin Outstanding Chases";
-            this.btnAdmin.UseVisualStyleBackColor = false;
-            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
-            // 
-            // btnOutstanding
-            // 
-            this.btnOutstanding.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnOutstanding.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnOutstanding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOutstanding.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOutstanding.ForeColor = System.Drawing.Color.White;
-            this.btnOutstanding.Location = new System.Drawing.Point(632, 44);
-            this.btnOutstanding.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnOutstanding.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnOutstanding.Name = "btnOutstanding";
-            this.btnOutstanding.Padding = new System.Windows.Forms.Padding(3);
-            this.btnOutstanding.Size = new System.Drawing.Size(179, 30);
-            this.btnOutstanding.TabIndex = 86;
-            this.btnOutstanding.Text = "Outstanding Chases";
-            this.btnOutstanding.UseVisualStyleBackColor = false;
-            this.btnOutstanding.Click += new System.EventHandler(this.btnOutstanding_Click);
-            // 
-            // label7
-            // 
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label7.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label7.Location = new System.Drawing.Point(445, 92);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(121, 23);
-            this.label7.TabIndex = 88;
-            this.label7.Text = "Chase Status";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // cmbChasingStatus
-            // 
-            this.cmbChasingStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.cmbChasingStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbChasingStatus.FormattingEnabled = true;
-            this.cmbChasingStatus.Items.AddRange(new object[] {
-            "Pending",
-            "Chasing",
-            "Won",
-            "Lost"});
-            this.cmbChasingStatus.Location = new System.Drawing.Point(445, 118);
-            this.cmbChasingStatus.Name = "cmbChasingStatus";
-            this.cmbChasingStatus.Size = new System.Drawing.Size(121, 21);
-            this.cmbChasingStatus.TabIndex = 87;
-            this.cmbChasingStatus.SelectedIndexChanged += new System.EventHandler(this.cmbChasingStatus_SelectedIndexChanged);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.dteChaseEnd);
+            this.Controls.Add(this.dteChaseStart);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.cmbChasedBy);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cmbChasingStatus);
             this.Controls.Add(this.btnOutstanding);
@@ -624,6 +696,12 @@
         private buttonFormatting btnOutstanding;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmbChasingStatus;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cmbChasedBy;
+        private System.Windows.Forms.DateTimePicker dteChaseEnd;
+        private System.Windows.Forms.DateTimePicker dteChaseStart;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label15;
     }
 }
 
