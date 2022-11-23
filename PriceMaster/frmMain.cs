@@ -755,7 +755,7 @@ namespace PriceMaster
                                 "FROM [order_database].dbo.quotation_chase_log_slimline a " +
                                 "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
                                 "left join [user_info].dbo.[user] u on a.chased_by = u.id " +
-                                 "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
+                                 "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) and u.id = " + CONNECT.staffID;
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {

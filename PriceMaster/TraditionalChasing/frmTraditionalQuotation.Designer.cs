@@ -50,6 +50,7 @@
             this.btnChase = new PriceMaster.buttonFormatting();
             this.btnChaseHistory = new PriceMaster.buttonFormatting();
             this.btnRelatedEnquiries = new PriceMaster.buttonFormatting();
+            this.chkNonResponsive = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -239,7 +240,7 @@
             // 
             this.chkUnableToMeetSpec.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkUnableToMeetSpec.AutoSize = true;
-            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(205, 556);
+            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(205, 554);
             this.chkUnableToMeetSpec.Name = "chkUnableToMeetSpec";
             this.chkUnableToMeetSpec.Size = new System.Drawing.Size(127, 17);
             this.chkUnableToMeetSpec.TabIndex = 54;
@@ -252,7 +253,7 @@
             // 
             this.chkQuoteTookTooLong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkQuoteTookTooLong.AutoSize = true;
-            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(74, 556);
+            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(74, 554);
             this.chkQuoteTookTooLong.Name = "chkQuoteTookTooLong";
             this.chkQuoteTookTooLong.Size = new System.Drawing.Size(123, 17);
             this.chkQuoteTookTooLong.TabIndex = 55;
@@ -344,11 +345,24 @@
             this.btnRelatedEnquiries.UseVisualStyleBackColor = false;
             this.btnRelatedEnquiries.Click += new System.EventHandler(this.btnRelatedEnquiries_Click);
             // 
+            // chkNonResponsive
+            // 
+            this.chkNonResponsive.AutoSize = true;
+            this.chkNonResponsive.Location = new System.Drawing.Point(74, 579);
+            this.chkNonResponsive.Name = "chkNonResponsive";
+            this.chkNonResponsive.Size = new System.Drawing.Size(152, 17);
+            this.chkNonResponsive.TabIndex = 68;
+            this.chkNonResponsive.Text = "Non Responsive Customer";
+            this.chkNonResponsive.UseVisualStyleBackColor = true;
+            this.chkNonResponsive.Visible = false;
+            this.chkNonResponsive.CheckedChanged += new System.EventHandler(this.chkNonResponsive_CheckedChanged);
+            // 
             // frmTraditionalQuotation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1224, 599);
+            this.Controls.Add(this.chkNonResponsive);
             this.Controls.Add(this.btnRelatedEnquiries);
             this.Controls.Add(this.btnChaseHistory);
             this.Controls.Add(this.btnChase);
@@ -403,5 +417,6 @@
         private buttonFormatting btnChase;
         private buttonFormatting btnChaseHistory;
         private buttonFormatting btnRelatedEnquiries;
+        private System.Windows.Forms.CheckBox chkNonResponsive;
     }
 }

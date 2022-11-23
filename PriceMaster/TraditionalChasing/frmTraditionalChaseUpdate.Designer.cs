@@ -36,6 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.btnSave = new PriceMaster.buttonFormatting();
+            this.chkNonResponsive = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblLost
@@ -126,7 +127,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(98, 134);
+            this.btnSave.Location = new System.Drawing.Point(98, 156);
             this.btnSave.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSave.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSave.Name = "btnSave";
@@ -137,12 +138,24 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // chkNonResponsive
+            // 
+            this.chkNonResponsive.AutoSize = true;
+            this.chkNonResponsive.Location = new System.Drawing.Point(12, 133);
+            this.chkNonResponsive.Name = "chkNonResponsive";
+            this.chkNonResponsive.Size = new System.Drawing.Size(152, 17);
+            this.chkNonResponsive.TabIndex = 67;
+            this.chkNonResponsive.Text = "Non Responsive Customer";
+            this.chkNonResponsive.UseVisualStyleBackColor = true;
+            this.chkNonResponsive.Visible = false;
+            // 
             // frmTraditionalChaseUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(271, 177);
+            this.ClientSize = new System.Drawing.Size(271, 192);
             this.ControlBox = false;
+            this.Controls.Add(this.chkNonResponsive);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblLost);
             this.Controls.Add(this.chkLeadTimeTooLong);
@@ -170,5 +183,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbStatus;
         private buttonFormatting btnSave;
+        private System.Windows.Forms.CheckBox chkNonResponsive;
     }
 }

@@ -40,7 +40,7 @@ namespace PriceMaster
 
 
                     //if the current status is not pending then we remove it so it cannot be added back
-                    sql = "SELECT [status] ,[custom_feedback] ,[too_expensive] ,[lead_time_too_long] ,[quote_took_too_long] ,[unable_to_meet_spec] " +
+                    sql = "SELECT [status] ,[custom_feedback] ,[too_expensive] ,[lead_time_too_long] ,[quote_took_too_long] ,[unable_to_meet_spec],[non_responsive_customer] " +
                         "FROM [order_database].[dbo].[quotation_feed_back_slimline] WHERE quote_id = " + quote_id.ToString();
                     using (SqlCommand cmdData = new SqlCommand(sql, conn))
                     {
@@ -58,6 +58,8 @@ namespace PriceMaster
                             chkQuoteTookTooLong.Checked = true;
                         if (dt.Rows[0][5].ToString() == "-1")
                             chkUnableToMeetSpec.Checked = true;
+                        if (dt.Rows[0][6].ToString() == "-1")
+                            chkNonResponsive.Checked = true;
 
                         if (string.IsNullOrEmpty(cmbStatus.Text))
                             cmbStatus.Items.Add("Pending");
@@ -72,6 +74,7 @@ namespace PriceMaster
                             chkQuoteTookTooLong.Visible = true;
                             chkTooExpensive.Visible = true;
                             chkUnableToMeetSpec.Visible = true;
+                            chkNonResponsive.Visible = true;
                         }
 
                         if (cmbStatus.Text != "Chasing")
@@ -124,6 +127,7 @@ namespace PriceMaster
                 chkQuoteTookTooLong.Visible = true;
                 chkTooExpensive.Visible = true;
                 chkUnableToMeetSpec.Visible = true;
+                chkNonResponsive.Visible = true;
             }
             else
             {
@@ -132,6 +136,7 @@ namespace PriceMaster
                 chkQuoteTookTooLong.Visible = false;
                 chkTooExpensive.Visible = false;
                 chkUnableToMeetSpec.Visible = false;
+                chkNonResponsive.Visible = false;
             }
 
             if (cmbStatus.Text != "Chasing")
@@ -149,7 +154,7 @@ namespace PriceMaster
                 string sql = "";
                 if (cmbStatus.Text != "Lost")
                 {
-                    sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET status = '" + cmbStatus.Text + "',too_expensive = 0,lead_time_too_long = 0,quote_took_too_long = 0,unable_to_meet_spec = 0 WHERE quote_id = " + quote_id.ToString();
+                    sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET status = '" + cmbStatus.Text + "',too_expensive = 0,lead_time_too_long = 0,quote_took_too_long = 0,unable_to_meet_spec = 0,non_responsive_customer = 0 WHERE quote_id = " + quote_id.ToString();
                     sql_update(sql);
                 }
                 else
@@ -158,10 +163,10 @@ namespace PriceMaster
                     sql_update(sql);
                     frmSlimlineLossReason frm = new frmSlimlineLossReason(quote_id);
                     frm.ShowDialog();
-                    sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET status = '" + cmbStatus.Text + "',too_expensive = 0,lead_time_too_long = 0,quote_took_too_long = 0,unable_to_meet_spec = 0 WHERE quote_id = " + quote_id.ToString();
+                    sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET status = '" + cmbStatus.Text + "',too_expensive = 0,lead_time_too_long = 0,quote_took_too_long = 0,unable_to_meet_spec = 0,non_responsive_customer = 0 WHERE quote_id = " + quote_id.ToString();
                     using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
                     {
-                        sql = "SELECT [status] ,[custom_feedback] ,[too_expensive] ,[lead_time_too_long] ,[quote_took_too_long] ,[unable_to_meet_spec] " +
+                        sql = "SELECT [status] ,[custom_feedback] ,[too_expensive] ,[lead_time_too_long] ,[quote_took_too_long] ,[unable_to_meet_spec],[non_responsive_customer] " +
                            "FROM [order_database].[dbo].[quotation_feed_back_slimline] WHERE quote_id = " + quote_id.ToString();
                         using (SqlCommand cmdData = new SqlCommand(sql, conn))
                         {
@@ -179,6 +184,8 @@ namespace PriceMaster
                                 chkQuoteTookTooLong.Checked = true;
                             if (dt.Rows[0][5].ToString() == "-1")
                                 chkUnableToMeetSpec.Checked = true;
+                            if (dt.Rows[0][6].ToString() == "-1")
+                                chkNonResponsive.Checked = true;
 
                             if (cmbStatus.Text == "Lost")
                             {
@@ -187,6 +194,7 @@ namespace PriceMaster
                                 chkQuoteTookTooLong.Visible = true;
                                 chkTooExpensive.Visible = true;
                                 chkUnableToMeetSpec.Visible = true;
+                                chkNonResponsive.Visible = true;
                             }
                             if (cmbStatus.Text != "Chasing")
                                 btnChase.Visible = false;
@@ -206,7 +214,7 @@ namespace PriceMaster
             //if the current status is not pending then we remove it so it cannot be added back
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
-                string sql = "SELECT [status] ,[custom_feedback] ,[too_expensive] ,[lead_time_too_long] ,[quote_took_too_long] ,[unable_to_meet_spec] " +
+                string sql = "SELECT [status] ,[custom_feedback] ,[too_expensive] ,[lead_time_too_long] ,[quote_took_too_long] ,[unable_to_meet_spec],[non_responsive_customer] " +
                     "FROM [order_database].[dbo].[quotation_feed_back_slimline] WHERE quote_id = " + quote_id.ToString();
                 using (SqlCommand cmdData = new SqlCommand(sql, conn))
                 {
@@ -224,6 +232,8 @@ namespace PriceMaster
                         chkQuoteTookTooLong.Checked = true;
                     if (dt.Rows[0][5].ToString() == "-1")
                         chkUnableToMeetSpec.Checked = true;
+                    if (dt.Rows[0][6].ToString() == "-1")
+                        chkNonResponsive.Checked = true; 
 
                     if (cmbStatus.Text == "Lost")
                     {
@@ -349,6 +359,8 @@ namespace PriceMaster
                     cancel_close = 0;
                 if (chkUnableToMeetSpec.Checked == true)
                     cancel_close = 0;
+                if (chkNonResponsive.Checked == true)
+                    cancel_close = 0;
 
                 if (cancel_close == -1)
                 {
@@ -392,6 +404,15 @@ namespace PriceMaster
             frmSlimlineEnquiryHistory frm = new frmSlimlineEnquiryHistory(enquiry_id);
 
             frm.ShowDialog();
+        }
+
+        private void chkNonResponsive_CheckedChanged(object sender, EventArgs e)
+        {
+            int value = 0;
+            if (chkNonResponsive.Checked == true)
+                value = -1;
+            string sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET non_responsive_customer = " + value + " WHERE quote_id = " + quote_id.ToString();
+            sql_update(sql);
         }
     }
 }

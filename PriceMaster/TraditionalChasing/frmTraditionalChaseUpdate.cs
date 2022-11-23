@@ -31,6 +31,7 @@ namespace PriceMaster
                 chkQuoteTookTooLong.Visible = true;
                 chkTooExpensive.Visible = true;
                 chkUnableToMeetSpec.Visible = true;
+                chkNonResponsive.Visible = true;
             }
             else
             {
@@ -39,12 +40,13 @@ namespace PriceMaster
                 chkQuoteTookTooLong.Visible = false;
                 chkTooExpensive.Visible = false;
                 chkUnableToMeetSpec.Visible = false;
+                chkNonResponsive.Visible = false;
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            int lead = 0, quote = 0, expensive = 0, unable = 0;
+            int lead = 0, quote = 0, expensive = 0, unable = 0, non_responsive = 0;
             if (chkLeadTimeTooLong.Checked == true)
             {
                 validation = -1;
@@ -65,6 +67,11 @@ namespace PriceMaster
                 validation = -1;
                 unable = -1;
             }
+            if (chkNonResponsive.Checked == true)
+            {
+                validation = -1;
+                non_responsive = -1;
+            }
 
             if (cmbStatus.Text == "")
             {
@@ -77,8 +84,7 @@ namespace PriceMaster
                 return;
             }
 
-            string sql = "UPDATE [order_database].dbo.quotation_feed_back SET status = '" + cmbStatus.Text + "',too_expensive = " + expensive + ",lead_time_too_long = " + lead + ",quote_took_too_long = " + quote + ",unable_to_meet_spec = " + unable + " " +
-                            "WHERE quote_id = " + quote_id.ToString();
+            string sql = "UPDATE [order_database].dbo.quotation_feed_back SET status = '" + cmbStatus.Text + "',too_expensive = " + expensive + ",lead_time_too_long = " + lead + ",quote_took_too_long = " + quote + ",unable_to_meet_spec = " + unable + ",non_responsive_customer = " + non_responsive  + " " + " WHERE quote_id = " + quote_id.ToString();
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
