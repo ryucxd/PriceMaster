@@ -489,7 +489,7 @@ namespace PriceMaster
         private void btnEmail_Click(object sender, EventArgs e)
         {
             string temp = "";
-            string sql = "select top 150 a.quote_id,rtrim(s.[NAME]) as customer,a.quotation_ref,a.customer_contact,s.TELEPHONE,enquiry_id,e.sender_email_address,e.priority as [priority_class],q.status,last_chase.chase_date,last_chase.chased_by, '                                                           ' as notes " +
+            string sql = "select top 150 a.quote_id,rtrim(s.[NAME]) as customer,a.quotation_ref,a.customer_contact,s.TELEPHONE,enquiry_id,e.sender_email_address,e.priority as [priority_class],q.status,last_chase.chase_date,last_chase.chased_by,chase_description as [lase_chase_note], '                                                           ' as notes " +
                 "from dbo.sl_quotation a " +
                 "left join [dsl_fitting].dbo.SALES_LEDGER s on a.customer_acc_ref = s.ACCOUNT_REF " +
                 "left join[EnquiryLog].dbo.[Enquiry_Log] e on e.id = a.enquiry_id " +
@@ -505,7 +505,7 @@ namespace PriceMaster
                 "LEFT JOIN dbo.slimline_systems AS slimline_systems_4 ON a.system_id_4 = slimline_systems_4.id " +
                 "LEFT JOIN dbo.slimline_systems AS slimline_systems_5 ON a.system_id_5 = slimline_systems_5.id " +
                 "left join [order_database].dbo.quotation_feed_back_slimline q on a.quote_id = q.quote_id " +
-                "left join (SELECT a.quote_id,chase_date,u.forename + ' ' + u.surname as chased_by from [order_database].dbo.quotation_chase_log_slimline a " +
+                "left join (SELECT a.quote_id,chase_description,chase_date,u.forename + ' ' + u.surname as chased_by from [order_database].dbo.quotation_chase_log_slimline a " +
                 "right join(select max(id) as id,quote_id from[order_database].dbo.quotation_chase_log_slimline " +
                 "group by quote_id) b on a.quote_id = b.quote_id AND a.id = b.id left join[user_info].dbo.[user] u on a.chased_by = u.id ) as last_chase on a.quote_id = last_chase.quote_id " + 
                 "WHERE highest_issue = -1 ";
@@ -600,6 +600,7 @@ namespace PriceMaster
                         xlWorksheet.Cells[10][excel_row].Value2 = row[9].ToString();
                         xlWorksheet.Cells[11][excel_row].Value2 = row[10].ToString();
                         xlWorksheet.Cells[12][excel_row].Value2 = row[11].ToString();
+                        xlWorksheet.Cells[13][excel_row].Value2 = row[12].ToString();
                         excel_row++;
                     }
 

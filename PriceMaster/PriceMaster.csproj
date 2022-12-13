@@ -25,7 +25,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>32</ApplicationRevision>
+    <ApplicationRevision>35</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -60,7 +60,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>pricelog.ico</ApplicationIcon>
@@ -86,6 +86,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CONNECT.cs" />
+    <Compile Include="SlimlineChasing\frmSlimlineMultipleChaseLoss.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineMultipleChaseLoss.Designer.cs">
+      <DependentUpon>frmSlimlineMultipleChaseLoss.cs</DependentUpon>
+    </Compile>
     <Compile Include="SlimlineChasing\frmSlimlineQuotation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,12 @@
     <Compile Include="TraditionalChasing\frmTraditionalEnquiryHistory.Designer.cs">
       <DependentUpon>frmTraditionalEnquiryHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalMultipleChaseLoss.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalMultipleChaseLoss.Designer.cs">
+      <DependentUpon>frmTraditionalMultipleChaseLoss.cs</DependentUpon>
+    </Compile>
     <Compile Include="TraditionalChasing\frmTraditionalOutstandingChase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,6 +250,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineMultipleChaseLoss.resx">
+      <DependentUpon>frmSlimlineMultipleChaseLoss.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineQuotation.resx">
       <DependentUpon>frmSlimlineQuotation.cs</DependentUpon>
     </EmbeddedResource>
@@ -285,6 +300,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TraditionalChasing\frmTraditionalEnquiryHistory.resx">
       <DependentUpon>frmTraditionalEnquiryHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalMultipleChaseLoss.resx">
+      <DependentUpon>frmTraditionalMultipleChaseLoss.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TraditionalChasing\frmTraditionalOutstandingChase.resx">
       <DependentUpon>frmTraditionalOutstandingChase.cs</DependentUpon>

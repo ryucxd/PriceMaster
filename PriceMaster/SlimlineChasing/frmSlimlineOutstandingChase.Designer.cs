@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbCustomerSearch = new System.Windows.Forms.ComboBox();
+            this.chkFuture = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,11 +101,23 @@
             this.cmbCustomerSearch.TabIndex = 52;
             this.cmbCustomerSearch.SelectedIndexChanged += new System.EventHandler(this.cmbCustomerSearch_SelectedIndexChanged);
             // 
+            // chkFuture
+            // 
+            this.chkFuture.AutoSize = true;
+            this.chkFuture.Location = new System.Drawing.Point(638, 9);
+            this.chkFuture.Name = "chkFuture";
+            this.chkFuture.Size = new System.Drawing.Size(94, 17);
+            this.chkFuture.TabIndex = 54;
+            this.chkFuture.Text = "Future Chases";
+            this.chkFuture.UseVisualStyleBackColor = true;
+            this.chkFuture.CheckedChanged += new System.EventHandler(this.chkFuture_CheckedChanged);
+            // 
             // frmSlimlineOutstandingChase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(949, 481);
+            this.Controls.Add(this.chkFuture);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbCustomerSearch);
             this.Controls.Add(this.label1);
@@ -115,6 +128,7 @@
             this.Name = "frmSlimlineOutstandingChase";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Outstanding Chases";
+            this.Shown += new System.EventHandler(this.frmSlimlineOutstandingChase_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -127,5 +141,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbCustomerSearch;
+        private System.Windows.Forms.CheckBox chkFuture;
     }
 }

@@ -31,13 +31,7 @@ namespace PriceMaster
             if (admin == -1)
                 this.Text = "Admin Outstanding Chases";
 
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (cmbCustomerSearch.Items.Contains(row.Cells[6].Value.ToString()))
-                { } //nothing
-                else
-                    cmbCustomerSearch.Items.Add(row.Cells[6].Value.ToString());
-            }
+         
 
         }
 
@@ -74,6 +68,17 @@ namespace PriceMaster
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             dataGridView1.Columns[chase_description_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            cmbCustomerSearch.Items.Clear();
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (cmbCustomerSearch.Items.Contains(row.Cells[6].Value.ToString()))
+                { } //nothing
+                else
+                    cmbCustomerSearch.Items.Add(row.Cells[6].Value.ToString());
+            }
+
+
         }
 
         private void load_data()
@@ -86,7 +91,14 @@ namespace PriceMaster
                 "left join[price_master].dbo.[sl_quotation] sl on sl.quote_id = a.quote_id " +
                 "left join[EnquiryLog].dbo.[Enquiry_Log] e on sl.enquiry_id = e.id " +
                 "left join[dsl_fitting].dbo.SALES_LEDGER s on sl.customer_acc_ref = s.ACCOUNT_REF " +
-                "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
+                "where next_chase_date ";
+
+            if (chkFuture.Checked == true)
+                sql = sql + " > ";
+            else
+                sql = sql + " <= ";
+            
+            sql = sql + " CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
 
             if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                 sql = sql + " AND rtrim(s.NAME) = '" + cmbCustomerSearch.Text + "'  ";
@@ -198,6 +210,16 @@ namespace PriceMaster
         private void cmbCustomerSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
             load_data();
+        }
+
+        private void chkFuture_CheckedChanged(object sender, EventArgs e)
+        {
+            load_data();
+        }
+
+        private void frmSlimlineOutstandingChase_Shown(object sender, EventArgs e)
+        {
+            format();
         }
     }
 }

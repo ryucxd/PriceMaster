@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Globalization;
 using PriceMaster.SlimlinelChasing;
+using PriceMaster.SlimlineChasing;
 
 namespace PriceMaster
 {
@@ -209,6 +210,46 @@ namespace PriceMaster
 
         private void btnChase_Click(object sender, EventArgs e)
         {
+
+            //if there are >= 3 chases then prompt the user if they are really sure 
+
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+                string sql = "select count(id) from [order_database].[dbo].quotation_chase_log_slimline where quote_id = " + quote_id.ToString();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    var temp = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                    if (temp == null)
+                        temp = 0;
+
+
+                    if (temp >= 3)
+                    {
+                        DialogResult result = MessageBox.Show("This project has already been chased " + temp.ToString() + " times. Are you sure you want to add a chase?", "Non Responsive Customer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (result == DialogResult.No)
+                        {
+                            //mark customer as non responsive and cancel out the chase
+                            DialogResult lossResult = MessageBox.Show("Would you like to mark this project as lost?", "Project update", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                            if (lossResult == DialogResult.Yes)
+                            {
+                                frmSlimlineMultipleChaseLoss  frmSlimline = new frmSlimlineMultipleChaseLoss(quote_id);
+                                frmSlimline.ShowDialog();
+                                this.Close();
+                            }
+
+                            return;
+                        }
+
+                    }
+
+                }
+
+                conn.Close();
+            }
+
+
             frmSlimlineChase frm = new frmSlimlineChase(quote_id, 0, 0);
             frm.ShowDialog();
             //if the current status is not pending then we remove it so it cannot be added back
@@ -233,7 +274,7 @@ namespace PriceMaster
                     if (dt.Rows[0][5].ToString() == "-1")
                         chkUnableToMeetSpec.Checked = true;
                     if (dt.Rows[0][6].ToString() == "-1")
-                        chkNonResponsive.Checked = true; 
+                        chkNonResponsive.Checked = true;
 
                     if (cmbStatus.Text == "Lost")
                     {
@@ -391,7 +432,7 @@ namespace PriceMaster
                         return;
                     }
                     else if (string.IsNullOrEmpty(dt.Rows[0][0].ToString()))
-                        {
+                    {
                         MessageBox.Show("There is no linked enquiry for this quote + issue.", "Missing data.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
