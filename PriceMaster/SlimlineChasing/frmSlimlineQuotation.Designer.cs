@@ -45,6 +45,7 @@
             this.btnChaseHistory = new PriceMaster.buttonFormatting();
             this.btnRelatedEnquiries = new PriceMaster.buttonFormatting();
             this.chkNonResponsive = new System.Windows.Forms.CheckBox();
+            this.btnInsertNote = new PriceMaster.buttonFormatting();
             this.SuspendLayout();
             // 
             // cmbRev
@@ -101,6 +102,7 @@
             // 
             this.txtCustom.Location = new System.Drawing.Point(344, 99);
             this.txtCustom.Name = "txtCustom";
+            this.txtCustom.ReadOnly = true;
             this.txtCustom.Size = new System.Drawing.Size(691, 139);
             this.txtCustom.TabIndex = 49;
             this.txtCustom.Text = "";
@@ -264,11 +266,30 @@
             this.chkNonResponsive.Visible = false;
             this.chkNonResponsive.CheckedChanged += new System.EventHandler(this.chkNonResponsive_CheckedChanged);
             // 
+            // btnInsertNote
+            // 
+            this.btnInsertNote.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnInsertNote.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnInsertNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInsertNote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInsertNote.ForeColor = System.Drawing.Color.White;
+            this.btnInsertNote.Location = new System.Drawing.Point(344, 66);
+            this.btnInsertNote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnInsertNote.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnInsertNote.Name = "btnInsertNote";
+            this.btnInsertNote.Padding = new System.Windows.Forms.Padding(3);
+            this.btnInsertNote.Size = new System.Drawing.Size(101, 30);
+            this.btnInsertNote.TabIndex = 62;
+            this.btnInsertNote.Text = "Insert Note";
+            this.btnInsertNote.UseVisualStyleBackColor = false;
+            this.btnInsertNote.Click += new System.EventHandler(this.btnInsertNote_Click);
+            // 
             // frmSlimlineQuotation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1144, 246);
+            this.Controls.Add(this.btnInsertNote);
             this.Controls.Add(this.chkNonResponsive);
             this.Controls.Add(this.btnRelatedEnquiries);
             this.Controls.Add(this.btnChaseHistory);
@@ -317,5 +338,6 @@
         private buttonFormatting btnChaseHistory;
         private buttonFormatting btnRelatedEnquiries;
         private System.Windows.Forms.CheckBox chkNonResponsive;
+        private buttonFormatting btnInsertNote;
     }
 }

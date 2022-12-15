@@ -25,7 +25,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationRevision>38</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -86,6 +86,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CONNECT.cs" />
+    <Compile Include="SlimlineChasing\frmSlimlineInsertNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineInsertNote.Designer.cs">
+      <DependentUpon>frmSlimlineInsertNote.cs</DependentUpon>
+    </Compile>
     <Compile Include="SlimlineChasing\frmSlimlineMultipleChaseLoss.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -250,6 +256,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineInsertNote.resx">
+      <DependentUpon>frmSlimlineInsertNote.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineMultipleChaseLoss.resx">
       <DependentUpon>frmSlimlineMultipleChaseLoss.cs</DependentUpon>
     </EmbeddedResource>

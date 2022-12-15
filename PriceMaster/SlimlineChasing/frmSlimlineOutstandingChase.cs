@@ -91,6 +91,7 @@ namespace PriceMaster
                 "left join[price_master].dbo.[sl_quotation] sl on sl.quote_id = a.quote_id " +
                 "left join[EnquiryLog].dbo.[Enquiry_Log] e on sl.enquiry_id = e.id " +
                 "left join[dsl_fitting].dbo.SALES_LEDGER s on sl.customer_acc_ref = s.ACCOUNT_REF " +
+                "right join (select max(id) as id,quote_id FROM [order_database].dbo.quotation_chase_log_slimline group by quote_id) as z on z.id = a.id " +
                 "where next_chase_date ";
 
             if (chkFuture.Checked == true)

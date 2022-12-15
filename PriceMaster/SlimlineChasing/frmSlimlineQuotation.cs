@@ -234,7 +234,7 @@ namespace PriceMaster
 
                             if (lossResult == DialogResult.Yes)
                             {
-                                frmSlimlineMultipleChaseLoss  frmSlimline = new frmSlimlineMultipleChaseLoss(quote_id);
+                                frmSlimlineMultipleChaseLoss frmSlimline = new frmSlimlineMultipleChaseLoss(quote_id);
                                 frmSlimline.ShowDialog();
                                 this.Close();
                             }
@@ -454,6 +454,30 @@ namespace PriceMaster
                 value = -1;
             string sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET non_responsive_customer = " + value + " WHERE quote_id = " + quote_id.ToString();
             sql_update(sql);
+        }
+
+        private void btnInsertNote_Click(object sender, EventArgs e)
+        {
+            //opens a form to enter a note
+            frmSlimlineInsertNote frm = new frmSlimlineInsertNote(quote_id);
+            frm.ShowDialog();
+
+
+            //if the current status is not pending then we remove it so it cannot be added back
+           string sql = "SELECT [custom_feedback] FROM [order_database].[dbo].[quotation_feed_back_slimline] WHERE quote_id = " + quote_id.ToString();
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmdData = new SqlCommand(sql, conn))
+                {
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmdData);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    txtCustom.Text = dt.Rows[0][0].ToString();
+                }
+                conn.Close();
+            }
         }
     }
 }
