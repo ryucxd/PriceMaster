@@ -122,14 +122,14 @@ namespace PriceMaster
                         cmbPriority.Items.Add(reader.GetString(0));
                     reader.Close();
                 }
-                sql = "Select description FROM dbo.sl_status ";
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
-                {
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                        cmbStatus.Items.Add(reader.GetString(0));
-                    reader.Close();
-                }
+                //sql = "Select description FROM dbo.sl_status ";
+                //using (SqlCommand cmd = new SqlCommand(sql, conn))
+                //{
+                //    SqlDataReader reader = cmd.ExecuteReader();
+                //    while (reader.Read())
+                //        cmbStatus.Items.Add(reader.GetString(0));
+                //    reader.Close();
+                //}
                 sql = "Select material_description FROM dbo.sl_material ";
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {

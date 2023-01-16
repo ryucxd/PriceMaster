@@ -11,6 +11,8 @@ using System.Data.SqlClient;
 using System.Globalization;
 using PriceMaster.SlimlinelChasing;
 using PriceMaster.SlimlineChasing;
+using System.IO;
+using System.Diagnostics;
 
 namespace PriceMaster
 {
@@ -478,6 +480,22 @@ namespace PriceMaster
                 }
                 conn.Close();
             }
+        }
+
+        private void chkPriority_CheckedChanged(object sender, EventArgs e)
+        {
+            int value = 0;
+            if (chkPriority.Checked == true)
+                value = -1;
+            string sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET priority_chase = " + value + " WHERE quote_id = " + quote_id.ToString();
+            sql_update(sql);
+        }
+
+        private void btnAttachments_Click(object sender, EventArgs e)
+        {
+            string filePath = @"\\designsvr1\public\Slimline Chase Log\" + quote_id.ToString();
+            Directory.CreateDirectory(filePath);
+            Process.Start(filePath);
         }
     }
 }

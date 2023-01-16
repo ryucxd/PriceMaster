@@ -182,6 +182,9 @@
             this.cmbStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Items.AddRange(new object[] {
+            "Pending",
+            "Quoted"});
             this.cmbStatus.Location = new System.Drawing.Point(409, 163);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(206, 21);

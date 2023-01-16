@@ -1,6 +1,6 @@
 ﻿namespace PriceMaster
 {
-    partial class frmSlimlineOutstandingChase
+    partial class frmManagementView
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSlimlineOutstandingChase));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManagementView));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,6 +37,8 @@
             this.chkFuture = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,7 +88,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(317, 9);
+            this.label2.Location = new System.Drawing.Point(497, 7);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 17);
             this.label2.TabIndex = 53;
@@ -97,7 +99,7 @@
             // 
             this.cmbCustomerSearch.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cmbCustomerSearch.FormattingEnabled = true;
-            this.cmbCustomerSearch.Location = new System.Drawing.Point(444, 7);
+            this.cmbCustomerSearch.Location = new System.Drawing.Point(624, 5);
             this.cmbCustomerSearch.Name = "cmbCustomerSearch";
             this.cmbCustomerSearch.Size = new System.Drawing.Size(188, 21);
             this.cmbCustomerSearch.TabIndex = 52;
@@ -105,10 +107,12 @@
             // 
             // chkFuture
             // 
+            this.chkFuture.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkFuture.AutoSize = true;
-            this.chkFuture.Location = new System.Drawing.Point(638, 9);
+            this.chkFuture.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.chkFuture.Location = new System.Drawing.Point(818, 7);
             this.chkFuture.Name = "chkFuture";
-            this.chkFuture.Size = new System.Drawing.Size(94, 17);
+            this.chkFuture.Size = new System.Drawing.Size(119, 21);
             this.chkFuture.TabIndex = 54;
             this.chkFuture.Text = "Future Chases";
             this.chkFuture.UseVisualStyleBackColor = true;
@@ -141,11 +145,35 @@
             this.label4.Text = "       ";
             this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // frmSlimlineOutstandingChase
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label5.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label5.Location = new System.Drawing.Point(176, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(121, 17);
+            this.label5.TabIndex = 58;
+            this.label5.Text = "Customer Search:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(303, 5);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(188, 21);
+            this.comboBox1.TabIndex = 57;
+            // 
+            // frmManagementView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(949, 481);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.chkFuture);
@@ -154,9 +182,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmSlimlineOutstandingChase";
+            this.Name = "frmManagementView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Outstanding Chases";
             this.Shown += new System.EventHandler(this.frmSlimlineOutstandingChase_Shown);
@@ -175,5 +202,7 @@
         private System.Windows.Forms.CheckBox chkFuture;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

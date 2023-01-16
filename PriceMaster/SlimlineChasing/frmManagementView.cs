@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace PriceMaster
 {
-    public partial class frmSlimlineOutstandingChase : Form
+    public partial class frmManagementView : Form
     {
         public int id_index { get; set; }
         public int quote_index { get; set; }
@@ -20,17 +20,13 @@ namespace PriceMaster
         public int next_chase_date_index { get; set; }
         public int chased_by_index { get; set; }
         public int button_index { get; set; }
-        public int admin { get; set; }
         public int customer_index { get; set; }
         public int sender_email_address_index { get; set; }
         public int priority_chase_index { get; set; }
-        public frmSlimlineOutstandingChase(int _admin)
+        public frmManagementView()
         {
             InitializeComponent();
-            admin = _admin;
             load_data();
-            if (admin == -1)
-                this.Text = "Admin Outstanding Chases";
 
          
 
@@ -59,10 +55,6 @@ namespace PriceMaster
                     row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
             }
 
-
-            if (admin == 0)
-                dataGridView1.Columns[chased_by_index].Visible = false;
-            else
                 dataGridView1.Columns[chased_by_index].HeaderText = "Chased by";
 
             foreach (DataGridViewColumn col in dataGridView1.Columns)
@@ -107,8 +99,6 @@ namespace PriceMaster
             if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                 sql = sql + " AND rtrim(s.NAME) = '" + cmbCustomerSearch.Text + "'  ";
 
-            if (admin == 0)
-                sql = sql + "AND chased_by = " + CONNECT.staffID.ToString();
 
             sql = sql + " order by priority_chase desc,rtrim(s.[NAME]), next_chase_date asc, quote_id ";
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
@@ -168,26 +158,7 @@ namespace PriceMaster
             if (e.RowIndex == -1)
                 return;
             column_index();
-            //if (e.ColumnIndex == button_index)
-            //{
-            //    DialogResult result = MessageBox.Show("Are you sure you want to mark this chase as completed?", "Completed Chase Entry", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            //    if (result == DialogResult.Yes)
-            //    {
-            //        string sql = "UPDATE [order_database].dbo.[quotation_chase_log] SET chase_followed_up = -1,chase_followed_up_date = GETDATE() WHERE id = " + dataGridView1.Rows[e.RowIndex].Cells[id_index].Value.ToString();
-            //        using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
-            //        {
-            //            conn.Open();
-            //            using (SqlCommand cmd = new SqlCommand(sql, conn))
-            //                cmd.ExecuteNonQuery();
-            //            conn.Close();
-            //            load_data();
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //try
-            //{
+
 
             //get the customer
             string customer = "";
@@ -203,9 +174,8 @@ namespace PriceMaster
                 conn.Close();
             }
 
-            frmSlimlineQuotation frm = new frmSlimlineQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString()), customer);
+            frmManagementViewHistory frm = new frmManagementViewHistory(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString()));
             frm.ShowDialog();
-            load_data();
             //apply_filter();
             //}
             //    catch { }

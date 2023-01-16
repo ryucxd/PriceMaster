@@ -87,8 +87,6 @@ namespace PriceMaster
                 sql = sql + " AND q.status LIKE '%" + cmbChasingStatus.Text + "%'";
 
 
-            if (cmbStatus.Text.Length > 0)
-                sql = sql + " AND st.description = '" + cmbStatus.Text + "' ";
             if (cmbMaterial.Text.Length > 0)
                 sql = sql + " AND m.material_description = '" + cmbMaterial.Text + "'";
             if (cmbSystem.Text.Length > 0)
@@ -118,7 +116,7 @@ namespace PriceMaster
             sql_where = sql.Substring(sql.LastIndexOf("-1") + 2);
 
 
-            //  AND quote_date >= '20220701 00:00' AND quote_date <= '20220731'   ORDER BY quote_id DESC, issue_id";
+            //  AND quote_date >= '20220701 00:00' AND quote_date <= '20220731' ORDER BY quote_id DESC, issue_id";
 
             sql = sql + " order by quote_id DESC, issue_id";
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
@@ -229,11 +227,17 @@ namespace PriceMaster
             //before changing the formatting - count the total value
             double total_cost = 0;
             foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
                 total_cost = total_cost + Convert.ToDouble(row.Cells[price_index].Value);
+                //also copy the status if the chase is null
+                if (row.Cells[chasing_status_index].Value.ToString() == "")
+                    row.Cells[chasing_status_index].Value = row.Cells[description_index].Value;
+            }
             lblTotalCost.Text = total_cost.ToString("C");
             //get rid of these
             dataGridView1.Columns[view_index].Visible = false;
             dataGridView1.Columns[email_index].Visible = false;
+            dataGridView1.Columns[description_index].Visible = false;
 
             //headertext stuff
             dataGridView1.Columns[quote_id_index].HeaderText = "Quote ID";
@@ -291,15 +295,15 @@ namespace PriceMaster
                 using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
                 {
                     conn.Open();
-                    string sql = "Select description FROM dbo.sl_status ";
-                    using (SqlCommand cmd = new SqlCommand(sql, conn))
-                    {
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                            cmbStatus.Items.Add(reader.GetString(0));
-                        reader.Close();
-                    }
-                    sql = "Select material_description FROM dbo.sl_material ";
+                    //string sql = "Select description FROM dbo.sl_status ";
+                    //using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    //{
+                    //    SqlDataReader reader = cmd.ExecuteReader();
+                    //    while (reader.Read())
+                    //        cmbStatus.Items.Add(reader.GetString(0));
+                    //    reader.Close();
+                    //}
+                    string sql = "Select material_description FROM dbo.sl_material ";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
                         SqlDataReader reader = cmd.ExecuteReader();
@@ -466,7 +470,6 @@ namespace PriceMaster
         private void btnClear_Click(object sender, EventArgs e)
         {
             txtQuoteID.Text = "";
-            cmbStatus.Text = "";
             cmbMaterial.Text = "";
             cmbSystem.Text = "";
             cmbCustomer.Text = "";
@@ -811,6 +814,12 @@ namespace PriceMaster
         private void cmbChasedBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadData();
+        }
+
+        private void btnManagementView_Click(object sender, EventArgs e)
+        {
+            frmManagementView frm = new frmManagementView();
+            frm.ShowDialog();
         }
     }
 }

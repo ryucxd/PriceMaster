@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dteChaseDate = new System.Windows.Forms.DateTimePicker();
             this.dteNextDate = new System.Windows.Forms.DateTimePicker();
             this.lblChase = new System.Windows.Forms.Label();
@@ -41,13 +41,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.chkNoFollowup = new System.Windows.Forms.CheckBox();
             this.chkHiddenFollowup = new System.Windows.Forms.CheckBox();
+            this.chkEmail = new System.Windows.Forms.CheckBox();
+            this.chkPhone = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dteChaseDate
             // 
             this.dteChaseDate.Enabled = false;
-            this.dteChaseDate.Location = new System.Drawing.Point(204, 22);
+            this.dteChaseDate.Location = new System.Drawing.Point(204, 9);
             this.dteChaseDate.Name = "dteChaseDate";
             this.dteChaseDate.Size = new System.Drawing.Size(145, 20);
             this.dteChaseDate.TabIndex = 0;
@@ -64,7 +66,7 @@
             this.lblChase.AutoSize = true;
             this.lblChase.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblChase.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblChase.Location = new System.Drawing.Point(48, 22);
+            this.lblChase.Location = new System.Drawing.Point(48, 9);
             this.lblChase.Name = "lblChase";
             this.lblChase.Size = new System.Drawing.Size(152, 17);
             this.lblChase.TabIndex = 58;
@@ -145,14 +147,14 @@
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Location = new System.Drawing.Point(553, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
@@ -193,12 +195,34 @@
             this.chkHiddenFollowup.UseVisualStyleBackColor = true;
             this.chkHiddenFollowup.Visible = false;
             // 
-            // frmTraditionalChase
+            // chkEmail
+            // 
+            this.chkEmail.AutoSize = true;
+            this.chkEmail.Location = new System.Drawing.Point(289, 35);
+            this.chkEmail.Name = "chkEmail";
+            this.chkEmail.Size = new System.Drawing.Size(51, 17);
+            this.chkEmail.TabIndex = 68;
+            this.chkEmail.Text = "Email";
+            this.chkEmail.UseVisualStyleBackColor = true;
+            // 
+            // chkPhone
+            // 
+            this.chkPhone.AutoSize = true;
+            this.chkPhone.Location = new System.Drawing.Point(226, 35);
+            this.chkPhone.Name = "chkPhone";
+            this.chkPhone.Size = new System.Drawing.Size(57, 17);
+            this.chkPhone.TabIndex = 69;
+            this.chkPhone.Text = "Phone";
+            this.chkPhone.UseVisualStyleBackColor = true;
+            // 
+            // frmSlimlineChase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(798, 373);
             this.ControlBox = false;
+            this.Controls.Add(this.chkPhone);
+            this.Controls.Add(this.chkEmail);
             this.Controls.Add(this.chkHiddenFollowup);
             this.Controls.Add(this.chkNoFollowup);
             this.Controls.Add(this.label3);
@@ -235,5 +259,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox chkNoFollowup;
         private System.Windows.Forms.CheckBox chkHiddenFollowup;
+        private System.Windows.Forms.CheckBox chkEmail;
+        private System.Windows.Forms.CheckBox chkPhone;
     }
 }

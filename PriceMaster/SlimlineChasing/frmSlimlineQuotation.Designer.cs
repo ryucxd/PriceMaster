@@ -31,7 +31,6 @@
             this.cmbRev = new System.Windows.Forms.ComboBox();
             this.lblCustomer = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnQuote = new PriceMaster.buttonFormatting();
             this.txtCustom = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
@@ -41,11 +40,14 @@
             this.chkQuoteTookTooLong = new System.Windows.Forms.CheckBox();
             this.chkLeadTimeTooLong = new System.Windows.Forms.CheckBox();
             this.lblLost = new System.Windows.Forms.Label();
-            this.btnChase = new PriceMaster.buttonFormatting();
-            this.btnChaseHistory = new PriceMaster.buttonFormatting();
-            this.btnRelatedEnquiries = new PriceMaster.buttonFormatting();
             this.chkNonResponsive = new System.Windows.Forms.CheckBox();
+            this.chkPriority = new System.Windows.Forms.CheckBox();
+            this.btnAttachments = new PriceMaster.buttonFormatting();
             this.btnInsertNote = new PriceMaster.buttonFormatting();
+            this.btnRelatedEnquiries = new PriceMaster.buttonFormatting();
+            this.btnChaseHistory = new PriceMaster.buttonFormatting();
+            this.btnChase = new PriceMaster.buttonFormatting();
+            this.btnQuote = new PriceMaster.buttonFormatting();
             this.SuspendLayout();
             // 
             // cmbRev
@@ -80,30 +82,12 @@
             this.label1.Text = "Issue:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // btnQuote
-            // 
-            this.btnQuote.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnQuote.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuote.ForeColor = System.Drawing.Color.White;
-            this.btnQuote.Location = new System.Drawing.Point(1043, 205);
-            this.btnQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnQuote.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnQuote.Name = "btnQuote";
-            this.btnQuote.Padding = new System.Windows.Forms.Padding(3);
-            this.btnQuote.Size = new System.Drawing.Size(89, 33);
-            this.btnQuote.TabIndex = 47;
-            this.btnQuote.Text = "Quote";
-            this.btnQuote.UseVisualStyleBackColor = false;
-            this.btnQuote.Click += new System.EventHandler(this.btnQuote_Click);
-            // 
             // txtCustom
             // 
-            this.txtCustom.Location = new System.Drawing.Point(344, 99);
+            this.txtCustom.Location = new System.Drawing.Point(330, 99);
             this.txtCustom.Name = "txtCustom";
             this.txtCustom.ReadOnly = true;
-            this.txtCustom.Size = new System.Drawing.Size(691, 139);
+            this.txtCustom.Size = new System.Drawing.Size(692, 139);
             this.txtCustom.TabIndex = 49;
             this.txtCustom.Text = "";
             this.txtCustom.Leave += new System.EventHandler(this.txtCustom_Leave);
@@ -122,7 +106,7 @@
             // cmbStatus
             // 
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(70, 99);
+            this.cmbStatus.Location = new System.Drawing.Point(56, 99);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(157, 21);
             this.cmbStatus.TabIndex = 51;
@@ -133,7 +117,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label3.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label3.Location = new System.Drawing.Point(12, 99);
+            this.label3.Location = new System.Drawing.Point(-2, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 17);
             this.label3.TabIndex = 52;
@@ -143,7 +127,7 @@
             // chkTooExpensive
             // 
             this.chkTooExpensive.AutoSize = true;
-            this.chkTooExpensive.Location = new System.Drawing.Point(40, 167);
+            this.chkTooExpensive.Location = new System.Drawing.Point(26, 167);
             this.chkTooExpensive.Name = "chkTooExpensive";
             this.chkTooExpensive.Size = new System.Drawing.Size(99, 17);
             this.chkTooExpensive.TabIndex = 53;
@@ -155,7 +139,7 @@
             // chkUnableToMeetSpec
             // 
             this.chkUnableToMeetSpec.AutoSize = true;
-            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(171, 194);
+            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(157, 194);
             this.chkUnableToMeetSpec.Name = "chkUnableToMeetSpec";
             this.chkUnableToMeetSpec.Size = new System.Drawing.Size(127, 17);
             this.chkUnableToMeetSpec.TabIndex = 54;
@@ -167,7 +151,7 @@
             // chkQuoteTookTooLong
             // 
             this.chkQuoteTookTooLong.AutoSize = true;
-            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(40, 194);
+            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(26, 194);
             this.chkQuoteTookTooLong.Name = "chkQuoteTookTooLong";
             this.chkQuoteTookTooLong.Size = new System.Drawing.Size(123, 17);
             this.chkQuoteTookTooLong.TabIndex = 55;
@@ -179,7 +163,7 @@
             // chkLeadTimeTooLong
             // 
             this.chkLeadTimeTooLong.AutoSize = true;
-            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(171, 167);
+            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(157, 167);
             this.chkLeadTimeTooLong.Name = "chkLeadTimeTooLong";
             this.chkLeadTimeTooLong.Size = new System.Drawing.Size(116, 17);
             this.chkLeadTimeTooLong.TabIndex = 56;
@@ -192,7 +176,7 @@
             // 
             this.lblLost.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblLost.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblLost.Location = new System.Drawing.Point(40, 131);
+            this.lblLost.Location = new System.Drawing.Point(26, 131);
             this.lblLost.Name = "lblLost";
             this.lblLost.Size = new System.Drawing.Size(247, 17);
             this.lblLost.TabIndex = 57;
@@ -200,41 +184,65 @@
             this.lblLost.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblLost.Visible = false;
             // 
-            // btnChase
+            // chkNonResponsive
             // 
-            this.btnChase.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnChase.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnChase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChase.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChase.ForeColor = System.Drawing.Color.White;
-            this.btnChase.Location = new System.Drawing.Point(235, 97);
-            this.btnChase.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnChase.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnChase.Name = "btnChase";
-            this.btnChase.Padding = new System.Windows.Forms.Padding(3);
-            this.btnChase.Size = new System.Drawing.Size(101, 30);
-            this.btnChase.TabIndex = 58;
-            this.btnChase.Text = "Add Chase";
-            this.btnChase.UseVisualStyleBackColor = false;
-            this.btnChase.Click += new System.EventHandler(this.btnChase_Click);
+            this.chkNonResponsive.AutoSize = true;
+            this.chkNonResponsive.Location = new System.Drawing.Point(26, 220);
+            this.chkNonResponsive.Name = "chkNonResponsive";
+            this.chkNonResponsive.Size = new System.Drawing.Size(152, 17);
+            this.chkNonResponsive.TabIndex = 61;
+            this.chkNonResponsive.Text = "Non Responsive Customer";
+            this.chkNonResponsive.UseVisualStyleBackColor = true;
+            this.chkNonResponsive.Visible = false;
+            this.chkNonResponsive.CheckedChanged += new System.EventHandler(this.chkNonResponsive_CheckedChanged);
             // 
-            // btnChaseHistory
+            // chkPriority
             // 
-            this.btnChaseHistory.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnChaseHistory.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnChaseHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChaseHistory.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChaseHistory.ForeColor = System.Drawing.Color.White;
-            this.btnChaseHistory.Location = new System.Drawing.Point(1043, 144);
-            this.btnChaseHistory.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnChaseHistory.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnChaseHistory.Name = "btnChaseHistory";
-            this.btnChaseHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.btnChaseHistory.Size = new System.Drawing.Size(89, 50);
-            this.btnChaseHistory.TabIndex = 59;
-            this.btnChaseHistory.Text = "Chase History";
-            this.btnChaseHistory.UseVisualStyleBackColor = false;
-            this.btnChaseHistory.Click += new System.EventHandler(this.btnChaseHistory_Click);
+            this.chkPriority.AutoSize = true;
+            this.chkPriority.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.chkPriority.Location = new System.Drawing.Point(998, 50);
+            this.chkPriority.Name = "chkPriority";
+            this.chkPriority.Size = new System.Drawing.Size(134, 24);
+            this.chkPriority.TabIndex = 63;
+            this.chkPriority.Text = "Priority Chase";
+            this.chkPriority.UseVisualStyleBackColor = true;
+            this.chkPriority.CheckedChanged += new System.EventHandler(this.chkPriority_CheckedChanged);
+            // 
+            // btnAttachments
+            // 
+            this.btnAttachments.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAttachments.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnAttachments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAttachments.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+            this.btnAttachments.ForeColor = System.Drawing.Color.White;
+            this.btnAttachments.Location = new System.Drawing.Point(1030, 95);
+            this.btnAttachments.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnAttachments.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnAttachments.Name = "btnAttachments";
+            this.btnAttachments.Padding = new System.Windows.Forms.Padding(3);
+            this.btnAttachments.Size = new System.Drawing.Size(102, 49);
+            this.btnAttachments.TabIndex = 64;
+            this.btnAttachments.Text = "Chase Attachments";
+            this.btnAttachments.UseVisualStyleBackColor = false;
+            this.btnAttachments.Click += new System.EventHandler(this.btnAttachments_Click);
+            // 
+            // btnInsertNote
+            // 
+            this.btnInsertNote.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnInsertNote.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnInsertNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInsertNote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInsertNote.ForeColor = System.Drawing.Color.White;
+            this.btnInsertNote.Location = new System.Drawing.Point(330, 66);
+            this.btnInsertNote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnInsertNote.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnInsertNote.Name = "btnInsertNote";
+            this.btnInsertNote.Padding = new System.Windows.Forms.Padding(3);
+            this.btnInsertNote.Size = new System.Drawing.Size(101, 30);
+            this.btnInsertNote.TabIndex = 62;
+            this.btnInsertNote.Text = "Insert Note";
+            this.btnInsertNote.UseVisualStyleBackColor = false;
+            this.btnInsertNote.Click += new System.EventHandler(this.btnInsertNote_Click);
             // 
             // btnRelatedEnquiries
             // 
@@ -254,41 +262,67 @@
             this.btnRelatedEnquiries.UseVisualStyleBackColor = false;
             this.btnRelatedEnquiries.Click += new System.EventHandler(this.btnRelatedEnquiries_Click);
             // 
-            // chkNonResponsive
+            // btnChaseHistory
             // 
-            this.chkNonResponsive.AutoSize = true;
-            this.chkNonResponsive.Location = new System.Drawing.Point(40, 220);
-            this.chkNonResponsive.Name = "chkNonResponsive";
-            this.chkNonResponsive.Size = new System.Drawing.Size(152, 17);
-            this.chkNonResponsive.TabIndex = 61;
-            this.chkNonResponsive.Text = "Non Responsive Customer";
-            this.chkNonResponsive.UseVisualStyleBackColor = true;
-            this.chkNonResponsive.Visible = false;
-            this.chkNonResponsive.CheckedChanged += new System.EventHandler(this.chkNonResponsive_CheckedChanged);
+            this.btnChaseHistory.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnChaseHistory.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnChaseHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChaseHistory.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChaseHistory.ForeColor = System.Drawing.Color.White;
+            this.btnChaseHistory.Location = new System.Drawing.Point(1030, 149);
+            this.btnChaseHistory.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnChaseHistory.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnChaseHistory.Name = "btnChaseHistory";
+            this.btnChaseHistory.Padding = new System.Windows.Forms.Padding(3);
+            this.btnChaseHistory.Size = new System.Drawing.Size(102, 50);
+            this.btnChaseHistory.TabIndex = 59;
+            this.btnChaseHistory.Text = "Chase History";
+            this.btnChaseHistory.UseVisualStyleBackColor = false;
+            this.btnChaseHistory.Click += new System.EventHandler(this.btnChaseHistory_Click);
             // 
-            // btnInsertNote
+            // btnChase
             // 
-            this.btnInsertNote.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnInsertNote.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnInsertNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInsertNote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInsertNote.ForeColor = System.Drawing.Color.White;
-            this.btnInsertNote.Location = new System.Drawing.Point(344, 66);
-            this.btnInsertNote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnInsertNote.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnInsertNote.Name = "btnInsertNote";
-            this.btnInsertNote.Padding = new System.Windows.Forms.Padding(3);
-            this.btnInsertNote.Size = new System.Drawing.Size(101, 30);
-            this.btnInsertNote.TabIndex = 62;
-            this.btnInsertNote.Text = "Insert Note";
-            this.btnInsertNote.UseVisualStyleBackColor = false;
-            this.btnInsertNote.Click += new System.EventHandler(this.btnInsertNote_Click);
+            this.btnChase.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnChase.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnChase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChase.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChase.ForeColor = System.Drawing.Color.White;
+            this.btnChase.Location = new System.Drawing.Point(221, 97);
+            this.btnChase.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnChase.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnChase.Name = "btnChase";
+            this.btnChase.Padding = new System.Windows.Forms.Padding(3);
+            this.btnChase.Size = new System.Drawing.Size(101, 30);
+            this.btnChase.TabIndex = 58;
+            this.btnChase.Text = "Add Chase";
+            this.btnChase.UseVisualStyleBackColor = false;
+            this.btnChase.Click += new System.EventHandler(this.btnChase_Click);
+            // 
+            // btnQuote
+            // 
+            this.btnQuote.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnQuote.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuote.ForeColor = System.Drawing.Color.White;
+            this.btnQuote.Location = new System.Drawing.Point(1030, 205);
+            this.btnQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnQuote.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnQuote.Name = "btnQuote";
+            this.btnQuote.Padding = new System.Windows.Forms.Padding(3);
+            this.btnQuote.Size = new System.Drawing.Size(102, 33);
+            this.btnQuote.TabIndex = 47;
+            this.btnQuote.Text = "Quote";
+            this.btnQuote.UseVisualStyleBackColor = false;
+            this.btnQuote.Click += new System.EventHandler(this.btnQuote_Click);
             // 
             // frmSlimlineQuotation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1144, 246);
+            this.Controls.Add(this.btnAttachments);
+            this.Controls.Add(this.chkPriority);
             this.Controls.Add(this.btnInsertNote);
             this.Controls.Add(this.chkNonResponsive);
             this.Controls.Add(this.btnRelatedEnquiries);
@@ -339,5 +373,7 @@
         private buttonFormatting btnRelatedEnquiries;
         private System.Windows.Forms.CheckBox chkNonResponsive;
         private buttonFormatting btnInsertNote;
+        private System.Windows.Forms.CheckBox chkPriority;
+        private buttonFormatting btnAttachments;
     }
 }
