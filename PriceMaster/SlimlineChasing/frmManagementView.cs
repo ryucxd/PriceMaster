@@ -27,8 +27,8 @@ namespace PriceMaster
         {
             InitializeComponent();
             load_data();
+            fillCombo();
 
-         
 
         }
 
@@ -55,7 +55,7 @@ namespace PriceMaster
                     row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
             }
 
-                dataGridView1.Columns[chased_by_index].HeaderText = "Chased by";
+            dataGridView1.Columns[chased_by_index].HeaderText = "Chased by";
 
             foreach (DataGridViewColumn col in dataGridView1.Columns)
             {
@@ -64,6 +64,10 @@ namespace PriceMaster
             }
             dataGridView1.Columns[chase_description_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+        }
+
+        private void fillCombo()
+        {
             cmbCustomerSearch.Items.Clear();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -73,7 +77,14 @@ namespace PriceMaster
                     cmbCustomerSearch.Items.Add(row.Cells[6].Value.ToString());
             }
 
-
+            cmbStaffSearch.Items.Clear();
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (cmbStaffSearch.Items.Contains(row.Cells[5].Value.ToString()))
+                { } //nothing
+                else
+                    cmbStaffSearch.Items.Add(row.Cells[5].Value.ToString());
+            }
         }
 
         private void load_data()
@@ -93,11 +104,13 @@ namespace PriceMaster
                 sql = sql + " > ";
             else
                 sql = sql + " <= ";
-            
+
             sql = sql + " CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
 
             if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                 sql = sql + " AND rtrim(s.NAME) = '" + cmbCustomerSearch.Text + "'  ";
+            if (string.IsNullOrEmpty(cmbStaffSearch.Text) == false)
+                sql = sql + " AND u.forename + ' ' + u.surname = '" + cmbStaffSearch.Text + "'  ";
 
 
             sql = sql + " order by priority_chase desc,rtrim(s.[NAME]), next_chase_date asc, quote_id ";
@@ -195,6 +208,20 @@ namespace PriceMaster
         private void frmSlimlineOutstandingChase_Shown(object sender, EventArgs e)
         {
             format();
+        }
+
+        private void cmbStaffSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            load_data();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            chkFuture.Checked = false;
+            cmbStaffSearch.Text = "";
+            cmbCustomerSearch.Text = "";
+            load_data();
+            fillCombo();
         }
     }
 }

@@ -420,7 +420,7 @@
             this.btnOutstanding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOutstanding.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOutstanding.ForeColor = System.Drawing.Color.White;
-            this.btnOutstanding.Location = new System.Drawing.Point(679, 44);
+            this.btnOutstanding.Location = new System.Drawing.Point(826, 44);
             this.btnOutstanding.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnOutstanding.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnOutstanding.Name = "btnOutstanding";
@@ -438,14 +438,14 @@
             this.btnAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdmin.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdmin.ForeColor = System.Drawing.Color.White;
-            this.btnAdmin.Location = new System.Drawing.Point(868, 44);
+            this.btnAdmin.Location = new System.Drawing.Point(1015, 43);
             this.btnAdmin.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnAdmin.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnAdmin.Name = "btnAdmin";
             this.btnAdmin.Padding = new System.Windows.Forms.Padding(3);
             this.btnAdmin.Size = new System.Drawing.Size(213, 30);
             this.btnAdmin.TabIndex = 85;
-            this.btnAdmin.Text = "Admin Outstanding Chases";
+            this.btnAdmin.Text = "All Outstanding Chases";
             this.btnAdmin.UseVisualStyleBackColor = false;
             this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
             // 
@@ -582,7 +582,7 @@
             this.btnManagementView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnManagementView.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnManagementView.ForeColor = System.Drawing.Color.White;
-            this.btnManagementView.Location = new System.Drawing.Point(1091, 44);
+            this.btnManagementView.Location = new System.Drawing.Point(594, 23);
             this.btnManagementView.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnManagementView.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnManagementView.Name = "btnManagementView";

@@ -38,7 +38,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbStaffSearch = new System.Windows.Forms.ComboBox();
+            this.btnClear = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,7 +89,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(497, 7);
+            this.label2.Location = new System.Drawing.Point(419, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 17);
             this.label2.TabIndex = 53;
@@ -98,8 +99,10 @@
             // cmbCustomerSearch
             // 
             this.cmbCustomerSearch.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cmbCustomerSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbCustomerSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCustomerSearch.FormattingEnabled = true;
-            this.cmbCustomerSearch.Location = new System.Drawing.Point(624, 5);
+            this.cmbCustomerSearch.Location = new System.Drawing.Point(546, 6);
             this.cmbCustomerSearch.Name = "cmbCustomerSearch";
             this.cmbCustomerSearch.Size = new System.Drawing.Size(188, 21);
             this.cmbCustomerSearch.TabIndex = 52;
@@ -110,7 +113,7 @@
             this.chkFuture.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkFuture.AutoSize = true;
             this.chkFuture.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.chkFuture.Location = new System.Drawing.Point(818, 7);
+            this.chkFuture.Location = new System.Drawing.Point(740, 8);
             this.chkFuture.Name = "chkFuture";
             this.chkFuture.Size = new System.Drawing.Size(119, 21);
             this.chkFuture.TabIndex = 54;
@@ -151,29 +154,52 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label5.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label5.Location = new System.Drawing.Point(176, 7);
+            this.label5.Location = new System.Drawing.Point(114, 8);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(121, 17);
+            this.label5.Size = new System.Drawing.Size(90, 17);
             this.label5.TabIndex = 58;
-            this.label5.Text = "Customer Search:";
+            this.label5.Text = "Staff Search:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // comboBox1
+            // cmbStaffSearch
             // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(303, 5);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(188, 21);
-            this.comboBox1.TabIndex = 57;
+            this.cmbStaffSearch.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cmbStaffSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbStaffSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbStaffSearch.FormattingEnabled = true;
+            this.cmbStaffSearch.Location = new System.Drawing.Point(210, 4);
+            this.cmbStaffSearch.Name = "cmbStaffSearch";
+            this.cmbStaffSearch.Size = new System.Drawing.Size(188, 21);
+            this.cmbStaffSearch.TabIndex = 57;
+            this.cmbStaffSearch.SelectedIndexChanged += new System.EventHandler(this.cmbStaffSearch_SelectedIndexChanged);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnClear.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.ForeColor = System.Drawing.Color.White;
+            this.btnClear.Location = new System.Drawing.Point(862, 3);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnClear.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Padding = new System.Windows.Forms.Padding(3);
+            this.btnClear.Size = new System.Drawing.Size(75, 30);
+            this.btnClear.TabIndex = 59;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // frmManagementView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(949, 481);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbStaffSearch);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.chkFuture);
@@ -203,6 +229,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbStaffSearch;
+        private buttonFormatting btnClear;
     }
 }
