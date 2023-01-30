@@ -498,5 +498,11 @@ namespace PriceMaster
             frmOutstandingChase frm = new frmOutstandingChase(-1);
             frm.ShowDialog();
         }
+
+        private void btnManagementView_Click(object sender, EventArgs e)
+        {
+            frmManagementView frm = new frmManagementView(0);
+            frm.ShowDialog();
+        }
     }
 }

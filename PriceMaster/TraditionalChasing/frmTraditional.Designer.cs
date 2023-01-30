@@ -56,6 +56,7 @@
             this.btnReport = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
+            this.btnManagementView = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -320,7 +321,7 @@
             this.btnOutstanding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOutstanding.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOutstanding.ForeColor = System.Drawing.Color.White;
-            this.btnOutstanding.Location = new System.Drawing.Point(846, 9);
+            this.btnOutstanding.Location = new System.Drawing.Point(1002, 9);
             this.btnOutstanding.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnOutstanding.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnOutstanding.Name = "btnOutstanding";
@@ -338,7 +339,7 @@
             this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReport.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReport.ForeColor = System.Drawing.Color.White;
-            this.btnReport.Location = new System.Drawing.Point(690, 9);
+            this.btnReport.Location = new System.Drawing.Point(846, 9);
             this.btnReport.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnReport.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnReport.Name = "btnReport";
@@ -374,22 +375,41 @@
             this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
-            this.buttonFormatting1.Location = new System.Drawing.Point(1035, 9);
+            this.buttonFormatting1.Location = new System.Drawing.Point(1191, 9);
             this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
             this.buttonFormatting1.Name = "buttonFormatting1";
             this.buttonFormatting1.Padding = new System.Windows.Forms.Padding(3);
             this.buttonFormatting1.Size = new System.Drawing.Size(213, 30);
             this.buttonFormatting1.TabIndex = 84;
-            this.buttonFormatting1.Text = "Admin Outstanding Chases";
+            this.buttonFormatting1.Text = "All Outstanding Chases";
             this.buttonFormatting1.UseVisualStyleBackColor = false;
             this.buttonFormatting1.Click += new System.EventHandler(this.buttonFormatting1_Click);
+            // 
+            // btnManagementView
+            // 
+            this.btnManagementView.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnManagementView.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnManagementView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManagementView.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManagementView.ForeColor = System.Drawing.Color.White;
+            this.btnManagementView.Location = new System.Drawing.Point(610, 12);
+            this.btnManagementView.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnManagementView.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnManagementView.Name = "btnManagementView";
+            this.btnManagementView.Padding = new System.Windows.Forms.Padding(3);
+            this.btnManagementView.Size = new System.Drawing.Size(154, 30);
+            this.btnManagementView.TabIndex = 98;
+            this.btnManagementView.Text = "Management View";
+            this.btnManagementView.UseVisualStyleBackColor = false;
+            this.btnManagementView.Click += new System.EventHandler(this.btnManagementView_Click);
             // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnManagementView);
             this.Controls.Add(this.buttonFormatting1);
             this.Controls.Add(this.btnOutstanding);
             this.Controls.Add(this.label8);
@@ -457,5 +477,6 @@
         private System.Windows.Forms.ComboBox cmbStatus;
         private buttonFormatting btnOutstanding;
         private buttonFormatting buttonFormatting1;
+        private buttonFormatting btnManagementView;
     }
 }

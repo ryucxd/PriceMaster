@@ -400,6 +400,7 @@ namespace PriceMaster
                 }
 
                 frmSlimlineQuotation frm = new frmSlimlineQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString()), dataGridView1.Rows[e.RowIndex].Cells[customer_index].Value.ToString());
+                //frmSlimlineChaseQuotation frm = new frmSlimlineChaseQuotation();
                 frm.ShowDialog();
                 loadData();
             }
@@ -818,7 +819,7 @@ namespace PriceMaster
 
         private void btnManagementView_Click(object sender, EventArgs e)
         {
-            frmManagementView frm = new frmManagementView();
+            frmManagementView frm = new frmManagementView(-1);
             frm.ShowDialog();
         }
     }

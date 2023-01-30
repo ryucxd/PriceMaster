@@ -34,6 +34,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbCustomerSearch = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.chkFuture = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,11 +103,52 @@
             this.label2.Text = "Customer Search:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label4.Location = new System.Drawing.Point(12, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(36, 17);
+            this.label4.TabIndex = 58;
+            this.label4.Text = "       ";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label3.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label3.Location = new System.Drawing.Point(47, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(68, 17);
+            this.label3.TabIndex = 57;
+            this.label3.Text = "= Priority ";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // chkFuture
+            // 
+            this.chkFuture.AutoSize = true;
+            this.chkFuture.Location = new System.Drawing.Point(597, 9);
+            this.chkFuture.Name = "chkFuture";
+            this.chkFuture.Size = new System.Drawing.Size(94, 17);
+            this.chkFuture.TabIndex = 59;
+            this.chkFuture.Text = "Future Chases";
+            this.chkFuture.UseVisualStyleBackColor = true;
+            this.chkFuture.CheckedChanged += new System.EventHandler(this.chkFuture_CheckedChanged);
+            // 
             // frmOutstandingChase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(866, 518);
+            this.Controls.Add(this.chkFuture);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbCustomerSearch);
             this.Controls.Add(this.label1);
@@ -115,6 +159,7 @@
             this.Name = "frmOutstandingChase";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Outstanding Chases";
+            this.Shown += new System.EventHandler(this.frmOutstandingChase_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -127,5 +172,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbCustomerSearch;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox chkFuture;
     }
 }

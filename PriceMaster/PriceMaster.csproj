@@ -86,6 +86,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CONNECT.cs" />
+    <Compile Include="frmSlimlineChaseQuotation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSlimlineChaseQuotation.Designer.cs">
+      <DependentUpon>frmSlimlineChaseQuotation.cs</DependentUpon>
+    </Compile>
     <Compile Include="SlimlineChasing\frmManagementViewHistory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,10 +110,10 @@
     <Compile Include="SlimlineChasing\frmSlimlineMultipleChaseLoss.Designer.cs">
       <DependentUpon>frmSlimlineMultipleChaseLoss.cs</DependentUpon>
     </Compile>
-    <Compile Include="SlimlineChasing\frmManagementView.cs">
+    <Compile Include="frmManagementView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SlimlineChasing\frmManagementView.Designer.cs">
+    <Compile Include="frmManagementView.Designer.cs">
       <DependentUpon>frmManagementView.cs</DependentUpon>
     </Compile>
     <Compile Include="SlimlineChasing\frmSlimlineQuotation.cs">
@@ -268,6 +274,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmSlimlineChaseQuotation.resx">
+      <DependentUpon>frmSlimlineChaseQuotation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SlimlineChasing\frmManagementViewHistory.resx">
       <DependentUpon>frmManagementViewHistory.cs</DependentUpon>
     </EmbeddedResource>
@@ -277,7 +286,7 @@
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineMultipleChaseLoss.resx">
       <DependentUpon>frmSlimlineMultipleChaseLoss.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SlimlineChasing\frmManagementView.resx">
+    <EmbeddedResource Include="frmManagementView.resx">
       <DependentUpon>frmManagementView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineQuotation.resx">
@@ -395,6 +404,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="pricelog.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewSlimlineChasing\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

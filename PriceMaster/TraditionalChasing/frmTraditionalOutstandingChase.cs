@@ -23,6 +23,7 @@ namespace PriceMaster
         public int admin { get; set; }
         public int customer_index { get; set; }
         public int sender_email_address_index { get; set; }
+        public int priority_chase_index { get; set; }
         public frmOutstandingChase(int _admin)
         {
             InitializeComponent();
@@ -31,14 +32,6 @@ namespace PriceMaster
             if (admin == -1)
                 this.Text = "Admin Outstanding Chases";
 
-            //load all the data into the customers
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (cmbCustomerSearch.Items.Contains(row.Cells[6].Value.ToString()))
-                { } //nothing
-                else
-                    cmbCustomerSearch.Items.Add(row.Cells[6].Value.ToString());
-            }
 
         }
 
@@ -51,6 +44,7 @@ namespace PriceMaster
             dataGridView1.Columns[next_chase_date_index].HeaderText = "Next Chase Date";
             dataGridView1.Columns[customer_index].HeaderText = "Customer";
             dataGridView1.Columns[sender_email_address_index].HeaderText = "Sender Email Address";
+            dataGridView1.Columns[priority_chase_index].Visible = false;
 
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
@@ -61,6 +55,8 @@ namespace PriceMaster
                     string temp = row.Cells[sender_email_address_index].Value.ToString();
                     row.Cells[sender_email_address_index].Value = temp.Substring(temp.IndexOf("-") + 1);
                 }
+                if (row.Cells[priority_chase_index].Value.ToString() == "-1")
+                    row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
             }
 
 
@@ -75,12 +71,23 @@ namespace PriceMaster
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             dataGridView1.Columns[chase_description_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            cmbCustomerSearch.Items.Clear();
+            //load all the data into the customers
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (cmbCustomerSearch.Items.Contains(row.Cells[6].Value.ToString()))
+                { } //nothing
+                else
+                    cmbCustomerSearch.Items.Add(row.Cells[6].Value.ToString());
+            }
+            
         }
 
         private void load_data()
         {
             dataGridView1.DataSource = null;
-            string sql = "SELECT a.id,a.quote_id,chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as  [Chased by],rtrim(q.customer) as customer,e.sender_email_address " +
+            string sql = "SELECT a.id,a.quote_id,chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as  [Chased by],rtrim(q.customer) as customer,e.sender_email_address,priority_chase " +
                 "FROM [order_database].dbo.quotation_chase_log a " +
                 "left join [order_database].dbo.quotation_feed_back b on a.quote_id = b.quote_id " +
                 "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
@@ -88,7 +95,15 @@ namespace PriceMaster
                 "left join [order_database].dbo.solidworks_quotation_log q on sw.quote_id = q.quote_id and sw.revision_number = q.revision_number " +
                 "left join (select max(id) as enquiry_id, left(related_quote, CHARINDEX('-', related_quote) - 1) as related_quote from [EnquiryLog].dbo.[Enquiry_Log] WHERE related_quote<> 'No Related Quote' group by LEFT(related_quote, CHARINDEX('-', related_quote) - 1)) el on el.related_quote like '%' + cast(q.quote_id as nvarchar) + '%' " +
                 "left join [EnquiryLog].dbo.[Enquiry_Log] e on el.enquiry_id = e.id " +
-                "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
+                "where next_chase_date ";
+
+
+            if (chkFuture.Checked == true)
+                sql = sql + " > ";
+            else
+                sql = sql + " <= ";
+
+            sql = sql + "CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
 
             if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                 sql = sql + " AND rtrim(q.customer) = '" + cmbCustomerSearch.Text + "'  ";
@@ -96,7 +111,7 @@ namespace PriceMaster
             if (admin == 0)
                 sql = sql + "AND chased_by = " + CONNECT.staffID.ToString();
 
-            sql = sql + " order by rtrim(q.customer) ,next_chase_date asc, quote_id ";
+            sql = sql + " order by priority_chase desc,rtrim(q.customer) ,next_chase_date asc, quote_id ";
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
@@ -143,6 +158,7 @@ namespace PriceMaster
             chased_by_index = dataGridView1.Columns["Chased by"].Index;
             customer_index = dataGridView1.Columns["customer"].Index;
             sender_email_address_index = dataGridView1.Columns["sender_email_address"].Index;
+            priority_chase_index = dataGridView1.Columns["priority_chase"].Index;
 
             if (dataGridView1.Columns.Contains("Complete") == true)
                 button_index = dataGridView1.Columns["Complete"].Index;
@@ -199,6 +215,16 @@ namespace PriceMaster
         private void cmbCustomerSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
             load_data();
+        }
+
+        private void chkFuture_CheckedChanged(object sender, EventArgs e)
+        {
+            load_data();
+        }
+
+        private void frmOutstandingChase_Shown(object sender, EventArgs e)
+        {
+            dataGridView1.ClearSelection();
         }
     }
 }

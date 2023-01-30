@@ -41,7 +41,7 @@ namespace PriceMaster
 
 
                     //if the current status is not pending then we remove it so it cannot be added back
-                    sql = "SELECT [status] ,[custom_feedback] ,[too_expensive] ,[lead_time_too_long] ,[quote_took_too_long] ,[unable_to_meet_spec],[non_responsive_customer] " +
+                    sql = "SELECT [status] ,[custom_feedback] ,[too_expensive] ,[lead_time_too_long] ,[quote_took_too_long] ,[unable_to_meet_spec],[non_responsive_customer],priority_chase " +
                         "FROM [order_database].[dbo].[quotation_feed_back] WHERE quote_id = " + quote_id.ToString();
                     using (SqlCommand cmdData = new SqlCommand(sql, conn))
                     {
@@ -61,6 +61,8 @@ namespace PriceMaster
                             chkUnableToMeetSpec.Checked = true;
                         if (dt.Rows[0][6].ToString() == "-1")
                             chkNonResponsive.Checked = true;
+                        if (dt.Rows[0][7].ToString() == "-1")
+                            chkPriority.Checked = true;
 
                         if (string.IsNullOrEmpty(cmbStatus.Text))
                             cmbStatus.Items.Add("Pending");
@@ -469,6 +471,15 @@ namespace PriceMaster
             if (chkNonResponsive.Checked == true)
                 value = -1;
             string sql = "UPDATE [order_database].dbo.quotation_feed_back SET non_responsive_customer = " + value + " WHERE quote_id = " + quote_id.ToString();
+            sql_update(sql);
+        }
+
+        private void chkPriority_CheckedChanged(object sender, EventArgs e)
+        {
+            int value = 0;
+            if (chkPriority.Checked == true)
+                value = -1;
+            string sql = "UPDATE [order_database].dbo.quotation_feed_back SET priority_chase = " + value + " WHERE quote_id = " + quote_id.ToString();
             sql_update(sql);
         }
     }

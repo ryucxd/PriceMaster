@@ -51,6 +51,7 @@
             this.btnChaseHistory = new PriceMaster.buttonFormatting();
             this.btnRelatedEnquiries = new PriceMaster.buttonFormatting();
             this.chkNonResponsive = new System.Windows.Forms.CheckBox();
+            this.chkPriority = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -334,7 +335,7 @@
             this.btnRelatedEnquiries.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRelatedEnquiries.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRelatedEnquiries.ForeColor = System.Drawing.Color.White;
-            this.btnRelatedEnquiries.Location = new System.Drawing.Point(1061, 12);
+            this.btnRelatedEnquiries.Location = new System.Drawing.Point(1061, 6);
             this.btnRelatedEnquiries.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnRelatedEnquiries.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnRelatedEnquiries.Name = "btnRelatedEnquiries";
@@ -357,11 +358,24 @@
             this.chkNonResponsive.Visible = false;
             this.chkNonResponsive.CheckedChanged += new System.EventHandler(this.chkNonResponsive_CheckedChanged);
             // 
+            // chkPriority
+            // 
+            this.chkPriority.AutoSize = true;
+            this.chkPriority.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.chkPriority.Location = new System.Drawing.Point(1071, 39);
+            this.chkPriority.Name = "chkPriority";
+            this.chkPriority.Size = new System.Drawing.Size(134, 24);
+            this.chkPriority.TabIndex = 69;
+            this.chkPriority.Text = "Priority Chase";
+            this.chkPriority.UseVisualStyleBackColor = true;
+            this.chkPriority.CheckedChanged += new System.EventHandler(this.chkPriority_CheckedChanged);
+            // 
             // frmTraditionalQuotation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1224, 599);
+            this.Controls.Add(this.chkPriority);
             this.Controls.Add(this.chkNonResponsive);
             this.Controls.Add(this.btnRelatedEnquiries);
             this.Controls.Add(this.btnChaseHistory);
@@ -418,5 +432,6 @@
         private buttonFormatting btnChaseHistory;
         private buttonFormatting btnRelatedEnquiries;
         private System.Windows.Forms.CheckBox chkNonResponsive;
+        private System.Windows.Forms.CheckBox chkPriority;
     }
 }
