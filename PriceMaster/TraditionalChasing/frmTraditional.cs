@@ -29,6 +29,7 @@ namespace PriceMaster
         public int quote_button_index { get; set; }
         public int status_index { get; set; }
         public string sql_report { get; set; }
+        public int prioritY_chase_index { get; set; }
 
         public frmTraditional()
         {
@@ -42,7 +43,7 @@ namespace PriceMaster
 
         private void apply_filter()
         {
-            string sql = "select top 300 s.quote_id,date_output,s.revision_number,item_count,customer,customer_ref,emailed_to as quoted_by,deliveryAddress,total_quotation_value,coalesce(q.status,'') as status " +
+            string sql = "select top 300 s.quote_id,date_output,s.revision_number,item_count,customer,customer_ref,emailed_to as quoted_by,deliveryAddress,total_quotation_value,coalesce(q.status,'') as status,priority_chase " +
                 "from [order_database].dbo.solidworks_quotation_log s " +
                 "inner join (select quote_id,max(revision_number) as revision_number from [order_database].dbo.solidworks_quotation_log group by quote_id) as b on s.quote_id = b.quote_id AND s.revision_number = b.revision_number " +
                 "left join [order_database].dbo.quotation_feed_back q on s.quote_id = q.quote_id " +
@@ -75,6 +76,10 @@ namespace PriceMaster
 
             if (cmbStatus.Text.Length > 0)
                 sql = sql + "  status = '" + cmbStatus.Text + "'   AND ";
+
+            //priority_chase
+            if (chkChasePriority.Checked == true)
+                sql = sql + "  priority_chase = -1    AND ";
 
             sql = sql.Substring(0, sql.Length - 6);
 
@@ -136,6 +141,10 @@ namespace PriceMaster
         }
         private void format()
         {
+            //hide prio chase column
+            dataGridView1.Columns[prioritY_chase_index].Visible = false;
+
+
             //remove >@designandsupply.co.uk< if it exists
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
@@ -150,7 +159,12 @@ namespace PriceMaster
             //label at the bottom right
             double total_cost = 0;
             foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
                 total_cost = total_cost + Convert.ToDouble(row.Cells[value_index].Value);
+                //while we are here also we need to highlight any rows lightblue if they are prio chase
+                if (row.Cells[prioritY_chase_index].Value.ToString() == "-1")
+                    row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
+            }
             lblTotalCost.Text = total_cost.ToString("C");
 
             //headertext stuff
@@ -202,6 +216,7 @@ namespace PriceMaster
             delivery_address_index = dataGridView1.Columns["deliveryAddress"].Index;
             value_index = dataGridView1.Columns["total_quotation_value"].Index;
             status_index = dataGridView1.Columns["status"].Index;
+            prioritY_chase_index = dataGridView1.Columns["priority_chase"].Index;
         }
 
         private void dteStart_ValueChanged(object sender, EventArgs e)
@@ -466,7 +481,7 @@ namespace PriceMaster
                "FROM [order_database].dbo.quotation_chase_log a " +
                "left join [order_database].dbo.quotation_feed_back b on a.quote_id = b.quote_id " +
                "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
-               "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) and u.id = " + CONNECT.staffID;
+               "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) and (chase_complete = 0 or chase_complete is null) and u.id = " + CONNECT.staffID;
 
             //sql = "SELECT CAST(a.quote_id as nvarchar(max)) FROM [order_database].dbo.quotation_chase_log where next_chase_date <= CAST(GETDATE() as date) and " +
             //"dont_chase = 0 and(chase_followed_up is null or chase_followed_up = 0) AND chased_by =  " + CONNECT.staffID.ToString();
@@ -503,6 +518,22 @@ namespace PriceMaster
         {
             frmManagementView frm = new frmManagementView(0);
             frm.ShowDialog();
+        }
+
+        private void chkChasePriority_CheckedChanged(object sender, EventArgs e)
+        {
+            apply_filter();
+        }
+
+        private void txtEnquiry_Leave(object sender, EventArgs e)
+        {
+            apply_filter();
+        }
+
+        private void txtEnquiry_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                apply_filter();
         }
     }
 }

@@ -103,7 +103,7 @@ namespace PriceMaster
             else
                 sql = sql + " <= ";
 
-            sql = sql + "CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
+            sql = sql + "CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) AND (chase_complete = 0 or chase_complete is null) ";
 
             if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                 sql = sql + " AND rtrim(q.customer) = '" + cmbCustomerSearch.Text + "'  ";

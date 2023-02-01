@@ -42,6 +42,7 @@ namespace PriceMaster
         public int chasing_status_index { get; set; }
         public int last_chased_date_index { get; set; }
         public int last_chased_by_index { get; set; }
+        public int chase_priority_index { get; set; }
 
         //date stuffs
         public int dateFilter { get; set; }
@@ -59,7 +60,7 @@ namespace PriceMaster
             string sql = "SELECT top 150 a.quote_id,q.status,last_chase.chase_date,last_chase.chased_by,'View' as [view_temp],'Email' as email_temp,issue_id,CASE WHEN highest_issue = 0 THEN CAST(0 AS BIT) WHEN highest_issue IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [current] ,p.priority_description as priority_id,st.description,m.material_description, " +
                                 "COALESCE(slimline_systems_1.system_name, '') + ' - ' + COALESCE(slimline_systems_2.system_name, '') + ' - ' + COALESCE(slimline_systems_3.system_name, '') + ' - ' + " +
                                 "COALESCE(slimline_systems_4.system_name, '') + ' - ' + COALESCE(slimline_systems_5.system_name, '') as [system_row] , rtrim(s.[NAME]) as customer,s.type,u_2.forename + ' ' + u_2.surname as  email_sent_by,email_sent_date,quotation_ref,COALESCE(price,0) as price," +
-                                "u.forename + ' ' + u.surname as [quoted_by],quote_date FROM dbo.sl_quotation a " +
+                                "u.forename + ' ' + u.surname as [quoted_by],quote_date,last_chase.priority_chase FROM dbo.sl_quotation a " +
                                 "LEFT JOIN[dsl_fitting].dbo.[SALES_LEDGER] s on s.ACCOUNT_REF = a.customer_acc_ref " +
                                 "left join[user_info].dbo.[user] u on u.id = a.created_by_id " +
                                 "left join[user_info].dbo.[user] u_2 on u_2.id = a.email_sent_by " +
@@ -72,10 +73,11 @@ namespace PriceMaster
                                 "LEFT JOIN dbo.slimline_systems AS slimline_systems_3 ON a.system_id_3 = slimline_systems_3.id " +
                                 "LEFT JOIN dbo.slimline_systems AS slimline_systems_4 ON a.system_id_4 = slimline_systems_4.id " +
                                 "LEFT JOIN dbo.slimline_systems AS slimline_systems_5 ON a.system_id_5 = slimline_systems_5.id " +
-                                "left join (SELECT a.quote_id,chase_date,u.forename + ' ' + u.surname as chased_by from [order_database].dbo.quotation_chase_log_slimline a " +
+                                "left join (SELECT a.quote_id,chase_date,u.forename + ' ' + u.surname as chased_by,c.priority_chase from [order_database].dbo.quotation_chase_log_slimline a " +
                                 "right join(select max(id) as id,quote_id from[order_database].dbo.quotation_chase_log_slimline " +
                                 " " +
-                                "group by quote_id) b on a.quote_id = b.quote_id AND a.id = b.id left join[user_info].dbo.[user] u on a.chased_by = u.id ) as last_chase on a.quote_id = last_chase.quote_id ";
+                                "group by quote_id) b on a.quote_id = b.quote_id AND a.id = b.id left join[user_info].dbo.[user] u on a.chased_by = u.id " +
+                                " left join [order_database].dbo.quotation_feed_back_slimline c on a.quote_id = c.quote_id  ) as last_chase on a.quote_id = last_chase.quote_id ";
 
 
             sql = sql + " WHERE highest_issue = -1 ";
@@ -112,6 +114,9 @@ namespace PriceMaster
 
             if (cmbChasedBy.Text.Length > 0)
                 sql = sql + " AND last_chase.chased_by = '" + cmbChasedBy.Text + "' ";
+
+            if (chkChasePriority.Checked == true)
+                sql = sql + " AND last_chase.priority_chase = -1 ";
 
             sql_where = sql.Substring(sql.LastIndexOf("-1") + 2);
 
@@ -172,6 +177,7 @@ namespace PriceMaster
             quoted_by_index = dataGridView1.Columns["quoted_by"].Index;
             quote_date_index = dataGridView1.Columns["quote_date"].Index;
             type_index = dataGridView1.Columns["type"].Index;
+            chase_priority_index = dataGridView1.Columns["priority_chase"].Index;
 
 
             ////checkbox for revision
@@ -209,7 +215,7 @@ namespace PriceMaster
                 dataGridView1.Columns.Insert(column_index, email_button);
             }
 
-            column_index = email_button_index + 1 ;
+            column_index = email_button_index + 1;
             DataGridViewButtonColumn chase_button = new DataGridViewButtonColumn();
             chase_button.Name = "Chase";
             chase_button.Text = "Chase";
@@ -232,12 +238,15 @@ namespace PriceMaster
                 //also copy the status if the chase is null
                 if (row.Cells[chasing_status_index].Value.ToString() == "")
                     row.Cells[chasing_status_index].Value = row.Cells[description_index].Value;
+                if (row.Cells[chase_priority_index].Value.ToString() == "-1")
+                    row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
             }
             lblTotalCost.Text = total_cost.ToString("C");
             //get rid of these
             dataGridView1.Columns[view_index].Visible = false;
             dataGridView1.Columns[email_index].Visible = false;
             dataGridView1.Columns[description_index].Visible = false;
+            dataGridView1.Columns[chase_priority_index].Visible = false;
 
             //headertext stuff
             dataGridView1.Columns[quote_id_index].HeaderText = "Quote ID";
@@ -334,7 +343,7 @@ namespace PriceMaster
                         while (reader.Read())
                             cmbQuotedBy.Items.Add(reader.GetString(0));
                         reader.Close();
-                    }  
+                    }
                     sql = "SELECT distinct u.forename + ' ' + u.surname as chased_by from [order_database].dbo.quotation_chase_log_slimline a " +
                              "left join[user_info].dbo.[user] u on a.chased_by = u.id order by chased_by asc";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -399,8 +408,8 @@ namespace PriceMaster
                     conn.Close();
                 }
 
-                frmSlimlineQuotation frm = new frmSlimlineQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString()), dataGridView1.Rows[e.RowIndex].Cells[customer_index].Value.ToString());
-                //frmSlimlineChaseQuotation frm = new frmSlimlineChaseQuotation();
+                //frmSlimlineQuotation frm = new frmSlimlineQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString()), dataGridView1.Rows[e.RowIndex].Cells[customer_index].Value.ToString());
+                frmSlimlineChaseQuotation frm = new frmSlimlineChaseQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString()), dataGridView1.Rows[e.RowIndex].Cells[customer_index].Value.ToString());
                 frm.ShowDialog();
                 loadData();
             }
@@ -408,7 +417,7 @@ namespace PriceMaster
 
         private void txtQuoteID_TextChanged(object sender, EventArgs e)
         {
-            loadData();
+//            loadData();
         }
 
         private void cmbPriority_SelectedIndexChanged(object sender, EventArgs e)
@@ -443,12 +452,12 @@ namespace PriceMaster
 
         private void txtQuoteRef_TextChanged(object sender, EventArgs e)
         {
-            loadData();
+            
         }
 
         private void txtPrice_TextChanged(object sender, EventArgs e)
         {
-            loadData();
+            
         }
 
         private void txtQuotedBy_SelectedIndexChanged(object sender, EventArgs e)
@@ -511,7 +520,7 @@ namespace PriceMaster
                 "left join [order_database].dbo.quotation_feed_back_slimline q on a.quote_id = q.quote_id " +
                 "left join (SELECT a.quote_id,chase_description,chase_date,u.forename + ' ' + u.surname as chased_by from [order_database].dbo.quotation_chase_log_slimline a " +
                 "right join(select max(id) as id,quote_id from[order_database].dbo.quotation_chase_log_slimline " +
-                "group by quote_id) b on a.quote_id = b.quote_id AND a.id = b.id left join[user_info].dbo.[user] u on a.chased_by = u.id ) as last_chase on a.quote_id = last_chase.quote_id " + 
+                "group by quote_id) b on a.quote_id = b.quote_id AND a.id = b.id left join[user_info].dbo.[user] u on a.chased_by = u.id ) as last_chase on a.quote_id = last_chase.quote_id " +
                 "WHERE highest_issue = -1 ";
 
 
@@ -577,7 +586,7 @@ namespace PriceMaster
 
                     System.IO.Directory.CreateDirectory(@"C:\temp");
 
-                     temp = @"\\designsvr1\apps\Design and Supply CSharp\price_log_template.xlsx";
+                    temp = @"\\designsvr1\apps\Design and Supply CSharp\price_log_template.xlsx";
                     System.IO.File.Copy(temp, @"C:\temp\price_log.xlsx", true);
 
                     temp = @"C:\temp\price_log.xlsx";
@@ -619,7 +628,7 @@ namespace PriceMaster
                     //xlWorksheet.PrintOut(Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
 
                     xlWorkbook.Close(true); //close the excel sheet without saving
-                                             // xlApp.Quit();
+                                            // xlApp.Quit();
 
 
                     // Manual disposal because of COM
@@ -642,7 +651,7 @@ namespace PriceMaster
                     }
 
                 }
-                    conn.Close();
+                conn.Close();
             }
 
             Process.Start(temp);
@@ -761,7 +770,7 @@ namespace PriceMaster
                                 "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
                                 "left join [user_info].dbo.[user] u on a.chased_by = u.id " +
                                 "right join (select max(id) as id,quote_id FROM [order_database].dbo.quotation_chase_log_slimline group by quote_id) as z on z.id = a.id " +
-                                "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) and u.id = " + CONNECT.staffID;
+                                "where next_chase_date <= CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) and (chase_complete = 0 or chase_complete is null) and u.id = " + CONNECT.staffID;
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -780,7 +789,7 @@ namespace PriceMaster
                     }
                 }
                 conn.Close();
-            } 
+            }
         }
 
         private void btnAdmin_Click(object sender, EventArgs e)
@@ -821,6 +830,50 @@ namespace PriceMaster
         {
             frmManagementView frm = new frmManagementView(-1);
             frm.ShowDialog();
+        }
+
+        private void chkChasePriority_CheckedChanged(object sender, EventArgs e)
+        {
+            loadData();
+        }
+
+        private void txtQuoteID_Leave(object sender, EventArgs e)
+        {
+            loadData();
+        }
+
+        private void txtQuoteID_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                loadData();
+            }
+        }
+
+        private void txtQuoteRef_Leave(object sender, EventArgs e)
+        {
+            loadData();
+        }
+
+        private void txtQuoteRef_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                loadData();
+            }
+        }
+
+        private void txtPrice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                loadData();
+            }
+        }
+
+        private void txtPrice_Leave(object sender, EventArgs e)
+        {
+            loadData();
         }
     }
 }

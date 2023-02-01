@@ -57,6 +57,9 @@
             this.btnClear = new PriceMaster.buttonFormatting();
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             this.btnManagementView = new PriceMaster.buttonFormatting();
+            this.chkChasePriority = new System.Windows.Forms.CheckBox();
+            this.txtEnquiry = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -357,7 +360,7 @@
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(1601, 108);
+            this.btnClear.Location = new System.Drawing.Point(1733, 107);
             this.btnClear.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnClear.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnClear.Name = "btnClear";
@@ -404,11 +407,48 @@
             this.btnManagementView.UseVisualStyleBackColor = false;
             this.btnManagementView.Click += new System.EventHandler(this.btnManagementView_Click);
             // 
+            // chkChasePriority
+            // 
+            this.chkChasePriority.AutoSize = true;
+            this.chkChasePriority.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.chkChasePriority.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.chkChasePriority.Location = new System.Drawing.Point(327, 64);
+            this.chkChasePriority.Name = "chkChasePriority";
+            this.chkChasePriority.Size = new System.Drawing.Size(109, 20);
+            this.chkChasePriority.TabIndex = 99;
+            this.chkChasePriority.Text = "Priority Chase";
+            this.chkChasePriority.UseVisualStyleBackColor = false;
+            this.chkChasePriority.CheckedChanged += new System.EventHandler(this.chkChasePriority_CheckedChanged);
+            // 
+            // txtEnquiry
+            // 
+            this.txtEnquiry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.txtEnquiry.Location = new System.Drawing.Point(1599, 116);
+            this.txtEnquiry.Name = "txtEnquiry";
+            this.txtEnquiry.Size = new System.Drawing.Size(126, 21);
+            this.txtEnquiry.TabIndex = 100;
+            this.txtEnquiry.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEnquiry_KeyDown);
+            this.txtEnquiry.Leave += new System.EventHandler(this.txtEnquiry_Leave);
+            // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label9.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label9.Location = new System.Drawing.Point(1599, 89);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(126, 23);
+            this.label9.TabIndex = 101;
+            this.label9.Text = "Enquiry ID";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtEnquiry);
+            this.Controls.Add(this.chkChasePriority);
             this.Controls.Add(this.btnManagementView);
             this.Controls.Add(this.buttonFormatting1);
             this.Controls.Add(this.btnOutstanding);
@@ -478,5 +518,8 @@
         private buttonFormatting btnOutstanding;
         private buttonFormatting buttonFormatting1;
         private buttonFormatting btnManagementView;
+        private System.Windows.Forms.CheckBox chkChasePriority;
+        private System.Windows.Forms.TextBox txtEnquiry;
+        private System.Windows.Forms.Label label9;
     }
 }

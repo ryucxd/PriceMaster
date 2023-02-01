@@ -1,6 +1,6 @@
 ﻿namespace PriceMaster.SlimlineChasing
 {
-    partial class frmSlimlineInsertNote
+    partial class frmTraditionalInsertNote
     {
         /// <summary>
         /// Required designer variable.
@@ -88,7 +88,7 @@
             this.label1.Text = "Please enter text for the custom feedback field.";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // frmSlimlineInsertNote
+            // frmTraditionalInsertNote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -99,9 +99,9 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.txtCustom);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "frmSlimlineInsertNote";
+            this.Name = "frmTraditionalInsertNote";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Slimline Note";
+            this.Text = "Traditional Note";
             this.ResumeLayout(false);
 
         }

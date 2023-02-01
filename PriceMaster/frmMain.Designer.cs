@@ -60,6 +60,8 @@
             this.dteChaseStart = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.chkChasePriority = new System.Windows.Forms.CheckBox();
+            this.btnManagementView = new PriceMaster.buttonFormatting();
             this.btnOutstanding = new PriceMaster.buttonFormatting();
             this.btnAdmin = new PriceMaster.buttonFormatting();
             this.btnTraditional = new PriceMaster.buttonFormatting();
@@ -69,7 +71,6 @@
             this.btnSupplier = new PriceMaster.buttonFormatting();
             this.btnEmail = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
-            this.btnManagementView = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -122,6 +123,8 @@
             this.txtQuoteID.Size = new System.Drawing.Size(84, 21);
             this.txtQuoteID.TabIndex = 3;
             this.txtQuoteID.TextChanged += new System.EventHandler(this.txtQuoteID_TextChanged);
+            this.txtQuoteID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtQuoteID_KeyDown);
+            this.txtQuoteID.Leave += new System.EventHandler(this.txtQuoteID_Leave);
             // 
             // cmbSystem
             // 
@@ -219,6 +222,8 @@
             this.txtQuoteRef.Size = new System.Drawing.Size(100, 21);
             this.txtQuoteRef.TabIndex = 23;
             this.txtQuoteRef.TextChanged += new System.EventHandler(this.txtQuoteRef_TextChanged);
+            this.txtQuoteRef.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtQuoteRef_KeyDown);
+            this.txtQuoteRef.Leave += new System.EventHandler(this.txtQuoteRef_Leave);
             // 
             // label11
             // 
@@ -239,7 +244,9 @@
             this.txtPrice.Size = new System.Drawing.Size(112, 21);
             this.txtPrice.TabIndex = 25;
             this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
+            this.txtPrice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPrice_KeyDown);
             this.txtPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrice_KeyPress);
+            this.txtPrice.Leave += new System.EventHandler(this.txtPrice_Leave);
             // 
             // label12
             // 
@@ -413,6 +420,37 @@
             this.label15.Text = "to";
             this.label15.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // chkChasePriority
+            // 
+            this.chkChasePriority.AutoSize = true;
+            this.chkChasePriority.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.chkChasePriority.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.chkChasePriority.Location = new System.Drawing.Point(293, 63);
+            this.chkChasePriority.Name = "chkChasePriority";
+            this.chkChasePriority.Size = new System.Drawing.Size(109, 20);
+            this.chkChasePriority.TabIndex = 98;
+            this.chkChasePriority.Text = "Priority Chase";
+            this.chkChasePriority.UseVisualStyleBackColor = false;
+            this.chkChasePriority.CheckedChanged += new System.EventHandler(this.chkChasePriority_CheckedChanged);
+            // 
+            // btnManagementView
+            // 
+            this.btnManagementView.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnManagementView.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnManagementView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManagementView.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManagementView.ForeColor = System.Drawing.Color.White;
+            this.btnManagementView.Location = new System.Drawing.Point(594, 23);
+            this.btnManagementView.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnManagementView.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnManagementView.Name = "btnManagementView";
+            this.btnManagementView.Padding = new System.Windows.Forms.Padding(3);
+            this.btnManagementView.Size = new System.Drawing.Size(154, 30);
+            this.btnManagementView.TabIndex = 97;
+            this.btnManagementView.Text = "Management View";
+            this.btnManagementView.UseVisualStyleBackColor = false;
+            this.btnManagementView.Click += new System.EventHandler(this.btnManagementView_Click);
+            // 
             // btnOutstanding
             // 
             this.btnOutstanding.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -575,29 +613,12 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // btnManagementView
-            // 
-            this.btnManagementView.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnManagementView.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnManagementView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnManagementView.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManagementView.ForeColor = System.Drawing.Color.White;
-            this.btnManagementView.Location = new System.Drawing.Point(594, 23);
-            this.btnManagementView.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnManagementView.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnManagementView.Name = "btnManagementView";
-            this.btnManagementView.Padding = new System.Windows.Forms.Padding(3);
-            this.btnManagementView.Size = new System.Drawing.Size(154, 30);
-            this.btnManagementView.TabIndex = 97;
-            this.btnManagementView.Text = "Management View";
-            this.btnManagementView.UseVisualStyleBackColor = false;
-            this.btnManagementView.Click += new System.EventHandler(this.btnManagementView_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.chkChasePriority);
             this.Controls.Add(this.btnManagementView);
             this.Controls.Add(this.dteChaseEnd);
             this.Controls.Add(this.dteChaseStart);
@@ -695,6 +716,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label15;
         private buttonFormatting btnManagementView;
+        private System.Windows.Forms.CheckBox chkChasePriority;
     }
 }
 

@@ -14,6 +14,7 @@ using PriceMaster.SlimlineChasing;
 using System.IO;
 using System.Diagnostics;
 
+
 namespace PriceMaster
 {
     public partial class frmSlimlineQuotation : Form

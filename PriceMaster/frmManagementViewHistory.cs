@@ -8,17 +8,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Web;
 
 namespace PriceMaster
 {
     public partial class frmManagementViewHistory : Form
     {
-        public frmManagementViewHistory(int quote_id)
+        public int slimline { get; set; }
+        public frmManagementViewHistory(int quote_id,int _slimline)
         {
             InitializeComponent();
-            string sql = "select l.id,l.chase_date as [Chase Date],u.forename + ' ' + u.surname as [Full Name] from [order_database].dbo.quotation_chase_log_slimline  l " +
-                "left join[user_info].dbo.[user] u on l.chased_by = u.id " +
-                "where quote_id = " + quote_id.ToString() + " ORDER BY l.id desc";
+            slimline = _slimline;
+            string sql = "";
+            if (slimline == -1)
+            {
+                sql = "select l.id,l.chase_date as [Chase Date],u.forename + ' ' + u.surname as [Full Name],CASE WHEN chase_complete = 0 THEN CAST(0 AS BIT) WHEN chase_complete IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Complete]  from [order_database].dbo.quotation_chase_log_slimline  l " +
+                    "left join[user_info].dbo.[user] u on l.chased_by = u.id " +
+                    "where quote_id = " + quote_id.ToString() + " ORDER BY l.id desc";
+            }
+            else
+            {
+                sql = "select l.id,l.chase_date as [Chase Date],u.forename + ' ' + u.surname as [Full Name],CASE WHEN chase_complete = 0 THEN CAST(0 AS BIT) WHEN chase_complete IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Complete]  from [order_database].dbo.quotation_chase_log  l " +
+                    "left join[user_info].dbo.[user] u on l.chased_by = u.id " +
+                    "where quote_id = " + quote_id.ToString() + " ORDER BY l.id desc";
+            }
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -33,7 +46,7 @@ namespace PriceMaster
                         col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     dataGridView1.Columns[0].Visible = false;
-
+                    dataGridView1.Columns[3].ReadOnly = true;
                 }
                 conn.Close();
             }
@@ -68,7 +81,12 @@ namespace PriceMaster
             chkPhone.Enabled = false;
 
             //load data that was passed over
-            string sql = "select chase_date,chase_description,next_chase_date, dont_chase,phone,email from [order_database].dbo.quotation_chase_log_slimline where id = " + chase_id.ToString();
+            string sql = "";
+
+            if (slimline == -1)
+                sql = "select chase_date,chase_description,next_chase_date, dont_chase,phone,email from [order_database].dbo.quotation_chase_log_slimline where id = " + chase_id.ToString();
+            else
+                sql = "select chase_date,chase_description,next_chase_date, dont_chase,phone,email from [order_database].dbo.quotation_chase_log where id = " + chase_id.ToString();
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -85,11 +103,15 @@ namespace PriceMaster
                     {
                         dteNextDate.Visible = false;
                         lblNext.Visible = false;
-                        chkNoFollowup.Visible = false;
+                        chkNoFollowup.Visible = true;
+                        chkNoFollowup.Checked = true;
+                        chkNoFollowup.AutoCheck = false;
                     }
                     else
                     {
                         chkNoFollowup.Visible = false;
+                        dteNextDate.Visible = true;
+                        lblNext.Visible = true;
                     }
                     if (dt.Rows[0][4].ToString() == "-1")
                         chkPhone.Checked = true;

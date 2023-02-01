@@ -52,12 +52,23 @@
             this.btnRelatedEnquiries = new PriceMaster.buttonFormatting();
             this.chkNonResponsive = new System.Windows.Forms.CheckBox();
             this.chkPriority = new System.Windows.Forms.CheckBox();
+            this.chkHiddenFollowup = new System.Windows.Forms.CheckBox();
+            this.txtNextDate = new System.Windows.Forms.TextBox();
+            this.txtChaseDate = new System.Windows.Forms.TextBox();
+            this.chkPhone = new System.Windows.Forms.CheckBox();
+            this.chkEmail = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtDescription = new System.Windows.Forms.RichTextBox();
+            this.lblNext = new System.Windows.Forms.Label();
+            this.lblChase = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.btnInsert = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbRev
             // 
-            this.cmbRev.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cmbRev.FormattingEnabled = true;
             this.cmbRev.Location = new System.Drawing.Point(588, 50);
             this.cmbRev.Name = "cmbRev";
@@ -71,9 +82,6 @@
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -92,8 +100,6 @@
             // 
             // lblCustomer
             // 
-            this.lblCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
             this.lblCustomer.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblCustomer.Location = new System.Drawing.Point(12, 9);
@@ -105,7 +111,6 @@
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.label1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -118,7 +123,6 @@
             // 
             // lblTotalCost
             // 
-            this.lblTotalCost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalCost.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblTotalCost.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblTotalCost.Location = new System.Drawing.Point(855, 65);
@@ -141,13 +145,12 @@
             // 
             // btnQuote
             // 
-            this.btnQuote.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnQuote.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnQuote.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQuote.ForeColor = System.Drawing.Color.White;
-            this.btnQuote.Location = new System.Drawing.Point(1123, 515);
+            this.btnQuote.Location = new System.Drawing.Point(1123, 511);
             this.btnQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnQuote.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnQuote.Name = "btnQuote";
@@ -160,13 +163,12 @@
             // 
             // btnDrawings
             // 
-            this.btnDrawings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDrawings.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnDrawings.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnDrawings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDrawings.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDrawings.ForeColor = System.Drawing.Color.White;
-            this.btnDrawings.Location = new System.Drawing.Point(1123, 557);
+            this.btnDrawings.Location = new System.Drawing.Point(1123, 556);
             this.btnDrawings.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnDrawings.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnDrawings.Name = "btnDrawings";
@@ -179,10 +181,9 @@
             // 
             // txtCustom
             // 
-            this.txtCustom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCustom.Location = new System.Drawing.Point(424, 451);
             this.txtCustom.Name = "txtCustom";
+            this.txtCustom.ReadOnly = true;
             this.txtCustom.Size = new System.Drawing.Size(691, 139);
             this.txtCustom.TabIndex = 49;
             this.txtCustom.Text = "";
@@ -190,8 +191,6 @@
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.label2.Location = new System.Drawing.Point(424, 429);
@@ -203,7 +202,6 @@
             // 
             // cmbStatus
             // 
-            this.cmbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmbStatus.FormattingEnabled = true;
             this.cmbStatus.Location = new System.Drawing.Point(129, 451);
             this.cmbStatus.Name = "cmbStatus";
@@ -213,7 +211,6 @@
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label3.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -226,7 +223,6 @@
             // 
             // chkTooExpensive
             // 
-            this.chkTooExpensive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkTooExpensive.AutoSize = true;
             this.chkTooExpensive.Location = new System.Drawing.Point(74, 529);
             this.chkTooExpensive.Name = "chkTooExpensive";
@@ -239,7 +235,6 @@
             // 
             // chkUnableToMeetSpec
             // 
-            this.chkUnableToMeetSpec.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkUnableToMeetSpec.AutoSize = true;
             this.chkUnableToMeetSpec.Location = new System.Drawing.Point(205, 554);
             this.chkUnableToMeetSpec.Name = "chkUnableToMeetSpec";
@@ -252,7 +247,6 @@
             // 
             // chkQuoteTookTooLong
             // 
-            this.chkQuoteTookTooLong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkQuoteTookTooLong.AutoSize = true;
             this.chkQuoteTookTooLong.Location = new System.Drawing.Point(74, 554);
             this.chkQuoteTookTooLong.Name = "chkQuoteTookTooLong";
@@ -265,7 +259,6 @@
             // 
             // chkLeadTimeTooLong
             // 
-            this.chkLeadTimeTooLong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkLeadTimeTooLong.AutoSize = true;
             this.chkLeadTimeTooLong.Location = new System.Drawing.Point(205, 529);
             this.chkLeadTimeTooLong.Name = "chkLeadTimeTooLong";
@@ -278,7 +271,6 @@
             // 
             // lblLost
             // 
-            this.lblLost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblLost.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblLost.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblLost.Location = new System.Drawing.Point(74, 493);
@@ -291,7 +283,6 @@
             // 
             // btnChase
             // 
-            this.btnChase.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnChase.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnChase.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnChase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -310,18 +301,17 @@
             // 
             // btnChaseHistory
             // 
-            this.btnChaseHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnChaseHistory.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnChaseHistory.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnChaseHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChaseHistory.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChaseHistory.ForeColor = System.Drawing.Color.White;
-            this.btnChaseHistory.Location = new System.Drawing.Point(1123, 454);
+            this.btnChaseHistory.Location = new System.Drawing.Point(1342, 558);
             this.btnChaseHistory.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnChaseHistory.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnChaseHistory.Name = "btnChaseHistory";
             this.btnChaseHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.btnChaseHistory.Size = new System.Drawing.Size(89, 50);
+            this.btnChaseHistory.Size = new System.Drawing.Size(152, 30);
             this.btnChaseHistory.TabIndex = 59;
             this.btnChaseHistory.Text = "Chase History";
             this.btnChaseHistory.UseVisualStyleBackColor = false;
@@ -329,7 +319,6 @@
             // 
             // btnRelatedEnquiries
             // 
-            this.btnRelatedEnquiries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRelatedEnquiries.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnRelatedEnquiries.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnRelatedEnquiries.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -370,11 +359,154 @@
             this.chkPriority.UseVisualStyleBackColor = true;
             this.chkPriority.CheckedChanged += new System.EventHandler(this.chkPriority_CheckedChanged);
             // 
+            // chkHiddenFollowup
+            // 
+            this.chkHiddenFollowup.AutoSize = true;
+            this.chkHiddenFollowup.Location = new System.Drawing.Point(1383, 526);
+            this.chkHiddenFollowup.Name = "chkHiddenFollowup";
+            this.chkHiddenFollowup.Size = new System.Drawing.Size(123, 17);
+            this.chkHiddenFollowup.TabIndex = 102;
+            this.chkHiddenFollowup.Text = "No followup required";
+            this.chkHiddenFollowup.UseVisualStyleBackColor = true;
+            this.chkHiddenFollowup.Visible = false;
+            // 
+            // txtNextDate
+            // 
+            this.txtNextDate.Location = new System.Drawing.Point(1434, 524);
+            this.txtNextDate.Name = "txtNextDate";
+            this.txtNextDate.ReadOnly = true;
+            this.txtNextDate.Size = new System.Drawing.Size(72, 20);
+            this.txtNextDate.TabIndex = 106;
+            // 
+            // txtChaseDate
+            // 
+            this.txtChaseDate.Location = new System.Drawing.Point(1422, 52);
+            this.txtChaseDate.Name = "txtChaseDate";
+            this.txtChaseDate.ReadOnly = true;
+            this.txtChaseDate.Size = new System.Drawing.Size(128, 20);
+            this.txtChaseDate.TabIndex = 105;
+            // 
+            // chkPhone
+            // 
+            this.chkPhone.AutoSize = true;
+            this.chkPhone.Enabled = false;
+            this.chkPhone.Location = new System.Drawing.Point(1380, 78);
+            this.chkPhone.Name = "chkPhone";
+            this.chkPhone.Size = new System.Drawing.Size(57, 17);
+            this.chkPhone.TabIndex = 104;
+            this.chkPhone.Text = "Phone";
+            this.chkPhone.UseVisualStyleBackColor = true;
+            // 
+            // chkEmail
+            // 
+            this.chkEmail.AutoSize = true;
+            this.chkEmail.Enabled = false;
+            this.chkEmail.Location = new System.Drawing.Point(1443, 78);
+            this.chkEmail.Name = "chkEmail";
+            this.chkEmail.Size = new System.Drawing.Size(51, 17);
+            this.chkEmail.TabIndex = 103;
+            this.chkEmail.Text = "Email";
+            this.chkEmail.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label5.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label5.Location = new System.Drawing.Point(1238, 105);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(387, 17);
+            this.label5.TabIndex = 101;
+            this.label5.Text = "Quotation Chase Description";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // txtDescription
+            // 
+            this.txtDescription.Location = new System.Drawing.Point(1238, 130);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.ReadOnly = true;
+            this.txtDescription.Size = new System.Drawing.Size(387, 380);
+            this.txtDescription.TabIndex = 100;
+            this.txtDescription.Text = "";
+            // 
+            // lblNext
+            // 
+            this.lblNext.AutoSize = true;
+            this.lblNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.lblNext.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblNext.Location = new System.Drawing.Point(1309, 524);
+            this.lblNext.Name = "lblNext";
+            this.lblNext.Size = new System.Drawing.Size(127, 17);
+            this.lblNext.TabIndex = 99;
+            this.lblNext.Text = "NEXT Chase Date:";
+            this.lblNext.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // lblChase
+            // 
+            this.lblChase.AutoSize = true;
+            this.lblChase.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.lblChase.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblChase.Location = new System.Drawing.Point(1272, 52);
+            this.lblChase.Name = "lblChase";
+            this.lblChase.Size = new System.Drawing.Size(152, 17);
+            this.lblChase.TabIndex = 98;
+            this.lblChase.Text = "Quotation Chase Date:";
+            this.lblChase.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.label4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label4.Location = new System.Drawing.Point(1236, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(387, 29);
+            this.label4.TabIndex = 96;
+            this.label4.Text = "Most Recent Chase";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.InfoText;
+            this.richTextBox1.Location = new System.Drawing.Point(1220, 8);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(1, 583);
+            this.richTextBox1.TabIndex = 95;
+            this.richTextBox1.Text = "";
+            // 
+            // btnInsert
+            // 
+            this.btnInsert.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnInsert.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInsert.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInsert.ForeColor = System.Drawing.Color.White;
+            this.btnInsert.Location = new System.Drawing.Point(1123, 451);
+            this.btnInsert.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnInsert.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnInsert.Name = "btnInsert";
+            this.btnInsert.Padding = new System.Windows.Forms.Padding(3);
+            this.btnInsert.Size = new System.Drawing.Size(89, 48);
+            this.btnInsert.TabIndex = 107;
+            this.btnInsert.Text = "Insert Note";
+            this.btnInsert.UseVisualStyleBackColor = false;
+            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
+            // 
             // frmTraditionalQuotation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1224, 599);
+            this.ClientSize = new System.Drawing.Size(1640, 599);
+            this.Controls.Add(this.btnInsert);
+            this.Controls.Add(this.chkHiddenFollowup);
+            this.Controls.Add(this.txtNextDate);
+            this.Controls.Add(this.txtChaseDate);
+            this.Controls.Add(this.chkPhone);
+            this.Controls.Add(this.chkEmail);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtDescription);
+            this.Controls.Add(this.lblNext);
+            this.Controls.Add(this.lblChase);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.chkPriority);
             this.Controls.Add(this.chkNonResponsive);
             this.Controls.Add(this.btnRelatedEnquiries);
@@ -398,6 +530,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.cmbRev);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmTraditionalQuotation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -433,5 +566,17 @@
         private buttonFormatting btnRelatedEnquiries;
         private System.Windows.Forms.CheckBox chkNonResponsive;
         private System.Windows.Forms.CheckBox chkPriority;
+        private System.Windows.Forms.CheckBox chkHiddenFollowup;
+        private System.Windows.Forms.TextBox txtNextDate;
+        private System.Windows.Forms.TextBox txtChaseDate;
+        private System.Windows.Forms.CheckBox chkPhone;
+        private System.Windows.Forms.CheckBox chkEmail;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.RichTextBox txtDescription;
+        private System.Windows.Forms.Label lblNext;
+        private System.Windows.Forms.Label lblChase;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private buttonFormatting btnInsert;
     }
 }

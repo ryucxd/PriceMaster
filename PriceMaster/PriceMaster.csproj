@@ -25,7 +25,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>44</ApplicationRevision>
+    <ApplicationRevision>53</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -92,10 +92,28 @@
     <Compile Include="frmSlimlineChaseQuotation.Designer.cs">
       <DependentUpon>frmSlimlineChaseQuotation.cs</DependentUpon>
     </Compile>
-    <Compile Include="SlimlineChasing\frmManagementViewHistory.cs">
+    <Compile Include="TraditionalChasing\frmTraditionalInsertNote.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SlimlineChasing\frmManagementViewHistory.Designer.cs">
+    <Compile Include="TraditionalChasing\frmTraditionalInsertNote.Designer.cs">
+      <DependentUpon>frmTraditionalInsertNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalChaseHistoryNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalChaseHistoryNew.Designer.cs">
+      <DependentUpon>frmTraditionalChaseHistoryNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineChaseHistoryNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineChaseHistoryNew.Designer.cs">
+      <DependentUpon>frmSlimlineChaseHistoryNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManagementViewHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManagementViewHistory.Designer.cs">
       <DependentUpon>frmManagementViewHistory.cs</DependentUpon>
     </Compile>
     <Compile Include="SlimlineChasing\frmSlimlineInsertNote.cs">
@@ -277,7 +295,16 @@
     <EmbeddedResource Include="frmSlimlineChaseQuotation.resx">
       <DependentUpon>frmSlimlineChaseQuotation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SlimlineChasing\frmManagementViewHistory.resx">
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalInsertNote.resx">
+      <DependentUpon>frmTraditionalInsertNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalChaseHistoryNew.resx">
+      <DependentUpon>frmTraditionalChaseHistoryNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineChaseHistoryNew.resx">
+      <DependentUpon>frmSlimlineChaseHistoryNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManagementViewHistory.resx">
       <DependentUpon>frmManagementViewHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineInsertNote.resx">
@@ -315,12 +342,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCustomerList.resx">
       <DependentUpon>frmCustomerList.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditCustomer.resx">
       <DependentUpon>frmEditCustomer.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEnquiry.resx">
       <DependentUpon>frmEnquiry.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>

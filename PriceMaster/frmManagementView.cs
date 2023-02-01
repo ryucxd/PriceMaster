@@ -30,6 +30,7 @@ namespace PriceMaster
         public int customer_index { get; set; }
         public int sender_email_address_index { get; set; }
         public int priority_chase_index { get; set; }
+        public int date_filter { get; set; }
         public frmManagementView(int _slimline)
         {
             InitializeComponent();
@@ -71,12 +72,12 @@ namespace PriceMaster
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             dataGridView1.Columns[chase_description_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            
+
         }
 
         private void fillCombo()
         {
-           
+
             cmbCustomerSearch.Items.Clear();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -109,7 +110,7 @@ namespace PriceMaster
                     "FROM [order_database].dbo.quotation_chase_log_slimline a " +
                     "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
                     "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
-                    "left join[price_master].dbo.[sl_quotation] sl on sl.quote_id = a.quote_id " +
+                    "left join (SELECT * FROM [price_master].dbo.[sl_quotation] where highest_issue = -1 )  sl on sl.quote_id = a.quote_id " +
                     "left join[EnquiryLog].dbo.[Enquiry_Log] e on sl.enquiry_id = e.id " +
                     "left join[dsl_fitting].dbo.SALES_LEDGER s on sl.customer_acc_ref = s.ACCOUNT_REF " +
                     "right join (select max(id) as id,quote_id FROM [order_database].dbo.quotation_chase_log_slimline group by quote_id) as z on z.id = a.id " +
@@ -120,7 +121,7 @@ namespace PriceMaster
                 else
                     sql = sql + " <= ";
 
-                sql = sql + " CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
+                sql = sql + " CAST(GETDATE() as date) and b.[status] = 'Chasing'  "; // and (dont_chase = 0 or dont_chase is null)
 
                 if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                     sql = sql + " AND rtrim(s.NAME) = '" + cmbCustomerSearch.Text + "'  ";
@@ -128,7 +129,19 @@ namespace PriceMaster
                     sql = sql + " AND u.forename + ' ' + u.surname = '" + cmbStaffSearch.Text + "'  ";
 
 
-                sql = sql + " order by priority_chase desc,chase_date asc,rtrim(s.[NAME]), quote_id ";
+                if (chkCompleted.Checked == true)
+                    sql = sql + "and  (chase_complete = -1)  ";
+                else
+                    sql = sql + "and  (chase_complete = 0 or chase_complete is null)  ";
+
+                if (date_filter == -1)
+                    sql = sql + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "'";
+                
+
+
+
+
+                sql = sql + " order by priority_chase desc,chase_date desc,rtrim(s.[NAME]), quote_id ";
 
             }
             else
@@ -148,7 +161,7 @@ namespace PriceMaster
                 else
                     sql = sql + " <= ";
 
-                sql = sql + " CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
+                sql = sql + " CAST(GETDATE() as date) and b.[status] = 'Chasing'  and (chase_complete = 0 or chase_complete is null) ";//and (dont_chase = 0 or dont_chase is null)
 
                 if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                     sql = sql + " AND rtrim(q.customer) = '" + cmbCustomerSearch.Text + "'  ";
@@ -156,7 +169,7 @@ namespace PriceMaster
                     sql = sql + " AND u.forename + ' ' + u.surname = '" + cmbStaffSearch.Text + "'  ";
 
 
-                sql = sql + " order by priority_chase desc,chase_date asc,rtrim(q.[customer]), quote_id ";
+                sql = sql + " order by priority_chase desc,chase_date desc,rtrim(q.[customer]), quote_id ";
 
             }
 
@@ -225,16 +238,25 @@ namespace PriceMaster
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
-                string sql = "select  rtrim(b.[NAME]) from [price_master].dbo.sl_quotation a " +
-                    "left join[dsl_fitting].dbo.[SALES_LEDGER] b on a.customer_acc_ref = b.ACCOUNT_REF where quote_id = " + dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString();
+                string sql = "";
+                if (slimline == -1)//no idea what this does tbh
+                {
+                    sql = "select  rtrim(b.[NAME]) from [price_master].dbo.sl_quotation a " +
+                        "left join[dsl_fitting].dbo.[SALES_LEDGER] b on a.customer_acc_ref = b.ACCOUNT_REF where quote_id = " + dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString();
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                        customer = cmd.ExecuteScalar().ToString();
+                }
+                else
+                {
 
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
-                    customer = cmd.ExecuteScalar().ToString();
+                }
+
 
                 conn.Close();
             }
 
-            frmManagementViewHistory frm = new frmManagementViewHistory(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString()));
+            // dataGridView1.ClearSelection();
+            frmManagementViewHistory frm = new frmManagementViewHistory(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString()), slimline);
             frm.ShowDialog();
             //apply_filter();
             //}
@@ -268,9 +290,10 @@ namespace PriceMaster
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-           // chkFuture.Checked = false;
+            // chkFuture.Checked = false;
             cmbStaffSearch.Text = "";
             cmbCustomerSearch.Text = "";
+            date_filter = 0;
             load_data();
             fillCombo();
         }
@@ -284,7 +307,7 @@ namespace PriceMaster
             int customer_index = 0;
             customer_index = dataGridView1.Columns["Customer"].Index;
 
-            string FileName = @"C:\temp\temp" + DateTime.Now.ToString("yyyyMMddTHHmmss") + ".xls";
+            string FileName = @"C:\temp\Management_chase_list" + DateTime.Now.ToString("mmss") + ".xls";
 
 
             //adjust the chase description
@@ -473,6 +496,27 @@ namespace PriceMaster
             }
             catch
             { }
+        }
+
+        private void chkCompleted_CheckedChanged(object sender, EventArgs e)
+        {
+            cmbCustomerSearch.Text = "";
+            cmbStaffSearch.Text = "";
+
+            load_data();
+            fillCombo();
+        }
+
+        private void dteStart_CloseUp(object sender, EventArgs e)
+        {
+            date_filter = -1;
+            load_data();
+        }
+
+        private void dteEnd_CloseUp(object sender, EventArgs e)
+        {
+            date_filter = -1;
+            load_data();
         }
     }
 }
