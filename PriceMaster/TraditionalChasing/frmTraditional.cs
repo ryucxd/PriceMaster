@@ -30,6 +30,7 @@ namespace PriceMaster
         public int status_index { get; set; }
         public string sql_report { get; set; }
         public int prioritY_chase_index { get; set; }
+        public int enquiry_id_index { get; set; }
 
         public frmTraditional()
         {
@@ -43,10 +44,13 @@ namespace PriceMaster
 
         private void apply_filter()
         {
-            string sql = "select top 300 s.quote_id,date_output,s.revision_number,item_count,customer,customer_ref,emailed_to as quoted_by,deliveryAddress,total_quotation_value,coalesce(q.status,'') as status,priority_chase " +
+            string sql = "select top 300 s.quote_id,date_output,s.revision_number,item_count,customer,customer_ref,emailed_to as quoted_by,deliveryAddress,total_quotation_value,coalesce(q.status,'') as status,priority_chase," +
+                "case when e.id is null then 'No Related Enquiry' else cast(e.id as nvarchar) end as enquiry_id " +
                 "from [order_database].dbo.solidworks_quotation_log s " +
                 "inner join (select quote_id,max(revision_number) as revision_number from [order_database].dbo.solidworks_quotation_log group by quote_id) as b on s.quote_id = b.quote_id AND s.revision_number = b.revision_number " +
                 "left join [order_database].dbo.quotation_feed_back q on s.quote_id = q.quote_id " +
+                "left join (SELECT max(id) as id,related_quote FROM [EnquiryLog].dbo.[enquiry_log] group by related_quote) e " +
+                "on e.related_quote = cast(s.quote_id as nvarchar(max)) + '-' + cast(s.revision_number as nvarchar(max))  " +
                 "WHERE ";
 
             if (txtQuoteID.Text.Length > 0)
@@ -76,6 +80,9 @@ namespace PriceMaster
 
             if (cmbStatus.Text.Length > 0)
                 sql = sql + "  status = '" + cmbStatus.Text + "'   AND ";
+
+            if (txtEnquiry.Text.Length > 0)
+                sql = sql + "  e.id = '" + txtEnquiry.Text + "'   AND ";
 
             //priority_chase
             if (chkChasePriority.Checked == true)
@@ -178,6 +185,7 @@ namespace PriceMaster
             dataGridView1.Columns[delivery_address_index].HeaderText = "Delivery Address";
             dataGridView1.Columns[value_index].HeaderText = "Value";
             dataGridView1.Columns[status_index].HeaderText = "Status";
+            dataGridView1.Columns[enquiry_id_index].HeaderText = "Enquiry ID";
 
             foreach (DataGridViewColumn col in dataGridView1.Columns)
             {
@@ -217,6 +225,7 @@ namespace PriceMaster
             value_index = dataGridView1.Columns["total_quotation_value"].Index;
             status_index = dataGridView1.Columns["status"].Index;
             prioritY_chase_index = dataGridView1.Columns["priority_chase"].Index;
+            enquiry_id_index = dataGridView1.Columns["enquiry_id"].Index;
         }
 
         private void dteStart_ValueChanged(object sender, EventArgs e)
@@ -534,6 +543,11 @@ namespace PriceMaster
         {
             if (e.KeyCode == Keys.Enter)
                 apply_filter();
+        }
+
+        private void txtEnquiry_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

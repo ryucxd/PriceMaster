@@ -121,7 +121,7 @@ namespace PriceMaster
                 else
                     sql = sql + " <= ";
 
-                sql = sql + " CAST(GETDATE() as date) and b.[status] = 'Chasing'  "; // and (dont_chase = 0 or dont_chase is null)
+                sql = sql + " CAST(GETDATE() as date)   "; // and (dont_chase = 0 or dont_chase is null) and b.[status] = 'Chasing'
 
                 if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                     sql = sql + " AND rtrim(s.NAME) = '" + cmbCustomerSearch.Text + "'  ";
@@ -161,13 +161,20 @@ namespace PriceMaster
                 else
                     sql = sql + " <= ";
 
-                sql = sql + " CAST(GETDATE() as date) and b.[status] = 'Chasing'  and (chase_complete = 0 or chase_complete is null) ";//and (dont_chase = 0 or dont_chase is null)
+                sql = sql + " CAST(GETDATE() as date)    ";//and (dont_chase = 0 or dont_chase is null) and b.[status] = 'Chasing'
 
                 if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                     sql = sql + " AND rtrim(q.customer) = '" + cmbCustomerSearch.Text + "'  ";
                 if (string.IsNullOrEmpty(cmbStaffSearch.Text) == false)
                     sql = sql + " AND u.forename + ' ' + u.surname = '" + cmbStaffSearch.Text + "'  ";
 
+                if (chkCompleted.Checked == true)
+                    sql = sql + "and  (chase_complete = -1)  ";
+                else
+                    sql = sql + "and  (chase_complete = 0 or chase_complete is null)  ";
+
+                if (date_filter == -1)
+                    sql = sql + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "'";
 
                 sql = sql + " order by priority_chase desc,chase_date desc,rtrim(q.[customer]), quote_id ";
 

@@ -427,6 +427,7 @@
             this.txtEnquiry.Name = "txtEnquiry";
             this.txtEnquiry.Size = new System.Drawing.Size(126, 21);
             this.txtEnquiry.TabIndex = 100;
+            this.txtEnquiry.TextChanged += new System.EventHandler(this.txtEnquiry_TextChanged);
             this.txtEnquiry.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEnquiry_KeyDown);
             this.txtEnquiry.Leave += new System.EventHandler(this.txtEnquiry_Leave);
             // 

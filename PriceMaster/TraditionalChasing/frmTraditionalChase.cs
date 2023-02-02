@@ -144,14 +144,24 @@ namespace PriceMaster
             if (chkNoFollowup.Checked == true)
                 dont_chase = -1;
 
-            string sql = "INSERT INTO [order_database].dbo.quotation_chase_log (quote_id,chase_date,chase_description,next_chase_date,chased_by,dont_chase,email,phone) " +
-                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + ")";
+            //also mark all previous chases as complete - toms idea
+            string sql = "UPDATE [order_database].dbo.quotation_chase_log SET chase_complete = -1 where quote_id = " + quote_id.ToString();
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     cmd.ExecuteNonQuery();
+
+                // add the new chase
+                sql = "INSERT INTO [order_database].dbo.quotation_chase_log (quote_id,chase_date,chase_description,next_chase_date,chased_by,dont_chase,email,phone,chase_complete) " +
+                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + "," + dont_chase.ToString() + ")";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    cmd.ExecuteNonQuery();
+
                 conn.Close();
+
+
 
                 //also update the status to chasing >> incase they forgot 
                 frmTraditionalChaseUpdate frm = new frmTraditionalChaseUpdate(quote_id);
