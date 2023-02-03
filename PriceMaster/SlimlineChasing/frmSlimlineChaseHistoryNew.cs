@@ -137,7 +137,7 @@ namespace PriceMaster
                     }
                     else
                     {
-                        btnChaseComplete.Visible = true;
+                        //btnChaseComplete.Visible = true;
                         chkChaseComplete.Visible = false;
                     }
                 }

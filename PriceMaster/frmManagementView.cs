@@ -31,6 +31,7 @@ namespace PriceMaster
         public int sender_email_address_index { get; set; }
         public int priority_chase_index { get; set; }
         public int date_filter { get; set; }
+        public int chase_complete_index { get; set; }
         public frmManagementView(int _slimline)
         {
             InitializeComponent();
@@ -51,6 +52,7 @@ namespace PriceMaster
             dataGridView1.Columns[customer_index].HeaderText = "Customer";
             dataGridView1.Columns[sender_email_address_index].HeaderText = "Sender Email Address";
             dataGridView1.Columns[priority_chase_index].Visible = false;
+            dataGridView1.Columns[chase_complete_index].Visible = false;
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -62,6 +64,8 @@ namespace PriceMaster
                 }
                 if (row.Cells[priority_chase_index].Value.ToString() == "-1")
                     row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
+                if (row.Cells[chase_complete_index].Value.ToString() == "-1")
+                    row.DefaultCellStyle.BackColor = Color.DarkGray;
             }
 
             dataGridView1.Columns[chased_by_index].HeaderText = "Chased by";
@@ -107,19 +111,19 @@ namespace PriceMaster
             if (slimline == -1)
             {
                 sql = "SELECT a.id,a.quote_id,chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by,rtrim(s.[NAME]) as [customer] ,e.sender_email_address,priority_chase " +
-                    "FROM [order_database].dbo.quotation_chase_log_slimline a " +
+                    ",chase_complete FROM [order_database].dbo.quotation_chase_log_slimline a " +
                     "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
                     "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
                     "left join (SELECT * FROM [price_master].dbo.[sl_quotation] where highest_issue = -1 )  sl on sl.quote_id = a.quote_id " +
                     "left join[EnquiryLog].dbo.[Enquiry_Log] e on sl.enquiry_id = e.id " +
                     "left join[dsl_fitting].dbo.SALES_LEDGER s on sl.customer_acc_ref = s.ACCOUNT_REF " +
-                    "right join (select max(id) as id,quote_id FROM [order_database].dbo.quotation_chase_log_slimline group by quote_id) as z on z.id = a.id " +
-                    "where next_chase_date ";
+                    //"right join (select max(id) as id,quote_id FROM [order_database].dbo.quotation_chase_log_slimline group by quote_id) as z on z.id = a.id " +
+                    "where  ";
 
                 if (chkFuture.Checked == true)
-                    sql = sql + " > ";
+                    sql = sql + " next_chase_date > ";
                 else
-                    sql = sql + " <= ";
+                    sql = sql + " cast(chase_date as date) <= ";
 
                 sql = sql + " CAST(GETDATE() as date)   "; // and (dont_chase = 0 or dont_chase is null) and b.[status] = 'Chasing'
 
@@ -129,37 +133,43 @@ namespace PriceMaster
                     sql = sql + " AND u.forename + ' ' + u.surname = '" + cmbStaffSearch.Text + "'  ";
 
 
-                if (chkCompleted.Checked == true)
-                    sql = sql + "and  (chase_complete = -1)  ";
+                if (chkAllChases.Checked == true)
+                    sql = sql + "";//"and  (chase_complete = -1)  ";   -- no filter
                 else
                     sql = sql + "and  (chase_complete = 0 or chase_complete is null)  ";
 
                 if (date_filter == -1)
-                    sql = sql + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "'";
-                
+                {
+                    if (chkFuture.Checked == true)
+                        sql = sql + "and next_chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND next_chase_date  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "'";
+                    else
+                        sql = sql + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "'";
+
+                }
 
 
-
-
-                sql = sql + " order by priority_chase desc,chase_date desc,rtrim(s.[NAME]), quote_id ";
+                if (chkAllChases.Checked == true)
+                    sql = sql + " order by quote_id desc,chase_date desc";
+                else
+                    sql = sql + " order by priority_chase desc,chase_date desc,rtrim(s.[NAME]), quote_id ";
 
             }
             else
             {
                 sql = "SELECT a.id,a.quote_id,chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by," +
-                    "rtrim(q.customer) as customer,e.sender_email_address,priority_chase FROM[order_database].dbo.quotation_chase_log a " +
+                    "rtrim(q.customer) as customer,e.sender_email_address,priority_chase,chase_complete FROM[order_database].dbo.quotation_chase_log a " +
                     "left join[order_database].dbo.quotation_feed_back b on a.quote_id = b.quote_id left join[user_info].dbo.[user] u on a.chased_by = u.id " +
                     "left join(select quote_id, max(revision_number) as revision_number from[order_database].dbo.solidworks_quotation_log group by quote_id) sw on a.quote_id = sw.quote_id " +
                     "left join[order_database].dbo.solidworks_quotation_log q on sw.quote_id = q.quote_id and sw.revision_number = q.revision_number " +
                     "left join(select max(id) as enquiry_id, left(related_quote, CHARINDEX('-', related_quote) - 1) as related_quote from[EnquiryLog].dbo.[Enquiry_Log] " +
                     "WHERE related_quote<> 'No Related Quote' group by LEFT(related_quote, CHARINDEX('-', related_quote) - 1)) el on el.related_quote like '%' + cast(q.quote_id as nvarchar) + '%' " +
                     "left join[EnquiryLog].dbo.[Enquiry_Log] e on el.enquiry_id = e.id " +
-                    "where next_chase_date ";
+                    "where  ";
 
                 if (chkFuture.Checked == true)
-                    sql = sql + " > ";
+                    sql = sql + "next_chase_date > ";
                 else
-                    sql = sql + " <= ";
+                    sql = sql + "cast(chase_date as date) <= ";
 
                 sql = sql + " CAST(GETDATE() as date)    ";//and (dont_chase = 0 or dont_chase is null) and b.[status] = 'Chasing'
 
@@ -168,14 +178,22 @@ namespace PriceMaster
                 if (string.IsNullOrEmpty(cmbStaffSearch.Text) == false)
                     sql = sql + " AND u.forename + ' ' + u.surname = '" + cmbStaffSearch.Text + "'  ";
 
-                if (chkCompleted.Checked == true)
-                    sql = sql + "and  (chase_complete = -1)  ";
+                if (chkAllChases.Checked == true)
+                    sql = sql + "";//"and  (chase_complete = -1)  ";   -- no filter
                 else
                     sql = sql + "and  (chase_complete = 0 or chase_complete is null)  ";
 
                 if (date_filter == -1)
-                    sql = sql + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "'";
+                {
+                    if (chkFuture.Checked == true)
+                        sql = sql + "and next_chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND next_chase_date  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "'";
+                    else
+                        sql = sql + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "'";
 
+                }
+
+                //sql = sql + " order by quote_id desc,chase_date desc";
+                //vv old order by
                 sql = sql + " order by priority_chase desc,chase_date desc,rtrim(q.[customer]), quote_id ";
 
             }
@@ -228,6 +246,7 @@ namespace PriceMaster
             customer_index = dataGridView1.Columns["customer"].Index;
             sender_email_address_index = dataGridView1.Columns["sender_email_address"].Index;
             priority_chase_index = dataGridView1.Columns["priority_chase"].Index;
+            chase_complete_index = dataGridView1.Columns["chase_complete"].Index;
 
             if (dataGridView1.Columns.Contains("Complete") == true)
                 button_index = dataGridView1.Columns["Complete"].Index;
@@ -510,6 +529,12 @@ namespace PriceMaster
             cmbCustomerSearch.Text = "";
             cmbStaffSearch.Text = "";
 
+            if (chkAllChases.Checked == true)
+                btnShowAll.Text = "Show Only Latest";
+            else
+                btnShowAll.Text = "Show All";
+
+
             load_data();
             fillCombo();
         }
@@ -524,6 +549,21 @@ namespace PriceMaster
         {
             date_filter = -1;
             load_data();
+        }
+
+        private void btnShowAll_Click(object sender, EventArgs e)
+        {
+            if (chkAllChases.Checked == true)
+            {
+                chkAllChases.Checked = false;
+                btnShowAll.Size = new System.Drawing.Size(82, 30);
+
+            }
+            else
+            {
+                chkAllChases.Checked = true;
+                btnShowAll.Size = new System.Drawing.Size(145, 30);
+            }
         }
     }
 }
