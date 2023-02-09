@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Windows.Forms.ComponentModel.Com2Interop;
+using PriceMaster.TraditionalChasing;
 
 namespace PriceMaster
 {
@@ -170,6 +171,12 @@ namespace PriceMaster
                 conn.Close();
             }
             load_data();
+        }
+
+        private void btnEditChase_Click(object sender, EventArgs e)
+        {
+            frmTraditionalEditChase frm = new frmTraditionalEditChase(chase_id, dteNextDate.Value);
+            frm.ShowDialog();
         }
     }
 }

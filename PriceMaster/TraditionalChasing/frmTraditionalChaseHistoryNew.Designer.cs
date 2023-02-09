@@ -42,6 +42,7 @@
             this.chkNoFollowup = new System.Windows.Forms.CheckBox();
             this.btnChaseComplete = new PriceMaster.buttonFormatting();
             this.chkChaseComplete = new System.Windows.Forms.CheckBox();
+            this.btnEditChase = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -187,11 +188,31 @@
             this.chkChaseComplete.UseVisualStyleBackColor = true;
             this.chkChaseComplete.Visible = false;
             // 
-            // frmSlimlineChaseHistoryNew
+            // btnEditChase
+            // 
+            this.btnEditChase.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnEditChase.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnEditChase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditChase.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditChase.ForeColor = System.Drawing.Color.White;
+            this.btnEditChase.Location = new System.Drawing.Point(396, 326);
+            this.btnEditChase.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnEditChase.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnEditChase.Name = "btnEditChase";
+            this.btnEditChase.Padding = new System.Windows.Forms.Padding(3);
+            this.btnEditChase.Size = new System.Drawing.Size(145, 30);
+            this.btnEditChase.TabIndex = 82;
+            this.btnEditChase.Text = "Edit Next Chase";
+            this.btnEditChase.UseVisualStyleBackColor = false;
+            this.btnEditChase.Visible = false;
+            this.btnEditChase.Click += new System.EventHandler(this.btnEditChase_Click);
+            // 
+            // frmTraditionalChaseHistoryNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 393);
+            this.Controls.Add(this.btnEditChase);
             this.Controls.Add(this.chkChaseComplete);
             this.Controls.Add(this.btnChaseComplete);
             this.Controls.Add(this.chkPhone);
@@ -207,7 +228,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmSlimlineChaseHistoryNew";
+            this.Name = "frmTraditionalChaseHistoryNew";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chase History";
             this.Shown += new System.EventHandler(this.frmChaseHistory_Shown);
@@ -231,5 +252,6 @@
         private System.Windows.Forms.CheckBox chkNoFollowup;
         private buttonFormatting btnChaseComplete;
         private System.Windows.Forms.CheckBox chkChaseComplete;
+        private buttonFormatting btnEditChase;
     }
 }

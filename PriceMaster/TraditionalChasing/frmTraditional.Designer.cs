@@ -52,14 +52,20 @@
             this.txtQuotedBy = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
-            this.btnOutstanding = new PriceMaster.buttonFormatting();
-            this.btnReport = new PriceMaster.buttonFormatting();
-            this.btnClear = new PriceMaster.buttonFormatting();
-            this.buttonFormatting1 = new PriceMaster.buttonFormatting();
-            this.btnManagementView = new PriceMaster.buttonFormatting();
             this.chkChasePriority = new System.Windows.Forms.CheckBox();
             this.txtEnquiry = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.chkNonResponsive = new System.Windows.Forms.CheckBox();
+            this.chkLeadTimeTooLong = new System.Windows.Forms.CheckBox();
+            this.chkQuoteTookTooLong = new System.Windows.Forms.CheckBox();
+            this.chkUnableToMeetSpec = new System.Windows.Forms.CheckBox();
+            this.chkTooExpensive = new System.Windows.Forms.CheckBox();
+            this.lblLossReasons = new System.Windows.Forms.Label();
+            this.btnManagementView = new PriceMaster.buttonFormatting();
+            this.buttonFormatting1 = new PriceMaster.buttonFormatting();
+            this.btnOutstanding = new PriceMaster.buttonFormatting();
+            this.btnReport = new PriceMaster.buttonFormatting();
+            this.btnClear = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -317,6 +323,149 @@
             this.cmbStatus.TabIndex = 81;
             this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // chkChasePriority
+            // 
+            this.chkChasePriority.AutoSize = true;
+            this.chkChasePriority.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.chkChasePriority.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.chkChasePriority.Location = new System.Drawing.Point(327, 64);
+            this.chkChasePriority.Name = "chkChasePriority";
+            this.chkChasePriority.Size = new System.Drawing.Size(109, 20);
+            this.chkChasePriority.TabIndex = 99;
+            this.chkChasePriority.Text = "Priority Chase";
+            this.chkChasePriority.UseVisualStyleBackColor = false;
+            this.chkChasePriority.CheckedChanged += new System.EventHandler(this.chkChasePriority_CheckedChanged);
+            // 
+            // txtEnquiry
+            // 
+            this.txtEnquiry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.txtEnquiry.Location = new System.Drawing.Point(1599, 116);
+            this.txtEnquiry.Name = "txtEnquiry";
+            this.txtEnquiry.Size = new System.Drawing.Size(126, 21);
+            this.txtEnquiry.TabIndex = 100;
+            this.txtEnquiry.TextChanged += new System.EventHandler(this.txtEnquiry_TextChanged);
+            this.txtEnquiry.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEnquiry_KeyDown);
+            this.txtEnquiry.Leave += new System.EventHandler(this.txtEnquiry_Leave);
+            // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label9.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label9.Location = new System.Drawing.Point(1599, 89);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(126, 23);
+            this.label9.TabIndex = 101;
+            this.label9.Text = "Enquiry ID";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // chkNonResponsive
+            // 
+            this.chkNonResponsive.AutoSize = true;
+            this.chkNonResponsive.Location = new System.Drawing.Point(1427, 80);
+            this.chkNonResponsive.Name = "chkNonResponsive";
+            this.chkNonResponsive.Size = new System.Drawing.Size(152, 17);
+            this.chkNonResponsive.TabIndex = 106;
+            this.chkNonResponsive.Text = "Non Responsive Customer";
+            this.chkNonResponsive.UseVisualStyleBackColor = true;
+            this.chkNonResponsive.Visible = false;
+            this.chkNonResponsive.CheckedChanged += new System.EventHandler(this.chkNonResponsive_CheckedChanged);
+            // 
+            // chkLeadTimeTooLong
+            // 
+            this.chkLeadTimeTooLong.AutoSize = true;
+            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(1558, 30);
+            this.chkLeadTimeTooLong.Name = "chkLeadTimeTooLong";
+            this.chkLeadTimeTooLong.Size = new System.Drawing.Size(116, 17);
+            this.chkLeadTimeTooLong.TabIndex = 105;
+            this.chkLeadTimeTooLong.Text = "Lead time too long.";
+            this.chkLeadTimeTooLong.UseVisualStyleBackColor = true;
+            this.chkLeadTimeTooLong.Visible = false;
+            this.chkLeadTimeTooLong.CheckedChanged += new System.EventHandler(this.chkLeadTimeTooLong_CheckedChanged);
+            // 
+            // chkQuoteTookTooLong
+            // 
+            this.chkQuoteTookTooLong.AutoSize = true;
+            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(1427, 55);
+            this.chkQuoteTookTooLong.Name = "chkQuoteTookTooLong";
+            this.chkQuoteTookTooLong.Size = new System.Drawing.Size(123, 17);
+            this.chkQuoteTookTooLong.TabIndex = 104;
+            this.chkQuoteTookTooLong.Text = "Quote took too long.";
+            this.chkQuoteTookTooLong.UseVisualStyleBackColor = true;
+            this.chkQuoteTookTooLong.Visible = false;
+            this.chkQuoteTookTooLong.CheckedChanged += new System.EventHandler(this.chkQuoteTookTooLong_CheckedChanged);
+            // 
+            // chkUnableToMeetSpec
+            // 
+            this.chkUnableToMeetSpec.AutoSize = true;
+            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(1558, 55);
+            this.chkUnableToMeetSpec.Name = "chkUnableToMeetSpec";
+            this.chkUnableToMeetSpec.Size = new System.Drawing.Size(127, 17);
+            this.chkUnableToMeetSpec.TabIndex = 103;
+            this.chkUnableToMeetSpec.Text = "Unable to meet spec.";
+            this.chkUnableToMeetSpec.UseVisualStyleBackColor = true;
+            this.chkUnableToMeetSpec.Visible = false;
+            this.chkUnableToMeetSpec.CheckedChanged += new System.EventHandler(this.chkUnableToMeetSpec_CheckedChanged);
+            // 
+            // chkTooExpensive
+            // 
+            this.chkTooExpensive.AutoSize = true;
+            this.chkTooExpensive.Location = new System.Drawing.Point(1427, 30);
+            this.chkTooExpensive.Name = "chkTooExpensive";
+            this.chkTooExpensive.Size = new System.Drawing.Size(99, 17);
+            this.chkTooExpensive.TabIndex = 102;
+            this.chkTooExpensive.Text = "Too expensive.";
+            this.chkTooExpensive.UseVisualStyleBackColor = true;
+            this.chkTooExpensive.Visible = false;
+            this.chkTooExpensive.CheckedChanged += new System.EventHandler(this.chkTooExpensive_CheckedChanged);
+            // 
+            // lblLossReasons
+            // 
+            this.lblLossReasons.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.lblLossReasons.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblLossReasons.Location = new System.Drawing.Point(1424, 4);
+            this.lblLossReasons.Name = "lblLossReasons";
+            this.lblLossReasons.Size = new System.Drawing.Size(250, 23);
+            this.lblLossReasons.TabIndex = 107;
+            this.lblLossReasons.Text = "Loss Reasons";
+            this.lblLossReasons.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblLossReasons.Visible = false;
+            // 
+            // btnManagementView
+            // 
+            this.btnManagementView.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnManagementView.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnManagementView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManagementView.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManagementView.ForeColor = System.Drawing.Color.White;
+            this.btnManagementView.Location = new System.Drawing.Point(610, 12);
+            this.btnManagementView.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnManagementView.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnManagementView.Name = "btnManagementView";
+            this.btnManagementView.Padding = new System.Windows.Forms.Padding(3);
+            this.btnManagementView.Size = new System.Drawing.Size(154, 30);
+            this.btnManagementView.TabIndex = 98;
+            this.btnManagementView.Text = "Management View";
+            this.btnManagementView.UseVisualStyleBackColor = false;
+            this.btnManagementView.Click += new System.EventHandler(this.btnManagementView_Click);
+            // 
+            // buttonFormatting1
+            // 
+            this.buttonFormatting1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.buttonFormatting1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
+            this.buttonFormatting1.Location = new System.Drawing.Point(1191, 9);
+            this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
+            this.buttonFormatting1.Name = "buttonFormatting1";
+            this.buttonFormatting1.Padding = new System.Windows.Forms.Padding(3);
+            this.buttonFormatting1.Size = new System.Drawing.Size(213, 30);
+            this.buttonFormatting1.TabIndex = 84;
+            this.buttonFormatting1.Text = "All Outstanding Chases";
+            this.buttonFormatting1.UseVisualStyleBackColor = false;
+            this.buttonFormatting1.Click += new System.EventHandler(this.buttonFormatting1_Click);
+            // 
             // btnOutstanding
             // 
             this.btnOutstanding.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -371,82 +520,17 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // buttonFormatting1
-            // 
-            this.buttonFormatting1.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.buttonFormatting1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
-            this.buttonFormatting1.Location = new System.Drawing.Point(1191, 9);
-            this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
-            this.buttonFormatting1.Name = "buttonFormatting1";
-            this.buttonFormatting1.Padding = new System.Windows.Forms.Padding(3);
-            this.buttonFormatting1.Size = new System.Drawing.Size(213, 30);
-            this.buttonFormatting1.TabIndex = 84;
-            this.buttonFormatting1.Text = "All Outstanding Chases";
-            this.buttonFormatting1.UseVisualStyleBackColor = false;
-            this.buttonFormatting1.Click += new System.EventHandler(this.buttonFormatting1_Click);
-            // 
-            // btnManagementView
-            // 
-            this.btnManagementView.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnManagementView.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnManagementView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnManagementView.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManagementView.ForeColor = System.Drawing.Color.White;
-            this.btnManagementView.Location = new System.Drawing.Point(610, 12);
-            this.btnManagementView.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnManagementView.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnManagementView.Name = "btnManagementView";
-            this.btnManagementView.Padding = new System.Windows.Forms.Padding(3);
-            this.btnManagementView.Size = new System.Drawing.Size(154, 30);
-            this.btnManagementView.TabIndex = 98;
-            this.btnManagementView.Text = "Management View";
-            this.btnManagementView.UseVisualStyleBackColor = false;
-            this.btnManagementView.Click += new System.EventHandler(this.btnManagementView_Click);
-            // 
-            // chkChasePriority
-            // 
-            this.chkChasePriority.AutoSize = true;
-            this.chkChasePriority.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.chkChasePriority.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.chkChasePriority.Location = new System.Drawing.Point(327, 64);
-            this.chkChasePriority.Name = "chkChasePriority";
-            this.chkChasePriority.Size = new System.Drawing.Size(109, 20);
-            this.chkChasePriority.TabIndex = 99;
-            this.chkChasePriority.Text = "Priority Chase";
-            this.chkChasePriority.UseVisualStyleBackColor = false;
-            this.chkChasePriority.CheckedChanged += new System.EventHandler(this.chkChasePriority_CheckedChanged);
-            // 
-            // txtEnquiry
-            // 
-            this.txtEnquiry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.txtEnquiry.Location = new System.Drawing.Point(1599, 116);
-            this.txtEnquiry.Name = "txtEnquiry";
-            this.txtEnquiry.Size = new System.Drawing.Size(126, 21);
-            this.txtEnquiry.TabIndex = 100;
-            this.txtEnquiry.TextChanged += new System.EventHandler(this.txtEnquiry_TextChanged);
-            this.txtEnquiry.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEnquiry_KeyDown);
-            this.txtEnquiry.Leave += new System.EventHandler(this.txtEnquiry_Leave);
-            // 
-            // label9
-            // 
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label9.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label9.Location = new System.Drawing.Point(1599, 89);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(126, 23);
-            this.label9.TabIndex = 101;
-            this.label9.Text = "Enquiry ID";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.lblLossReasons);
+            this.Controls.Add(this.chkNonResponsive);
+            this.Controls.Add(this.chkLeadTimeTooLong);
+            this.Controls.Add(this.chkQuoteTookTooLong);
+            this.Controls.Add(this.chkUnableToMeetSpec);
+            this.Controls.Add(this.chkTooExpensive);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtEnquiry);
             this.Controls.Add(this.chkChasePriority);
@@ -522,5 +606,11 @@
         private System.Windows.Forms.CheckBox chkChasePriority;
         private System.Windows.Forms.TextBox txtEnquiry;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox chkNonResponsive;
+        private System.Windows.Forms.CheckBox chkLeadTimeTooLong;
+        private System.Windows.Forms.CheckBox chkQuoteTookTooLong;
+        private System.Windows.Forms.CheckBox chkUnableToMeetSpec;
+        private System.Windows.Forms.CheckBox chkTooExpensive;
+        private System.Windows.Forms.Label lblLossReasons;
     }
 }

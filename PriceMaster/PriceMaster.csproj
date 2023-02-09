@@ -25,7 +25,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>63</ApplicationRevision>
+    <ApplicationRevision>70</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -91,6 +91,18 @@
     </Compile>
     <Compile Include="frmSlimlineChaseQuotation.Designer.cs">
       <DependentUpon>frmSlimlineChaseQuotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalEditChase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalEditChase.Designer.cs">
+      <DependentUpon>frmTraditionalEditChase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineEditChase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineEditChase.Designer.cs">
+      <DependentUpon>frmSlimlineEditChase.cs</DependentUpon>
     </Compile>
     <Compile Include="TraditionalChasing\frmTraditionalInsertNote.cs">
       <SubType>Form</SubType>
@@ -294,6 +306,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmSlimlineChaseQuotation.resx">
       <DependentUpon>frmSlimlineChaseQuotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalEditChase.resx">
+      <DependentUpon>frmTraditionalEditChase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineEditChase.resx">
+      <DependentUpon>frmSlimlineEditChase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TraditionalChasing\frmTraditionalInsertNote.resx">
       <DependentUpon>frmTraditionalInsertNote.cs</DependentUpon>

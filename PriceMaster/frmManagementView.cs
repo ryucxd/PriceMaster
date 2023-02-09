@@ -32,6 +32,7 @@ namespace PriceMaster
         public int priority_chase_index { get; set; }
         public int date_filter { get; set; }
         public int chase_complete_index { get; set; }
+        public int chase_status_index { get; set; }
         public frmManagementView(int _slimline)
         {
             InitializeComponent();
@@ -51,6 +52,7 @@ namespace PriceMaster
             dataGridView1.Columns[next_chase_date_index].HeaderText = "Next Chase Date";
             dataGridView1.Columns[customer_index].HeaderText = "Customer";
             dataGridView1.Columns[sender_email_address_index].HeaderText = "Sender Email Address";
+            dataGridView1.Columns[chase_status_index].HeaderText = "Chase Status";
             dataGridView1.Columns[priority_chase_index].Visible = false;
             dataGridView1.Columns[chase_complete_index].Visible = false;
 
@@ -64,8 +66,8 @@ namespace PriceMaster
                 }
                 if (row.Cells[priority_chase_index].Value.ToString() == "-1")
                     row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
-                if (row.Cells[chase_complete_index].Value.ToString() == "-1")
-                    row.DefaultCellStyle.BackColor = Color.DarkGray;
+                //if (row.Cells[chase_complete_index].Value.ToString() == "-1")
+                //    row.DefaultCellStyle.BackColor = Color.DarkGray;
             }
 
             dataGridView1.Columns[chased_by_index].HeaderText = "Chased by";
@@ -110,7 +112,7 @@ namespace PriceMaster
 
             if (slimline == -1)
             {
-                sql = "SELECT a.id,a.quote_id,chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by,rtrim(s.[NAME]) as [customer] ,e.sender_email_address,priority_chase " +
+                sql = "SELECT a.id,a.quote_id,b.[status],chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by,rtrim(s.[NAME]) as [customer] ,e.sender_email_address,priority_chase " +
                     ",chase_complete FROM [order_database].dbo.quotation_chase_log_slimline a " +
                     "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
                     "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
@@ -126,6 +128,10 @@ namespace PriceMaster
                     sql = sql + " cast(chase_date as date) <= ";
 
                 sql = sql + " CAST(GETDATE() as date)   "; // and (dont_chase = 0 or dont_chase is null) and b.[status] = 'Chasing'
+
+
+                if (string.IsNullOrEmpty(cmbChaseStatus.Text) == false)
+                    sql = sql + " and b.[status] = '" + cmbChaseStatus.Text + "'    ";
 
                 if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                     sql = sql + " AND rtrim(s.NAME) = '" + cmbCustomerSearch.Text + "'  ";
@@ -148,15 +154,15 @@ namespace PriceMaster
                 }
 
 
-                if (chkAllChases.Checked == true)
-                    sql = sql + " order by quote_id desc,chase_date desc";
-                else
-                    sql = sql + " order by priority_chase desc,chase_date desc,rtrim(s.[NAME]), quote_id ";
+                //if (chkAllChases.Checked == true)
+                //    sql = sql + " order by quote_id desc,chase_date desc";
+                //else
+                    sql = sql + " order by chase_date desc,rtrim(s.[NAME]), quote_id ";
 
             }
             else
             {
-                sql = "SELECT a.id,a.quote_id,chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by," +
+                sql = "SELECT a.id,a.quote_id,b.[status],chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by," +
                     "rtrim(q.customer) as customer,e.sender_email_address,priority_chase,chase_complete FROM[order_database].dbo.quotation_chase_log a " +
                     "left join[order_database].dbo.quotation_feed_back b on a.quote_id = b.quote_id left join[user_info].dbo.[user] u on a.chased_by = u.id " +
                     "left join(select quote_id, max(revision_number) as revision_number from[order_database].dbo.solidworks_quotation_log group by quote_id) sw on a.quote_id = sw.quote_id " +
@@ -172,6 +178,11 @@ namespace PriceMaster
                     sql = sql + "cast(chase_date as date) <= ";
 
                 sql = sql + " CAST(GETDATE() as date)    ";//and (dont_chase = 0 or dont_chase is null) and b.[status] = 'Chasing'
+
+                if (string.IsNullOrEmpty(cmbChaseStatus.Text) == false)
+                    sql = sql + " and b.[status] = '" + cmbChaseStatus.Text + "'    ";
+
+
 
                 if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                     sql = sql + " AND rtrim(q.customer) = '" + cmbCustomerSearch.Text + "'  ";
@@ -192,9 +203,11 @@ namespace PriceMaster
 
                 }
 
-                //sql = sql + " order by quote_id desc,chase_date desc";
-                //vv old order by
-                sql = sql + " order by priority_chase desc,chase_date desc,rtrim(q.[customer]), quote_id ";
+
+                //if (chkAllChases.Checked == true)
+                //    sql = sql + " order by quote_id desc,chase_date desc";
+                //else
+                    sql = sql + " order by chase_date desc, quote_id ";
 
             }
 
@@ -247,6 +260,7 @@ namespace PriceMaster
             sender_email_address_index = dataGridView1.Columns["sender_email_address"].Index;
             priority_chase_index = dataGridView1.Columns["priority_chase"].Index;
             chase_complete_index = dataGridView1.Columns["chase_complete"].Index;
+            chase_status_index = dataGridView1.Columns["status"].Index;
 
             if (dataGridView1.Columns.Contains("Complete") == true)
                 button_index = dataGridView1.Columns["Complete"].Index;
@@ -306,6 +320,7 @@ namespace PriceMaster
 
         private void frmSlimlineOutstandingChase_Shown(object sender, EventArgs e)
         {
+            btnShowAll.PerformClick();
             format();
         }
 
@@ -319,6 +334,7 @@ namespace PriceMaster
             // chkFuture.Checked = false;
             cmbStaffSearch.Text = "";
             cmbCustomerSearch.Text = "";
+            cmbChaseStatus.Text = "";
             date_filter = 0;
             load_data();
             fillCombo();
@@ -340,7 +356,7 @@ namespace PriceMaster
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 //string temp =  row.Cells[3].Value.ToString();
-                row.Cells[3].Value = row.Cells[3].Value.ToString().Replace("\n", " ").Replace("\r", " - ");
+                row.Cells[chase_description_index].Value = row.Cells[chase_description_index].Value.ToString().Replace("\n", " ").Replace("\r", " - ");
             }
 
 
@@ -391,17 +407,17 @@ namespace PriceMaster
             xlWorkSheet.Columns[3].WrapText = true;
 
             //Make all top/left align
-            xlWorkSheet.get_Range("A1", "G1000").Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignGeneral;
-            xlWorkSheet.get_Range("A1", "G1000").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+            xlWorkSheet.get_Range("A1", "H1000").Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignGeneral;
+            xlWorkSheet.get_Range("A1", "H1000").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
             //change the entire top row to center align (AND BOTH DATE COLUMNS)
-            xlWorkSheet.get_Range("A1", "G1").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            xlWorkSheet.get_Range("A1", "H1").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             //xlWorkSheet.Columns[2].Style.HorizontalAlignment = HorizontalAlignment.Center;
             //xlWorkSheet.Columns[4].Style.HorizontalAlignment = HorizontalAlignment.Center;
 
 
-            xlWorkSheet.Range["A1:G1"].Interior.Color = System.Drawing.Color.LightSkyBlue;
-            xlWorkSheet.Range["A1:G1"].AutoFilter(1);
-            xlWorkSheet.Range["A1:G1"].Cells.Font.Size = 12;
+            xlWorkSheet.Range["A1:H1"].Interior.Color = System.Drawing.Color.LightSkyBlue;
+            xlWorkSheet.Range["A1:H1"].AutoFilter(1);
+            xlWorkSheet.Range["A1:H1"].Cells.Font.Size = 12;
 
             ws.Columns.AutoFit();
             ws.Rows.AutoFit();
@@ -564,6 +580,11 @@ namespace PriceMaster
                 chkAllChases.Checked = true;
                 btnShowAll.Size = new System.Drawing.Size(145, 30);
             }
+        }
+
+        private void cmbChaseStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            load_data();
         }
     }
 }

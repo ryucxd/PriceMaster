@@ -32,12 +32,25 @@ namespace PriceMaster.SlimlineChasing
                 return;
             }
 
-            string sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET custom_feedback = custom_feedback + '" + Environment.NewLine + txtCustom.Text + " - "
-                + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + " - " + CONNECT.staffFullName + "' WHERE quote_id = " + quote_id.ToString();
 
+
+
+            string sql = "SELECT custom_feedback FROM [order_database].dbo.quotation_feed_back_slimline WHERE quote_id = " + quote_id.ToString();
+            string note = "";
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    note = (string)cmd.ExecuteScalar().ToString();
+                }
+
+                if (note.Length > 0)
+                    note = note + Environment.NewLine;
+
+                sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET custom_feedback = '" + note + txtCustom.Text + " - "
+                + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + " - " + CONNECT.staffFullName + "' WHERE quote_id = " + quote_id.ToString();
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     cmd.ExecuteNonQuery();
 

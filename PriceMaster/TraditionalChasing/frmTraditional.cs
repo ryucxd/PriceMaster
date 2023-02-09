@@ -31,6 +31,7 @@ namespace PriceMaster
         public string sql_report { get; set; }
         public int prioritY_chase_index { get; set; }
         public int enquiry_id_index { get; set; }
+        public int reason_for_loss_index { get; set; }
 
         public frmTraditional()
         {
@@ -45,6 +46,11 @@ namespace PriceMaster
         private void apply_filter()
         {
             string sql = "select top 300 s.quote_id,date_output,s.revision_number,item_count,customer,customer_ref,emailed_to as quoted_by,deliveryAddress,total_quotation_value,coalesce(q.status,'') as status,priority_chase," +
+                "STUFF((CASE WHEN q.too_expensive = -1 then ', Too Expensive' ELSE '' end + " +
+                "CASE WHEN q.lead_time_too_long = -1 then ', Lead time too long' ELSE '' end + " +
+                "CASE WHEN q.quote_took_too_long = -1 then ', Quote took too long' ELSE '' end + " +
+                "CASE WHEN q.unable_to_meet_spec = -1 then ', Unable to meet spec' ELSE '' end + " +
+                "CASE WHEN q.non_responsive_customer = -1 then ', Non Responsive Customer' ELSE '' end) ,1,2,'') as reason_for_loss, " +
                 "case when e.id is null then 'No Related Enquiry' else cast(e.id as nvarchar) end as enquiry_id " +
                 "from [order_database].dbo.solidworks_quotation_log s " +
                 "inner join (select quote_id,max(revision_number) as revision_number from [order_database].dbo.solidworks_quotation_log group by quote_id) as b on s.quote_id = b.quote_id AND s.revision_number = b.revision_number " +
@@ -87,6 +93,17 @@ namespace PriceMaster
             //priority_chase
             if (chkChasePriority.Checked == true)
                 sql = sql + "  priority_chase = -1    AND ";
+
+            if (chkTooExpensive.Checked == true)
+                sql = sql + "  q.too_expensive = -1    AND ";
+            if (chkLeadTimeTooLong.Checked == true)
+                sql = sql + "  q.lead_time_too_long = -1    AND ";
+            if (chkQuoteTookTooLong.Checked == true)
+                sql = sql + "  q.quote_took_too_long = -1    AND ";
+            if (chkUnableToMeetSpec.Checked == true)
+                sql = sql + "  q.unable_to_meet_spec = -1    AND ";
+            if (chkNonResponsive.Checked == true)
+                sql = sql + "  q.non_responsive_customer = -1    AND ";
 
             sql = sql.Substring(0, sql.Length - 6);
 
@@ -185,6 +202,7 @@ namespace PriceMaster
             dataGridView1.Columns[delivery_address_index].HeaderText = "Delivery Address";
             dataGridView1.Columns[value_index].HeaderText = "Value";
             dataGridView1.Columns[status_index].HeaderText = "Status";
+            dataGridView1.Columns[reason_for_loss_index].HeaderText = "Reason for loss";
             dataGridView1.Columns[enquiry_id_index].HeaderText = "Enquiry ID";
 
             foreach (DataGridViewColumn col in dataGridView1.Columns)
@@ -226,6 +244,7 @@ namespace PriceMaster
             status_index = dataGridView1.Columns["status"].Index;
             prioritY_chase_index = dataGridView1.Columns["priority_chase"].Index;
             enquiry_id_index = dataGridView1.Columns["enquiry_id"].Index;
+            reason_for_loss_index = dataGridView1.Columns["reason_for_loss"].Index;
         }
 
         private void dteStart_ValueChanged(object sender, EventArgs e)
@@ -374,6 +393,32 @@ namespace PriceMaster
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbStatus.Text == "Lost")
+            {
+                lblLossReasons.Visible = true;
+                chkTooExpensive.Visible = true;
+                chkLeadTimeTooLong.Visible = true;
+                chkQuoteTookTooLong.Visible = true;
+                chkUnableToMeetSpec.Visible = true;
+                chkNonResponsive.Visible = true;
+            }
+            else
+            {
+                lblLossReasons.Visible = false;
+                chkTooExpensive.Visible = false;
+                chkLeadTimeTooLong.Visible = false;
+                chkQuoteTookTooLong.Visible = false;
+                chkUnableToMeetSpec.Visible = false;
+                chkNonResponsive.Visible = false;
+
+                
+                chkTooExpensive.Checked = false;
+                chkLeadTimeTooLong.Checked = false;
+                chkQuoteTookTooLong.Checked = false;
+                chkUnableToMeetSpec.Checked = false;
+                chkNonResponsive.Checked = false;
+
+            }
             apply_filter();
         }
 
@@ -548,6 +593,31 @@ namespace PriceMaster
         private void txtEnquiry_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void chkTooExpensive_CheckedChanged(object sender, EventArgs e)
+        {
+            apply_filter();
+        }
+
+        private void chkLeadTimeTooLong_CheckedChanged(object sender, EventArgs e)
+        {
+            apply_filter();
+        }
+
+        private void chkQuoteTookTooLong_CheckedChanged(object sender, EventArgs e)
+        {
+            apply_filter();
+        }
+
+        private void chkUnableToMeetSpec_CheckedChanged(object sender, EventArgs e)
+        {
+            apply_filter();
+        }
+
+        private void chkNonResponsive_CheckedChanged(object sender, EventArgs e)
+        {
+            apply_filter();
         }
     }
 }

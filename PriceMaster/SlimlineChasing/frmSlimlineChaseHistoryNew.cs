@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Windows.Forms.ComponentModel.Com2Interop;
+using PriceMaster.SlimlineChasing;
 
 namespace PriceMaster
 {
@@ -118,11 +119,15 @@ namespace PriceMaster
                     {
                         dteNextDate.Visible = false;
                         lblNext.Visible = false;
-                        chkNoFollowup.Visible = false;
+                        chkNoFollowup.Visible = true;
+                        chkNoFollowup.Checked = true;
                     }
                     else
                     {
+                        dteNextDate.Visible = true;
+                        lblNext.Visible = true;
                         chkNoFollowup.Visible = false;
+                        chkNoFollowup.Checked = false;
                     }
                     if (dt.Rows[0][4].ToString() == "-1")
                         chkPhone.Checked = true;
@@ -139,7 +144,14 @@ namespace PriceMaster
                     {
                         //btnChaseComplete.Visible = true;
                         chkChaseComplete.Visible = false;
+                        chkChaseComplete.Checked = false;
                     }
+
+                    //if chase is not complete > allow them to edit the next chase date
+                    if (chkChaseComplete.Checked == true)
+                        btnEditChase.Visible = false;
+                    else
+                        btnEditChase.Visible = true;
                 }
 
                 conn.Close();
@@ -170,6 +182,13 @@ namespace PriceMaster
                 conn.Close();
             }
             load_data();
+        }
+
+        private void btnEditChase_Click(object sender, EventArgs e)
+        {
+            frmSlimlineEditChase frm = new frmSlimlineEditChase(chase_id,dteNextDate.Value);
+            frm.ShowDialog();
+            fillChase(chase_id);
         }
     }
 }

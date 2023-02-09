@@ -42,12 +42,14 @@
             this.dteStart = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.chkAllChases = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbChaseStatus = new System.Windows.Forms.ComboBox();
             this.btnShowAll = new PriceMaster.buttonFormatting();
             this.btnExcel = new PriceMaster.buttonFormatting();
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,16 +75,15 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(1421, 497);
+            this.dataGridView1.Size = new System.Drawing.Size(1491, 497);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(495, 30);
+            this.label2.Location = new System.Drawing.Point(693, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(188, 17);
             this.label2.TabIndex = 53;
@@ -91,11 +92,10 @@
             // 
             // cmbCustomerSearch
             // 
-            this.cmbCustomerSearch.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cmbCustomerSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbCustomerSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCustomerSearch.FormattingEnabled = true;
-            this.cmbCustomerSearch.Location = new System.Drawing.Point(495, 50);
+            this.cmbCustomerSearch.Location = new System.Drawing.Point(693, 51);
             this.cmbCustomerSearch.Name = "cmbCustomerSearch";
             this.cmbCustomerSearch.Size = new System.Drawing.Size(188, 21);
             this.cmbCustomerSearch.TabIndex = 52;
@@ -103,10 +103,9 @@
             // 
             // chkFuture
             // 
-            this.chkFuture.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkFuture.AutoSize = true;
             this.chkFuture.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.chkFuture.Location = new System.Drawing.Point(689, 50);
+            this.chkFuture.Location = new System.Drawing.Point(887, 51);
             this.chkFuture.Name = "chkFuture";
             this.chkFuture.Size = new System.Drawing.Size(119, 21);
             this.chkFuture.TabIndex = 54;
@@ -116,11 +115,10 @@
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label3.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label3.Location = new System.Drawing.Point(54, 55);
+            this.label3.Location = new System.Drawing.Point(54, 58);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 17);
             this.label3.TabIndex = 55;
@@ -129,12 +127,11 @@
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.LightSkyBlue;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label4.Location = new System.Drawing.Point(12, 55);
+            this.label4.Location = new System.Drawing.Point(12, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(36, 17);
             this.label4.TabIndex = 56;
@@ -143,10 +140,9 @@
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label5.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label5.Location = new System.Drawing.Point(301, 30);
+            this.label5.Location = new System.Drawing.Point(499, 31);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(188, 17);
             this.label5.TabIndex = 58;
@@ -155,11 +151,10 @@
             // 
             // cmbStaffSearch
             // 
-            this.cmbStaffSearch.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cmbStaffSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbStaffSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbStaffSearch.FormattingEnabled = true;
-            this.cmbStaffSearch.Location = new System.Drawing.Point(301, 50);
+            this.cmbStaffSearch.Location = new System.Drawing.Point(499, 51);
             this.cmbStaffSearch.Name = "cmbStaffSearch";
             this.cmbStaffSearch.Size = new System.Drawing.Size(188, 21);
             this.cmbStaffSearch.TabIndex = 57;
@@ -183,7 +178,6 @@
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.label1.Location = new System.Drawing.Point(163, 6);
@@ -198,7 +192,7 @@
             this.chkAllChases.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkAllChases.AutoSize = true;
             this.chkAllChases.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.chkAllChases.Location = new System.Drawing.Point(958, 50);
+            this.chkAllChases.Location = new System.Drawing.Point(1126, 12);
             this.chkAllChases.Name = "chkAllChases";
             this.chkAllChases.Size = new System.Drawing.Size(80, 21);
             this.chkAllChases.TabIndex = 65;
@@ -207,15 +201,67 @@
             this.chkAllChases.Visible = false;
             this.chkAllChases.CheckedChanged += new System.EventHandler(this.chkCompleted_CheckedChanged);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.DarkGray;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label6.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label6.Location = new System.Drawing.Point(12, 33);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(36, 17);
+            this.label6.TabIndex = 68;
+            this.label6.Text = "       ";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label6.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label7.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label7.Location = new System.Drawing.Point(54, 33);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(89, 17);
+            this.label7.TabIndex = 67;
+            this.label7.Text = "= Non Latest";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label7.Visible = false;
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label8.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label8.Location = new System.Drawing.Point(305, 31);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(188, 17);
+            this.label8.TabIndex = 70;
+            this.label8.Text = "Chase Status:";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // cmbChaseStatus
+            // 
+            this.cmbChaseStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbChaseStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbChaseStatus.FormattingEnabled = true;
+            this.cmbChaseStatus.Items.AddRange(new object[] {
+            "Chasing",
+            "Won",
+            "Lost"});
+            this.cmbChaseStatus.Location = new System.Drawing.Point(305, 51);
+            this.cmbChaseStatus.Name = "cmbChaseStatus";
+            this.cmbChaseStatus.Size = new System.Drawing.Size(188, 21);
+            this.cmbChaseStatus.TabIndex = 69;
+            this.cmbChaseStatus.SelectedIndexChanged += new System.EventHandler(this.cmbChaseStatus_SelectedIndexChanged);
+            // 
             // btnShowAll
             // 
-            this.btnShowAll.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnShowAll.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnShowAll.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnShowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShowAll.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShowAll.ForeColor = System.Drawing.Color.White;
-            this.btnShowAll.Location = new System.Drawing.Point(816, 41);
+            this.btnShowAll.Location = new System.Drawing.Point(1014, 42);
             this.btnShowAll.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnShowAll.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnShowAll.Name = "btnShowAll";
@@ -228,13 +274,13 @@
             // 
             // btnExcel
             // 
-            this.btnExcel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExcel.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnExcel.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExcel.ForeColor = System.Drawing.Color.White;
-            this.btnExcel.Location = new System.Drawing.Point(1197, 42);
+            this.btnExcel.Location = new System.Drawing.Point(1265, 41);
             this.btnExcel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnExcel.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnExcel.Name = "btnExcel";
@@ -247,13 +293,13 @@
             // 
             // buttonFormatting1
             // 
-            this.buttonFormatting1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonFormatting1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonFormatting1.BackColor = System.Drawing.Color.LightSkyBlue;
             this.buttonFormatting1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
-            this.buttonFormatting1.Location = new System.Drawing.Point(1332, 42);
+            this.buttonFormatting1.Location = new System.Drawing.Point(1400, 41);
             this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
             this.buttonFormatting1.Name = "buttonFormatting1";
@@ -266,13 +312,13 @@
             // 
             // btnClear
             // 
-            this.btnClear.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(1118, 42);
+            this.btnClear.Location = new System.Drawing.Point(1186, 41);
             this.btnClear.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnClear.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnClear.Name = "btnClear";
@@ -283,38 +329,13 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.DarkGray;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label6.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label6.Location = new System.Drawing.Point(12, 30);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(36, 17);
-            this.label6.TabIndex = 68;
-            this.label6.Text = "       ";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label7.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label7.Location = new System.Drawing.Point(54, 30);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 17);
-            this.label7.TabIndex = 67;
-            this.label7.Text = "= Non Latest";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
             // frmManagementView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1445, 587);
+            this.ClientSize = new System.Drawing.Size(1515, 587);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cmbChaseStatus);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btnShowAll);
@@ -365,5 +386,7 @@
         private buttonFormatting btnShowAll;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cmbChaseStatus;
     }
 }
