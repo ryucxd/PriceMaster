@@ -120,10 +120,14 @@ namespace PriceMaster
                         dteNextDate.Visible = false;
                         lblNext.Visible = false;
                         chkNoFollowup.Visible = false;
+                        chkNoFollowup.Checked = true;
                     }
                     else
                     {
+                        dteNextDate.Visible = true;
+                        lblNext.Visible = true;
                         chkNoFollowup.Visible = false;
+                        chkNoFollowup.Checked = false;
                     }
                     if (dt.Rows[0][4].ToString() == "-1")
                         chkPhone.Checked = true;
@@ -138,9 +142,16 @@ namespace PriceMaster
                     }
                     else
                     {
-                        btnChaseComplete.Visible = true;
+                        //btnChaseComplete.Visible = true;
                         chkChaseComplete.Visible = false;
+                        chkChaseComplete.Checked = false;
                     }
+
+                    //if chase is not complete > allow them to edit the next chase date
+                    if (chkChaseComplete.Checked == true)
+                        btnEditChase.Visible = false;
+                    else
+                        btnEditChase.Visible = true;
                 }
 
                 conn.Close();
@@ -177,6 +188,7 @@ namespace PriceMaster
         {
             frmTraditionalEditChase frm = new frmTraditionalEditChase(chase_id, dteNextDate.Value);
             frm.ShowDialog();
+            fillChase(chase_id);
         }
     }
 }

@@ -25,7 +25,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>70</ApplicationRevision>
+    <ApplicationRevision>73</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -242,6 +242,12 @@
     <Compile Include="TraditionalChasing\frmTraditionalEnquiryHistory.Designer.cs">
       <DependentUpon>frmTraditionalEnquiryHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalLinkEnquiry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalLinkEnquiry.Designer.cs">
+      <DependentUpon>frmTraditionalLinkEnquiry.cs</DependentUpon>
+    </Compile>
     <Compile Include="TraditionalChasing\frmTraditionalMultipleChaseLoss.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -384,6 +390,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TraditionalChasing\frmTraditionalEnquiryHistory.resx">
       <DependentUpon>frmTraditionalEnquiryHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalLinkEnquiry.resx">
+      <DependentUpon>frmTraditionalLinkEnquiry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TraditionalChasing\frmTraditionalMultipleChaseLoss.resx">
       <DependentUpon>frmTraditionalMultipleChaseLoss.cs</DependentUpon>

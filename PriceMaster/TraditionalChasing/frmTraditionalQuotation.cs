@@ -466,11 +466,36 @@ namespace PriceMaster
 
         private void btnRelatedEnquiries_Click(object sender, EventArgs e)
         {
-            string sql = "select id,subject,sender_email_address from [EnquiryLog].dbo.[Enquiry_Log] where related_quote = '" + quote_id.ToString() + "-" + cmbRev.Text + "'";
+            string sql = "select id from [EnquiryLog].dbo.[Enquiry_Log] where related_quote = '" + quote_id.ToString() + "-" + cmbRev.Text + "'";
+            //if there is no enquiry - prompt the user if they want to add a link!
 
-            frmTraditionalEnquiryHistory frm = new frmTraditionalEnquiryHistory(quote_id.ToString() + "-" + cmbRev.Text);
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    var validation = cmd.ExecuteScalar();
+                    if (validation == null)
+                    {
+                        DialogResult result = MessageBox.Show("There is no enquiry related to this quote, would you like to add a related enquiry?","No Related Enquiry",MessageBoxButtons.YesNo,MessageBoxIcon.Information);
+                        if (result == DialogResult.Yes)
+                        {
+                            frmTraditionalLinkEnquiry frm = new frmTraditionalLinkEnquiry(quote_id.ToString() + "-" + cmbRev.Text);
+                            frm.ShowDialog();
+                        }
+                    }
+                    else
+                    {
+                        frmTraditionalEnquiryHistory frm = new frmTraditionalEnquiryHistory(quote_id.ToString() + "-" + cmbRev.Text);
+                        frm.ShowDialog();
+                    }
+                }
+                conn.Close();
+            }
 
-            frm.ShowDialog();
+
+
+            
         }
 
         private void chkNonResponsive_CheckedChanged(object sender, EventArgs e)
