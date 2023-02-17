@@ -33,6 +33,7 @@ namespace PriceMaster
         public int date_filter { get; set; }
         public int chase_complete_index { get; set; }
         public int chase_status_index { get; set; }
+        public int staff_index { get; set; }
         public frmManagementView(int _slimline)
         {
             InitializeComponent();
@@ -87,19 +88,19 @@ namespace PriceMaster
             cmbCustomerSearch.Items.Clear();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                if (cmbCustomerSearch.Items.Contains(row.Cells[6].Value.ToString()))
+                if (cmbCustomerSearch.Items.Contains(row.Cells[customer_index].Value.ToString()))
                 { } //nothing
                 else
-                    cmbCustomerSearch.Items.Add(row.Cells[6].Value.ToString());
+                    cmbCustomerSearch.Items.Add(row.Cells[customer_index].Value.ToString());
             }
 
             cmbStaffSearch.Items.Clear();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                if (cmbStaffSearch.Items.Contains(row.Cells[5].Value.ToString()))
+                if (cmbStaffSearch.Items.Contains(row.Cells[chased_by_index].Value.ToString()))
                 { } //nothing
                 else
-                    cmbStaffSearch.Items.Add(row.Cells[5].Value.ToString());
+                    cmbStaffSearch.Items.Add(row.Cells[chased_by_index].Value.ToString());
             }
 
         }

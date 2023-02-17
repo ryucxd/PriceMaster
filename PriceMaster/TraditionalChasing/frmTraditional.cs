@@ -619,5 +619,11 @@ namespace PriceMaster
         {
             apply_filter();
         }
+
+        private void btnCustomer_Click(object sender, EventArgs e)
+        {
+            frmChaseCustomerList frm = new frmChaseCustomerList(0);
+            frm.ShowDialog();
+        }
     }
 }

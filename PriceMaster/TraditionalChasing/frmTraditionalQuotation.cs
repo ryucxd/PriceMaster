@@ -98,7 +98,7 @@ namespace PriceMaster
         private void fillGrid()
         {
             string sql = "select CAST(parent_spec as nvarchar(max)) + '-' + cast(row_index as nvarchar(max)) + '-' + cast(rev_num as nvarchar(max)) as [Parent Spec], item_ref as [Item Ref], " +
-                "item_type as [Item Type], single_double as [Single / Double], width as [Width], height as [Height], threshold as [Threshold], hardware as [Hardware], qty_same as [Quantity Same],cost as [Cost]" +
+                "item_type as [Item Type], single_double as [Single / Double], width as [Width], height as [Height], threshold as [Threshold], hardware as [Hardware], qty_same as [Quantity Same],cost as [Cost] " +
                 "from [order_database].dbo.solidworks_quotation_log_details " +
                 "WHERE parent_spec = '" + quote_id.ToString() + "' and rev_num = " + cmbRev.Text + " Order by CAST(parent_spec as nvarchar(max)) + '-' + cast(row_index as nvarchar(max)) + '-' + cast(rev_num as nvarchar(max))";
 

@@ -66,6 +66,7 @@
             this.btnOutstanding = new PriceMaster.buttonFormatting();
             this.btnReport = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
+            this.btnCustomer = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -520,11 +521,30 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // btnCustomer
+            // 
+            this.btnCustomer.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnCustomer.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCustomer.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCustomer.ForeColor = System.Drawing.Color.White;
+            this.btnCustomer.Location = new System.Drawing.Point(846, 47);
+            this.btnCustomer.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnCustomer.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnCustomer.Name = "btnCustomer";
+            this.btnCustomer.Padding = new System.Windows.Forms.Padding(3);
+            this.btnCustomer.Size = new System.Drawing.Size(221, 30);
+            this.btnCustomer.TabIndex = 108;
+            this.btnCustomer.Text = "Customer Correspondence";
+            this.btnCustomer.UseVisualStyleBackColor = false;
+            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
+            // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnCustomer);
             this.Controls.Add(this.lblLossReasons);
             this.Controls.Add(this.chkNonResponsive);
             this.Controls.Add(this.chkLeadTimeTooLong);
@@ -612,5 +632,6 @@
         private System.Windows.Forms.CheckBox chkUnableToMeetSpec;
         private System.Windows.Forms.CheckBox chkTooExpensive;
         private System.Windows.Forms.Label lblLossReasons;
+        private buttonFormatting btnCustomer;
     }
 }

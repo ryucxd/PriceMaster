@@ -875,5 +875,11 @@ namespace PriceMaster
         {
             loadData();
         }
+
+        private void buttonFormatting1_Click(object sender, EventArgs e)
+        {
+            frmChaseCustomerList frm = new frmChaseCustomerList(-1);
+            frm.ShowDialog();
+        }
     }
 }
