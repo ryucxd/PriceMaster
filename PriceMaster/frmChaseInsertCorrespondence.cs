@@ -92,9 +92,9 @@ namespace PriceMaster
             //insert 
             string sql = "INSERT INTO [order_database].[dbo].[quotation_chase_customer] " +
                 "([customer_name],[slimline],[date_created],[body],[email],[phone],[inPerson],[contact],[issue_with_leadtime],[issue_with_quote_turnaround_time]" +
-                ",[issue_with_product],[issue_with_installation],[issue_with_service]) VALUES (" +
+                ",[issue_with_product],[issue_with_installation],[issue_with_service],correspondence_by) VALUES (" +
                 "'" + customer + "'," + slimline + ",GETDATE(),'" + txtDescription.Text + "'," + email + "," + phone + "," + in_person + "," +
-                "'" + txtContact.Text + "'," + lead_time + "," + turnaround + "," + product + "," + installation + "," + service + " )";
+                "'" + txtContact.Text + "'," + lead_time + "," + turnaround + "," + product + "," + installation + "," + service + "," + CONNECT.staffID + " )";
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {

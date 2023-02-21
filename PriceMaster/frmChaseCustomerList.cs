@@ -42,6 +42,7 @@ namespace PriceMaster
         public int issue_with_product_index { get; set; }
         public int issue_with_installation_index { get; set; }
         public int issue_with_service_index { get; set; }
+        public int correspondence_by_index { get; set; }
 
         public frmChaseCustomerList(int _slimline)
         {
@@ -133,17 +134,19 @@ namespace PriceMaster
                 }
 
                 //load the correspondence stuff
-                sql = "select id,customer_name,slimline,date_created,body," +
-                    "CASE WHEN email = 0 THEN CAST(0 AS BIT) WHEN email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Email] ," +
-                    "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Phone] ," +
-                    "CASE WHEN inPerson = 0 THEN CAST(0 AS BIT) WHEN inPerson IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [inPerson] ," +
-                    "contact," +
-                    "CASE WHEN issue_with_leadtime = 0 THEN CAST(0 AS BIT) WHEN issue_with_leadtime IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with leadtime] ," +
-                    "CASE WHEN issue_with_quote_turnaround_time = 0 THEN CAST(0 AS BIT) WHEN issue_with_quote_turnaround_time IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with quote turnaround time] ," +
-                    "CASE WHEN issue_with_product = 0 THEN CAST(0 AS BIT) WHEN issue_with_product IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with product]," +
-                    "CASE WHEN issue_with_installation = 0 THEN CAST(0 AS BIT) WHEN issue_with_installation IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with installation] ," +
-                    "CASE WHEN issue_with_service = 0 THEN CAST(0 AS BIT) WHEN issue_with_service IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with service] " +
-                    "from [order_database].dbo.quotation_chase_customer where customer_name = '" + cmbCustomer.Text + "' AND slimline = ";
+                sql = "select q.id,customer_name,u.forename + ' ' + u.surname as fullname,q.slimline,date_created,body," +
+                      "CASE WHEN q.email = 0 THEN CAST(0 AS BIT) WHEN q.email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Email] ," +
+                      "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Phone] ," +
+                      "CASE WHEN inPerson = 0 THEN CAST(0 AS BIT) WHEN inPerson IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [inPerson] ," +
+                      "contact," +
+                      "CASE WHEN issue_with_leadtime = 0 THEN CAST(0 AS BIT) WHEN issue_with_leadtime IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with leadtime] ," +
+                      "CASE WHEN issue_with_quote_turnaround_time = 0 THEN CAST(0 AS BIT) WHEN issue_with_quote_turnaround_time IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with quote turnaround time] ," +
+                      "CASE WHEN issue_with_product = 0 THEN CAST(0 AS BIT) WHEN issue_with_product IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with product]," +
+                      "CASE WHEN issue_with_installation = 0 THEN CAST(0 AS BIT) WHEN issue_with_installation IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with installation] ," +
+                      "CASE WHEN issue_with_service = 0 THEN CAST(0 AS BIT) WHEN issue_with_service IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with service] " +
+                      "from [order_database].dbo.quotation_chase_customer q " +
+                      "left join [user_info].dbo.[user] u on q.correspondence_by = u.id " +
+                      "where  customer_name = '" + cmbCustomer.Text + "' AND q.slimline = ";
 
 
                 if (slimline == -1)
@@ -218,6 +221,7 @@ namespace PriceMaster
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
 
             //correspondence formatting
+            dgvOther.Columns[correspondence_by_index].HeaderText = "Correspondence By";
             dgvOther.Columns[id_index].HeaderText = "ID";
             dgvOther.Columns[customer_name_index].HeaderText = "Customer Name";
             dgvOther.Columns[slimline_index].HeaderText = "Slimline";
@@ -260,7 +264,8 @@ namespace PriceMaster
             phone_index = dgvOther.Columns["phone"].Index;
             in_person_index = dgvOther.Columns["inPerson"].Index;
             contact_index = dgvOther.Columns["contact"].Index;
-            
+            correspondence_by_index = dgvOther.Columns["fullName"].Index;
+
             issue_with_leadtime_index = dgvOther.Columns["Issue with leadtime"].Index;
             issue_with_quote_turnaround_time_index = dgvOther.Columns["Issue with quote turnaround time"].Index;
             issue_with_product_index = dgvOther.Columns["Issue with product"].Index;

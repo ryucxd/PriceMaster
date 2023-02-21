@@ -19,8 +19,9 @@ namespace PriceMaster
 {
     public partial class frmManagementView : Form
     {
+        //chase datagrid
         public int slimline { get; set; }
-        public int id_index { get; set; }
+        public int chase_id_index { get; set; }
         public int quote_index { get; set; }
         public int chase_date_index { get; set; }
         public int chase_description_index { get; set; }
@@ -34,30 +35,48 @@ namespace PriceMaster
         public int chase_complete_index { get; set; }
         public int chase_status_index { get; set; }
         public int staff_index { get; set; }
+
+        //correspondence datagrid
+        public int correspondence_id_index { get; set; }
+        public int customer_name_index { get; set; }
+        public int slimline_index { get; set; }
+        public int date_created_index { get; set; }
+        public int body_index { get; set; }
+        public int email_index { get; set; }
+        public int phone_index { get; set; }
+        public int in_person_index { get; set; }
+        public int contact_index { get; set; }
+        public int issue_with_leadtime_index { get; set; }
+        public int issue_with_quote_turnaround_time_index { get; set; }
+        public int issue_with_product_index { get; set; }
+        public int issue_with_installation_index { get; set; }
+        public int issue_with_service_index { get; set; }
+        public int correspondence_by_index { get; set; }
         public frmManagementView(int _slimline)
         {
             InitializeComponent();
             slimline = _slimline;
             load_data();
+            load_correspondence();
             fillCombo();
 
-
+            dteEnd.Value = DateTime.Now.AddDays(1);
         }
 
         private void format()
         {
-            dataGridView1.Columns[id_index].Visible = false;
-            dataGridView1.Columns[quote_index].HeaderText = "Quote ID";
-            dataGridView1.Columns[chase_date_index].HeaderText = "Chase Date";
-            dataGridView1.Columns[chase_description_index].HeaderText = "Chase Description";
-            dataGridView1.Columns[next_chase_date_index].HeaderText = "Next Chase Date";
-            dataGridView1.Columns[customer_index].HeaderText = "Customer";
-            dataGridView1.Columns[sender_email_address_index].HeaderText = "Sender Email Address";
-            dataGridView1.Columns[chase_status_index].HeaderText = "Chase Status";
-            dataGridView1.Columns[priority_chase_index].Visible = false;
-            dataGridView1.Columns[chase_complete_index].Visible = false;
+            dgvChase.Columns[chase_id_index].Visible = false;
+            dgvChase.Columns[quote_index].HeaderText = "Quote ID";
+            dgvChase.Columns[chase_date_index].HeaderText = "Chase Date";
+            dgvChase.Columns[chase_description_index].HeaderText = "Chase Description";
+            dgvChase.Columns[next_chase_date_index].HeaderText = "Next Chase Date";
+            dgvChase.Columns[customer_index].HeaderText = "Customer";
+            dgvChase.Columns[sender_email_address_index].HeaderText = "Sender Email Address";
+            dgvChase.Columns[chase_status_index].HeaderText = "Chase Status";
+            dgvChase.Columns[priority_chase_index].Visible = false;
+            dgvChase.Columns[chase_complete_index].Visible = false;
 
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in dgvChase.Rows)
             {
                 if (row.Cells[sender_email_address_index].Value.ToString().Contains("EXCHANGELABS/OU=EXCHANGE"))
                 {
@@ -71,14 +90,14 @@ namespace PriceMaster
                 //    row.DefaultCellStyle.BackColor = Color.DarkGray;
             }
 
-            dataGridView1.Columns[chased_by_index].HeaderText = "Chased by";
+            dgvChase.Columns[chased_by_index].HeaderText = "Chased by";
 
-            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            foreach (DataGridViewColumn col in dgvChase.Columns)
             {
                 col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-            dataGridView1.Columns[chase_description_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvChase.Columns[chase_description_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
         }
 
@@ -86,7 +105,7 @@ namespace PriceMaster
         {
 
             cmbCustomerSearch.Items.Clear();
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in dgvChase.Rows)
             {
                 if (cmbCustomerSearch.Items.Contains(row.Cells[customer_index].Value.ToString()))
                 { } //nothing
@@ -94,20 +113,36 @@ namespace PriceMaster
                     cmbCustomerSearch.Items.Add(row.Cells[customer_index].Value.ToString());
             }
 
+
+            foreach (DataGridViewRow row in dgvCorrespondence.Rows)
+            {
+                if (cmbCustomerSearch.Items.Contains(row.Cells[customer_name_index].Value.ToString()))
+                { } //nothing
+                else
+                    cmbCustomerSearch.Items.Add(row.Cells[customer_name_index].Value.ToString());
+            }
+
             cmbStaffSearch.Items.Clear();
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in dgvChase.Rows)
             {
                 if (cmbStaffSearch.Items.Contains(row.Cells[chased_by_index].Value.ToString()))
                 { } //nothing
                 else
                     cmbStaffSearch.Items.Add(row.Cells[chased_by_index].Value.ToString());
             }
+            foreach (DataGridViewRow row in dgvCorrespondence.Rows)
+            {
+                if (cmbStaffSearch.Items.Contains(row.Cells[correspondence_by_index].Value.ToString()))
+                { } //nothing
+                else
+                    cmbStaffSearch.Items.Add(row.Cells[correspondence_by_index].Value.ToString());
+            }
 
         }
 
         private void load_data()
         {
-            dataGridView1.DataSource = null;
+            dgvChase.DataSource = null;
             string sql = "";
 
 
@@ -158,7 +193,7 @@ namespace PriceMaster
                 //if (chkAllChases.Checked == true)
                 //    sql = sql + " order by quote_id desc,chase_date desc";
                 //else
-                    sql = sql + " order by chase_date desc,rtrim(s.[NAME]), quote_id ";
+                sql = sql + " order by chase_date desc,rtrim(s.[NAME]), quote_id ";
 
             }
             else
@@ -208,7 +243,7 @@ namespace PriceMaster
                 //if (chkAllChases.Checked == true)
                 //    sql = sql + " order by quote_id desc,chase_date desc";
                 //else
-                    sql = sql + " order by chase_date desc, quote_id ";
+                sql = sql + " order by chase_date desc, quote_id ";
 
             }
 
@@ -221,8 +256,9 @@ namespace PriceMaster
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     System.Data.DataTable dt = new System.Data.DataTable();
                     da.Fill(dt);
-                    dataGridView1.DataSource = dt;
+                    dgvChase.DataSource = dt;
                 }
+
                 conn.Close();
             }
             column_index();
@@ -230,6 +266,111 @@ namespace PriceMaster
             column_index();
             format();
             column_index();
+
+        }
+
+        private void load_correspondence()
+        {
+
+            string sql = "";
+
+            //load the correspondence 
+            sql = "select q.id,customer_name,u.forename + ' ' + u.surname as fullname,q.slimline,date_created,body," +
+                "CASE WHEN q.email = 0 THEN CAST(0 AS BIT) WHEN q.email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Email] ," +
+                "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Phone] ," +
+                "CASE WHEN inPerson = 0 THEN CAST(0 AS BIT) WHEN inPerson IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [inPerson] ," +
+                "contact," +
+                "CASE WHEN issue_with_leadtime = 0 THEN CAST(0 AS BIT) WHEN issue_with_leadtime IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with leadtime] ," +
+                "CASE WHEN issue_with_quote_turnaround_time = 0 THEN CAST(0 AS BIT) WHEN issue_with_quote_turnaround_time IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with quote turnaround time] ," +
+                "CASE WHEN issue_with_product = 0 THEN CAST(0 AS BIT) WHEN issue_with_product IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with product]," +
+                "CASE WHEN issue_with_installation = 0 THEN CAST(0 AS BIT) WHEN issue_with_installation IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with installation] ," +
+                "CASE WHEN issue_with_service = 0 THEN CAST(0 AS BIT) WHEN issue_with_service IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with service] " +
+                "from [order_database].dbo.quotation_chase_customer q " +
+                "left join [user_info].dbo.[user] u on q.correspondence_by = u.id " +
+                "where q.slimline = ";
+
+
+            if (slimline == -1)
+                sql = sql + "-1 ";
+            else
+                sql = sql + "0 ";
+
+            if (string.IsNullOrWhiteSpace(cmbCustomerSearch.Text) == false)
+                sql = sql + " AND customer_name = '" + cmbCustomerSearch.Text + "' ";
+
+            if (string.IsNullOrWhiteSpace(cmbStaffSearch.Text) == false)
+                sql = sql + " AND u.forename + ' ' + u.surname = '" + cmbStaffSearch.Text + "' ";
+
+
+            if (date_filter == -1)
+            {
+                    sql = sql + "AND date_created >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND date_created  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "' ";
+            }
+
+
+            sql = sql + " order by date_created desc";
+
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                        da.Fill(dt);
+                    dgvCorrespondence.DataSource = dt;
+                }    
+
+                conn.Close();
+            }
+            column_index_correspondence();
+            format_correspondence();
+        }
+
+        private void format_correspondence()
+        {
+            //correspondence formatting
+            dgvCorrespondence.Columns[correspondence_id_index].HeaderText = "ID";
+            dgvCorrespondence.Columns[customer_name_index].HeaderText = "Customer Name";
+            dgvCorrespondence.Columns[slimline_index].HeaderText = "Slimline";
+            dgvCorrespondence.Columns[date_created_index].HeaderText = "Date Created";
+            dgvCorrespondence.Columns[body_index].HeaderText = "Body";
+            dgvCorrespondence.Columns[email_index].HeaderText = "Email";
+            dgvCorrespondence.Columns[phone_index].HeaderText = "Phone";
+            dgvCorrespondence.Columns[in_person_index].HeaderText = "In-Person";
+            dgvCorrespondence.Columns[contact_index].HeaderText = "Contact";
+            dgvCorrespondence.Columns[correspondence_by_index].HeaderText = "Correspondence By";
+
+            dgvCorrespondence.Columns[correspondence_id_index].Visible = false;
+            dgvCorrespondence.Columns[slimline_index].Visible = false;
+
+            foreach (DataGridViewColumn col in dgvCorrespondence.Columns)
+            {
+                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            dgvCorrespondence.Columns[body_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        private void column_index_correspondence()
+        {
+            chase_id_index = dgvCorrespondence.Columns["id"].Index;
+            customer_name_index = dgvCorrespondence.Columns["customer_name"].Index;
+            slimline_index = dgvCorrespondence.Columns["slimline"].Index;
+            date_created_index = dgvCorrespondence.Columns["date_created"].Index;
+            body_index = dgvCorrespondence.Columns["body"].Index;
+            email_index = dgvCorrespondence.Columns["email"].Index;
+            phone_index = dgvCorrespondence.Columns["phone"].Index;
+            in_person_index = dgvCorrespondence.Columns["inPerson"].Index;
+            contact_index = dgvCorrespondence.Columns["contact"].Index;
+            correspondence_by_index = dgvCorrespondence.Columns["fullName"].Index;
+
+            issue_with_leadtime_index = dgvCorrespondence.Columns["Issue with leadtime"].Index;
+            issue_with_quote_turnaround_time_index = dgvCorrespondence.Columns["Issue with quote turnaround time"].Index;
+            issue_with_product_index = dgvCorrespondence.Columns["Issue with product"].Index;
+            issue_with_installation_index = dgvCorrespondence.Columns["Issue with installation"].Index;
+            issue_with_service_index = dgvCorrespondence.Columns["Issue with service"].Index;
         }
         private void add_button()
         {
@@ -251,20 +392,20 @@ namespace PriceMaster
 
         private void column_index()
         {
-            id_index = dataGridView1.Columns["id"].Index;
-            quote_index = dataGridView1.Columns["quote_id"].Index;
-            chase_date_index = dataGridView1.Columns["chase_date"].Index;
-            chase_description_index = dataGridView1.Columns["chase_description"].Index;
-            next_chase_date_index = dataGridView1.Columns["next_chase_date"].Index;
-            chased_by_index = dataGridView1.Columns["chased_by"].Index;
-            customer_index = dataGridView1.Columns["customer"].Index;
-            sender_email_address_index = dataGridView1.Columns["sender_email_address"].Index;
-            priority_chase_index = dataGridView1.Columns["priority_chase"].Index;
-            chase_complete_index = dataGridView1.Columns["chase_complete"].Index;
-            chase_status_index = dataGridView1.Columns["status"].Index;
+            chase_id_index = dgvChase.Columns["id"].Index;
+            quote_index = dgvChase.Columns["quote_id"].Index;
+            chase_date_index = dgvChase.Columns["chase_date"].Index;
+            chase_description_index = dgvChase.Columns["chase_description"].Index;
+            next_chase_date_index = dgvChase.Columns["next_chase_date"].Index;
+            chased_by_index = dgvChase.Columns["chased_by"].Index;
+            customer_index = dgvChase.Columns["customer"].Index;
+            sender_email_address_index = dgvChase.Columns["sender_email_address"].Index;
+            priority_chase_index = dgvChase.Columns["priority_chase"].Index;
+            chase_complete_index = dgvChase.Columns["chase_complete"].Index;
+            chase_status_index = dgvChase.Columns["status"].Index;
 
-            if (dataGridView1.Columns.Contains("Complete") == true)
-                button_index = dataGridView1.Columns["Complete"].Index;
+            if (dgvChase.Columns.Contains("Complete") == true)
+                button_index = dgvChase.Columns["Complete"].Index;
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -283,7 +424,7 @@ namespace PriceMaster
                 if (slimline == -1)//no idea what this does tbh
                 {
                     sql = "select  rtrim(b.[NAME]) from [price_master].dbo.sl_quotation a " +
-                        "left join[dsl_fitting].dbo.[SALES_LEDGER] b on a.customer_acc_ref = b.ACCOUNT_REF where quote_id = " + dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString();
+                        "left join[dsl_fitting].dbo.[SALES_LEDGER] b on a.customer_acc_ref = b.ACCOUNT_REF where quote_id = " + dgvChase.Rows[e.RowIndex].Cells[quote_index].Value.ToString();
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                         customer = cmd.ExecuteScalar().ToString();
                 }
@@ -297,7 +438,7 @@ namespace PriceMaster
             }
 
             // dataGridView1.ClearSelection();
-            frmManagementViewHistory frm = new frmManagementViewHistory(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString()), slimline);
+            frmManagementViewHistory frm = new frmManagementViewHistory(Convert.ToInt32(dgvChase.Rows[e.RowIndex].Cells[quote_index].Value.ToString()), slimline);
             frm.ShowDialog();
             //apply_filter();
             //}
@@ -308,6 +449,7 @@ namespace PriceMaster
         private void cmbCustomerSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
             load_data();
+            load_correspondence();
         }
 
         private void chkFuture_CheckedChanged(object sender, EventArgs e)
@@ -316,6 +458,7 @@ namespace PriceMaster
             cmbStaffSearch.Text = "";
 
             load_data();
+            load_correspondence();
             fillCombo();
         }
 
@@ -328,6 +471,7 @@ namespace PriceMaster
         private void cmbStaffSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
             load_data();
+            load_correspondence();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -338,6 +482,7 @@ namespace PriceMaster
             cmbChaseStatus.Text = "";
             date_filter = 0;
             load_data();
+            load_correspondence();
             fillCombo();
         }
 
@@ -348,13 +493,13 @@ namespace PriceMaster
 
             //
             int customer_index = 0;
-            customer_index = dataGridView1.Columns["Customer"].Index;
+            customer_index = dgvChase.Columns["Customer"].Index;
 
             string FileName = @"C:\temp\Management_chase_list" + DateTime.Now.ToString("mmss") + ".xls";
 
 
             //adjust the chase description
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in dgvChase.Rows)
             {
                 //string temp =  row.Cells[3].Value.ToString();
                 row.Cells[chase_description_index].Value = row.Cells[chase_description_index].Value.ToString().Replace("\n", " ").Replace("\r", " - ");
@@ -362,13 +507,13 @@ namespace PriceMaster
 
 
             // Copy DataGridView results to clipboard
-            dataGridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
-            dataGridView1.SelectAll();
+            dgvChase.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+            dgvChase.SelectAll();
 
             //delete all of the first row
 
 
-            DataObject dataObj = dataGridView1.GetClipboardContent();
+            DataObject dataObj = dgvChase.GetClipboardContent();
             if (dataObj != null)
                 Clipboard.SetDataObject(dataObj);
 
@@ -439,7 +584,7 @@ namespace PriceMaster
 
             // Clear Clipboard and DataGridView selection
             Clipboard.Clear();
-            dataGridView1.ClearSelection();
+            dgvChase.ClearSelection();
 
             // Open the newly saved excel file
             if (File.Exists(FileName))
@@ -553,6 +698,7 @@ namespace PriceMaster
 
 
             load_data();
+            load_correspondence();
             fillCombo();
         }
 
@@ -560,12 +706,14 @@ namespace PriceMaster
         {
             date_filter = -1;
             load_data();
+            load_correspondence();
         }
 
         private void dteEnd_CloseUp(object sender, EventArgs e)
         {
             date_filter = -1;
             load_data();
+            load_correspondence();
         }
 
         private void btnShowAll_Click(object sender, EventArgs e)
@@ -585,7 +733,7 @@ namespace PriceMaster
 
         private void cmbChaseStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            load_data();
+            load_correspondence();
         }
     }
 }
