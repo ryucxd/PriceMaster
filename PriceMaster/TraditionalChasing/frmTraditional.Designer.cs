@@ -61,12 +61,13 @@
             this.chkUnableToMeetSpec = new System.Windows.Forms.CheckBox();
             this.chkTooExpensive = new System.Windows.Forms.CheckBox();
             this.lblLossReasons = new System.Windows.Forms.Label();
+            this.btnNonReturningCustomers = new PriceMaster.buttonFormatting();
+            this.btnCustomer = new PriceMaster.buttonFormatting();
             this.btnManagementView = new PriceMaster.buttonFormatting();
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             this.btnOutstanding = new PriceMaster.buttonFormatting();
             this.btnReport = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
-            this.btnCustomer = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -431,6 +432,42 @@
             this.lblLossReasons.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblLossReasons.Visible = false;
             // 
+            // btnNonReturningCustomers
+            // 
+            this.btnNonReturningCustomers.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnNonReturningCustomers.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNonReturningCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNonReturningCustomers.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNonReturningCustomers.ForeColor = System.Drawing.Color.White;
+            this.btnNonReturningCustomers.Location = new System.Drawing.Point(845, 45);
+            this.btnNonReturningCustomers.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnNonReturningCustomers.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnNonReturningCustomers.Name = "btnNonReturningCustomers";
+            this.btnNonReturningCustomers.Padding = new System.Windows.Forms.Padding(3);
+            this.btnNonReturningCustomers.Size = new System.Drawing.Size(208, 30);
+            this.btnNonReturningCustomers.TabIndex = 109;
+            this.btnNonReturningCustomers.Text = "Non Returning Customers";
+            this.btnNonReturningCustomers.UseVisualStyleBackColor = false;
+            this.btnNonReturningCustomers.Click += new System.EventHandler(this.btnNonReturningCustomers_Click);
+            // 
+            // btnCustomer
+            // 
+            this.btnCustomer.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnCustomer.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCustomer.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCustomer.ForeColor = System.Drawing.Color.White;
+            this.btnCustomer.Location = new System.Drawing.Point(1063, 45);
+            this.btnCustomer.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnCustomer.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnCustomer.Name = "btnCustomer";
+            this.btnCustomer.Padding = new System.Windows.Forms.Padding(3);
+            this.btnCustomer.Size = new System.Drawing.Size(221, 30);
+            this.btnCustomer.TabIndex = 108;
+            this.btnCustomer.Text = "Customer Correspondence";
+            this.btnCustomer.UseVisualStyleBackColor = false;
+            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
+            // 
             // btnManagementView
             // 
             this.btnManagementView.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -456,15 +493,16 @@
             this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
-            this.buttonFormatting1.Location = new System.Drawing.Point(1191, 9);
+            this.buttonFormatting1.Location = new System.Drawing.Point(314, 9);
             this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
             this.buttonFormatting1.Name = "buttonFormatting1";
             this.buttonFormatting1.Padding = new System.Windows.Forms.Padding(3);
-            this.buttonFormatting1.Size = new System.Drawing.Size(213, 30);
+            this.buttonFormatting1.Size = new System.Drawing.Size(75, 30);
             this.buttonFormatting1.TabIndex = 84;
             this.buttonFormatting1.Text = "All Outstanding Chases";
             this.buttonFormatting1.UseVisualStyleBackColor = false;
+            this.buttonFormatting1.Visible = false;
             this.buttonFormatting1.Click += new System.EventHandler(this.buttonFormatting1_Click);
             // 
             // btnOutstanding
@@ -521,29 +559,12 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // btnCustomer
-            // 
-            this.btnCustomer.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnCustomer.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCustomer.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCustomer.ForeColor = System.Drawing.Color.White;
-            this.btnCustomer.Location = new System.Drawing.Point(846, 47);
-            this.btnCustomer.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnCustomer.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnCustomer.Name = "btnCustomer";
-            this.btnCustomer.Padding = new System.Windows.Forms.Padding(3);
-            this.btnCustomer.Size = new System.Drawing.Size(221, 30);
-            this.btnCustomer.TabIndex = 108;
-            this.btnCustomer.Text = "Customer Correspondence";
-            this.btnCustomer.UseVisualStyleBackColor = false;
-            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
-            // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnNonReturningCustomers);
             this.Controls.Add(this.btnCustomer);
             this.Controls.Add(this.lblLossReasons);
             this.Controls.Add(this.chkNonResponsive);
@@ -633,5 +654,6 @@
         private System.Windows.Forms.CheckBox chkTooExpensive;
         private System.Windows.Forms.Label lblLossReasons;
         private buttonFormatting btnCustomer;
+        private buttonFormatting btnNonReturningCustomers;
     }
 }

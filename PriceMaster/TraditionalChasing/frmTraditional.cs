@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.Diagnostics;
 using Excel = Microsoft.Office.Interop.Excel;
+using PriceMaster.TraditionalChasing;
 
 namespace PriceMaster
 {
@@ -623,6 +624,12 @@ namespace PriceMaster
         private void btnCustomer_Click(object sender, EventArgs e)
         {
             frmChaseCustomerList frm = new frmChaseCustomerList(0);
+            frm.ShowDialog();
+        }
+
+        private void btnNonReturningCustomers_Click(object sender, EventArgs e)
+        {
+            frmNonReturningCustomers frm = new frmNonReturningCustomers();
             frm.ShowDialog();
         }
     }

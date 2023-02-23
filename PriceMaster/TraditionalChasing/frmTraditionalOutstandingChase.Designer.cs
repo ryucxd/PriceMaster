@@ -31,13 +31,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOutstandingChase));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.cmbCustomerSearch = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblPriority = new System.Windows.Forms.Label();
             this.chkFuture = new System.Windows.Forms.CheckBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -66,19 +70,19 @@
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label1.Location = new System.Drawing.Point(12, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(842, 22);
-            this.label1.TabIndex = 49;
-            this.label1.Text = "The following entries are marked for a follow up and have not yet been completed." +
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.lblTitle.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblTitle.Location = new System.Drawing.Point(303, 31);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(551, 22);
+            this.lblTitle.TabIndex = 49;
+            this.lblTitle.Text = "The following entries are marked for a follow up and have not yet been completed." +
     "";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // cmbCustomerSearch
             // 
@@ -117,18 +121,18 @@
             this.label4.Text = "       ";
             this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // label3
+            // lblPriority
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label3.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label3.Location = new System.Drawing.Point(47, 6);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 17);
-            this.label3.TabIndex = 57;
-            this.label3.Text = "= Priority ";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblPriority.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblPriority.AutoSize = true;
+            this.lblPriority.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.lblPriority.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblPriority.Location = new System.Drawing.Point(47, 6);
+            this.lblPriority.Name = "lblPriority";
+            this.lblPriority.Size = new System.Drawing.Size(68, 17);
+            this.lblPriority.TabIndex = 57;
+            this.lblPriority.Text = "= Priority ";
+            this.lblPriority.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // chkFuture
             // 
@@ -141,6 +145,37 @@
             this.chkFuture.UseVisualStyleBackColor = true;
             this.chkFuture.CheckedChanged += new System.EventHandler(this.chkFuture_CheckedChanged);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(13, 34);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(284, 22);
+            this.tabControl1.TabIndex = 60;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(276, 0);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Outstanding Chases";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(276, 0);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Outstanding AUTOMATIC Chases";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // frmOutstandingChase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -148,11 +183,12 @@
             this.ClientSize = new System.Drawing.Size(866, 518);
             this.Controls.Add(this.chkFuture);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblPriority);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbCustomerSearch);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -161,6 +197,7 @@
             this.Text = "Outstanding Chases";
             this.Shown += new System.EventHandler(this.frmOutstandingChase_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,11 +206,14 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.ComboBox cmbCustomerSearch;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblPriority;
         private System.Windows.Forms.CheckBox chkFuture;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }

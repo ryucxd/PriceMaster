@@ -60,7 +60,7 @@ namespace PriceMaster
             load_correspondence();
             fillCombo();
 
-            dteEnd.Value = DateTime.Now.AddDays(1);
+            //dteEnd.Value = DateTime.Now.AddDays(1);
         }
 
         private void format()
@@ -183,9 +183,9 @@ namespace PriceMaster
                 if (date_filter == -1)
                 {
                     if (chkFuture.Checked == true)
-                        sql = sql + "and next_chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND next_chase_date  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "'";
+                        sql = sql + "and next_chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND next_chase_date  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1)";
                     else
-                        sql = sql + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "'";
+                        sql = sql + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1)";
 
                 }
 
@@ -233,9 +233,9 @@ namespace PriceMaster
                 if (date_filter == -1)
                 {
                     if (chkFuture.Checked == true)
-                        sql = sql + "and next_chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND next_chase_date  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "'";
+                        sql = sql + "and next_chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND next_chase_date  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1)";
                     else
-                        sql = sql + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "'";
+                        sql = sql + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1)";
 
                 }
 
@@ -304,7 +304,7 @@ namespace PriceMaster
 
             if (date_filter == -1)
             {
-                    sql = sql + "AND date_created >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND date_created  <= '" + dteEnd.Value.ToString("yyyyMMdd") + "' ";
+                    sql = sql + "AND date_created >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND date_created  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1) ";
             }
 
 
@@ -374,7 +374,6 @@ namespace PriceMaster
         }
         private void add_button()
         {
-
             //if (dataGridView1.Columns.Contains("Complete") == true)
             //    dataGridView1.Columns.Remove("Complete");
 

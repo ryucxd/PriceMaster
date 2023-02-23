@@ -291,11 +291,13 @@
             // 
             // label9
             // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label9.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.label9.Location = new System.Drawing.Point(10, 519);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(1491, 17);
+            this.label9.Size = new System.Drawing.Size(1665, 17);
             this.label9.TabIndex = 72;
             this.label9.Text = "Customer Correspondence:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
