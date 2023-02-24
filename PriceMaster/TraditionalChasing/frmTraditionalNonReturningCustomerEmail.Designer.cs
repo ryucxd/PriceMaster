@@ -34,6 +34,7 @@
             this.dgvAttachments = new System.Windows.Forms.DataGridView();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.lblSentBy = new System.Windows.Forms.Label();
+            this.lblEmail = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAttachments)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +63,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvAttachments.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvAttachments.Location = new System.Drawing.Point(12, 782);
+            this.dgvAttachments.Location = new System.Drawing.Point(12, 795);
             this.dgvAttachments.Name = "dgvAttachments";
             this.dgvAttachments.RowHeadersVisible = false;
             this.dgvAttachments.Size = new System.Drawing.Size(898, 185);
@@ -71,7 +72,7 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(12, 39);
+            this.webBrowser1.Location = new System.Drawing.Point(12, 52);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(910, 718);
@@ -80,18 +81,30 @@
             // lblSentBy
             // 
             this.lblSentBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.lblSentBy.Location = new System.Drawing.Point(15, 16);
+            this.lblSentBy.Location = new System.Drawing.Point(15, 5);
             this.lblSentBy.Name = "lblSentBy";
             this.lblSentBy.Size = new System.Drawing.Size(907, 20);
             this.lblSentBy.TabIndex = 31;
             this.lblSentBy.Text = "Email Body";
             this.lblSentBy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblEmail
+            // 
+            this.lblEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.lblEmail.Location = new System.Drawing.Point(15, 29);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(907, 20);
+            this.lblEmail.TabIndex = 32;
+            this.lblEmail.Text = "Sender Email";
+            this.lblEmail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblEmail.Click += new System.EventHandler(this.lblEmail_Click);
+            // 
             // frmTraditionalNonReturningCustomerEmail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(931, 979);
+            this.ClientSize = new System.Drawing.Size(931, 992);
+            this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.lblSentBy);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dgvAttachments);
@@ -114,5 +127,6 @@
         private System.Windows.Forms.DataGridView dgvAttachments;
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.Label lblSentBy;
+        private System.Windows.Forms.Label lblEmail;
     }
 }

@@ -68,7 +68,7 @@ namespace PriceMaster
 
             txtContact.Text = txtContact.Text.Replace("'", "");
 
-            if (txtContact.Text.Length < 5)
+            if (txtContact.Text.Length < 2)
             {
                 MessageBox.Show("Please enter a contact before saivng.", "Missing information!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

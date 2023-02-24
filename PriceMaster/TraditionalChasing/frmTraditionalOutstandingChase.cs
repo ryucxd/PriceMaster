@@ -95,6 +95,9 @@ namespace PriceMaster
                 dataGridView1.Columns[auto_customer_ref_index].HeaderText = "Customer Reference";
                 dataGridView1.Columns[auto_total_quotation_value_index].HeaderText = "Quotation Value";
 
+                dataGridView1.Columns[auto_revision_index].Visible = false;
+                dataGridView1.Columns[auto_item_count_index].Visible = false;
+
                 foreach (DataGridViewColumn col in dataGridView1.Columns)
                 {
                     col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;

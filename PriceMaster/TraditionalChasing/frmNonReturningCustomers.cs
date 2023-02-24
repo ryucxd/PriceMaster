@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace PriceMaster.TraditionalChasing
 {
@@ -22,12 +23,29 @@ namespace PriceMaster.TraditionalChasing
             InitializeComponent();
 
             load_grid();
+            fill_combo();
+        }
+
+        private void fill_combo()
+        {
+            foreach (DataGridViewRow row in dgvNonReturningCustomers.Rows)
+            {
+                if (cmbCustomerSearch.Items.Contains(row.Cells[0].Value.ToString()))
+                { } //nothing
+                else
+                    cmbCustomerSearch.Items.Add(row.Cells[0].Value.ToString());
+            }
         }
         
         private void load_grid()
         {
-            string sql = "select Customer,cast([Last Date Ordered] as date) as last_date_ordered,[Last Door Ordered] as [last_Door_Ordered]," +
-                "[Slimline Customer] as slimline from [order_database].dbo.POWERBI_non_returning_customers where [Slimline Customer] = 'Yes' order by last_date_ordered desc";
+            string sql = "select rtrim(Customer) as customer,cast([Last Date Ordered] as date) as last_date_ordered,[Last Door Ordered] as [last_Door_Ordered]," +
+                "[Slimline Customer] as slimline from [order_database].dbo.POWERBI_non_returning_customers where [Slimline Customer] = 'No' ";
+
+            if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
+                sql = sql + "AND customer = '" + cmbCustomerSearch.Text + "' ";
+
+            sql = sql + "order by last_date_ordered desc";
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -73,6 +91,16 @@ namespace PriceMaster.TraditionalChasing
         {
             frmTraditionalNonReturningCustomerEmail frm = new frmTraditionalNonReturningCustomerEmail(Convert.ToInt32(dgvNonReturningCustomers.Rows[e.RowIndex].Cells[last_door_ordered_index].Value.ToString()));
             frm.ShowDialog();
+        }
+
+        private void cmbCustomerSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            load_grid();
+        }
+
+        private void cmbCustomerSearch_TextChanged(object sender, EventArgs e)
+        {
+            load_grid();
         }
     }
 }
