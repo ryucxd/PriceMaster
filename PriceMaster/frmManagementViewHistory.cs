@@ -15,9 +15,10 @@ namespace PriceMaster
     public partial class frmManagementViewHistory : Form
     {
         public int slimline { get; set; }
-        public frmManagementViewHistory(int quote_id,int _slimline)
+        public frmManagementViewHistory(int quote_id,int _slimline,string customer)
         {
             InitializeComponent();
+            LblCustomer.Text = customer;
             slimline = _slimline;
             string sql = "";
             if (slimline == -1)

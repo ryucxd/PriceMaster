@@ -52,6 +52,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.chkboxSlimline = new System.Windows.Forms.CheckBox();
             this.btnShowAll = new PriceMaster.buttonFormatting();
             this.btnExcel = new PriceMaster.buttonFormatting();
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
@@ -75,7 +76,7 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightBlue;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvChase.DefaultCellStyle = dataGridViewCellStyle1;
@@ -83,7 +84,8 @@
             this.dgvChase.Name = "dgvChase";
             this.dgvChase.ReadOnly = true;
             this.dgvChase.RowHeadersVisible = false;
-            this.dgvChase.Size = new System.Drawing.Size(1665, 424);
+            this.dgvChase.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvChase.Size = new System.Drawing.Size(1793, 424);
             this.dgvChase.TabIndex = 1;
             this.dgvChase.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -202,7 +204,7 @@
             this.chkAllChases.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkAllChases.AutoSize = true;
             this.chkAllChases.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.chkAllChases.Location = new System.Drawing.Point(1360, 12);
+            this.chkAllChases.Location = new System.Drawing.Point(1424, 12);
             this.chkAllChases.Name = "chkAllChases";
             this.chkAllChases.Size = new System.Drawing.Size(80, 21);
             this.chkAllChases.TabIndex = 65;
@@ -278,7 +280,7 @@
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightBlue;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCorrespondence.DefaultCellStyle = dataGridViewCellStyle2;
@@ -286,7 +288,8 @@
             this.dgvCorrespondence.Name = "dgvCorrespondence";
             this.dgvCorrespondence.ReadOnly = true;
             this.dgvCorrespondence.RowHeadersVisible = false;
-            this.dgvCorrespondence.Size = new System.Drawing.Size(1665, 62);
+            this.dgvCorrespondence.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCorrespondence.Size = new System.Drawing.Size(1793, 62);
             this.dgvCorrespondence.TabIndex = 71;
             // 
             // label9
@@ -297,7 +300,7 @@
             this.label9.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.label9.Location = new System.Drawing.Point(10, 519);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(1665, 17);
+            this.label9.Size = new System.Drawing.Size(1793, 17);
             this.label9.TabIndex = 72;
             this.label9.Text = "Customer Correspondence:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -322,6 +325,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chkboxSlimline);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.cmbCustomerSearch);
             this.groupBox2.Controls.Add(this.label2);
@@ -333,7 +337,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.groupBox2.Location = new System.Drawing.Point(639, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(685, 65);
+            this.groupBox2.Size = new System.Drawing.Size(767, 65);
             this.groupBox2.TabIndex = 74;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Universal Filters";
@@ -348,6 +352,18 @@
             this.label10.TabIndex = 65;
             this.label10.Text = "to";
             this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // chkboxSlimline
+            // 
+            this.chkboxSlimline.AutoSize = true;
+            this.chkboxSlimline.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.chkboxSlimline.Location = new System.Drawing.Point(685, 34);
+            this.chkboxSlimline.Name = "chkboxSlimline";
+            this.chkboxSlimline.Size = new System.Drawing.Size(75, 21);
+            this.chkboxSlimline.TabIndex = 75;
+            this.chkboxSlimline.Text = "Slimline";
+            this.chkboxSlimline.UseVisualStyleBackColor = true;
+            this.chkboxSlimline.CheckedChanged += new System.EventHandler(this.chkboxSlimline_CheckedChanged);
             // 
             // btnShowAll
             // 
@@ -375,7 +391,7 @@
             this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExcel.ForeColor = System.Drawing.Color.White;
-            this.btnExcel.Location = new System.Drawing.Point(1439, 41);
+            this.btnExcel.Location = new System.Drawing.Point(1567, 41);
             this.btnExcel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnExcel.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnExcel.Name = "btnExcel";
@@ -394,7 +410,7 @@
             this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
-            this.buttonFormatting1.Location = new System.Drawing.Point(1574, 41);
+            this.buttonFormatting1.Location = new System.Drawing.Point(1702, 41);
             this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
             this.buttonFormatting1.Name = "buttonFormatting1";
@@ -413,7 +429,7 @@
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(1360, 41);
+            this.btnClear.Location = new System.Drawing.Point(1488, 41);
             this.btnClear.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnClear.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnClear.Name = "btnClear";
@@ -428,7 +444,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1689, 613);
+            this.ClientSize = new System.Drawing.Size(1817, 613);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label9);
@@ -450,6 +466,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -482,5 +499,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox chkboxSlimline;
     }
 }

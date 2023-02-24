@@ -427,6 +427,8 @@ namespace PriceMaster
         {
             string temp = "";
             string sql = sql_report;
+            //get all processes before opening the sheet
+            Process[] processesBefore = Process.GetProcessesByName("excel");
 
             //get it into a datatable
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
@@ -450,7 +452,7 @@ namespace PriceMaster
                     //dataGridView1.DataSource = dt;
                     //open the excel doc here and start inserting 
                     // Store the Excel processes before opening.
-                    Process[] processesBefore = Process.GetProcessesByName("excel");
+                    
                     // Open the file in Excel.
 
                     System.IO.Directory.CreateDirectory(@"C:\temp");

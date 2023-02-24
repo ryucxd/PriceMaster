@@ -277,7 +277,7 @@ namespace PriceMaster
         {
             if (e.RowIndex < 0)
                 return;
-            frmManagementViewHistory frm = new frmManagementViewHistory(Convert.ToInt32(dgvChase.Rows[e.RowIndex].Cells[quote_id_index].Value),slimline);
+            frmManagementViewHistory frm = new frmManagementViewHistory(Convert.ToInt32(dgvChase.Rows[e.RowIndex].Cells[quote_id_index].Value), slimline, cmbCustomer.Text);
             frm.ShowDialog();
         }
 

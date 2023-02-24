@@ -56,9 +56,15 @@ namespace PriceMaster
         {
             InitializeComponent();
             slimline = _slimline;
+            if (slimline == 0)
+                chkboxSlimline.Checked = false;
+            else
+                chkboxSlimline.Checked = true;
             load_data();
             load_correspondence();
             fillCombo();
+
+   
 
             //dteEnd.Value = DateTime.Now.AddDays(1);
         }
@@ -142,6 +148,12 @@ namespace PriceMaster
 
         private void load_data()
         {
+
+            if (chkboxSlimline.Checked == true)
+                slimline = -1;
+            else
+                slimline = 0;
+
             dgvChase.DataSource = null;
             string sql = "";
 
@@ -437,7 +449,7 @@ namespace PriceMaster
             }
 
             // dataGridView1.ClearSelection();
-            frmManagementViewHistory frm = new frmManagementViewHistory(Convert.ToInt32(dgvChase.Rows[e.RowIndex].Cells[quote_index].Value.ToString()), slimline);
+            frmManagementViewHistory frm = new frmManagementViewHistory(Convert.ToInt32(dgvChase.Rows[e.RowIndex].Cells[quote_index].Value.ToString()), slimline, dgvChase.Rows[e.RowIndex].Cells[customer_index].Value.ToString());
             frm.ShowDialog();
             //apply_filter();
             //}
@@ -733,6 +745,22 @@ namespace PriceMaster
         private void cmbChaseStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             load_correspondence();
+        }
+
+        private void chkboxSlimline_CheckedChanged(object sender, EventArgs e)
+        {
+            cmbStaffSearch.Text = "";
+            cmbCustomerSearch.Text = "";
+            cmbChaseStatus.Text = "";
+            date_filter = 0;
+
+            if (chkboxSlimline.Checked == true)
+                slimline = -1;
+            else
+                slimline = 0;
+            load_data();
+            load_correspondence();
+            fillCombo();
         }
     }
 }

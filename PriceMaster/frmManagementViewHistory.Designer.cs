@@ -40,6 +40,7 @@
             this.dteNextDate = new System.Windows.Forms.DateTimePicker();
             this.dteChaseDate = new System.Windows.Forms.DateTimePicker();
             this.chkNoFollowup = new System.Windows.Forms.CheckBox();
+            this.LblCustomer = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,14 +62,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(240, 369);
+            this.dataGridView1.Size = new System.Drawing.Size(240, 399);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(273, 101);
+            this.txtDescription.Location = new System.Drawing.Point(273, 142);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(529, 218);
             this.txtDescription.TabIndex = 61;
@@ -77,7 +78,7 @@
             // chkPhone
             // 
             this.chkPhone.AutoSize = true;
-            this.chkPhone.Location = new System.Drawing.Point(478, 48);
+            this.chkPhone.Location = new System.Drawing.Point(478, 89);
             this.chkPhone.Name = "chkPhone";
             this.chkPhone.Size = new System.Drawing.Size(57, 17);
             this.chkPhone.TabIndex = 78;
@@ -87,7 +88,7 @@
             // chkEmail
             // 
             this.chkEmail.AutoSize = true;
-            this.chkEmail.Location = new System.Drawing.Point(541, 48);
+            this.chkEmail.Location = new System.Drawing.Point(541, 89);
             this.chkEmail.Name = "chkEmail";
             this.chkEmail.Size = new System.Drawing.Size(51, 17);
             this.chkEmail.TabIndex = 77;
@@ -98,7 +99,7 @@
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(275, 80);
+            this.label2.Location = new System.Drawing.Point(275, 121);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(529, 17);
             this.label2.TabIndex = 74;
@@ -110,7 +111,7 @@
             this.lblNext.AutoSize = true;
             this.lblNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblNext.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblNext.Location = new System.Drawing.Point(373, 347);
+            this.lblNext.Location = new System.Drawing.Point(373, 388);
             this.lblNext.Name = "lblNext";
             this.lblNext.Size = new System.Drawing.Size(127, 17);
             this.lblNext.TabIndex = 73;
@@ -122,7 +123,7 @@
             this.lblChase.AutoSize = true;
             this.lblChase.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblChase.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblChase.Location = new System.Drawing.Point(311, 22);
+            this.lblChase.Location = new System.Drawing.Point(311, 63);
             this.lblChase.Name = "lblChase";
             this.lblChase.Size = new System.Drawing.Size(152, 17);
             this.lblChase.TabIndex = 72;
@@ -131,7 +132,7 @@
             // 
             // dteNextDate
             // 
-            this.dteNextDate.Location = new System.Drawing.Point(504, 347);
+            this.dteNextDate.Location = new System.Drawing.Point(504, 388);
             this.dteNextDate.Name = "dteNextDate";
             this.dteNextDate.Size = new System.Drawing.Size(145, 20);
             this.dteNextDate.TabIndex = 71;
@@ -139,7 +140,7 @@
             // dteChaseDate
             // 
             this.dteChaseDate.Enabled = false;
-            this.dteChaseDate.Location = new System.Drawing.Point(467, 22);
+            this.dteChaseDate.Location = new System.Drawing.Point(467, 63);
             this.dteChaseDate.Name = "dteChaseDate";
             this.dteChaseDate.Size = new System.Drawing.Size(145, 20);
             this.dteChaseDate.TabIndex = 70;
@@ -147,7 +148,7 @@
             // chkNoFollowup
             // 
             this.chkNoFollowup.AutoSize = true;
-            this.chkNoFollowup.Location = new System.Drawing.Point(469, 347);
+            this.chkNoFollowup.Location = new System.Drawing.Point(469, 388);
             this.chkNoFollowup.Name = "chkNoFollowup";
             this.chkNoFollowup.Size = new System.Drawing.Size(123, 17);
             this.chkNoFollowup.TabIndex = 76;
@@ -155,11 +156,23 @@
             this.chkNoFollowup.UseVisualStyleBackColor = true;
             this.chkNoFollowup.Visible = false;
             // 
+            // LblCustomer
+            // 
+            this.LblCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.LblCustomer.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.LblCustomer.Location = new System.Drawing.Point(275, 12);
+            this.LblCustomer.Name = "LblCustomer";
+            this.LblCustomer.Size = new System.Drawing.Size(527, 30);
+            this.LblCustomer.TabIndex = 79;
+            this.LblCustomer.Text = "CUSTOMER";
+            this.LblCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmManagementViewHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 393);
+            this.ClientSize = new System.Drawing.Size(814, 423);
+            this.Controls.Add(this.LblCustomer);
             this.Controls.Add(this.chkPhone);
             this.Controls.Add(this.chkEmail);
             this.Controls.Add(this.chkNoFollowup);
@@ -195,5 +208,6 @@
         private System.Windows.Forms.DateTimePicker dteNextDate;
         private System.Windows.Forms.DateTimePicker dteChaseDate;
         private System.Windows.Forms.CheckBox chkNoFollowup;
+        private System.Windows.Forms.Label LblCustomer;
     }
 }

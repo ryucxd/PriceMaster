@@ -212,9 +212,10 @@
             this.Controls.Add(this.lblChase);
             this.Controls.Add(this.cmbCustomer);
             this.Controls.Add(this.label3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "frmChaseCustomerList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "frmChaseCustomerList";
+            this.Text = "Customer List";
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOther)).EndInit();
             this.ResumeLayout(false);
