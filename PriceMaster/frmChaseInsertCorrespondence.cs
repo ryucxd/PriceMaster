@@ -86,15 +86,29 @@ namespace PriceMaster
             if (chkService.Checked == true)
                 service = -1;
 
+            string next_correspondence_date = "";
+            int no_follow_up = 0;
+
+            if (chkFollowUp.Checked == true)
+            {
+                no_follow_up = -1;
+                next_correspondence_date = "NULL";
+            }    
+            else
+            {
+                no_follow_up = 0;
+                next_correspondence_date = "'" + dteNextDate.Value.ToString("yyyyMMdd") + "'";
+            }
 
 
 
             //insert 
             string sql = "INSERT INTO [order_database].[dbo].[quotation_chase_customer] " +
                 "([customer_name],[slimline],[date_created],[body],[email],[phone],[inPerson],[contact],[issue_with_leadtime],[issue_with_quote_turnaround_time]" +
-                ",[issue_with_product],[issue_with_installation],[issue_with_service],correspondence_by) VALUES (" +
+                ",[issue_with_product],[issue_with_installation],[issue_with_service],correspondence_by,next_correspondence_date,no_follow_up) VALUES (" +
                 "'" + customer + "'," + slimline + ",GETDATE(),'" + txtDescription.Text + "'," + email + "," + phone + "," + in_person + "," +
-                "'" + txtContact.Text + "'," + lead_time + "," + turnaround + "," + product + "," + installation + "," + service + "," + CONNECT.staffID + " )";
+                "'" + txtContact.Text + "'," + lead_time + "," + turnaround + "," + product + "," + installation + "," + service + "," + CONNECT.staffID + "," +
+                "" + next_correspondence_date + "," + no_follow_up + " )";
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -109,6 +123,14 @@ namespace PriceMaster
             this.Close();
 
 
+        }
+
+        private void chkFollowUp_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFollowUp.Checked == true)
+                dteNextDate.Enabled = false;
+            else
+                dteNextDate.Enabled = true;
         }
     }
 }

@@ -42,6 +42,7 @@ namespace PriceMaster
         public int slimline_index { get; set; }
         public int date_created_index { get; set; }
         public int body_index { get; set; }
+        public int next_correspondence_index { get; set; }
         public int email_index { get; set; }
         public int phone_index { get; set; }
         public int in_person_index { get; set; }
@@ -288,6 +289,7 @@ namespace PriceMaster
 
             //load the correspondence 
             sql = "select q.id,customer_name,u.forename + ' ' + u.surname as fullname,q.slimline,date_created,body," +
+                "CASE WHEN no_follow_up = 0 then convert(varchar(10),next_correspondence_date , 103)  else 'No follow Up'end as next_correspondence," +
                 "CASE WHEN q.email = 0 THEN CAST(0 AS BIT) WHEN q.email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Email] ," +
                 "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Phone] ," +
                 "CASE WHEN inPerson = 0 THEN CAST(0 AS BIT) WHEN inPerson IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [inPerson] ," +
@@ -348,6 +350,7 @@ namespace PriceMaster
             dgvCorrespondence.Columns[slimline_index].HeaderText = "Slimline";
             dgvCorrespondence.Columns[date_created_index].HeaderText = "Date Created";
             dgvCorrespondence.Columns[body_index].HeaderText = "Body";
+            dgvCorrespondence.Columns[next_correspondence_index].HeaderText = "Next Correspondence";
             dgvCorrespondence.Columns[email_index].HeaderText = "Email";
             dgvCorrespondence.Columns[phone_index].HeaderText = "Phone";
             dgvCorrespondence.Columns[in_person_index].HeaderText = "In-Person";
@@ -372,6 +375,7 @@ namespace PriceMaster
             slimline_index = dgvCorrespondence.Columns["slimline"].Index;
             date_created_index = dgvCorrespondence.Columns["date_created"].Index;
             body_index = dgvCorrespondence.Columns["body"].Index;
+            next_correspondence_index = dgvCorrespondence.Columns["next_correspondence"].Index;
             email_index = dgvCorrespondence.Columns["email"].Index;
             phone_index = dgvCorrespondence.Columns["phone"].Index;
             in_person_index = dgvCorrespondence.Columns["inPerson"].Index;
@@ -559,9 +563,7 @@ namespace PriceMaster
             //ws.Columns.AutoFit();
             //ws.Rows.AutoFit();
 
-            //adjust the description conversation to fit and look nicer
-            xlWorkSheet.Columns[3].ColumnWidth = 100;
-            xlWorkSheet.Columns[3].WrapText = true;
+            
 
             //Make all top/left align
             xlWorkSheet.get_Range("A1", "H1000").Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignGeneral;
@@ -579,6 +581,9 @@ namespace PriceMaster
             ws.Columns.AutoFit();
             ws.Rows.AutoFit();
 
+            //adjust the description conversation to fit and look nicer
+            xlWorkSheet.Columns[4].ColumnWidth = 100;
+            xlWorkSheet.Columns[4].WrapText = true;
 
             range.Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
             range.Borders.Color = ColorTranslator.ToOle(Color.Black);
@@ -761,6 +766,19 @@ namespace PriceMaster
             load_data();
             load_correspondence();
             fillCombo();
+        }
+
+        private void dgvCorrespondence_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+         
+        }
+
+        private void dgvCorrespondence_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+            frmChaseCorrespondenceView frm = new frmChaseCorrespondenceView(Convert.ToInt32(dgvCorrespondence.Rows[e.RowIndex].Cells[correspondence_id_index].Value.ToString()));
+            frm.ShowDialog();
         }
     }
 }

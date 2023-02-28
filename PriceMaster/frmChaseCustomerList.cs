@@ -33,6 +33,7 @@ namespace PriceMaster
         public int slimline_index { get; set; }
         public int date_created_index { get; set; }
         public int body_index { get; set; }
+        public int next_correspondence_index { get; set; }
         public int email_index { get; set; }
         public int phone_index { get; set; }
         public int in_person_index { get; set; }
@@ -135,6 +136,7 @@ namespace PriceMaster
 
                 //load the correspondence stuff
                 sql = "select q.id,customer_name,u.forename + ' ' + u.surname as fullname,q.slimline,date_created,body," +
+                      "CASE WHEN no_follow_up = 0 then convert(varchar(10),next_correspondence_date , 103)  else 'No follow Up'end as next_correspondence, " +
                       "CASE WHEN q.email = 0 THEN CAST(0 AS BIT) WHEN q.email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Email] ," +
                       "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Phone] ," +
                       "CASE WHEN inPerson = 0 THEN CAST(0 AS BIT) WHEN inPerson IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [inPerson] ," +
@@ -227,6 +229,7 @@ namespace PriceMaster
             dgvOther.Columns[slimline_index].HeaderText = "Slimline";
             dgvOther.Columns[date_created_index].HeaderText = "Date Created";
             dgvOther.Columns[body_index].HeaderText = "Body";
+            dgvOther.Columns[next_correspondence_index].HeaderText = "Next Correspondence Date";
             dgvOther.Columns[email_index].HeaderText = "Email";
             dgvOther.Columns[phone_index].HeaderText = "Phone";
             dgvOther.Columns[in_person_index].HeaderText = "In-Person";
@@ -260,6 +263,7 @@ namespace PriceMaster
             slimline_index = dgvOther.Columns["slimline"].Index;
             date_created_index = dgvOther.Columns["date_created"].Index;
             body_index = dgvOther.Columns["body"].Index;
+            next_correspondence_index = dgvOther.Columns["next_correspondence"].Index;
             email_index = dgvOther.Columns["email"].Index;
             phone_index = dgvOther.Columns["phone"].Index;
             in_person_index = dgvOther.Columns["inPerson"].Index;
@@ -433,6 +437,15 @@ namespace PriceMaster
                     }
                 }
             }
+        }
+
+        private void dgvOther_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            frmChaseCorrespondenceView frm = new frmChaseCorrespondenceView(Convert.ToInt32(dgvOther.Rows[e.RowIndex].Cells[id_index].Value.ToString()));
+            frm.ShowDialog();
         }
     }
 }

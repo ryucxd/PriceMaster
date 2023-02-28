@@ -9,17 +9,23 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Web;
+using System.Diagnostics;
+using System.IO;
 
 namespace PriceMaster
 {
     public partial class frmManagementViewHistory : Form
     {
         public int slimline { get; set; }
-        public frmManagementViewHistory(int quote_id,int _slimline,string customer)
+        public int quote_chase_id { get; set; }
+        public frmManagementViewHistory(int quote_id, int _slimline, string customer)
         {
             InitializeComponent();
             LblCustomer.Text = customer;
             slimline = _slimline;
+
+            if (slimline == -1)
+                btnDrawings.Visible = false;
             string sql = "";
             if (slimline == -1)
             {
@@ -67,13 +73,14 @@ namespace PriceMaster
 
             //chase id - Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
             fillChase(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()));
-            
+
 
         }
 
-        
+
         private void fillChase(int chase_id)
         {
+            quote_chase_id = chase_id;
             dteChaseDate.Format = DateTimePickerFormat.Custom;
             dteChaseDate.CustomFormat = "dd/MM/yyyy hh:mm:ss";
             txtDescription.ReadOnly = true;
@@ -134,6 +141,119 @@ namespace PriceMaster
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             dataGridView1.ClearSelection();
+        }
+
+        private void btnQuote_Click(object sender, EventArgs e)
+        {
+            if (slimline == -1)
+            {
+                string sql = "select s.quote_id,issue_id from [order_database].dbo.quotation_chase_log_slimline q " +
+                    "left join dbo.sl_quotation s on q.quote_id = s.quote_id where q.id = " + quote_chase_id.ToString();
+                
+                string quote_id = "", revision_number = "";
+
+                using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                {
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        quote_id = dt.Rows[0][0].ToString();
+                        revision_number = dt.Rows[0][1].ToString();
+                    }
+
+                    conn.Close();
+                }
+
+                string filePath = @"S:\SLIMLINE QUOTES\SL" + quote_id;
+
+                if (Convert.ToInt32(revision_number) > 1) //issue has some extra stuff
+                    filePath = filePath + "I" + revision_number;
+
+                filePath = filePath + ".rtf";
+
+                //check if file exists 
+                if (File.Exists(filePath))
+                    Process.Start(filePath);
+                else
+                    MessageBox.Show("The quotation for " + quote_id + " does not exist!", "Missing File", MessageBoxButtons.OK);
+
+            }
+            else
+            {
+                //get the info we need to open this quote
+                string sql = "select s.quote_id,revision_number from [order_database].dbo.quotation_chase_log q " +
+                    "left join [order_database].dbo.solidworks_quotation_log s on q.quote_id = s.quote_id " +
+                    "where q.id = " + quote_chase_id.ToString();
+                string quote_id = "", revision_number = "";
+
+                using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                {
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        quote_id = dt.Rows[0][0].ToString();
+                        revision_number = dt.Rows[0][1].ToString();
+                    }
+
+                    conn.Close();
+                }
+
+                try
+                {
+                    string path = @"\\designsvr1\SOLIDWORKS\Door Designer\Specifications\Project " + quote_id + @"\Quotations\Revision " + revision_number + @"\FullQuotation-" + quote_id + "-" + revision_number + ".pdf";
+                    System.Diagnostics.Process.Start(path);
+                }
+                catch
+                {
+                    MessageBox.Show("The full quotation does not yet exist for this number.", "No File Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+        }
+
+        private void btnDrawings_Click(object sender, EventArgs e)
+        {
+            string sql = "select s.quote_id,revision_number from [order_database].dbo.quotation_chase_log q " +
+                   "left join [order_database].dbo.solidworks_quotation_log s on q.quote_id = s.quote_id " +
+                   "where q.id = " + quote_chase_id.ToString();
+            string quote_id = "", revision_number = "";
+
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    quote_id = dt.Rows[0][0].ToString();
+                    revision_number = dt.Rows[0][1].ToString();
+                }
+
+                conn.Close();
+            }
+
+            try
+            {
+                string path = @"\\designsvr1\SOLIDWORKS\Door Designer\Specifications\Project " + quote_id.ToString();
+                System.Diagnostics.Process.Start(path);
+            }
+            catch
+            {
+                MessageBox.Show("The full quotation does not yet exist for this number.", "No File Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

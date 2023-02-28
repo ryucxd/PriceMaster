@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using PriceMaster.TraditionalChasing;
 
 namespace PriceMaster
 {
@@ -177,10 +178,11 @@ namespace PriceMaster
             }
             else
             {
-                sql = "select customer,cast(s.quote_id as nvarchar) as quote_id, " +
+                sql = "select s.customer,cast(s.quote_id as nvarchar) as quote_id, " +
                       "s.customer_ref,'£' + CAST(round(s.total_quotation_value,2) as nvarchar(max)) as total_quotation_value,revision_number,item_count from [order_database].dbo.solidworks_quotation_log as s " +
                       // "left join [order_database].dbo.quotation_chase_log q on s.quote_id = q.quote_id " +
-                      "where cast(date_output as date) = cast([order_database].dbo.func_work_days(getdate(),2) as date) ";
+                      "left join [order_database].dbo.quotation_chase_exclusion_list a on s.customer = a.customer " +
+                      "where cast(date_output as date) = cast([order_database].dbo.func_work_days(getdate(),2) as date) AND a.customer is null ";
 
                 if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                     sql = sql + " AND customer = '" + cmbCustomerSearch.Text + "' ";
@@ -418,6 +420,12 @@ namespace PriceMaster
                 }
                 conn.Close();
             }
+        }
+
+        private void btnBanList_Click(object sender, EventArgs e)
+        {
+            frmAutoChaseBanList frm = new frmAutoChaseBanList();
+            frm.ShowDialog();
         }
     }
 }

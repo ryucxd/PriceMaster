@@ -50,10 +50,10 @@
             this.dgvCorrespondence = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.chkboxSlimline = new System.Windows.Forms.CheckBox();
             this.btnShowAll = new PriceMaster.buttonFormatting();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkboxSlimline = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.btnExcel = new PriceMaster.buttonFormatting();
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
@@ -291,6 +291,8 @@
             this.dgvCorrespondence.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCorrespondence.Size = new System.Drawing.Size(1793, 62);
             this.dgvCorrespondence.TabIndex = 71;
+            this.dgvCorrespondence.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCorrespondence_CellClick);
+            this.dgvCorrespondence.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCorrespondence_CellContentClick);
             // 
             // label9
             // 
@@ -323,6 +325,24 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Chase Filters";
             // 
+            // btnShowAll
+            // 
+            this.btnShowAll.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnShowAll.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnShowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowAll.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowAll.ForeColor = System.Drawing.Color.White;
+            this.btnShowAll.Location = new System.Drawing.Point(322, 26);
+            this.btnShowAll.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnShowAll.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnShowAll.Name = "btnShowAll";
+            this.btnShowAll.Padding = new System.Windows.Forms.Padding(3);
+            this.btnShowAll.Size = new System.Drawing.Size(82, 30);
+            this.btnShowAll.TabIndex = 66;
+            this.btnShowAll.Text = "Show All";
+            this.btnShowAll.UseVisualStyleBackColor = false;
+            this.btnShowAll.Click += new System.EventHandler(this.btnShowAll_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.chkboxSlimline);
@@ -342,17 +362,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Universal Filters";
             // 
-            // label10
-            // 
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label10.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label10.Location = new System.Drawing.Point(523, 34);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(28, 17);
-            this.label10.TabIndex = 65;
-            this.label10.Text = "to";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
             // chkboxSlimline
             // 
             this.chkboxSlimline.AutoSize = true;
@@ -365,23 +374,16 @@
             this.chkboxSlimline.UseVisualStyleBackColor = true;
             this.chkboxSlimline.CheckedChanged += new System.EventHandler(this.chkboxSlimline_CheckedChanged);
             // 
-            // btnShowAll
+            // label10
             // 
-            this.btnShowAll.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnShowAll.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnShowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowAll.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowAll.ForeColor = System.Drawing.Color.White;
-            this.btnShowAll.Location = new System.Drawing.Point(322, 26);
-            this.btnShowAll.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnShowAll.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnShowAll.Name = "btnShowAll";
-            this.btnShowAll.Padding = new System.Windows.Forms.Padding(3);
-            this.btnShowAll.Size = new System.Drawing.Size(82, 30);
-            this.btnShowAll.TabIndex = 66;
-            this.btnShowAll.Text = "Show All";
-            this.btnShowAll.UseVisualStyleBackColor = false;
-            this.btnShowAll.Click += new System.EventHandler(this.btnShowAll_Click);
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label10.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label10.Location = new System.Drawing.Point(523, 34);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(28, 17);
+            this.label10.TabIndex = 65;
+            this.label10.Text = "to";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // btnExcel
             // 
