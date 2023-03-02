@@ -20,12 +20,14 @@ namespace PriceMaster
     {
         public int quote_id { get; set; }
         public string customer { get; set; }
+        public int skip_loss_check { get; set; }
         public frmSlimlineChaseQuotation(int _quote_id, string _customer)
         {
             InitializeComponent();
             quote_id = _quote_id;
             customer = _customer + " - " + quote_id.ToString() ;
             lblCustomer.Text = customer;
+            skip_loss_check = 0;
             load_data();
         }
 
@@ -264,6 +266,39 @@ namespace PriceMaster
 
         private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string sql = "";
+            //are you sureeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+            if (skip_loss_check == 0)
+            {
+                if (cmbStatus.Text == "Lost")
+                {
+                    DialogResult result = MessageBox.Show("Are you sure you want to mark this chase as lost?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.No)
+                    {
+                        //revert it back to whatever it was
+                        sql = "select [status] from [order_database].dbo.quotation_feed_back_slimline WHERE quote_id = " + quote_id.ToString();
+
+                        using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                        {
+                            conn.Open();
+
+                            using (SqlCommand cmd = new SqlCommand(sql, conn))
+                            {
+                                var temp = cmd.ExecuteScalar();
+                                if (temp == null || string.IsNullOrEmpty(temp.ToString()) == true)
+                                    cmbStatus.Text = "Chasing";
+                                else
+                                    cmbStatus.Text = temp.ToString();
+                            }
+
+                            conn.Close();
+                            return;
+                        }
+                    }
+                }
+            }
+
             if (cmbStatus.Text == "Lost")
             {
                 lblLost.Visible = true;
@@ -291,7 +326,7 @@ namespace PriceMaster
                 if (cmbStatus.Text != "Pending")
                     cmbStatus.Items.RemoveAt(cmbStatus.Items.IndexOf("Pending"));
 
-            string sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET status = '" + cmbStatus.Text + "',too_expensive = 0,lead_time_too_long = 0,quote_took_too_long = 0,unable_to_meet_spec = 0,non_responsive_customer = 0 WHERE quote_id = " + quote_id.ToString();
+            sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET status = '" + cmbStatus.Text + "',too_expensive = 0,lead_time_too_long = 0,quote_took_too_long = 0,unable_to_meet_spec = 0,non_responsive_customer = 0 WHERE quote_id = " + quote_id.ToString();
             sql_update(sql);
 
             chkLeadTimeTooLong.Checked = false;
@@ -386,7 +421,7 @@ namespace PriceMaster
         {
             frmSlimlineChase frm = new frmSlimlineChase(quote_id, 0, 0);
             frm.ShowDialog();
-
+            skip_loss_check = -1;
             //update most recent chase
             load_data();
         }

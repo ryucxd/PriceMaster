@@ -46,6 +46,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dteNextDate = new System.Windows.Forms.DateTimePicker();
             this.chkFollowUp = new System.Windows.Forms.CheckBox();
+            this.btnSaveManagement = new PriceMaster.buttonFormatting();
             this.SuspendLayout();
             // 
             // chkPhone
@@ -183,7 +184,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(187, 467);
+            this.btnCancel.Location = new System.Drawing.Point(71, 467);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnCancel.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnCancel.Name = "btnCancel";
@@ -201,7 +202,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(282, 467);
+            this.btnSave.Location = new System.Drawing.Point(166, 467);
             this.btnSave.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSave.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSave.Name = "btnSave";
@@ -242,12 +243,31 @@
             this.chkFollowUp.UseVisualStyleBackColor = true;
             this.chkFollowUp.CheckedChanged += new System.EventHandler(this.chkFollowUp_CheckedChanged);
             // 
+            // btnSaveManagement
+            // 
+            this.btnSaveManagement.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnSaveManagement.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSaveManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveManagement.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveManagement.ForeColor = System.Drawing.Color.White;
+            this.btnSaveManagement.Location = new System.Drawing.Point(261, 467);
+            this.btnSaveManagement.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnSaveManagement.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnSaveManagement.Name = "btnSaveManagement";
+            this.btnSaveManagement.Padding = new System.Windows.Forms.Padding(3);
+            this.btnSaveManagement.Size = new System.Drawing.Size(222, 30);
+            this.btnSaveManagement.TabIndex = 99;
+            this.btnSaveManagement.Text = "Save AND alert management";
+            this.btnSaveManagement.UseVisualStyleBackColor = false;
+            this.btnSaveManagement.Click += new System.EventHandler(this.btnSaveManagement_Click);
+            // 
             // frmChaseInsertCorrespondence
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(555, 508);
             this.ControlBox = false;
+            this.Controls.Add(this.btnSaveManagement);
             this.Controls.Add(this.chkFollowUp);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dteNextDate);
@@ -295,5 +315,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dteNextDate;
         private System.Windows.Forms.CheckBox chkFollowUp;
+        private buttonFormatting btnSaveManagement;
     }
 }

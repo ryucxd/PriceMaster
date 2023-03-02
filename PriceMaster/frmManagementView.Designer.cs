@@ -196,7 +196,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(286, 17);
             this.label1.TabIndex = 64;
-            this.label1.Text = "Chase Date";
+            this.label1.Text = "Chase Date / Correspondence Date";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // chkAllChases

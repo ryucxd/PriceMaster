@@ -126,6 +126,9 @@ namespace PriceMaster
 
         private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
+
+
             if (cmbStatus.Text == "Lost")
             {
                 lblLost.Visible = true;

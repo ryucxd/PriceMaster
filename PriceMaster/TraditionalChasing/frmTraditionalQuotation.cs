@@ -16,12 +16,13 @@ namespace PriceMaster
 {
     public partial class frmTraditionalQuotation : Form
     {
-
+        public int skip_loss_check { get; set; }
         public int quote_id { get; set; }
         public frmTraditionalQuotation(int _quote_id, string customer)
         {
             InitializeComponent();
             quote_id = _quote_id;
+            skip_loss_check = 0;
             lblCustomer.Text = customer + " - " + quote_id.ToString();
             //get the max rev and fill the combobox
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
@@ -168,6 +169,40 @@ namespace PriceMaster
 
         private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            //are you sureeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+            if (skip_loss_check == 0)
+            {
+                if (cmbStatus.Text == "Lost")
+                {
+                    DialogResult result = MessageBox.Show("Are you sure you want to mark this chase as lost?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.No)
+                    {
+                        //revert it back to whatever it was
+                        string sql = "select [status] from [order_database].dbo.quotation_feed_back WHERE quote_id = " + quote_id.ToString();
+
+                        using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                        {
+                            conn.Open();
+
+                            using (SqlCommand cmd = new SqlCommand(sql, conn))
+                            {
+                                var temp = cmd.ExecuteScalar();
+                                if (temp == null || string.IsNullOrEmpty(temp.ToString()) == true)
+                                    cmbStatus.Text = "Chasing";
+                                else
+                                    cmbStatus.Text = temp.ToString();
+                            }
+
+                            conn.Close();
+                            return;
+                        }
+                    }
+                }
+            }
+            skip_loss_check = 0;
+
             if (cmbStatus.Text == "Lost")
             {
                 lblLost.Visible = true;
@@ -258,6 +293,7 @@ namespace PriceMaster
         private void btnChase_Click(object sender, EventArgs e)
         {
 
+            skip_loss_check = -1;
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -336,6 +372,7 @@ namespace PriceMaster
 
                 }
             }
+            
             recent_chase();
         }
 
