@@ -447,5 +447,11 @@ namespace PriceMaster
             frmChaseCorrespondenceView frm = new frmChaseCorrespondenceView(Convert.ToInt32(dgvOther.Rows[e.RowIndex].Cells[id_index].Value.ToString()));
             frm.ShowDialog();
         }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            frmCorrespondenceMassInsert frm = new frmCorrespondenceMassInsert();
+            frm.ShowDialog();
+        }
     }
 }

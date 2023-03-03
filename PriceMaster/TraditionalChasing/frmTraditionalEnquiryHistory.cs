@@ -16,6 +16,7 @@ namespace PriceMaster.TraditionalChasing
     public partial class frmTraditionalEnquiryHistory : Form
     {
         public int enquiry_id { get; set; }
+        public string sender_email { get; set; }         
         public frmTraditionalEnquiryHistory(string quote)
         {
             InitializeComponent();
@@ -92,6 +93,7 @@ namespace PriceMaster.TraditionalChasing
             }
 
             lblSentBy.Text = "Email Body  -  Sent by: " + sent_by;
+            sender_email = sent_by;
 
         }
 
@@ -113,6 +115,13 @@ namespace PriceMaster.TraditionalChasing
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             loadData(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()),dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString());
+        }
+
+        private void lblSentBy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(sender_email);
+
+            MessageBox.Show("Email Address Copied", "Copied to Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
     }
 }

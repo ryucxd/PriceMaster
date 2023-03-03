@@ -25,7 +25,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>101</ApplicationRevision>
+    <ApplicationRevision>104</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -103,6 +103,12 @@
     </Compile>
     <Compile Include="frmChaseInsertCorrespondence.Designer.cs">
       <DependentUpon>frmChaseInsertCorrespondence.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCorrespondenceMassInsert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCorrespondenceMassInsert.Designer.cs">
+      <DependentUpon>frmCorrespondenceMassInsert.cs</DependentUpon>
     </Compile>
     <Compile Include="SlimlineChasing\frmSlimlineChaseQuotation.cs">
       <SubType>Form</SubType>
@@ -354,6 +360,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmChaseInsertCorrespondence.resx">
       <DependentUpon>frmChaseInsertCorrespondence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCorrespondenceMassInsert.resx">
+      <DependentUpon>frmCorrespondenceMassInsert.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineChaseQuotation.resx">
       <DependentUpon>frmSlimlineChaseQuotation.cs</DependentUpon>

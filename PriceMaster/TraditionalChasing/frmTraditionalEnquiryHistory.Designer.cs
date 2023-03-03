@@ -90,6 +90,7 @@
             this.lblSentBy.TabIndex = 31;
             this.lblSentBy.Text = "Email Body";
             this.lblSentBy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblSentBy.Click += new System.EventHandler(this.lblSentBy_Click);
             // 
             // label1
             // 
