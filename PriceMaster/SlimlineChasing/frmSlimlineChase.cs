@@ -76,12 +76,12 @@ namespace PriceMaster
 
                 conn.Close();
             }
-        }
+        }  
 
 
         private void loadHistory()
         {
-
+            
             
 
            string  sql = "select l.id,l.chase_date as [Chase Date],u.forename + ' ' + u.surname as [Full Name] from [order_database].dbo.quotation_chase_log_slimline  l " +
@@ -144,13 +144,20 @@ namespace PriceMaster
             if (chkNoFollowup.Checked == true)
                 dont_chase = -1;
 
-            string sql = "INSERT INTO [order_database].dbo.quotation_chase_log_slimline (quote_id,chase_date,chase_description,next_chase_date,chased_by,dont_chase,email,phone) " +
-                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + ")";
+
+            //also mark all previous chases as complete - toms idea
+            string sql = "UPDATE [order_database].dbo.quotation_chase_log_slimline SET chase_complete = -1 where quote_id = " + quote_id.ToString();
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     cmd.ExecuteNonQuery();
+
+                sql = "INSERT INTO [order_database].dbo.quotation_chase_log_slimline (quote_id,chase_date,chase_description,next_chase_date,chased_by,dont_chase,email,phone,chase_complete) " +
+                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + "," + dont_chase.ToString() + ")";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    cmd.ExecuteNonQuery();
+
                 conn.Close();
 
                 //also update the status to chasing >> incase they forgot 

@@ -91,7 +91,7 @@ namespace PriceMaster
                 "FROM [order_database].dbo.quotation_chase_log_slimline a " +
                 "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
                 "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
-                "left join[price_master].dbo.[sl_quotation] sl on sl.quote_id = a.quote_id " +
+                "left join (SELECT * FROM [price_master].dbo.[sl_quotation] where highest_issue = -1 ) sl on sl.quote_id = a.quote_id " +
                 "left join[EnquiryLog].dbo.[Enquiry_Log] e on sl.enquiry_id = e.id " +
                 "left join[dsl_fitting].dbo.SALES_LEDGER s on sl.customer_acc_ref = s.ACCOUNT_REF " +
                 "right join (select max(id) as id,quote_id FROM [order_database].dbo.quotation_chase_log_slimline group by quote_id) as z on z.id = a.id " +
@@ -102,7 +102,7 @@ namespace PriceMaster
             else
                 sql = sql + " <= ";
             
-            sql = sql + " CAST(GETDATE() as date) and b.[status] = 'Chasing' and (dont_chase = 0 or dont_chase is null) ";
+            sql = sql + " CAST(GETDATE() as date) and (dont_chase = 0 or dont_chase is null) AND (chase_complete = 0 or chase_complete is null) ";//and b.[status] = 'Chasing'
 
             if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                 sql = sql + " AND rtrim(s.NAME) = '" + cmbCustomerSearch.Text + "'  ";
@@ -110,7 +110,7 @@ namespace PriceMaster
             if (admin == 0)
                 sql = sql + "AND chased_by = " + CONNECT.staffID.ToString();
 
-            sql = sql + " order by priority_chase desc,rtrim(s.[NAME]), next_chase_date asc, quote_id ";
+            sql = sql + " order by priority_chase desc,chase_date desc,rtrim(s.[NAME]), quote_id ";
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
@@ -203,7 +203,8 @@ namespace PriceMaster
                 conn.Close();
             }
 
-            frmSlimlineQuotation frm = new frmSlimlineQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString()), customer);
+            //frmSlimlineQuotation frm = new frmSlimlineQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString()), customer);
+            frmSlimlineChaseQuotation frm = new frmSlimlineChaseQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString()), customer);
             frm.ShowDialog();
             load_data();
             //apply_filter();

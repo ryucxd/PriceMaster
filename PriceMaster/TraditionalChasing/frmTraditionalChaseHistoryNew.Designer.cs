@@ -1,6 +1,6 @@
 ﻿namespace PriceMaster
 {
-    partial class frmManagementViewHistory
+    partial class frmTraditionalChaseHistoryNew
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManagementViewHistory));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTraditionalChaseHistoryNew));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.txtDescription = new System.Windows.Forms.RichTextBox();
             this.chkPhone = new System.Windows.Forms.CheckBox();
@@ -40,6 +40,9 @@
             this.dteNextDate = new System.Windows.Forms.DateTimePicker();
             this.dteChaseDate = new System.Windows.Forms.DateTimePicker();
             this.chkNoFollowup = new System.Windows.Forms.CheckBox();
+            this.btnChaseComplete = new PriceMaster.buttonFormatting();
+            this.chkChaseComplete = new System.Windows.Forms.CheckBox();
+            this.btnEditChase = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +61,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(562, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(240, 369);
@@ -68,7 +71,7 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(273, 101);
+            this.txtDescription.Location = new System.Drawing.Point(12, 98);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(529, 218);
             this.txtDescription.TabIndex = 61;
@@ -77,7 +80,7 @@
             // chkPhone
             // 
             this.chkPhone.AutoSize = true;
-            this.chkPhone.Location = new System.Drawing.Point(478, 48);
+            this.chkPhone.Location = new System.Drawing.Point(217, 45);
             this.chkPhone.Name = "chkPhone";
             this.chkPhone.Size = new System.Drawing.Size(57, 17);
             this.chkPhone.TabIndex = 78;
@@ -87,7 +90,7 @@
             // chkEmail
             // 
             this.chkEmail.AutoSize = true;
-            this.chkEmail.Location = new System.Drawing.Point(541, 48);
+            this.chkEmail.Location = new System.Drawing.Point(280, 45);
             this.chkEmail.Name = "chkEmail";
             this.chkEmail.Size = new System.Drawing.Size(51, 17);
             this.chkEmail.TabIndex = 77;
@@ -98,7 +101,7 @@
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(275, 80);
+            this.label2.Location = new System.Drawing.Point(14, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(529, 17);
             this.label2.TabIndex = 74;
@@ -110,7 +113,7 @@
             this.lblNext.AutoSize = true;
             this.lblNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblNext.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblNext.Location = new System.Drawing.Point(373, 347);
+            this.lblNext.Location = new System.Drawing.Point(112, 329);
             this.lblNext.Name = "lblNext";
             this.lblNext.Size = new System.Drawing.Size(127, 17);
             this.lblNext.TabIndex = 73;
@@ -122,7 +125,7 @@
             this.lblChase.AutoSize = true;
             this.lblChase.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblChase.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblChase.Location = new System.Drawing.Point(311, 22);
+            this.lblChase.Location = new System.Drawing.Point(50, 19);
             this.lblChase.Name = "lblChase";
             this.lblChase.Size = new System.Drawing.Size(152, 17);
             this.lblChase.TabIndex = 72;
@@ -131,7 +134,7 @@
             // 
             // dteNextDate
             // 
-            this.dteNextDate.Location = new System.Drawing.Point(504, 347);
+            this.dteNextDate.Location = new System.Drawing.Point(243, 329);
             this.dteNextDate.Name = "dteNextDate";
             this.dteNextDate.Size = new System.Drawing.Size(145, 20);
             this.dteNextDate.TabIndex = 71;
@@ -139,7 +142,7 @@
             // dteChaseDate
             // 
             this.dteChaseDate.Enabled = false;
-            this.dteChaseDate.Location = new System.Drawing.Point(467, 22);
+            this.dteChaseDate.Location = new System.Drawing.Point(206, 19);
             this.dteChaseDate.Name = "dteChaseDate";
             this.dteChaseDate.Size = new System.Drawing.Size(145, 20);
             this.dteChaseDate.TabIndex = 70;
@@ -147,7 +150,7 @@
             // chkNoFollowup
             // 
             this.chkNoFollowup.AutoSize = true;
-            this.chkNoFollowup.Location = new System.Drawing.Point(516, 349);
+            this.chkNoFollowup.Location = new System.Drawing.Point(217, 330);
             this.chkNoFollowup.Name = "chkNoFollowup";
             this.chkNoFollowup.Size = new System.Drawing.Size(123, 17);
             this.chkNoFollowup.TabIndex = 76;
@@ -155,11 +158,63 @@
             this.chkNoFollowup.UseVisualStyleBackColor = true;
             this.chkNoFollowup.Visible = false;
             // 
-            // frmManagementViewHistory
+            // btnChaseComplete
+            // 
+            this.btnChaseComplete.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnChaseComplete.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnChaseComplete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChaseComplete.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChaseComplete.ForeColor = System.Drawing.Color.White;
+            this.btnChaseComplete.Location = new System.Drawing.Point(186, 354);
+            this.btnChaseComplete.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnChaseComplete.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnChaseComplete.Name = "btnChaseComplete";
+            this.btnChaseComplete.Padding = new System.Windows.Forms.Padding(3);
+            this.btnChaseComplete.Size = new System.Drawing.Size(202, 30);
+            this.btnChaseComplete.TabIndex = 79;
+            this.btnChaseComplete.Text = "Mark Chase as Complete";
+            this.btnChaseComplete.UseVisualStyleBackColor = false;
+            this.btnChaseComplete.Click += new System.EventHandler(this.btnChaseComplete_Click);
+            // 
+            // chkChaseComplete
+            // 
+            this.chkChaseComplete.AutoSize = true;
+            this.chkChaseComplete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.chkChaseComplete.Location = new System.Drawing.Point(217, 359);
+            this.chkChaseComplete.Name = "chkChaseComplete";
+            this.chkChaseComplete.Size = new System.Drawing.Size(128, 21);
+            this.chkChaseComplete.TabIndex = 80;
+            this.chkChaseComplete.Text = "Chase complete";
+            this.chkChaseComplete.UseVisualStyleBackColor = true;
+            this.chkChaseComplete.Visible = false;
+            // 
+            // btnEditChase
+            // 
+            this.btnEditChase.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnEditChase.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnEditChase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditChase.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditChase.ForeColor = System.Drawing.Color.White;
+            this.btnEditChase.Location = new System.Drawing.Point(396, 326);
+            this.btnEditChase.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnEditChase.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnEditChase.Name = "btnEditChase";
+            this.btnEditChase.Padding = new System.Windows.Forms.Padding(3);
+            this.btnEditChase.Size = new System.Drawing.Size(145, 30);
+            this.btnEditChase.TabIndex = 82;
+            this.btnEditChase.Text = "Edit Next Chase";
+            this.btnEditChase.UseVisualStyleBackColor = false;
+            this.btnEditChase.Visible = false;
+            this.btnEditChase.Click += new System.EventHandler(this.btnEditChase_Click);
+            // 
+            // frmTraditionalChaseHistoryNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 393);
+            this.Controls.Add(this.btnEditChase);
+            this.Controls.Add(this.chkChaseComplete);
+            this.Controls.Add(this.btnChaseComplete);
             this.Controls.Add(this.chkPhone);
             this.Controls.Add(this.chkEmail);
             this.Controls.Add(this.chkNoFollowup);
@@ -173,7 +228,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmManagementViewHistory";
+            this.Name = "frmTraditionalChaseHistoryNew";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chase History";
             this.Shown += new System.EventHandler(this.frmChaseHistory_Shown);
@@ -195,5 +250,8 @@
         private System.Windows.Forms.DateTimePicker dteNextDate;
         private System.Windows.Forms.DateTimePicker dteChaseDate;
         private System.Windows.Forms.CheckBox chkNoFollowup;
+        private buttonFormatting btnChaseComplete;
+        private System.Windows.Forms.CheckBox chkChaseComplete;
+        private buttonFormatting btnEditChase;
     }
 }

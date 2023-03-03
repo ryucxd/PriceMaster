@@ -33,21 +33,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtCustom = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbStatus = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.chkTooExpensive = new System.Windows.Forms.CheckBox();
-            this.chkUnableToMeetSpec = new System.Windows.Forms.CheckBox();
-            this.chkQuoteTookTooLong = new System.Windows.Forms.CheckBox();
-            this.chkLeadTimeTooLong = new System.Windows.Forms.CheckBox();
-            this.lblLost = new System.Windows.Forms.Label();
-            this.chkNonResponsive = new System.Windows.Forms.CheckBox();
             this.chkPriority = new System.Windows.Forms.CheckBox();
             this.btnAttachments = new PriceMaster.buttonFormatting();
             this.btnInsertNote = new PriceMaster.buttonFormatting();
             this.btnRelatedEnquiries = new PriceMaster.buttonFormatting();
             this.btnChaseHistory = new PriceMaster.buttonFormatting();
-            this.btnChase = new PriceMaster.buttonFormatting();
             this.btnQuote = new PriceMaster.buttonFormatting();
+            this.chkNonResponsive = new System.Windows.Forms.CheckBox();
+            this.btnChase = new PriceMaster.buttonFormatting();
+            this.lblLost = new System.Windows.Forms.Label();
+            this.chkLeadTimeTooLong = new System.Windows.Forms.CheckBox();
+            this.chkQuoteTookTooLong = new System.Windows.Forms.CheckBox();
+            this.chkUnableToMeetSpec = new System.Windows.Forms.CheckBox();
+            this.chkTooExpensive = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // cmbRev
@@ -102,99 +102,6 @@
             this.label2.TabIndex = 50;
             this.label2.Text = "Custom Feedback:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // cmbStatus
-            // 
-            this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(56, 99);
-            this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(157, 21);
-            this.cmbStatus.TabIndex = 51;
-            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label3.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label3.Location = new System.Drawing.Point(-2, 99);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 17);
-            this.label3.TabIndex = 52;
-            this.label3.Text = "Status:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // chkTooExpensive
-            // 
-            this.chkTooExpensive.AutoSize = true;
-            this.chkTooExpensive.Location = new System.Drawing.Point(26, 167);
-            this.chkTooExpensive.Name = "chkTooExpensive";
-            this.chkTooExpensive.Size = new System.Drawing.Size(99, 17);
-            this.chkTooExpensive.TabIndex = 53;
-            this.chkTooExpensive.Text = "Too expensive.";
-            this.chkTooExpensive.UseVisualStyleBackColor = true;
-            this.chkTooExpensive.Visible = false;
-            this.chkTooExpensive.CheckedChanged += new System.EventHandler(this.chkTooExpensive_CheckedChanged);
-            // 
-            // chkUnableToMeetSpec
-            // 
-            this.chkUnableToMeetSpec.AutoSize = true;
-            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(157, 194);
-            this.chkUnableToMeetSpec.Name = "chkUnableToMeetSpec";
-            this.chkUnableToMeetSpec.Size = new System.Drawing.Size(127, 17);
-            this.chkUnableToMeetSpec.TabIndex = 54;
-            this.chkUnableToMeetSpec.Text = "Unable to meet spec.";
-            this.chkUnableToMeetSpec.UseVisualStyleBackColor = true;
-            this.chkUnableToMeetSpec.Visible = false;
-            this.chkUnableToMeetSpec.CheckedChanged += new System.EventHandler(this.chkUnableToMeetSpec_CheckedChanged);
-            // 
-            // chkQuoteTookTooLong
-            // 
-            this.chkQuoteTookTooLong.AutoSize = true;
-            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(26, 194);
-            this.chkQuoteTookTooLong.Name = "chkQuoteTookTooLong";
-            this.chkQuoteTookTooLong.Size = new System.Drawing.Size(123, 17);
-            this.chkQuoteTookTooLong.TabIndex = 55;
-            this.chkQuoteTookTooLong.Text = "Quote took too long.";
-            this.chkQuoteTookTooLong.UseVisualStyleBackColor = true;
-            this.chkQuoteTookTooLong.Visible = false;
-            this.chkQuoteTookTooLong.CheckedChanged += new System.EventHandler(this.chkQuoteTookTooLong_CheckedChanged);
-            // 
-            // chkLeadTimeTooLong
-            // 
-            this.chkLeadTimeTooLong.AutoSize = true;
-            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(157, 167);
-            this.chkLeadTimeTooLong.Name = "chkLeadTimeTooLong";
-            this.chkLeadTimeTooLong.Size = new System.Drawing.Size(116, 17);
-            this.chkLeadTimeTooLong.TabIndex = 56;
-            this.chkLeadTimeTooLong.Text = "Lead time too long.";
-            this.chkLeadTimeTooLong.UseVisualStyleBackColor = true;
-            this.chkLeadTimeTooLong.Visible = false;
-            this.chkLeadTimeTooLong.CheckedChanged += new System.EventHandler(this.chkLeadTimeTooLong_CheckedChanged);
-            // 
-            // lblLost
-            // 
-            this.lblLost.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblLost.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblLost.Location = new System.Drawing.Point(26, 131);
-            this.lblLost.Name = "lblLost";
-            this.lblLost.Size = new System.Drawing.Size(247, 17);
-            this.lblLost.TabIndex = 57;
-            this.lblLost.Text = "Please select why this was lost.";
-            this.lblLost.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblLost.Visible = false;
-            // 
-            // chkNonResponsive
-            // 
-            this.chkNonResponsive.AutoSize = true;
-            this.chkNonResponsive.Location = new System.Drawing.Point(26, 220);
-            this.chkNonResponsive.Name = "chkNonResponsive";
-            this.chkNonResponsive.Size = new System.Drawing.Size(152, 17);
-            this.chkNonResponsive.TabIndex = 61;
-            this.chkNonResponsive.Text = "Non Responsive Customer";
-            this.chkNonResponsive.UseVisualStyleBackColor = true;
-            this.chkNonResponsive.Visible = false;
-            this.chkNonResponsive.CheckedChanged += new System.EventHandler(this.chkNonResponsive_CheckedChanged);
             // 
             // chkPriority
             // 
@@ -280,6 +187,36 @@
             this.btnChaseHistory.UseVisualStyleBackColor = false;
             this.btnChaseHistory.Click += new System.EventHandler(this.btnChaseHistory_Click);
             // 
+            // btnQuote
+            // 
+            this.btnQuote.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnQuote.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuote.ForeColor = System.Drawing.Color.White;
+            this.btnQuote.Location = new System.Drawing.Point(1030, 205);
+            this.btnQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnQuote.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnQuote.Name = "btnQuote";
+            this.btnQuote.Padding = new System.Windows.Forms.Padding(3);
+            this.btnQuote.Size = new System.Drawing.Size(102, 33);
+            this.btnQuote.TabIndex = 47;
+            this.btnQuote.Text = "Quote";
+            this.btnQuote.UseVisualStyleBackColor = false;
+            this.btnQuote.Click += new System.EventHandler(this.btnQuote_Click);
+            // 
+            // chkNonResponsive
+            // 
+            this.chkNonResponsive.AutoSize = true;
+            this.chkNonResponsive.Location = new System.Drawing.Point(26, 220);
+            this.chkNonResponsive.Name = "chkNonResponsive";
+            this.chkNonResponsive.Size = new System.Drawing.Size(152, 17);
+            this.chkNonResponsive.TabIndex = 61;
+            this.chkNonResponsive.Text = "Non Responsive Customer";
+            this.chkNonResponsive.UseVisualStyleBackColor = true;
+            this.chkNonResponsive.Visible = false;
+            this.chkNonResponsive.CheckedChanged += new System.EventHandler(this.chkNonResponsive_CheckedChanged);
+            // 
             // btnChase
             // 
             this.btnChase.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -298,23 +235,86 @@
             this.btnChase.UseVisualStyleBackColor = false;
             this.btnChase.Click += new System.EventHandler(this.btnChase_Click);
             // 
-            // btnQuote
+            // lblLost
             // 
-            this.btnQuote.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnQuote.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuote.ForeColor = System.Drawing.Color.White;
-            this.btnQuote.Location = new System.Drawing.Point(1030, 205);
-            this.btnQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnQuote.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnQuote.Name = "btnQuote";
-            this.btnQuote.Padding = new System.Windows.Forms.Padding(3);
-            this.btnQuote.Size = new System.Drawing.Size(102, 33);
-            this.btnQuote.TabIndex = 47;
-            this.btnQuote.Text = "Quote";
-            this.btnQuote.UseVisualStyleBackColor = false;
-            this.btnQuote.Click += new System.EventHandler(this.btnQuote_Click);
+            this.lblLost.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.lblLost.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblLost.Location = new System.Drawing.Point(26, 131);
+            this.lblLost.Name = "lblLost";
+            this.lblLost.Size = new System.Drawing.Size(247, 17);
+            this.lblLost.TabIndex = 57;
+            this.lblLost.Text = "Please select why this was lost.";
+            this.lblLost.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblLost.Visible = false;
+            // 
+            // chkLeadTimeTooLong
+            // 
+            this.chkLeadTimeTooLong.AutoSize = true;
+            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(157, 167);
+            this.chkLeadTimeTooLong.Name = "chkLeadTimeTooLong";
+            this.chkLeadTimeTooLong.Size = new System.Drawing.Size(116, 17);
+            this.chkLeadTimeTooLong.TabIndex = 56;
+            this.chkLeadTimeTooLong.Text = "Lead time too long.";
+            this.chkLeadTimeTooLong.UseVisualStyleBackColor = true;
+            this.chkLeadTimeTooLong.Visible = false;
+            this.chkLeadTimeTooLong.CheckedChanged += new System.EventHandler(this.chkLeadTimeTooLong_CheckedChanged);
+            // 
+            // chkQuoteTookTooLong
+            // 
+            this.chkQuoteTookTooLong.AutoSize = true;
+            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(26, 194);
+            this.chkQuoteTookTooLong.Name = "chkQuoteTookTooLong";
+            this.chkQuoteTookTooLong.Size = new System.Drawing.Size(123, 17);
+            this.chkQuoteTookTooLong.TabIndex = 55;
+            this.chkQuoteTookTooLong.Text = "Quote took too long.";
+            this.chkQuoteTookTooLong.UseVisualStyleBackColor = true;
+            this.chkQuoteTookTooLong.Visible = false;
+            this.chkQuoteTookTooLong.CheckedChanged += new System.EventHandler(this.chkQuoteTookTooLong_CheckedChanged);
+            // 
+            // chkUnableToMeetSpec
+            // 
+            this.chkUnableToMeetSpec.AutoSize = true;
+            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(157, 194);
+            this.chkUnableToMeetSpec.Name = "chkUnableToMeetSpec";
+            this.chkUnableToMeetSpec.Size = new System.Drawing.Size(127, 17);
+            this.chkUnableToMeetSpec.TabIndex = 54;
+            this.chkUnableToMeetSpec.Text = "Unable to meet spec.";
+            this.chkUnableToMeetSpec.UseVisualStyleBackColor = true;
+            this.chkUnableToMeetSpec.Visible = false;
+            this.chkUnableToMeetSpec.CheckedChanged += new System.EventHandler(this.chkUnableToMeetSpec_CheckedChanged);
+            // 
+            // chkTooExpensive
+            // 
+            this.chkTooExpensive.AutoSize = true;
+            this.chkTooExpensive.Location = new System.Drawing.Point(26, 167);
+            this.chkTooExpensive.Name = "chkTooExpensive";
+            this.chkTooExpensive.Size = new System.Drawing.Size(99, 17);
+            this.chkTooExpensive.TabIndex = 53;
+            this.chkTooExpensive.Text = "Too expensive.";
+            this.chkTooExpensive.UseVisualStyleBackColor = true;
+            this.chkTooExpensive.Visible = false;
+            this.chkTooExpensive.CheckedChanged += new System.EventHandler(this.chkTooExpensive_CheckedChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label3.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label3.Location = new System.Drawing.Point(-2, 99);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 17);
+            this.label3.TabIndex = 52;
+            this.label3.Text = "Status:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cmbStatus
+            // 
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Location = new System.Drawing.Point(56, 99);
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(157, 21);
+            this.cmbStatus.TabIndex = 51;
+            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
             // 
             // frmSlimlineQuotation
             // 
@@ -361,19 +361,19 @@
         private buttonFormatting btnQuote;
         private System.Windows.Forms.RichTextBox txtCustom;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbStatus;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox chkTooExpensive;
-        private System.Windows.Forms.CheckBox chkUnableToMeetSpec;
-        private System.Windows.Forms.CheckBox chkQuoteTookTooLong;
-        private System.Windows.Forms.CheckBox chkLeadTimeTooLong;
-        private System.Windows.Forms.Label lblLost;
-        private buttonFormatting btnChase;
         private buttonFormatting btnChaseHistory;
         private buttonFormatting btnRelatedEnquiries;
-        private System.Windows.Forms.CheckBox chkNonResponsive;
         private buttonFormatting btnInsertNote;
         private System.Windows.Forms.CheckBox chkPriority;
         private buttonFormatting btnAttachments;
+        private System.Windows.Forms.CheckBox chkNonResponsive;
+        private buttonFormatting btnChase;
+        private System.Windows.Forms.Label lblLost;
+        private System.Windows.Forms.CheckBox chkLeadTimeTooLong;
+        private System.Windows.Forms.CheckBox chkQuoteTookTooLong;
+        private System.Windows.Forms.CheckBox chkUnableToMeetSpec;
+        private System.Windows.Forms.CheckBox chkTooExpensive;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cmbStatus;
     }
 }

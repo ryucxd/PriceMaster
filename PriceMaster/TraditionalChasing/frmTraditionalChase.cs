@@ -38,7 +38,7 @@ namespace PriceMaster
             btnCancel.Text = "Close";
 
             //load data that was passed over
-            string sql = "select chase_date,chase_description,next_chase_date, dont_chase from [order_database].dbo.quotation_chase_log where id = " + id.ToString();
+            string sql = "select chase_date,chase_description,next_chase_date, dont_chase,phone,email from [order_database].dbo.quotation_chase_log where id = " + id.ToString();
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -62,6 +62,12 @@ namespace PriceMaster
                     }
                     else
                         chkNoFollowup.Visible = false;
+
+                    if (dt.Rows[0][4].ToString() == "-1")
+                        chkPhone.Checked = true;
+                    if (dt.Rows[0][5].ToString() == "-1")
+                        chkEmail.Checked = true;
+
                     btnSave.Visible = false;
                     btnCancel.Location = new Point(215, 334);
                 }
@@ -110,20 +116,52 @@ namespace PriceMaster
                 return;
             }
 
+            int validation = 0;
+            int phone = 0;
+            int email = 0;
+            if (chkEmail.Checked == true)
+            {
+                validation = -1;
+                email = -1;
+            }
+            if (chkPhone.Checked == true)
+            {
+                validation = -1;
+                phone = -1;
+            }
+
+            if (validation == 0)
+            {
+                MessageBox.Show("Please select either email or phone before saving this chase.", "Chase Method", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
             txtDescription.Text = txtDescription.Text.Replace("'", "");
 
             int dont_chase = 0;
+
             if (chkNoFollowup.Checked == true)
                 dont_chase = -1;
 
-            string sql = "INSERT INTO [order_database].dbo.quotation_chase_log (quote_id,chase_date,chase_description,next_chase_date,chased_by,dont_chase) " +
-                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," + CONNECT.staffID + "," + dont_chase.ToString() + ")";
+            //also mark all previous chases as complete - toms idea
+            string sql = "UPDATE [order_database].dbo.quotation_chase_log SET chase_complete = -1 where quote_id = " + quote_id.ToString();
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     cmd.ExecuteNonQuery();
+
+                // add the new chase
+                sql = "INSERT INTO [order_database].dbo.quotation_chase_log (quote_id,chase_date,chase_description,next_chase_date,chased_by,dont_chase,email,phone,chase_complete) " +
+                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + "," + dont_chase.ToString() + ")";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    cmd.ExecuteNonQuery();
+
                 conn.Close();
+
+
 
                 //also update the status to chasing >> incase they forgot 
                 frmTraditionalChaseUpdate frm = new frmTraditionalChaseUpdate(quote_id);

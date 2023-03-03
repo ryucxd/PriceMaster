@@ -16,12 +16,13 @@ namespace PriceMaster
 {
     public partial class frmTraditionalQuotation : Form
     {
-
+        public int skip_loss_check { get; set; }
         public int quote_id { get; set; }
         public frmTraditionalQuotation(int _quote_id, string customer)
         {
             InitializeComponent();
             quote_id = _quote_id;
+            skip_loss_check = 0;
             lblCustomer.Text = customer + " - " + quote_id.ToString();
             //get the max rev and fill the combobox
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
@@ -41,7 +42,7 @@ namespace PriceMaster
 
 
                     //if the current status is not pending then we remove it so it cannot be added back
-                    sql = "SELECT [status] ,[custom_feedback] ,[too_expensive] ,[lead_time_too_long] ,[quote_took_too_long] ,[unable_to_meet_spec],[non_responsive_customer] " +
+                    sql = "SELECT [status] ,[custom_feedback] ,[too_expensive] ,[lead_time_too_long] ,[quote_took_too_long] ,[unable_to_meet_spec],[non_responsive_customer],priority_chase " +
                         "FROM [order_database].[dbo].[quotation_feed_back] WHERE quote_id = " + quote_id.ToString();
                     using (SqlCommand cmdData = new SqlCommand(sql, conn))
                     {
@@ -61,6 +62,8 @@ namespace PriceMaster
                             chkUnableToMeetSpec.Checked = true;
                         if (dt.Rows[0][6].ToString() == "-1")
                             chkNonResponsive.Checked = true;
+                        if (dt.Rows[0][7].ToString() == "-1")
+                            chkPriority.Checked = true;
 
                         if (string.IsNullOrEmpty(cmbStatus.Text))
                             cmbStatus.Items.Add("Pending");
@@ -96,7 +99,7 @@ namespace PriceMaster
         private void fillGrid()
         {
             string sql = "select CAST(parent_spec as nvarchar(max)) + '-' + cast(row_index as nvarchar(max)) + '-' + cast(rev_num as nvarchar(max)) as [Parent Spec], item_ref as [Item Ref], " +
-                "item_type as [Item Type], single_double as [Single / Double], width as [Width], height as [Height], threshold as [Threshold], hardware as [Hardware], qty_same as [Quantity Same],cost as [Cost]" +
+                "item_type as [Item Type], single_double as [Single / Double], width as [Width], height as [Height], threshold as [Threshold], hardware as [Hardware], qty_same as [Quantity Same],cost as [Cost] " +
                 "from [order_database].dbo.solidworks_quotation_log_details " +
                 "WHERE parent_spec = '" + quote_id.ToString() + "' and rev_num = " + cmbRev.Text + " Order by CAST(parent_spec as nvarchar(max)) + '-' + cast(row_index as nvarchar(max)) + '-' + cast(rev_num as nvarchar(max))";
 
@@ -130,6 +133,7 @@ namespace PriceMaster
 
             lblCount.Text = dataGridView1.Rows.Count.ToString() + " Items";
 
+            recent_chase();
         }
 
         private void cmbRev_SelectedIndexChanged(object sender, EventArgs e)
@@ -165,6 +169,40 @@ namespace PriceMaster
 
         private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            //are you sureeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+            if (skip_loss_check == 0)
+            {
+                if (cmbStatus.Text == "Lost")
+                {
+                    DialogResult result = MessageBox.Show("Are you sure you want to mark this chase as lost?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (result == DialogResult.No)
+                    {
+                        //revert it back to whatever it was
+                        string sql = "select [status] from [order_database].dbo.quotation_feed_back WHERE quote_id = " + quote_id.ToString();
+
+                        using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                        {
+                            conn.Open();
+
+                            using (SqlCommand cmd = new SqlCommand(sql, conn))
+                            {
+                                var temp = cmd.ExecuteScalar();
+                                if (temp == null || string.IsNullOrEmpty(temp.ToString()) == true)
+                                    cmbStatus.Text = "Chasing";
+                                else
+                                    cmbStatus.Text = temp.ToString();
+                            }
+
+                            conn.Close();
+                            return;
+                        }
+                    }
+                }
+            }
+            skip_loss_check = 0;
+
             if (cmbStatus.Text == "Lost")
             {
                 lblLost.Visible = true;
@@ -255,6 +293,7 @@ namespace PriceMaster
         private void btnChase_Click(object sender, EventArgs e)
         {
 
+            skip_loss_check = -1;
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -333,32 +372,37 @@ namespace PriceMaster
 
                 }
             }
+            
+            recent_chase();
         }
 
         private void btnChaseHistory_Click(object sender, EventArgs e)
         {
-            string sql = "select l.id from [order_database].dbo.quotation_chase_log  l " +
-          "left join[user_info].dbo.[user] u on l.chased_by = u.id " +
-          "where quote_id = " + quote_id.ToString();
+            ////  string sql = "select l.id from [order_database].dbo.quotation_chase_log  l " +
+            ////"left join[user_info].dbo.[user] u on l.chased_by = u.id " +
+            ////"where quote_id = " + quote_id.ToString();
 
-            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
-                {
-                    conn.Open();
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    if (dt.Rows.Count == 0)
-                    {
-                        MessageBox.Show("There is no chase history for this quote!", "Missing Chase", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    conn.Close();
-                }
-            }
+            ////  using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            ////  {
+            ////      using (SqlCommand cmd = new SqlCommand(sql, conn))
+            ////      {
+            ////          conn.Open();
+            ////          SqlDataAdapter da = new SqlDataAdapter(cmd);
+            ////          DataTable dt = new DataTable();
+            ////          da.Fill(dt);
+            ////          if (dt.Rows.Count == 0)
+            ////          {
+            ////              MessageBox.Show("There is no chase history for this quote!", "Missing Chase", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            ////              return;
+            ////          }
+            ////          conn.Close();
+            ////      }
+            ////  }
 
-            frmChaseHistory frm = new frmChaseHistory(quote_id);
+
+            //old code ^^
+
+            frmTraditionalChaseHistoryNew frm = new frmTraditionalChaseHistoryNew(quote_id);
             frm.ShowDialog();
         }
 
@@ -411,9 +455,12 @@ namespace PriceMaster
 
         private void txtCustom_Leave(object sender, EventArgs e)
         {
-            txtCustom.Text = txtCustom.Text.Replace("'", "");
-            string sql = "UPDATE [order_database].dbo.quotation_feed_back SET custom_feedback = '" + txtCustom.Text + "' WHERE quote_id = " + quote_id.ToString();
-            sql_update(sql);
+            //txtCustom.Text = txtCustom.Text.Replace("'", "");
+            //string sql = "UPDATE [order_database].dbo.quotation_feed_back SET custom_feedback = '" + txtCustom.Text + "' WHERE quote_id = " + quote_id.ToString();
+            //sql_update(sql);
+            //dont need this anymore as there is an insert button
+
+
         }
 
         private void txtCustom_LostFocus(object sender, EventArgs e)
@@ -425,9 +472,9 @@ namespace PriceMaster
 
         private void frmTraditionalQuotation_FormClosing(object sender, FormClosingEventArgs e)
         {
-            txtCustom.Text = txtCustom.Text.Replace("'", "");
-            string sql = "UPDATE [order_database].dbo.quotation_feed_back SET custom_feedback = '" + txtCustom.Text + "' WHERE quote_id = " + quote_id.ToString();
-            sql_update(sql);
+            //txtCustom.Text = txtCustom.Text.Replace("'", "");
+            //string sql = "UPDATE [order_database].dbo.quotation_feed_back SET custom_feedback = '" + txtCustom.Text + "' WHERE quote_id = " + quote_id.ToString();
+            //sql_update(sql);
 
 
             if (cmbStatus.Text == "Lost")
@@ -456,11 +503,36 @@ namespace PriceMaster
 
         private void btnRelatedEnquiries_Click(object sender, EventArgs e)
         {
-            string sql = "select id,subject,sender_email_address from [EnquiryLog].dbo.[Enquiry_Log] where related_quote = '" + quote_id.ToString() + "-" + cmbRev.Text + "'";
+            string sql = "select id from [EnquiryLog].dbo.[Enquiry_Log] where related_quote = '" + quote_id.ToString() + "-" + cmbRev.Text + "'";
+            //if there is no enquiry - prompt the user if they want to add a link!
 
-            frmTraditionalEnquiryHistory frm = new frmTraditionalEnquiryHistory(quote_id.ToString() + "-" + cmbRev.Text);
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    var validation = cmd.ExecuteScalar();
+                    if (validation == null)
+                    {
+                        DialogResult result = MessageBox.Show("There is no enquiry related to this quote, would you like to add a related enquiry?","No Related Enquiry",MessageBoxButtons.YesNo,MessageBoxIcon.Information);
+                        if (result == DialogResult.Yes)
+                        {
+                            frmTraditionalLinkEnquiry frm = new frmTraditionalLinkEnquiry(quote_id.ToString() + "-" + cmbRev.Text);
+                            frm.ShowDialog();
+                        }
+                    }
+                    else
+                    {
+                        frmTraditionalEnquiryHistory frm = new frmTraditionalEnquiryHistory(quote_id.ToString() + "-" + cmbRev.Text);
+                        frm.ShowDialog();
+                    }
+                }
+                conn.Close();
+            }
 
-            frm.ShowDialog();
+
+
+            
         }
 
         private void chkNonResponsive_CheckedChanged(object sender, EventArgs e)
@@ -470,6 +542,105 @@ namespace PriceMaster
                 value = -1;
             string sql = "UPDATE [order_database].dbo.quotation_feed_back SET non_responsive_customer = " + value + " WHERE quote_id = " + quote_id.ToString();
             sql_update(sql);
+        }
+
+        private void chkPriority_CheckedChanged(object sender, EventArgs e)
+        {
+            int value = 0;
+            if (chkPriority.Checked == true)
+                value = -1;
+            string sql = "UPDATE [order_database].dbo.quotation_feed_back SET priority_chase = " + value + " WHERE quote_id = " + quote_id.ToString();
+            sql_update(sql);
+        }
+
+        private void recent_chase()
+        {
+            //get the recent chase data
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+
+                //check if there is a existing chase~
+
+                string sql = "select top 1 id FROM [order_database].dbo.quotation_chase_log  where quote_id = " + quote_id + " order by id desc";
+                int chase_exists = 0;
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    var data = cmd.ExecuteScalar();
+                    if (data != null)
+                        chase_exists = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                }
+
+                if (chase_exists == 0) //small size = 1240, 638
+                {
+                    this.Size = new Size(1240, 638);
+                }
+                else //large size = 1656, 638
+                {
+                    this.Size = new Size(1656, 638);
+
+                    //populate data with the latest chase information
+
+                    sql = "select chase_date,chase_description,next_chase_date, dont_chase,phone,email from [order_database].dbo.quotation_chase_log  where id = " + chase_exists.ToString();
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        txtChaseDate.Text = Convert.ToDateTime(dt.Rows[0][0].ToString()).ToString();
+                        txtDescription.Text = dt.Rows[0][1].ToString();
+                        txtNextDate.Text = Convert.ToDateTime(dt.Rows[0][2].ToString()).ToString("dd/MM/yyyy");
+                        if (dt.Rows[0][3].ToString() == "-1")
+                        {
+                            txtNextDate.Visible = false;
+                            lblNext.Visible = false;
+                            chkHiddenFollowup.Visible = true;
+                            chkHiddenFollowup.Checked = true;
+                            chkHiddenFollowup.AutoCheck = false;
+                        }
+                        else
+                        {
+
+                        }
+                        if (dt.Rows[0][4].ToString() == "-1")
+                            chkPhone.Checked = true;
+                        if (dt.Rows[0][5].ToString() == "-1")
+                            chkEmail.Checked = true;
+                    }
+                }
+
+
+
+                this.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
+                          (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
+
+                conn.Close();
+            }
+        }
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            //opens a form to enter a note
+            frmTraditionalInsertNote frm = new frmTraditionalInsertNote(quote_id);
+            frm.ShowDialog();
+
+
+            //if the current status is not pending then we remove it so it cannot be added back
+            string sql = "SELECT [custom_feedback] FROM [order_database].[dbo].[quotation_feed_back] WHERE quote_id = " + quote_id.ToString();
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmdData = new SqlCommand(sql, conn))
+                {
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmdData);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    txtCustom.Text = dt.Rows[0][0].ToString();
+                }
+                conn.Close();
+            }
         }
     }
 }

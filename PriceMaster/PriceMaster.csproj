@@ -25,7 +25,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>44</ApplicationRevision>
+    <ApplicationRevision>101</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -86,10 +86,82 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CONNECT.cs" />
-    <Compile Include="SlimlineChasing\frmManagementViewHistory.cs">
+    <Compile Include="frmChaseCustomerList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SlimlineChasing\frmManagementViewHistory.Designer.cs">
+    <Compile Include="frmChaseCustomerList.Designer.cs">
+      <DependentUpon>frmChaseCustomerList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmChaseCorrespondenceView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChaseCorrespondenceView.Designer.cs">
+      <DependentUpon>frmChaseCorrespondenceView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmChaseInsertCorrespondence.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChaseInsertCorrespondence.Designer.cs">
+      <DependentUpon>frmChaseInsertCorrespondence.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineChaseQuotation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineChaseQuotation.Designer.cs">
+      <DependentUpon>frmSlimlineChaseQuotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmAutoChaseBanList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmAutoChaseBanList.Designer.cs">
+      <DependentUpon>frmAutoChaseBanList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmNonReturningCustomers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmNonReturningCustomers.Designer.cs">
+      <DependentUpon>frmNonReturningCustomers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalEditChase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalEditChase.Designer.cs">
+      <DependentUpon>frmTraditionalEditChase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineEditChase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineEditChase.Designer.cs">
+      <DependentUpon>frmSlimlineEditChase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalNonReturningCustomerEmail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalNonReturningCustomerEmail.Designer.cs">
+      <DependentUpon>frmTraditionalNonReturningCustomerEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalInsertNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalInsertNote.Designer.cs">
+      <DependentUpon>frmTraditionalInsertNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalChaseHistoryNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalChaseHistoryNew.Designer.cs">
+      <DependentUpon>frmTraditionalChaseHistoryNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineChaseHistoryNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlimlineChasing\frmSlimlineChaseHistoryNew.Designer.cs">
+      <DependentUpon>frmSlimlineChaseHistoryNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManagementViewHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManagementViewHistory.Designer.cs">
       <DependentUpon>frmManagementViewHistory.cs</DependentUpon>
     </Compile>
     <Compile Include="SlimlineChasing\frmSlimlineInsertNote.cs">
@@ -104,10 +176,10 @@
     <Compile Include="SlimlineChasing\frmSlimlineMultipleChaseLoss.Designer.cs">
       <DependentUpon>frmSlimlineMultipleChaseLoss.cs</DependentUpon>
     </Compile>
-    <Compile Include="SlimlineChasing\frmManagementView.cs">
+    <Compile Include="frmManagementView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SlimlineChasing\frmManagementView.Designer.cs">
+    <Compile Include="frmManagementView.Designer.cs">
       <DependentUpon>frmManagementView.cs</DependentUpon>
     </Compile>
     <Compile Include="SlimlineChasing\frmSlimlineQuotation.cs">
@@ -206,6 +278,12 @@
     <Compile Include="TraditionalChasing\frmTraditionalEnquiryHistory.Designer.cs">
       <DependentUpon>frmTraditionalEnquiryHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalLinkEnquiry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmTraditionalLinkEnquiry.Designer.cs">
+      <DependentUpon>frmTraditionalLinkEnquiry.cs</DependentUpon>
+    </Compile>
     <Compile Include="TraditionalChasing\frmTraditionalMultipleChaseLoss.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,7 +346,43 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="SlimlineChasing\frmManagementViewHistory.resx">
+    <EmbeddedResource Include="frmChaseCustomerList.resx">
+      <DependentUpon>frmChaseCustomerList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChaseCorrespondenceView.resx">
+      <DependentUpon>frmChaseCorrespondenceView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChaseInsertCorrespondence.resx">
+      <DependentUpon>frmChaseInsertCorrespondence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineChaseQuotation.resx">
+      <DependentUpon>frmSlimlineChaseQuotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmAutoChaseBanList.resx">
+      <DependentUpon>frmAutoChaseBanList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmNonReturningCustomers.resx">
+      <DependentUpon>frmNonReturningCustomers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalEditChase.resx">
+      <DependentUpon>frmTraditionalEditChase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineEditChase.resx">
+      <DependentUpon>frmSlimlineEditChase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalNonReturningCustomerEmail.resx">
+      <DependentUpon>frmTraditionalNonReturningCustomerEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalInsertNote.resx">
+      <DependentUpon>frmTraditionalInsertNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalChaseHistoryNew.resx">
+      <DependentUpon>frmTraditionalChaseHistoryNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlimlineChasing\frmSlimlineChaseHistoryNew.resx">
+      <DependentUpon>frmSlimlineChaseHistoryNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManagementViewHistory.resx">
       <DependentUpon>frmManagementViewHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineInsertNote.resx">
@@ -277,7 +391,7 @@
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineMultipleChaseLoss.resx">
       <DependentUpon>frmSlimlineMultipleChaseLoss.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SlimlineChasing\frmManagementView.resx">
+    <EmbeddedResource Include="frmManagementView.resx">
       <DependentUpon>frmManagementView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineQuotation.resx">
@@ -306,12 +420,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCustomerList.resx">
       <DependentUpon>frmCustomerList.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEditCustomer.resx">
       <DependentUpon>frmEditCustomer.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEnquiry.resx">
       <DependentUpon>frmEnquiry.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
@@ -327,6 +444,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TraditionalChasing\frmTraditionalEnquiryHistory.resx">
       <DependentUpon>frmTraditionalEnquiryHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmTraditionalLinkEnquiry.resx">
+      <DependentUpon>frmTraditionalLinkEnquiry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TraditionalChasing\frmTraditionalMultipleChaseLoss.resx">
       <DependentUpon>frmTraditionalMultipleChaseLoss.cs</DependentUpon>
@@ -395,6 +515,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="pricelog.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewSlimlineChasing\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
