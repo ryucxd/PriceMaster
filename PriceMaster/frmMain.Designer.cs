@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.lblTotalCost = new System.Windows.Forms.Label();
@@ -61,6 +62,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.chkChasePriority = new System.Windows.Forms.CheckBox();
+            this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             this.btnManagementView = new PriceMaster.buttonFormatting();
             this.btnOutstanding = new PriceMaster.buttonFormatting();
             this.btnAdmin = new PriceMaster.buttonFormatting();
@@ -71,7 +73,6 @@
             this.btnSupplier = new PriceMaster.buttonFormatting();
             this.btnEmail = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
-            this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -86,10 +87,19 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Location = new System.Drawing.Point(12, 143);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1877, 499);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -434,6 +444,24 @@
             this.chkChasePriority.UseVisualStyleBackColor = false;
             this.chkChasePriority.CheckedChanged += new System.EventHandler(this.chkChasePriority_CheckedChanged);
             // 
+            // buttonFormatting1
+            // 
+            this.buttonFormatting1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.buttonFormatting1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
+            this.buttonFormatting1.Location = new System.Drawing.Point(1238, 43);
+            this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
+            this.buttonFormatting1.Name = "buttonFormatting1";
+            this.buttonFormatting1.Padding = new System.Windows.Forms.Padding(3);
+            this.buttonFormatting1.Size = new System.Drawing.Size(221, 30);
+            this.buttonFormatting1.TabIndex = 109;
+            this.buttonFormatting1.Text = "Customer Correspondence";
+            this.buttonFormatting1.UseVisualStyleBackColor = false;
+            this.buttonFormatting1.Click += new System.EventHandler(this.buttonFormatting1_Click);
+            // 
             // btnManagementView
             // 
             this.btnManagementView.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -613,24 +641,6 @@
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // buttonFormatting1
-            // 
-            this.buttonFormatting1.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.buttonFormatting1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
-            this.buttonFormatting1.Location = new System.Drawing.Point(1238, 43);
-            this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
-            this.buttonFormatting1.Name = "buttonFormatting1";
-            this.buttonFormatting1.Padding = new System.Windows.Forms.Padding(3);
-            this.buttonFormatting1.Size = new System.Drawing.Size(221, 30);
-            this.buttonFormatting1.TabIndex = 109;
-            this.buttonFormatting1.Text = "Customer Correspondence";
-            this.buttonFormatting1.UseVisualStyleBackColor = false;
-            this.buttonFormatting1.Click += new System.EventHandler(this.buttonFormatting1_Click);
             // 
             // frmMain
             // 

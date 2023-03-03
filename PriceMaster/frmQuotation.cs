@@ -285,6 +285,17 @@ namespace PriceMaster
             {
                 sql = "UPDATE dbo.sl_quotation SET status_id = " + temp + " WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
                 runSQL(sql, 0);
+
+                //check if there is a quoted day -- if there is then skip otherwise we timestamp if the new status is quoted
+                sql = "SELECT quote_date FROM dbo.sl_quotation where quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
+                runSQL(sql, -1);
+                if (string.IsNullOrEmpty(temp))
+                {
+                    if (cmbStatus.Text == "Quoted")
+                    sql = "UPDATE dbo.sl_quotation SET quote_date = GETDATE() WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
+                    runSQL(sql, 0);
+                }
+
             }
             temp = null;
         }

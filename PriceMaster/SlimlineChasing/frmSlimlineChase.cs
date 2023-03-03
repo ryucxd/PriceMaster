@@ -76,12 +76,12 @@ namespace PriceMaster
 
                 conn.Close();
             }
-        }
+        }  
 
 
         private void loadHistory()
         {
-
+            
             
 
            string  sql = "select l.id,l.chase_date as [Chase Date],u.forename + ' ' + u.surname as [Full Name] from [order_database].dbo.quotation_chase_log_slimline  l " +

@@ -365,11 +365,11 @@ namespace PriceMaster
                 return;
             string sql = "";
             column_index_refresh();
-            if (e.ColumnIndex == quote_id_index)
-            {
-                frmQuotation frm = new frmQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()));
-                frm.ShowDialog();
-            }  //opens quotation screen
+            ////if (e.ColumnIndex == quote_id_index)
+            ////{
+            ////    frmQuotation frm = new frmQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()));
+            ////    frm.ShowDialog();
+            ////}  //opens quotation screen
 
             if (e.ColumnIndex == view_button_index)
             {
@@ -386,8 +386,7 @@ namespace PriceMaster
                 else
                     MessageBox.Show("The quotation for " + dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString() + " does not exist!", "Missing File", MessageBoxButtons.OK);
             }
-
-            if (e.ColumnIndex == chase_button_index)
+            else if (e.ColumnIndex == chase_button_index)
             {
 
                 //if there is no entry in quotation_feed_back then make one
@@ -412,6 +411,14 @@ namespace PriceMaster
                 frmSlimlineChaseQuotation frm = new frmSlimlineChaseQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString()), dataGridView1.Rows[e.RowIndex].Cells[customer_index].Value.ToString());
                 frm.ShowDialog();
                 loadData();
+            }
+            else
+            {
+                //if (e.ColumnIndex == quote_id_index)
+                //{
+                    frmQuotation frm = new frmQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString()));
+                    frm.ShowDialog();
+                //}
             }
         }
 
@@ -723,7 +730,7 @@ namespace PriceMaster
                         max_id = Convert.ToInt32(cmd.ExecuteScalar());
 
 
-                    sql = "insert into dbo.sl_quotation (quote_id,issue_id,quote_date,highest_issue,created_by_id,status_id) VALUES (" + max_id.ToString() + ",1,getdate(),-1," + CONNECT.staffID.ToString() + ",8)";
+                    sql = "insert into dbo.sl_quotation (quote_id,issue_id,"  + /*quote_date,*/  "highest_issue,created_by_id,status_id) VALUES (" + max_id.ToString() + ",1," + /*getdate(),*/  "-1," + CONNECT.staffID.ToString() + ",8)";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                         cmd.ExecuteNonQuery();
                     conn.Close();
