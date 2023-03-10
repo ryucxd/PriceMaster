@@ -101,7 +101,7 @@ namespace PriceMaster.TraditionalChasing
         {
             try
             {
-                if (File.Exists(dgvAttachments.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()))
+                if (File.Exists(dgvAttachments.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString())) 
                 {
                     Process.Start("explorer.exe", dgvAttachments.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
                 }
@@ -112,8 +112,10 @@ namespace PriceMaster.TraditionalChasing
             { }
         }
 
+
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            
             loadData(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()),dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString());
         }
 

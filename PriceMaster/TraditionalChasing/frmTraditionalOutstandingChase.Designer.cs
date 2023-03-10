@@ -88,6 +88,8 @@
             // cmbCustomerSearch
             // 
             this.cmbCustomerSearch.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cmbCustomerSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbCustomerSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCustomerSearch.FormattingEnabled = true;
             this.cmbCustomerSearch.Location = new System.Drawing.Point(478, 7);
             this.cmbCustomerSearch.Name = "cmbCustomerSearch";
