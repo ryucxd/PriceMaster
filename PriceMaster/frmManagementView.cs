@@ -65,7 +65,7 @@ namespace PriceMaster
             load_correspondence();
             fillCombo();
 
-   
+
 
             //dteEnd.Value = DateTime.Now.AddDays(1);
         }
@@ -318,7 +318,7 @@ namespace PriceMaster
 
             if (date_filter == -1)
             {
-                    sql = sql + "AND date_created >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND date_created  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1) ";
+                sql = sql + "AND date_created >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND date_created  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1) ";
             }
 
 
@@ -332,9 +332,9 @@ namespace PriceMaster
                 {
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
-                        da.Fill(dt);
+                    da.Fill(dt);
                     dgvCorrespondence.DataSource = dt;
-                }    
+                }
 
                 conn.Close();
             }
@@ -520,6 +520,12 @@ namespace PriceMaster
                 row.Cells[chase_description_index].Value = row.Cells[chase_description_index].Value.ToString().Replace("\n", " ").Replace("\r", " - ");
             }
 
+            foreach (DataGridViewRow row in dgvCorrespondence.Rows)
+            {
+                //string temp =  row.Cells[3].Value.ToString();
+                row.Cells[body_index].Value = row.Cells[body_index].Value.ToString().Replace("\n", " ").Replace("\r", " - ");
+            }
+
 
             // Copy DataGridView results to clipboard
             dgvChase.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
@@ -538,13 +544,14 @@ namespace PriceMaster
             xlexcel.DisplayAlerts = false; // Without this you will get two confirm overwrite prompts
             Microsoft.Office.Interop.Excel.Workbook xlWorkBook = xlexcel.Workbooks.Add(misValue);
             Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            xlWorkSheet.Name = "Chases";
 
             // Get Excel processes after opening the file. 
             Process[] processesAfter = Process.GetProcessesByName("excel");
 
 
             // Paste clipboard results to worksheet range
-            Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[2, 1];
+            Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[3, 1];
             CR.Select();
             xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
 
@@ -553,7 +560,7 @@ namespace PriceMaster
 
 
 
-            xlWorkSheet.get_Range("A2").Select();
+            xlWorkSheet.get_Range("A3").Select();
 
             Microsoft.Office.Interop.Excel.Worksheet ws = xlexcel.ActiveWorkbook.Worksheets[1];
             Microsoft.Office.Interop.Excel.Range range = ws.UsedRange;
@@ -563,20 +570,22 @@ namespace PriceMaster
             //ws.Columns.AutoFit();
             //ws.Rows.AutoFit();
 
-            
 
+            xlWorkSheet.Cells[1, 1].Value = "Quotation Chases";
+            xlWorkSheet.Range["A1:H1"].Cells.Font.Size = 20;
+            xlWorkSheet.Range[xlWorkSheet.Cells[1, 1], xlWorkSheet.Cells[1, 8]].Merge();
             //Make all top/left align
-            xlWorkSheet.get_Range("A1", "H1000").Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignGeneral;
-            xlWorkSheet.get_Range("A1", "H1000").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+            xlWorkSheet.get_Range("A2", "H1000").Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignGeneral;
+            xlWorkSheet.get_Range("A2", "H1000").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
             //change the entire top row to center align (AND BOTH DATE COLUMNS)
-            xlWorkSheet.get_Range("A1", "H1").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            xlWorkSheet.get_Range("A1", "H2").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
             //xlWorkSheet.Columns[2].Style.HorizontalAlignment = HorizontalAlignment.Center;
             //xlWorkSheet.Columns[4].Style.HorizontalAlignment = HorizontalAlignment.Center;
 
 
-            xlWorkSheet.Range["A1:H1"].Interior.Color = System.Drawing.Color.LightSkyBlue;
-            xlWorkSheet.Range["A1:H1"].AutoFilter(1);
-            xlWorkSheet.Range["A1:H1"].Cells.Font.Size = 12;
+            xlWorkSheet.Range["A2:H2"].Interior.Color = System.Drawing.Color.LightSkyBlue;
+            xlWorkSheet.Range["A2:H2"].AutoFilter(1);
+            xlWorkSheet.Range["A2:H2"].Cells.Font.Size = 12;
 
             ws.Columns.AutoFit();
             ws.Rows.AutoFit();
@@ -587,6 +596,86 @@ namespace PriceMaster
 
             range.Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
             range.Borders.Color = ColorTranslator.ToOle(Color.Black);
+
+
+
+            // ADD THE CORRESPONDENCE TO TAB 2 HERE
+            //IF THERE ARE ROWS
+            if (dgvCorrespondence.Rows.Count > 0)
+            {
+
+
+                dgvCorrespondence.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+                dgvCorrespondence.SelectAll();
+
+                xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.Add
+                    (System.Reflection.Missing.Value, xlWorkBook.Worksheets[xlWorkBook.Worksheets.Count],
+                    System.Reflection.Missing.Value, System.Reflection.Missing.Value);
+                xlWorkSheet.Name = "Correspondence";
+
+                dataObj = dgvCorrespondence.GetClipboardContent();
+                if (dataObj != null)
+                    Clipboard.SetDataObject(dataObj);
+
+                // Paste clipboard results to worksheet range
+                Microsoft.Office.Interop.Excel.Range CR2 = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[3, 1];
+                CR2.Select();
+                xlWorkSheet.PasteSpecial(CR2, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
+
+                //delete the first row
+                //((Excel.Range)xlWorkSheet.Rows[1, Missing.Value]).Delete(Excel.XlDeleteShiftDirection.xlShiftUp);
+
+                xlWorkSheet.Range["A3:N3"].Interior.Color = System.Drawing.Color.LightSkyBlue;
+                xlWorkSheet.Range["A3:N3"].AutoFilter(1);
+                xlWorkSheet.Range["A3:N3"].Cells.Font.Size = 11;
+
+                xlWorkSheet.Cells[1, 1].Value = "Customer Correspondence";
+                xlWorkSheet.Range["A1:N1"].Cells.Font.Size = 20;
+                xlWorkSheet.Range[xlWorkSheet.Cells[1, 1], xlWorkSheet.Cells[1, 14]].Merge();
+
+                //issue with header
+                xlWorkSheet.Cells[2, 10].Value = "Issue With";
+                xlWorkSheet.Range["J2"].Cells.Font.Size = 12;
+                xlWorkSheet.Range[xlWorkSheet.Cells[2, 1], xlWorkSheet.Cells[2, 9]].Merge();
+                xlWorkSheet.Range[xlWorkSheet.Cells[2, 10], xlWorkSheet.Cells[2, 14]].Merge();
+
+                //change all of the headers that have [Issue with] in them
+                xlWorkSheet.Cells[3, 10].Value = "Leadtime";
+                xlWorkSheet.Cells[3, 11].Value = "Quote Turnaround";
+                xlWorkSheet.Cells[3, 12].Value = "Product";
+                xlWorkSheet.Cells[3, 13].Value = "Installation";
+                xlWorkSheet.Cells[3, 14].Value = "Service";
+
+
+                ws.Columns.AutoFit();
+                ws.Rows.AutoFit();
+
+                //adjust the description conversation to fit and look nicer
+                xlWorkSheet.Columns[4].ColumnWidth = 70;
+                xlWorkSheet.Columns[4].WrapText = true;
+
+                xlWorkSheet.Columns[1].ColumnWidth = 25;
+                xlWorkSheet.Columns[1].WrapText = true;
+
+                ws = xlexcel.ActiveWorkbook.Worksheets[2];
+                range = ws.UsedRange;
+                //Make all top/left align
+                ws.Rows.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignGeneral;
+                ws.Rows.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+                //change the entire top row to center align (AND BOTH DATE COLUMNS)
+                xlWorkSheet.get_Range("A1", "N2").Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+                
+
+                ws.Columns.AutoFit();
+                ws.Rows.AutoFit();
+
+                range.Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+                range.Borders.Color = ColorTranslator.ToOle(Color.Black);
+
+            }//END OF CORRESPONDENCE
+
+            xlWorkBook.Sheets[1].Select();
 
             // Save the excel file under the captured location from the SaveFileDialog
             xlWorkBook.SaveAs(FileName, Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
@@ -601,6 +690,7 @@ namespace PriceMaster
             // Clear Clipboard and DataGridView selection
             Clipboard.Clear();
             dgvChase.ClearSelection();
+            dgvCorrespondence.ClearSelection();
 
             // Open the newly saved excel file
             if (File.Exists(FileName))
@@ -770,7 +860,7 @@ namespace PriceMaster
 
         private void dgvCorrespondence_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-         
+
         }
 
         private void dgvCorrespondence_CellClick(object sender, DataGridViewCellEventArgs e)

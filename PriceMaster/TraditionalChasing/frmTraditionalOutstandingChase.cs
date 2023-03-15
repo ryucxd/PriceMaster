@@ -44,7 +44,6 @@ namespace PriceMaster
             if (admin == -1)
                 this.Text = "Admin Outstanding Chases";
 
-
         }
 
         private void format()
