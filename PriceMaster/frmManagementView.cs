@@ -710,7 +710,13 @@ namespace PriceMaster
 
 
             if (chasing_added == 1)
-                xlWorkBook.Sheets[1].Delete();
+            {
+                try
+                {
+                    xlWorkBook.Sheets[1].Delete();
+                }
+                catch { }
+            }
 
             xlWorkBook.Sheets[1].Select();
 

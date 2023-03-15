@@ -174,6 +174,7 @@
             this.btnChaseComplete.TabIndex = 79;
             this.btnChaseComplete.Text = "Mark Chase as Complete";
             this.btnChaseComplete.UseVisualStyleBackColor = false;
+            this.btnChaseComplete.Visible = false;
             this.btnChaseComplete.Click += new System.EventHandler(this.btnChaseComplete_Click);
             // 
             // chkChaseComplete
