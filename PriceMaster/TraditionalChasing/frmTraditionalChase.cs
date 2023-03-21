@@ -248,9 +248,9 @@ namespace PriceMaster
                 //now we alert the manager
                 using (SqlCommand cmd = new SqlCommand("[order_database].dbo.usp_quotation_chase_alert", conn))
                 {
-
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@quote_id", SqlDbType.Int).Value = (quote_id);
+                    cmd.Parameters.AddWithValue("@slimline", SqlDbType.Int).Value = (0);
                     cmd.ExecuteNonQuery();
                 }
 

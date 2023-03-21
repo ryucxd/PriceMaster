@@ -25,7 +25,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>108</ApplicationRevision>
+    <ApplicationRevision>113</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -109,6 +109,18 @@
     </Compile>
     <Compile Include="frmCorrespondenceMassInsert.Designer.cs">
       <DependentUpon>frmCorrespondenceMassInsert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManagementAlert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManagementAlert.Designer.cs">
+      <DependentUpon>frmManagementAlert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManagementAlertAction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManagementAlertAction.Designer.cs">
+      <DependentUpon>frmManagementAlertAction.cs</DependentUpon>
     </Compile>
     <Compile Include="SlimlineChasing\frmSlimlineChaseQuotation.cs">
       <SubType>Form</SubType>
@@ -363,6 +375,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCorrespondenceMassInsert.resx">
       <DependentUpon>frmCorrespondenceMassInsert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManagementAlert.resx">
+      <DependentUpon>frmManagementAlert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManagementAlertAction.resx">
+      <DependentUpon>frmManagementAlertAction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineChaseQuotation.resx">
       <DependentUpon>frmSlimlineChaseQuotation.cs</DependentUpon>

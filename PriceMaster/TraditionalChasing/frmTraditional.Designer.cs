@@ -68,6 +68,7 @@
             this.btnOutstanding = new PriceMaster.buttonFormatting();
             this.btnReport = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
+            this.btnAlert = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -559,11 +560,30 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // btnAlert
+            // 
+            this.btnAlert.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAlert.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnAlert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlert.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAlert.ForeColor = System.Drawing.Color.White;
+            this.btnAlert.Location = new System.Drawing.Point(610, 45);
+            this.btnAlert.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnAlert.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnAlert.Name = "btnAlert";
+            this.btnAlert.Padding = new System.Windows.Forms.Padding(3);
+            this.btnAlert.Size = new System.Drawing.Size(154, 30);
+            this.btnAlert.TabIndex = 110;
+            this.btnAlert.Text = "Management Alert";
+            this.btnAlert.UseVisualStyleBackColor = false;
+            this.btnAlert.Click += new System.EventHandler(this.btnAlert_Click);
+            // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnAlert);
             this.Controls.Add(this.btnNonReturningCustomers);
             this.Controls.Add(this.btnCustomer);
             this.Controls.Add(this.lblLossReasons);
@@ -655,5 +675,6 @@
         private System.Windows.Forms.Label lblLossReasons;
         private buttonFormatting btnCustomer;
         private buttonFormatting btnNonReturningCustomers;
+        private buttonFormatting btnAlert;
     }
 }

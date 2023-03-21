@@ -888,5 +888,11 @@ namespace PriceMaster
             frmChaseCustomerList frm = new frmChaseCustomerList(-1);
             frm.ShowDialog();
         }
+
+        private void btnAlert_Click(object sender, EventArgs e)
+        {
+            frmManagementAlert frm = new frmManagementAlert(-1);
+            frm.ShowDialog();
+        }
     }
 }

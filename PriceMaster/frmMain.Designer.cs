@@ -73,6 +73,7 @@
             this.btnSupplier = new PriceMaster.buttonFormatting();
             this.btnEmail = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
+            this.btnAlert = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -469,7 +470,7 @@
             this.btnManagementView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnManagementView.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnManagementView.ForeColor = System.Drawing.Color.White;
-            this.btnManagementView.Location = new System.Drawing.Point(594, 23);
+            this.btnManagementView.Location = new System.Drawing.Point(571, 9);
             this.btnManagementView.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnManagementView.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnManagementView.Name = "btnManagementView";
@@ -642,11 +643,30 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // btnAlert
+            // 
+            this.btnAlert.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAlert.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnAlert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlert.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAlert.ForeColor = System.Drawing.Color.White;
+            this.btnAlert.Location = new System.Drawing.Point(571, 44);
+            this.btnAlert.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnAlert.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnAlert.Name = "btnAlert";
+            this.btnAlert.Padding = new System.Windows.Forms.Padding(3);
+            this.btnAlert.Size = new System.Drawing.Size(154, 30);
+            this.btnAlert.TabIndex = 110;
+            this.btnAlert.Text = "Management Alert";
+            this.btnAlert.UseVisualStyleBackColor = false;
+            this.btnAlert.Click += new System.EventHandler(this.btnAlert_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnAlert);
             this.Controls.Add(this.buttonFormatting1);
             this.Controls.Add(this.chkChasePriority);
             this.Controls.Add(this.btnManagementView);
@@ -748,6 +768,7 @@
         private buttonFormatting btnManagementView;
         private System.Windows.Forms.CheckBox chkChasePriority;
         private buttonFormatting buttonFormatting1;
+        private buttonFormatting btnAlert;
     }
 }
 

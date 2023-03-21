@@ -634,5 +634,11 @@ namespace PriceMaster
             frmNonReturningCustomers frm = new frmNonReturningCustomers();
             frm.ShowDialog();
         }
+
+        private void btnAlert_Click(object sender, EventArgs e)
+        {
+            frmManagementAlert frm = new frmManagementAlert(0);
+            frm.ShowDialog();
+        }
     }
 }
