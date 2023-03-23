@@ -12,7 +12,7 @@ namespace PriceMaster
                                  "password=Dodid1;Network Address=192.168.0.150\\sqlexpress;" +
                                  "Trusted_Connection=no;" +
                                  "database=price_master; " +
-                                 "connection timeout=30";
+                                 "connection timeout=90";
 
         public const string ConnectionStringUser = "user id=sa;" +
                                "password=Dodid1;Network Address=192.168.0.150\\sqlexpress;" +

@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.Web;
 using System.Diagnostics;
 using System.IO;
+using System.Drawing.Printing;
 
 namespace PriceMaster
 {
@@ -254,6 +255,76 @@ namespace PriceMaster
             {
                 MessageBox.Show("The full quotation does not yet exist for this number.", "No File Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            btnPrint.Visible = false;
+            System.Threading.Thread.Sleep(200);
+            printImage();
+            
+            System.Threading.Thread.Sleep(200);
+            btnPrint.Visible = true;
+        }
+
+        private void printImage()
+        {
+            try
+            {
+                Image bit = new Bitmap(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
+
+                Graphics gs = Graphics.FromImage(bit);
+
+                gs.CopyFromScreen(new Point(0, 0), new Point(0, 0), bit.Size);
+
+                //bit.Save(@"C:\temp\temp.jpg");
+
+
+                Rectangle bounds = this.Bounds;
+                using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
+                {
+                    using (Graphics g = Graphics.FromImage(bitmap))
+                    {
+                        g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
+                    }
+                    bitmap.Save(@"C:\temp\chase_" + quote_chase_id.ToString() + ".jpg");
+                }
+
+
+                //var frm = Form.ActiveForm;
+                //using (var bmp = new Bitmap(frm.Width, frm.Height))
+                //{
+                //    frm.DrawToBitmap(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
+                //    bmp.Save(@"C:\temp\temp.jpg");
+                //}
+
+
+
+                PrintDocument pd = new PrintDocument();
+                pd.PrintPage += (sender, args) =>
+                {
+                    Image i = Image.FromFile(@"C:\temp\chase_" + quote_chase_id.ToString() + ".jpg");
+                    Rectangle m = args.MarginBounds;
+                    if ((double)i.Width / (double)i.Height > (double)m.Width / (double)m.Height) // image is wider
+                    {
+                        m.Height = (int)((double)i.Height / (double)i.Width * (double)m.Width);
+                        //m.Height = 700;
+                        //m.Width = 650;
+                    }
+                    else
+                    {
+                        m.Width = (int)((double)i.Width / (double)i.Height * (double)m.Height);
+                    }
+                    args.Graphics.DrawImage(i, m);
+                };
+
+                pd.DefaultPageSettings.Landscape = false;
+                Margins margins = new Margins(50, 50, 50, 50);
+                pd.DefaultPageSettings.Margins = margins;
+                pd.Print();
+            }
+            catch
+            { }
         }
     }
 }

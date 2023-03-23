@@ -43,6 +43,7 @@
             this.LblCustomer = new System.Windows.Forms.Label();
             this.btnDrawings = new PriceMaster.buttonFormatting();
             this.btnQuote = new PriceMaster.buttonFormatting();
+            this.btnPrint = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,7 +65,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(240, 410);
+            this.dataGridView1.Size = new System.Drawing.Size(240, 445);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
@@ -113,7 +114,7 @@
             this.lblNext.AutoSize = true;
             this.lblNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblNext.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblNext.Location = new System.Drawing.Point(373, 388);
+            this.lblNext.Location = new System.Drawing.Point(373, 403);
             this.lblNext.Name = "lblNext";
             this.lblNext.Size = new System.Drawing.Size(127, 17);
             this.lblNext.TabIndex = 73;
@@ -134,7 +135,7 @@
             // 
             // dteNextDate
             // 
-            this.dteNextDate.Location = new System.Drawing.Point(504, 388);
+            this.dteNextDate.Location = new System.Drawing.Point(504, 403);
             this.dteNextDate.Name = "dteNextDate";
             this.dteNextDate.Size = new System.Drawing.Size(145, 20);
             this.dteNextDate.TabIndex = 71;
@@ -150,7 +151,7 @@
             // chkNoFollowup
             // 
             this.chkNoFollowup.AutoSize = true;
-            this.chkNoFollowup.Location = new System.Drawing.Point(469, 388);
+            this.chkNoFollowup.Location = new System.Drawing.Point(469, 403);
             this.chkNoFollowup.Name = "chkNoFollowup";
             this.chkNoFollowup.Size = new System.Drawing.Size(123, 17);
             this.chkNoFollowup.TabIndex = 76;
@@ -176,7 +177,7 @@
             this.btnDrawings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDrawings.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDrawings.ForeColor = System.Drawing.Color.White;
-            this.btnDrawings.Location = new System.Drawing.Point(712, 397);
+            this.btnDrawings.Location = new System.Drawing.Point(712, 433);
             this.btnDrawings.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnDrawings.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnDrawings.Name = "btnDrawings";
@@ -194,7 +195,7 @@
             this.btnQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQuote.ForeColor = System.Drawing.Color.White;
-            this.btnQuote.Location = new System.Drawing.Point(712, 363);
+            this.btnQuote.Location = new System.Drawing.Point(712, 398);
             this.btnQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnQuote.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnQuote.Name = "btnQuote";
@@ -205,11 +206,30 @@
             this.btnQuote.UseVisualStyleBackColor = false;
             this.btnQuote.Click += new System.EventHandler(this.btnQuote_Click);
             // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.ForeColor = System.Drawing.Color.White;
+            this.btnPrint.Location = new System.Drawing.Point(712, 363);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnPrint.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Padding = new System.Windows.Forms.Padding(3);
+            this.btnPrint.Size = new System.Drawing.Size(92, 30);
+            this.btnPrint.TabIndex = 82;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // frmManagementViewHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 434);
+            this.ClientSize = new System.Drawing.Size(814, 469);
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnDrawings);
             this.Controls.Add(this.btnQuote);
             this.Controls.Add(this.LblCustomer);
@@ -223,6 +243,7 @@
             this.Controls.Add(this.dteChaseDate);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.dataGridView1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -251,5 +272,6 @@
         private System.Windows.Forms.Label LblCustomer;
         private buttonFormatting btnQuote;
         private buttonFormatting btnDrawings;
+        private buttonFormatting btnPrint;
     }
 }
