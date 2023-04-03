@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.chkPhone = new System.Windows.Forms.CheckBox();
             this.chkEmail = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,10 +42,14 @@
             this.chkInPerson = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtContact = new System.Windows.Forms.TextBox();
-            this.btnCancel = new PriceMaster.buttonFormatting();
             this.chkFollowUp = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dteNextDate = new System.Windows.Forms.DateTimePicker();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnCancel = new PriceMaster.buttonFormatting();
+            this.btnComplete = new PriceMaster.buttonFormatting();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // chkPhone
@@ -185,24 +190,6 @@
             this.txtContact.Size = new System.Drawing.Size(141, 20);
             this.txtContact.TabIndex = 93;
             // 
-            // btnCancel
-            // 
-            this.btnCancel.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(237, 464);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnCancel.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Padding = new System.Windows.Forms.Padding(3);
-            this.btnCancel.Size = new System.Drawing.Size(85, 30);
-            this.btnCancel.TabIndex = 79;
-            this.btnCancel.Text = "Close";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // chkFollowUp
             // 
             this.chkFollowUp.AutoSize = true;
@@ -232,12 +219,86 @@
             this.dteNextDate.Size = new System.Drawing.Size(139, 20);
             this.dteNextDate.TabIndex = 99;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView1.Location = new System.Drawing.Point(560, 29);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(268, 465);
+            this.dataGridView1.TabIndex = 102;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label1.Location = new System.Drawing.Point(560, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(268, 17);
+            this.label1.TabIndex = 103;
+            this.label1.Text = "Correspondence History";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(145, 464);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnCancel.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Padding = new System.Windows.Forms.Padding(3);
+            this.btnCancel.Size = new System.Drawing.Size(85, 30);
+            this.btnCancel.TabIndex = 79;
+            this.btnCancel.Text = "Close";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnComplete
+            // 
+            this.btnComplete.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnComplete.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnComplete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnComplete.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnComplete.ForeColor = System.Drawing.Color.White;
+            this.btnComplete.Location = new System.Drawing.Point(240, 464);
+            this.btnComplete.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnComplete.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnComplete.Name = "btnComplete";
+            this.btnComplete.Padding = new System.Windows.Forms.Padding(3);
+            this.btnComplete.Size = new System.Drawing.Size(169, 30);
+            this.btnComplete.TabIndex = 104;
+            this.btnComplete.Text = "MARK AS COMPLETE";
+            this.btnComplete.UseVisualStyleBackColor = false;
+            this.btnComplete.Click += new System.EventHandler(this.btnComplete_Click);
+            // 
             // frmChaseCorrespondenceView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 504);
+            this.ClientSize = new System.Drawing.Size(837, 504);
             this.ControlBox = false;
+            this.Controls.Add(this.btnComplete);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.chkFollowUp);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dteNextDate);
@@ -259,6 +320,8 @@
             this.Name = "frmChaseCorrespondenceView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Correspondence";
+            this.Shown += new System.EventHandler(this.frmChaseCorrespondenceView_Shown);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,5 +346,8 @@
         private System.Windows.Forms.CheckBox chkFollowUp;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dteNextDate;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label1;
+        private buttonFormatting btnComplete;
     }
 }

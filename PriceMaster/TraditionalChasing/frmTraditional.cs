@@ -640,5 +640,11 @@ namespace PriceMaster
             frmManagementAlert frm = new frmManagementAlert(0);
             frm.ShowDialog();
         }
+
+        private void btnOutstandingCorrespondence_Click(object sender, EventArgs e)
+        {
+            frmOutstandingCustomerCorrespondence frm = new frmOutstandingCustomerCorrespondence(0);
+            frm.ShowDialog();
+        }
     }
 }

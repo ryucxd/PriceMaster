@@ -72,4 +72,6 @@ namespace PriceMaster
             base.FlatAppearance.BorderColor = _border;
         }
     }
+
+
 }

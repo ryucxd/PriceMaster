@@ -444,7 +444,7 @@ namespace PriceMaster
             if (e.RowIndex < 0)
                 return;
 
-            frmChaseCorrespondenceView frm = new frmChaseCorrespondenceView(Convert.ToInt32(dgvOther.Rows[e.RowIndex].Cells[id_index].Value.ToString()));
+            frmChaseCorrespondenceView frm = new frmChaseCorrespondenceView(Convert.ToInt32(dgvOther.Rows[e.RowIndex].Cells[id_index].Value.ToString()),slimline,0);
             frm.ShowDialog();
         }
 

@@ -69,6 +69,7 @@
             this.btnReport = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
             this.btnAlert = new PriceMaster.buttonFormatting();
+            this.btnOutstandingCorrespondence = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -440,7 +441,7 @@
             this.btnNonReturningCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNonReturningCustomers.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNonReturningCustomers.ForeColor = System.Drawing.Color.White;
-            this.btnNonReturningCustomers.Location = new System.Drawing.Point(845, 45);
+            this.btnNonReturningCustomers.Location = new System.Drawing.Point(1133, 9);
             this.btnNonReturningCustomers.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnNonReturningCustomers.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnNonReturningCustomers.Name = "btnNonReturningCustomers";
@@ -458,7 +459,7 @@
             this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCustomer.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCustomer.ForeColor = System.Drawing.Color.White;
-            this.btnCustomer.Location = new System.Drawing.Point(1063, 45);
+            this.btnCustomer.Location = new System.Drawing.Point(788, 45);
             this.btnCustomer.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnCustomer.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnCustomer.Name = "btnCustomer";
@@ -513,7 +514,7 @@
             this.btnOutstanding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOutstanding.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOutstanding.ForeColor = System.Drawing.Color.White;
-            this.btnOutstanding.Location = new System.Drawing.Point(1002, 9);
+            this.btnOutstanding.Location = new System.Drawing.Point(944, 9);
             this.btnOutstanding.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnOutstanding.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnOutstanding.Name = "btnOutstanding";
@@ -531,7 +532,7 @@
             this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReport.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReport.ForeColor = System.Drawing.Color.White;
-            this.btnReport.Location = new System.Drawing.Point(846, 9);
+            this.btnReport.Location = new System.Drawing.Point(788, 9);
             this.btnReport.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnReport.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnReport.Name = "btnReport";
@@ -578,11 +579,30 @@
             this.btnAlert.UseVisualStyleBackColor = false;
             this.btnAlert.Click += new System.EventHandler(this.btnAlert_Click);
             // 
+            // btnOutstandingCorrespondence
+            // 
+            this.btnOutstandingCorrespondence.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnOutstandingCorrespondence.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnOutstandingCorrespondence.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutstandingCorrespondence.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOutstandingCorrespondence.ForeColor = System.Drawing.Color.White;
+            this.btnOutstandingCorrespondence.Location = new System.Drawing.Point(1019, 45);
+            this.btnOutstandingCorrespondence.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnOutstandingCorrespondence.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnOutstandingCorrespondence.Name = "btnOutstandingCorrespondence";
+            this.btnOutstandingCorrespondence.Padding = new System.Windows.Forms.Padding(3);
+            this.btnOutstandingCorrespondence.Size = new System.Drawing.Size(238, 30);
+            this.btnOutstandingCorrespondence.TabIndex = 111;
+            this.btnOutstandingCorrespondence.Text = "Outstanding  Correspondence";
+            this.btnOutstandingCorrespondence.UseVisualStyleBackColor = false;
+            this.btnOutstandingCorrespondence.Click += new System.EventHandler(this.btnOutstandingCorrespondence_Click);
+            // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnOutstandingCorrespondence);
             this.Controls.Add(this.btnAlert);
             this.Controls.Add(this.btnNonReturningCustomers);
             this.Controls.Add(this.btnCustomer);
@@ -676,5 +696,6 @@
         private buttonFormatting btnCustomer;
         private buttonFormatting btnNonReturningCustomers;
         private buttonFormatting btnAlert;
+        private buttonFormatting btnOutstandingCorrespondence;
     }
 }

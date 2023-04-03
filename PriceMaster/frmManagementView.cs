@@ -53,6 +53,7 @@ namespace PriceMaster
         public int issue_with_installation_index { get; set; }
         public int issue_with_service_index { get; set; }
         public int correspondence_by_index { get; set; }
+        public int complete_index { get; set; }
         public frmManagementView(int _slimline)
         {
             InitializeComponent();
@@ -300,7 +301,8 @@ namespace PriceMaster
                 "CASE WHEN issue_with_quote_turnaround_time = 0 THEN CAST(0 AS BIT) WHEN issue_with_quote_turnaround_time IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with quote turnaround time] ," +
                 "CASE WHEN issue_with_product = 0 THEN CAST(0 AS BIT) WHEN issue_with_product IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with product]," +
                 "CASE WHEN issue_with_installation = 0 THEN CAST(0 AS BIT) WHEN issue_with_installation IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with installation] ," +
-                "CASE WHEN issue_with_service = 0 THEN CAST(0 AS BIT) WHEN issue_with_service IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with service] " +
+                "CASE WHEN issue_with_service = 0 THEN CAST(0 AS BIT) WHEN issue_with_service IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Issue with service] , " +
+                "CASE WHEN complete = 0 THEN CAST(0 AS BIT) WHEN complete IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Complete] " +
                 "from [order_database].dbo.quotation_chase_customer q " +
                 "left join [user_info].dbo.[user] u on q.correspondence_by = u.id " +
                 "where q.slimline = ";
@@ -389,6 +391,8 @@ namespace PriceMaster
             issue_with_product_index = dgvCorrespondence.Columns["Issue with product"].Index;
             issue_with_installation_index = dgvCorrespondence.Columns["Issue with installation"].Index;
             issue_with_service_index = dgvCorrespondence.Columns["Issue with service"].Index;
+
+            complete_index = dgvCorrespondence.Columns["Complete"].Index;
         }
         private void add_button()
         {
@@ -916,7 +920,7 @@ namespace PriceMaster
         {
             if (e.RowIndex < 0)
                 return;
-            frmChaseCorrespondenceView frm = new frmChaseCorrespondenceView(Convert.ToInt32(dgvCorrespondence.Rows[e.RowIndex].Cells[correspondence_id_index].Value.ToString()));
+            frmChaseCorrespondenceView frm = new frmChaseCorrespondenceView(Convert.ToInt32(dgvCorrespondence.Rows[e.RowIndex].Cells[correspondence_id_index].Value.ToString()),slimline,-1);
             frm.ShowDialog();
         }
     }
