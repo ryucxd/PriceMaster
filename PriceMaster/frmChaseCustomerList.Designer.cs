@@ -201,7 +201,6 @@
             // 
             // btnImport
             // 
-            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImport.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnImport.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

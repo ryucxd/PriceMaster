@@ -47,7 +47,7 @@ namespace PriceMaster
                     "CASE WHEN complete = 0 THEN CAST(0 AS BIT) WHEN complete IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Complete] " +
                     "FROM [order_database].dbo.quotation_chase_customer c " +
                     "left join [user_info].dbo.[user] u on c.correspondence_by = u.id " +
-                    "where next_correspondence_date <= GETDATE() and no_follow_up = 0  AND " +
+                    "where " + /*next_correspondence_date <= GETDATE() and no_follow_up = 0 "  AND " +*/
                     "c.slimline = " + slimline + " AND c.customer_name = '" + customer + "' ORDER BY next_correspondence_date desc,date_created desc"; //AND  correspondence_by = " + CONNECT.staffID.ToString() + " " +
 
 
@@ -169,6 +169,8 @@ namespace PriceMaster
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0)
+                return;
             correspondence_id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
             load_data();
         }

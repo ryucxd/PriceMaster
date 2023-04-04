@@ -114,7 +114,7 @@ namespace PriceMaster
         {
             //cmbCustomerSearch.Items.Clear();
             int column = 0;
-
+             
             if (tabControl1.SelectedIndex == 0)
                column = 6;
             else

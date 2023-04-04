@@ -77,9 +77,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblTitle.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblTitle.Location = new System.Drawing.Point(303, 31);
+            this.lblTitle.Location = new System.Drawing.Point(296, 31);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(702, 22);
+            this.lblTitle.Size = new System.Drawing.Size(709, 22);
             this.lblTitle.TabIndex = 49;
             this.lblTitle.Text = "The following entries are marked for a follow up and have not yet been completed." +
     "";
