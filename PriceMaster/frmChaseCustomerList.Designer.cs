@@ -237,6 +237,7 @@
             this.Name = "frmChaseCustomerList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Customer List";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOther)).EndInit();
             this.ResumeLayout(false);

@@ -44,6 +44,7 @@
             this.btnDrawings = new PriceMaster.buttonFormatting();
             this.btnQuote = new PriceMaster.buttonFormatting();
             this.btnPrint = new PriceMaster.buttonFormatting();
+            this.btnEmail = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -177,7 +178,7 @@
             this.btnDrawings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDrawings.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDrawings.ForeColor = System.Drawing.Color.White;
-            this.btnDrawings.Location = new System.Drawing.Point(712, 433);
+            this.btnDrawings.Location = new System.Drawing.Point(710, 466);
             this.btnDrawings.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnDrawings.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnDrawings.Name = "btnDrawings";
@@ -195,7 +196,7 @@
             this.btnQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQuote.ForeColor = System.Drawing.Color.White;
-            this.btnQuote.Location = new System.Drawing.Point(712, 398);
+            this.btnQuote.Location = new System.Drawing.Point(710, 431);
             this.btnQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnQuote.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnQuote.Name = "btnQuote";
@@ -213,7 +214,7 @@
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrint.ForeColor = System.Drawing.Color.White;
-            this.btnPrint.Location = new System.Drawing.Point(712, 363);
+            this.btnPrint.Location = new System.Drawing.Point(710, 396);
             this.btnPrint.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnPrint.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnPrint.Name = "btnPrint";
@@ -224,11 +225,30 @@
             this.btnPrint.UseVisualStyleBackColor = false;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // btnEmail
+            // 
+            this.btnEmail.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnEmail.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEmail.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEmail.ForeColor = System.Drawing.Color.White;
+            this.btnEmail.Location = new System.Drawing.Point(710, 361);
+            this.btnEmail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnEmail.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnEmail.Name = "btnEmail";
+            this.btnEmail.Padding = new System.Windows.Forms.Padding(3);
+            this.btnEmail.Size = new System.Drawing.Size(92, 30);
+            this.btnEmail.TabIndex = 83;
+            this.btnEmail.Text = "Email";
+            this.btnEmail.UseVisualStyleBackColor = false;
+            this.btnEmail.Click += new System.EventHandler(this.btnEmail_Click);
+            // 
             // frmManagementViewHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 469);
+            this.ClientSize = new System.Drawing.Size(814, 500);
+            this.Controls.Add(this.btnEmail);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnDrawings);
             this.Controls.Add(this.btnQuote);
@@ -273,5 +293,6 @@
         private buttonFormatting btnQuote;
         private buttonFormatting btnDrawings;
         private buttonFormatting btnPrint;
+        private buttonFormatting btnEmail;
     }
 }

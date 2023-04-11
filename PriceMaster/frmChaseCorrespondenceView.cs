@@ -65,14 +65,10 @@ namespace PriceMaster
                         col.SortMode = DataGridViewColumnSortMode.NotSortable;
                     }
                     dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
                     dataGridView1.Columns[0].Visible = false;
                     dataGridView1.Columns[1].HeaderText = "Date Created";
                     dataGridView1.Columns[2].HeaderText = "Correspondence by";
                 }
-
-
-
 
                 conn.Close();
             }

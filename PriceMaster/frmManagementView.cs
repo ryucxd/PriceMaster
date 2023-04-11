@@ -111,15 +111,62 @@ namespace PriceMaster
 
         private void fillCombo()
         {
-
+            string sql = "";
             cmbCustomerSearch.Items.Clear();
-            foreach (DataGridViewRow row in dgvChase.Rows)
+            cmbStaffSearch.Items.Clear();
+            //fill combobox with ALL data instead of whats showing
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
-                if (cmbCustomerSearch.Items.Contains(row.Cells[customer_index].Value.ToString()))
-                { } //nothing
+                conn.Open();
+                if (slimline == -1)
+                    sql = "SELECT distinct rtrim(s.[NAME]) as [customer] " +
+                        "FROM[order_database].dbo.quotation_chase_log_slimline a " +
+                        "left join (SELECT * FROM[price_master].dbo.[sl_quotation] where highest_issue = -1)  sl on sl.quote_id = a.quote_id " +
+                        "left join[EnquiryLog].dbo.[Enquiry_Log] e on sl.enquiry_id = e.id left join[dsl_fitting].dbo.SALES_LEDGER s on sl.customer_acc_ref = s.ACCOUNT_REF";
                 else
-                    cmbCustomerSearch.Items.Add(row.Cells[customer_index].Value.ToString());
+                    sql = "SELECT distinct rtrim(q.customer) as customer " +
+                        "FROM[order_database].dbo.quotation_chase_log a " +
+                        "left join[order_database].dbo.view_solidworks_max_rev q on a.quote_id = q.quote_id";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        cmbCustomerSearch.Items.Add(dr[0]);
+                    }
+                    dr.Close();
+                }
+
+
+                if (slimline == -1)
+                    sql = "SELECT distinct u.forename + ' ' + u.surname as chased_by FROM [order_database].dbo.quotation_chase_log_slimline a " +
+                        "left join[user_info].dbo.[user] u on a.chased_by = u.id ";
+                else
+                    sql = "SELECT distinct u.forename + ' ' + u.surname as chased_by FROM [order_database].dbo.quotation_chase_log a " +
+                        "left join[user_info].dbo.[user] u on a.chased_by = u.id ";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader dr2 = cmd.ExecuteReader();
+                    while (dr2.Read())
+                    {
+                        cmbStaffSearch.Items.Add(dr2[0]);
+                    }
+                }
+
+
+                conn.Close();
             }
+
+            //cmbCustomerSearch.Items.Clear();
+            //foreach (DataGridViewRow row in dgvChase.Rows)
+            //{
+            //    if (cmbCustomerSearch.Items.Contains(row.Cells[customer_index].Value.ToString()))
+            //    { } //nothing
+            //    else
+            //        cmbCustomerSearch.Items.Add(row.Cells[customer_index].Value.ToString());
+            //}
 
 
             foreach (DataGridViewRow row in dgvCorrespondence.Rows)
@@ -130,14 +177,14 @@ namespace PriceMaster
                     cmbCustomerSearch.Items.Add(row.Cells[customer_name_index].Value.ToString());
             }
 
-            cmbStaffSearch.Items.Clear();
-            foreach (DataGridViewRow row in dgvChase.Rows)
-            {
-                if (cmbStaffSearch.Items.Contains(row.Cells[chased_by_index].Value.ToString()))
-                { } //nothing
-                else
-                    cmbStaffSearch.Items.Add(row.Cells[chased_by_index].Value.ToString());
-            }
+            //cmbStaffSearch.Items.Clear();
+            //foreach (DataGridViewRow row in dgvChase.Rows)
+            //{
+            //    if (cmbStaffSearch.Items.Contains(row.Cells[chased_by_index].Value.ToString()))
+            //    { } //nothing
+            //    else
+            //        cmbStaffSearch.Items.Add(row.Cells[chased_by_index].Value.ToString());
+            //}
             foreach (DataGridViewRow row in dgvCorrespondence.Rows)
             {
                 if (cmbStaffSearch.Items.Contains(row.Cells[correspondence_by_index].Value.ToString()))
@@ -560,12 +607,12 @@ namespace PriceMaster
                 if (dataObj != null)
                     Clipboard.SetDataObject(dataObj);
 
-                
+
                 Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
                 xlWorkSheet.Name = "Chases";
 
                 // Get Excel processes after opening the file. 
-                
+
 
 
                 // Paste clipboard results to worksheet range
@@ -628,7 +675,7 @@ namespace PriceMaster
             if (dgvCorrespondence.Rows.Count > 0)
             {
 
-            
+
 
                 dgvCorrespondence.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
                 dgvCorrespondence.SelectAll();
@@ -654,7 +701,7 @@ namespace PriceMaster
                 xlWorkSheet.Range["A3:N3"].AutoFilter(1);
                 xlWorkSheet.Range["A3:N3"].Cells.Font.Size = 11;
 
-               
+
 
 
                 xlWorkSheet.Cells[1, 1].Value = "Customer Correspondence - " + dgvCorrespondence.Rows.Count.ToString() + " " + search_dates;
@@ -710,7 +757,7 @@ namespace PriceMaster
                 correspondence_pagesetup.FitToPagesTall = false;
                 correspondence_pagesetup.Zoom = false;
                 correspondence_pagesetup.Orientation = Excel.XlPageOrientation.xlLandscape;
-                
+
 
             }//END OF CORRESPONDENCE
 
@@ -920,7 +967,13 @@ namespace PriceMaster
         {
             if (e.RowIndex < 0)
                 return;
-            frmChaseCorrespondenceView frm = new frmChaseCorrespondenceView(Convert.ToInt32(dgvCorrespondence.Rows[e.RowIndex].Cells[correspondence_id_index].Value.ToString()),slimline,-1);
+            frmChaseCorrespondenceView frm = new frmChaseCorrespondenceView(Convert.ToInt32(dgvCorrespondence.Rows[e.RowIndex].Cells[correspondence_id_index].Value.ToString()), slimline, -1);
+            frm.ShowDialog();
+        }
+
+        private void btnLiveChart_Click(object sender, EventArgs e)
+        {
+            frmUniqueCustomerChaseCount frm = new frmUniqueCustomerChaseCount();
             frm.ShowDialog();
         }
     }

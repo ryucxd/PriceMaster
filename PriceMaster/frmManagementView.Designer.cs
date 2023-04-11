@@ -57,6 +57,7 @@
             this.btnExcel = new PriceMaster.buttonFormatting();
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
+            this.btnLiveChart = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCorrespondence)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -85,7 +86,7 @@
             this.dgvChase.ReadOnly = true;
             this.dgvChase.RowHeadersVisible = false;
             this.dgvChase.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvChase.Size = new System.Drawing.Size(1793, 424);
+            this.dgvChase.Size = new System.Drawing.Size(1835, 424);
             this.dgvChase.TabIndex = 1;
             this.dgvChase.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -204,7 +205,7 @@
             this.chkAllChases.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.chkAllChases.AutoSize = true;
             this.chkAllChases.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.chkAllChases.Location = new System.Drawing.Point(1424, 12);
+            this.chkAllChases.Location = new System.Drawing.Point(1445, 12);
             this.chkAllChases.Name = "chkAllChases";
             this.chkAllChases.Size = new System.Drawing.Size(80, 21);
             this.chkAllChases.TabIndex = 65;
@@ -289,7 +290,7 @@
             this.dgvCorrespondence.ReadOnly = true;
             this.dgvCorrespondence.RowHeadersVisible = false;
             this.dgvCorrespondence.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCorrespondence.Size = new System.Drawing.Size(1793, 62);
+            this.dgvCorrespondence.Size = new System.Drawing.Size(1835, 62);
             this.dgvCorrespondence.TabIndex = 71;
             this.dgvCorrespondence.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCorrespondence_CellClick);
             this.dgvCorrespondence.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCorrespondence_CellContentClick);
@@ -302,7 +303,7 @@
             this.label9.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.label9.Location = new System.Drawing.Point(10, 519);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(1793, 17);
+            this.label9.Size = new System.Drawing.Size(1835, 17);
             this.label9.TabIndex = 72;
             this.label9.Text = "Customer Correspondence:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -393,7 +394,7 @@
             this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExcel.ForeColor = System.Drawing.Color.White;
-            this.btnExcel.Location = new System.Drawing.Point(1567, 41);
+            this.btnExcel.Location = new System.Drawing.Point(1609, 41);
             this.btnExcel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnExcel.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnExcel.Name = "btnExcel";
@@ -412,7 +413,7 @@
             this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
-            this.buttonFormatting1.Location = new System.Drawing.Point(1702, 41);
+            this.buttonFormatting1.Location = new System.Drawing.Point(1744, 41);
             this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
             this.buttonFormatting1.Name = "buttonFormatting1";
@@ -431,7 +432,7 @@
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(1488, 41);
+            this.btnClear.Location = new System.Drawing.Point(1530, 41);
             this.btnClear.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnClear.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnClear.Name = "btnClear";
@@ -442,11 +443,31 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // btnLiveChart
+            // 
+            this.btnLiveChart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLiveChart.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnLiveChart.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnLiveChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLiveChart.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLiveChart.ForeColor = System.Drawing.Color.White;
+            this.btnLiveChart.Location = new System.Drawing.Point(1414, 41);
+            this.btnLiveChart.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnLiveChart.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnLiveChart.Name = "btnLiveChart";
+            this.btnLiveChart.Padding = new System.Windows.Forms.Padding(3);
+            this.btnLiveChart.Size = new System.Drawing.Size(110, 30);
+            this.btnLiveChart.TabIndex = 75;
+            this.btnLiveChart.Text = "Chase Chart";
+            this.btnLiveChart.UseVisualStyleBackColor = false;
+            this.btnLiveChart.Click += new System.EventHandler(this.btnLiveChart_Click);
+            // 
             // frmManagementView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1817, 613);
+            this.ClientSize = new System.Drawing.Size(1859, 613);
+            this.Controls.Add(this.btnLiveChart);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label9);
@@ -502,5 +523,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox chkboxSlimline;
+        private buttonFormatting btnLiveChart;
     }
 }

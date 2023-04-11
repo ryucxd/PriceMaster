@@ -795,7 +795,25 @@ namespace PriceMaster
                         }
                     }
                 }
-                conn.Close();
+
+                //also check outstanding correspondence
+                sql = "SELECT cast(id as nvarchar(max)) FROM [order_database].dbo.quotation_chase_customer " +
+                      "where no_follow_up = 0 AND (complete = 0 or complete is null) AND " +
+                      "slimline = -1 AND correspondence_by = " + CONNECT.staffID.ToString() + " AND next_correspondence_date <= CAST(GETDATE()  as date)";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    string temp = (string)(cmd.ExecuteScalar());
+                    if (temp != null)
+                    {
+                        DialogResult result = MessageBox.Show("You have current outstanding correspondences, would you like to view them?", "Outstanding correspondences", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (result == DialogResult.Yes)
+                        {
+                            frmOutstandingCustomerCorrespondence frm = new frmOutstandingCustomerCorrespondence(-1);
+                            frm.ShowDialog();
+                        }
+                    }
+                }
+                    conn.Close();
             }
         }
 
@@ -892,6 +910,12 @@ namespace PriceMaster
         private void btnAlert_Click(object sender, EventArgs e)
         {
             frmManagementAlert frm = new frmManagementAlert(-1);
+            frm.ShowDialog();
+        }
+
+        private void buttonFormatting2_Click(object sender, EventArgs e)
+        {
+            frmOutstandingCustomerCorrespondence frm = new frmOutstandingCustomerCorrespondence(-1);
             frm.ShowDialog();
         }
     }

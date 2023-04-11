@@ -74,6 +74,7 @@
             this.btnEmail = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
             this.btnAlert = new PriceMaster.buttonFormatting();
+            this.buttonFormatting2 = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -452,7 +453,7 @@
             this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
-            this.buttonFormatting1.Location = new System.Drawing.Point(1238, 43);
+            this.buttonFormatting1.Location = new System.Drawing.Point(936, 45);
             this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
             this.buttonFormatting1.Name = "buttonFormatting1";
@@ -488,7 +489,7 @@
             this.btnOutstanding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOutstanding.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOutstanding.ForeColor = System.Drawing.Color.White;
-            this.btnOutstanding.Location = new System.Drawing.Point(826, 44);
+            this.btnOutstanding.Location = new System.Drawing.Point(747, 44);
             this.btnOutstanding.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnOutstanding.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnOutstanding.Name = "btnOutstanding";
@@ -506,7 +507,7 @@
             this.btnAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdmin.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdmin.ForeColor = System.Drawing.Color.White;
-            this.btnAdmin.Location = new System.Drawing.Point(1015, 43);
+            this.btnAdmin.Location = new System.Drawing.Point(1691, 9);
             this.btnAdmin.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnAdmin.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnAdmin.Name = "btnAdmin";
@@ -515,6 +516,7 @@
             this.btnAdmin.TabIndex = 85;
             this.btnAdmin.Text = "All Outstanding Chases";
             this.btnAdmin.UseVisualStyleBackColor = false;
+            this.btnAdmin.Visible = false;
             this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
             // 
             // btnTraditional
@@ -524,7 +526,7 @@
             this.btnTraditional.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTraditional.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTraditional.ForeColor = System.Drawing.Color.White;
-            this.btnTraditional.Location = new System.Drawing.Point(826, 9);
+            this.btnTraditional.Location = new System.Drawing.Point(747, 9);
             this.btnTraditional.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnTraditional.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnTraditional.Name = "btnTraditional";
@@ -542,7 +544,7 @@
             this.btnNewQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNewQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNewQuote.ForeColor = System.Drawing.Color.White;
-            this.btnNewQuote.Location = new System.Drawing.Point(1614, 9);
+            this.btnNewQuote.Location = new System.Drawing.Point(1535, 9);
             this.btnNewQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnNewQuote.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnNewQuote.Name = "btnNewQuote";
@@ -560,7 +562,7 @@
             this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCustomer.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCustomer.ForeColor = System.Drawing.Color.White;
-            this.btnCustomer.Location = new System.Drawing.Point(1458, 9);
+            this.btnCustomer.Location = new System.Drawing.Point(1379, 9);
             this.btnCustomer.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnCustomer.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnCustomer.Name = "btnCustomer";
@@ -578,7 +580,7 @@
             this.btnMaterial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMaterial.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMaterial.ForeColor = System.Drawing.Color.White;
-            this.btnMaterial.Location = new System.Drawing.Point(1302, 9);
+            this.btnMaterial.Location = new System.Drawing.Point(1223, 9);
             this.btnMaterial.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnMaterial.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnMaterial.Name = "btnMaterial";
@@ -596,7 +598,7 @@
             this.btnSupplier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSupplier.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSupplier.ForeColor = System.Drawing.Color.White;
-            this.btnSupplier.Location = new System.Drawing.Point(1138, 9);
+            this.btnSupplier.Location = new System.Drawing.Point(1059, 9);
             this.btnSupplier.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSupplier.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSupplier.Name = "btnSupplier";
@@ -614,7 +616,7 @@
             this.btnEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEmail.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEmail.ForeColor = System.Drawing.Color.White;
-            this.btnEmail.Location = new System.Drawing.Point(982, 9);
+            this.btnEmail.Location = new System.Drawing.Point(903, 9);
             this.btnEmail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnEmail.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnEmail.Name = "btnEmail";
@@ -661,11 +663,30 @@
             this.btnAlert.UseVisualStyleBackColor = false;
             this.btnAlert.Click += new System.EventHandler(this.btnAlert_Click);
             // 
+            // buttonFormatting2
+            // 
+            this.buttonFormatting2.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.buttonFormatting2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonFormatting2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFormatting2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFormatting2.ForeColor = System.Drawing.Color.White;
+            this.buttonFormatting2.Location = new System.Drawing.Point(1167, 45);
+            this.buttonFormatting2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonFormatting2.MinimumSize = new System.Drawing.Size(75, 30);
+            this.buttonFormatting2.Name = "buttonFormatting2";
+            this.buttonFormatting2.Padding = new System.Windows.Forms.Padding(3);
+            this.buttonFormatting2.Size = new System.Drawing.Size(243, 30);
+            this.buttonFormatting2.TabIndex = 111;
+            this.buttonFormatting2.Text = "Outstanding Correspondence";
+            this.buttonFormatting2.UseVisualStyleBackColor = false;
+            this.buttonFormatting2.Click += new System.EventHandler(this.buttonFormatting2_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.buttonFormatting2);
             this.Controls.Add(this.btnAlert);
             this.Controls.Add(this.buttonFormatting1);
             this.Controls.Add(this.chkChasePriority);
@@ -769,6 +790,7 @@
         private System.Windows.Forms.CheckBox chkChasePriority;
         private buttonFormatting buttonFormatting1;
         private buttonFormatting btnAlert;
+        private buttonFormatting buttonFormatting2;
     }
 }
 

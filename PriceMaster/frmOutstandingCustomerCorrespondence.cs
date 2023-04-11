@@ -31,26 +31,29 @@ namespace PriceMaster
         public frmOutstandingCustomerCorrespondence(int _slimline)
         {
             InitializeComponent();
-            load_data();
-            fillCombo();
             slimline = _slimline;
             future_selected = 0;
+            load_data();
+            fillCombo();
         }
 
         private void load_data()
         {
-            string sql = "SELECT id,customer_name,date_created," +
-                "CASE WHEN email = 0 THEN CAST(0 AS BIT) WHEN email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Email] ," +
-                "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Phone] ," +
-                "CASE WHEN inPerson = 0 THEN CAST(0 AS BIT) WHEN inPerson IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [inPerson]," +
-                "contact,body, next_correspondence_date, " +
-                "CASE WHEN complete = 0 THEN CAST(0 AS BIT) WHEN complete IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Complete]" +
-                "FROM [order_database].dbo.quotation_chase_customer " +
-                "where no_follow_up = 0 AND (complete = 0 or complete is null) AND " +
-                "slimline = " + slimline + " AND " +
-                "correspondence_by = " + CONNECT.staffID.ToString() + " AND next_correspondence_date ";
+            string sql = "";
 
 
+                sql = "SELECT id,customer_name,date_created," +
+                    "CASE WHEN email = 0 THEN CAST(0 AS BIT) WHEN email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Email] ," +
+                    "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Phone] ," +
+                    "CASE WHEN inPerson = 0 THEN CAST(0 AS BIT) WHEN inPerson IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [inPerson]," +
+                    "contact,body, next_correspondence_date, " +
+                    "CASE WHEN complete = 0 THEN CAST(0 AS BIT) WHEN complete IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Complete]" +
+                    "FROM [order_database].dbo.quotation_chase_customer " +
+                    "where no_follow_up = 0 AND (complete = 0 or complete is null) AND " +
+                    "slimline = " + slimline + " AND " +
+                    "correspondence_by = " + CONNECT.staffID.ToString() + " AND next_correspondence_date ";
+
+            
             if (future_selected == -1)
                 sql = sql + " > ";
             else
