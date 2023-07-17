@@ -86,6 +86,8 @@
             this.btnRevise = new PriceMaster.buttonFormatting();
             this.label24 = new System.Windows.Forms.Label();
             this.cmbType = new System.Windows.Forms.ComboBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.chkLewis = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -679,11 +681,34 @@
             this.cmbType.Size = new System.Drawing.Size(206, 21);
             this.cmbType.TabIndex = 62;
             // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label25.Location = new System.Drawing.Point(380, 502);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(79, 17);
+            this.label25.TabIndex = 65;
+            this.label25.Text = "With Lewis:";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // chkLewis
+            // 
+            this.chkLewis.AutoSize = true;
+            this.chkLewis.Location = new System.Drawing.Point(465, 505);
+            this.chkLewis.Name = "chkLewis";
+            this.chkLewis.Size = new System.Drawing.Size(15, 14);
+            this.chkLewis.TabIndex = 64;
+            this.chkLewis.UseVisualStyleBackColor = true;
+            this.chkLewis.CheckedChanged += new System.EventHandler(this.chkLewis_CheckedChanged);
+            // 
             // frmQuotation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(627, 757);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.chkLewis);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.cmbType);
             this.Controls.Add(this.btnEnquiry);
@@ -813,5 +838,7 @@
         private buttonFormatting btnEnquiry;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.ComboBox cmbType;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.CheckBox chkLewis;
     }
 }

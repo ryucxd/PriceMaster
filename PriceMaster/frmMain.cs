@@ -47,6 +47,7 @@ namespace PriceMaster
         //date stuffs
         public int dateFilter { get; set; }
         public int ChaseDateFilter { get; set; }
+        public int isLewis { get; set; }
         public frmMain()
         {
             InitializeComponent();
@@ -60,24 +61,24 @@ namespace PriceMaster
             string sql = "SELECT top 150 a.quote_id,q.status,last_chase.chase_date,last_chase.chased_by,'View' as [view_temp],'Email' as email_temp,issue_id,CASE WHEN highest_issue = 0 THEN CAST(0 AS BIT) WHEN highest_issue IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [current] ,p.priority_description as priority_id,st.description,m.material_description, " +
                                 "COALESCE(slimline_systems_1.system_name, '') + ' - ' + COALESCE(slimline_systems_2.system_name, '') + ' - ' + COALESCE(slimline_systems_3.system_name, '') + ' - ' + " +
                                 "COALESCE(slimline_systems_4.system_name, '') + ' - ' + COALESCE(slimline_systems_5.system_name, '') as [system_row] , rtrim(s.[NAME]) as customer,s.type,u_2.forename + ' ' + u_2.surname as  email_sent_by,email_sent_date,quotation_ref,COALESCE(price,0) as price," +
-                                "u.forename + ' ' + u.surname as [quoted_by],quote_date,last_chase.priority_chase FROM dbo.sl_quotation a " +
-                                "LEFT JOIN[dsl_fitting].dbo.[SALES_LEDGER] s on s.ACCOUNT_REF = a.customer_acc_ref " +
-                                "left join[user_info].dbo.[user] u on u.id = a.created_by_id " +
-                                "left join[user_info].dbo.[user] u_2 on u_2.id = a.email_sent_by " +
-                                "left join dbo.sl_status st on st.id = a.status_id " +
-                                "left join dbo.sl_material m on m.id = a.material_type_id " +
-                                "left join dbo.sl_priority p on p.id = a.priority_id " +
-                                "left join [order_database].dbo.quotation_feed_back_slimline q on a.quote_id = q.quote_id " +
-                                "LEFT JOIN dbo.slimline_systems as slimline_systems_1 ON a.system_id_1 = slimline_systems_1.id " +
-                                "LEFT JOIN dbo.slimline_systems AS slimline_systems_2 ON a.system_id_2 = slimline_systems_2.id " +
-                                "LEFT JOIN dbo.slimline_systems AS slimline_systems_3 ON a.system_id_3 = slimline_systems_3.id " +
-                                "LEFT JOIN dbo.slimline_systems AS slimline_systems_4 ON a.system_id_4 = slimline_systems_4.id " +
-                                "LEFT JOIN dbo.slimline_systems AS slimline_systems_5 ON a.system_id_5 = slimline_systems_5.id " +
-                                "left join (SELECT a.quote_id,chase_date,u.forename + ' ' + u.surname as chased_by,c.priority_chase from [order_database].dbo.quotation_chase_log_slimline a " +
-                                "right join(select max(id) as id,quote_id from[order_database].dbo.quotation_chase_log_slimline " +
+                                "u.forename + ' ' + u.surname as [quoted_by],quote_date,CASE WHEN is_lewis = 0 THEN CAST(0 AS BIT) WHEN is_lewis IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [with_lewis] ,last_chase.priority_chase FROM dbo.sl_quotation a " +
+                                "LEFT merge JOIN[dsl_fitting].dbo.[SALES_LEDGER] s on s.ACCOUNT_REF = a.customer_acc_ref " +
+                                "left merge join[user_info].dbo.[user] u on u.id = a.created_by_id " +
+                                "left merge join[user_info].dbo.[user] u_2 on u_2.id = a.email_sent_by " +
+                                "left merge join dbo.sl_status st on st.id = a.status_id " +
+                                "left merge join dbo.sl_material m on m.id = a.material_type_id " +
+                                "left merge join dbo.sl_priority p on p.id = a.priority_id " +
+                                "left merge join [order_database].dbo.quotation_feed_back_slimline q on a.quote_id = q.quote_id " +
+                                "LEFT merge JOIN dbo.slimline_systems as slimline_systems_1 ON a.system_id_1 = slimline_systems_1.id " +
+                                "LEFT merge JOIN dbo.slimline_systems AS slimline_systems_2 ON a.system_id_2 = slimline_systems_2.id " +
+                                "LEFT merge JOIN dbo.slimline_systems AS slimline_systems_3 ON a.system_id_3 = slimline_systems_3.id " +
+                                "LEFT merge JOIN dbo.slimline_systems AS slimline_systems_4 ON a.system_id_4 = slimline_systems_4.id " +
+                                "LEFT merge JOIN dbo.slimline_systems AS slimline_systems_5 ON a.system_id_5 = slimline_systems_5.id " +
+                                "left merge join (SELECT a.quote_id,chase_date,u.forename + ' ' + u.surname as chased_by,c.priority_chase from [order_database].dbo.quotation_chase_log_slimline a " +
+                                "right merge join(select max(id) as id,quote_id from[order_database].dbo.quotation_chase_log_slimline " +
                                 " " +
                                 "group by quote_id) b on a.quote_id = b.quote_id AND a.id = b.id left join[user_info].dbo.[user] u on a.chased_by = u.id " +
-                                " left join [order_database].dbo.quotation_feed_back_slimline c on a.quote_id = c.quote_id  ) as last_chase on a.quote_id = last_chase.quote_id ";
+                                " left merge join [order_database].dbo.quotation_feed_back_slimline c on a.quote_id = c.quote_id  ) as last_chase on a.quote_id = last_chase.quote_id ";
 
 
             sql = sql + " WHERE highest_issue = -1 ";
@@ -162,6 +163,7 @@ namespace PriceMaster
             last_chased_date_index = dataGridView1.Columns["chase_date"].Index;
             last_chased_by_index = dataGridView1.Columns["chased_by"].Index;
 
+            isLewis = dataGridView1.Columns["with_lewis"].Index;
 
             issue_id_index = dataGridView1.Columns["issue_id"].Index;
             current_index = dataGridView1.Columns["current"].Index;
@@ -267,6 +269,7 @@ namespace PriceMaster
             dataGridView1.Columns[quoted_by_index].HeaderText = "Quoted By";
             dataGridView1.Columns[quote_date_index].HeaderText = "Quote Date";
             dataGridView1.Columns[type_index].HeaderText = "Type";
+            dataGridView1.Columns[isLewis].HeaderText = "With Lewis";
 
             foreach (DataGridViewColumn col in dataGridView1.Columns)
                 col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
