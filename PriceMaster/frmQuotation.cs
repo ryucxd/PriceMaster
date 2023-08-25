@@ -87,7 +87,10 @@ namespace PriceMaster
                         chkFollowUp.Checked = true;
                     else
                         chkFollowUp.Checked = false;
-                    try { txtFollowUp.Text = Convert.ToDateTime(dt.Rows[0][10].ToString()).ToString("dd/MM/yyyy"); }
+                    try
+                    {
+                        txtFollowUp.Text = Convert.ToDateTime(dt.Rows[0][10].ToString()).ToString("dd/MM/yyyy");
+                    }
                     catch { }
                     cmbStatus.Text = dt.Rows[0][11].ToString();
                     cmbLoss.Text = dt.Rows[0][12].ToString();
@@ -247,7 +250,7 @@ namespace PriceMaster
                 runSQL(sql, -1);
                 cmbType.Text = temp;
             }
-            
+
             temp = null;
         }
 
@@ -296,7 +299,7 @@ namespace PriceMaster
                 if (string.IsNullOrEmpty(temp))
                 {
                     if (cmbStatus.Text == "Quoted")
-                    sql = "UPDATE dbo.sl_quotation SET quote_date = GETDATE() WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
+                        sql = "UPDATE dbo.sl_quotation SET quote_date = GETDATE() WHERE quote_id = " + _quote_id.ToString() + " AND issue_id = " + cmbIssue.Text.ToString();
                     runSQL(sql, 0);
                 }
 
@@ -666,7 +669,7 @@ namespace PriceMaster
             DirectoryInfo di = Directory.CreateDirectory(file_path);
             Process.Start(file_path);
 
-            
+
 
         }
 

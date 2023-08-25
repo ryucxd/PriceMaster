@@ -95,7 +95,7 @@ namespace PriceMaster
             if (cmbSystem.Text.Length > 0)
                 sql = sql + " AND (slimline_systems_1.system_name LIKE '%" + cmbSystem.Text + "%' or slimline_systems_2.system_name LIKE '%" + cmbSystem.Text + "%' or slimline_systems_3.system_name LIKE '%" + cmbSystem.Text + "%' or slimline_systems_4.system_name LIKE '%" + cmbSystem.Text + "%' )";
             if (cmbCustomer.Text.Length > 0)
-                sql = sql + " AND s.[NAME] LIKE '%" + cmbCustomer.Text + "%'";
+                sql = sql + " AND s.[NAME] LIKE '%" + cmbCustomer.Text.Replace("'","") + "%'";
 
             if (txtQuoteRef.Text.Length > 0)
                 sql = sql + " AND quotation_ref LIKE '%" + txtQuoteRef.Text + "%'";
@@ -125,6 +125,8 @@ namespace PriceMaster
             //  AND quote_date >= '20220701 00:00' AND quote_date <= '20220731' ORDER BY quote_id DESC, issue_id";
 
             sql = sql + " order by quote_id DESC, issue_id";
+           //sql = sql.Replace("'", "");
+
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
