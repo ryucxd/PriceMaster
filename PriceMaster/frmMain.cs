@@ -95,7 +95,7 @@ namespace PriceMaster
             if (cmbSystem.Text.Length > 0)
                 sql = sql + " AND (slimline_systems_1.system_name LIKE '%" + cmbSystem.Text + "%' or slimline_systems_2.system_name LIKE '%" + cmbSystem.Text + "%' or slimline_systems_3.system_name LIKE '%" + cmbSystem.Text + "%' or slimline_systems_4.system_name LIKE '%" + cmbSystem.Text + "%' )";
             if (cmbCustomer.Text.Length > 0)
-                sql = sql + " AND s.[NAME] LIKE '%" + cmbCustomer.Text.Replace("'","") + "%'";
+                sql = sql + " AND s.[NAME] LIKE '%" + cmbCustomer.Text.Replace("'", "") + "%'";
 
             if (txtQuoteRef.Text.Length > 0)
                 sql = sql + " AND quotation_ref LIKE '%" + txtQuoteRef.Text + "%'";
@@ -125,7 +125,7 @@ namespace PriceMaster
             //  AND quote_date >= '20220701 00:00' AND quote_date <= '20220731' ORDER BY quote_id DESC, issue_id";
 
             sql = sql + " order by quote_id DESC, issue_id";
-           //sql = sql.Replace("'", "");
+            //sql = sql.Replace("'", "");
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -421,15 +421,15 @@ namespace PriceMaster
             {
                 //if (e.ColumnIndex == quote_id_index)
                 //{
-                    frmQuotation frm = new frmQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString()));
-                    frm.ShowDialog();
+                frmQuotation frm = new frmQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_id_index].Value.ToString()));
+                frm.ShowDialog();
                 //}
             }
         }
 
         private void txtQuoteID_TextChanged(object sender, EventArgs e)
         {
-//            loadData();
+            //            loadData();
         }
 
         private void cmbPriority_SelectedIndexChanged(object sender, EventArgs e)
@@ -464,12 +464,12 @@ namespace PriceMaster
 
         private void txtQuoteRef_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void txtPrice_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void txtQuotedBy_SelectedIndexChanged(object sender, EventArgs e)
@@ -735,7 +735,7 @@ namespace PriceMaster
                         max_id = Convert.ToInt32(cmd.ExecuteScalar());
 
 
-                    sql = "insert into dbo.sl_quotation (quote_id,issue_id,"  + /*quote_date,*/  "highest_issue,created_by_id,status_id) VALUES (" + max_id.ToString() + ",1," + /*getdate(),*/  "-1," + CONNECT.staffID.ToString() + ",8)";
+                    sql = "insert into dbo.sl_quotation (quote_id,issue_id," + /*quote_date,*/  "highest_issue,created_by_id,status_id) VALUES (" + max_id.ToString() + ",1," + /*getdate(),*/  "-1," + CONNECT.staffID.ToString() + ",8)";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                         cmd.ExecuteNonQuery();
                     conn.Close();
@@ -818,7 +818,7 @@ namespace PriceMaster
                         }
                     }
                 }
-                    conn.Close();
+                conn.Close();
             }
         }
 
@@ -921,6 +921,17 @@ namespace PriceMaster
         private void buttonFormatting2_Click(object sender, EventArgs e)
         {
             frmOutstandingCustomerCorrespondence frm = new frmOutstandingCustomerCorrespondence(-1);
+            frm.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCalendar_Click(object sender, EventArgs e)
+        {
+            frmCalendar frm = new frmCalendar();
             frm.ShowDialog();
         }
     }
