@@ -173,10 +173,17 @@ namespace PriceMaster
             dgvDate.ClientSize = new Size(totalWidth - 38, totalHeight);
 
 
-            //foreach (DataGridViewColumn col in dataGridView1.Columns)
-            //{
-            //    col.SortMode = DataGridViewColumnSortMode.NotSortable;
-            //}
+            if (CONNECT.staffID == 480) //dion wanted it to have a pink background
+            {
+                foreach (DataGridViewRow row in dgvDate.Rows)
+                {
+                    row.DefaultCellStyle.BackColor = Color.Plum;
+                }
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    row.DefaultCellStyle.BackColor = Color.Plum;
+                }
+            }
 
             //foreach (DataGridViewColumn col in dgvDate.Columns)
             //{
