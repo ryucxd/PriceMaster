@@ -41,6 +41,7 @@
             this.btnExcel = new PriceMaster.buttonFormatting();
             this.txtInsert = new PriceMaster.buttonFormatting();
             this.btnImport = new PriceMaster.buttonFormatting();
+            this.btnLastOrder = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOther)).BeginInit();
             this.SuspendLayout();
@@ -217,11 +218,30 @@
             this.btnImport.UseVisualStyleBackColor = false;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
+            // btnLastOrder
+            // 
+            this.btnLastOrder.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnLastOrder.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnLastOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLastOrder.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLastOrder.ForeColor = System.Drawing.Color.White;
+            this.btnLastOrder.Location = new System.Drawing.Point(122, 248);
+            this.btnLastOrder.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnLastOrder.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnLastOrder.Name = "btnLastOrder";
+            this.btnLastOrder.Padding = new System.Windows.Forms.Padding(3);
+            this.btnLastOrder.Size = new System.Drawing.Size(187, 30);
+            this.btnLastOrder.TabIndex = 49;
+            this.btnLastOrder.Text = "Last Order Details";
+            this.btnLastOrder.UseVisualStyleBackColor = false;
+            this.btnLastOrder.Click += new System.EventHandler(this.btnLastOrder_Click);
+            // 
             // frmChaseCustomerList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1281, 990);
+            this.Controls.Add(this.btnLastOrder);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.btnExcel);
             this.Controls.Add(this.label4);
@@ -258,5 +278,6 @@
         private System.Windows.Forms.ComboBox cmbType;
         private buttonFormatting btnExcel;
         private buttonFormatting btnImport;
+        private buttonFormatting btnLastOrder;
     }
 }

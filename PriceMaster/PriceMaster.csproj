@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>125</ApplicationRevision>
+    <ApplicationRevision>128</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -147,6 +147,12 @@
     <Compile Include="frmManagementAlertAction.Designer.cs">
       <DependentUpon>frmManagementAlertAction.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTurnOverDecline.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTurnOverDecline.Designer.cs">
+      <DependentUpon>frmTurnOverDecline.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmOutstandingCustomerCorrespondence.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,10 +177,10 @@
     <Compile Include="TraditionalChasing\frmAutoChaseBanList.Designer.cs">
       <DependentUpon>frmAutoChaseBanList.cs</DependentUpon>
     </Compile>
-    <Compile Include="TraditionalChasing\frmNonReturningCustomers.cs">
+    <Compile Include="frmNonReturningCustomers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TraditionalChasing\frmNonReturningCustomers.Designer.cs">
+    <Compile Include="frmNonReturningCustomers.Designer.cs">
       <DependentUpon>frmNonReturningCustomers.cs</DependentUpon>
     </Compile>
     <Compile Include="TraditionalChasing\frmTraditionalEditChase.cs">
@@ -422,6 +428,9 @@
     <EmbeddedResource Include="frmManagementAlertAction.resx">
       <DependentUpon>frmManagementAlertAction.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmTurnOverDecline.resx">
+      <DependentUpon>frmTurnOverDecline.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmOutstandingCustomerCorrespondence.resx">
       <DependentUpon>frmOutstandingCustomerCorrespondence.cs</DependentUpon>
     </EmbeddedResource>
@@ -434,7 +443,7 @@
     <EmbeddedResource Include="TraditionalChasing\frmAutoChaseBanList.resx">
       <DependentUpon>frmAutoChaseBanList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TraditionalChasing\frmNonReturningCustomers.resx">
+    <EmbeddedResource Include="frmNonReturningCustomers.resx">
       <DependentUpon>frmNonReturningCustomers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TraditionalChasing\frmTraditionalEditChase.resx">

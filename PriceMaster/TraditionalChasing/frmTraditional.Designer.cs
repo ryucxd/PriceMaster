@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTraditional));
             this.dteEnd = new System.Windows.Forms.DateTimePicker();
             this.dteStart = new System.Windows.Forms.DateTimePicker();
@@ -71,6 +71,7 @@
             this.btnClear = new PriceMaster.buttonFormatting();
             this.btnAlert = new PriceMaster.buttonFormatting();
             this.btnOutstandingCorrespondence = new PriceMaster.buttonFormatting();
+            this.btnTurnoverDecline = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -178,14 +179,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(12, 143);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -607,11 +608,30 @@
             this.btnOutstandingCorrespondence.UseVisualStyleBackColor = false;
             this.btnOutstandingCorrespondence.Click += new System.EventHandler(this.btnOutstandingCorrespondence_Click);
             // 
+            // btnTurnoverDecline
+            // 
+            this.btnTurnoverDecline.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnTurnoverDecline.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnTurnoverDecline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTurnoverDecline.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTurnoverDecline.ForeColor = System.Drawing.Color.White;
+            this.btnTurnoverDecline.Location = new System.Drawing.Point(1267, 45);
+            this.btnTurnoverDecline.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnTurnoverDecline.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnTurnoverDecline.Name = "btnTurnoverDecline";
+            this.btnTurnoverDecline.Padding = new System.Windows.Forms.Padding(3);
+            this.btnTurnoverDecline.Size = new System.Drawing.Size(145, 30);
+            this.btnTurnoverDecline.TabIndex = 116;
+            this.btnTurnoverDecline.Text = "Turnover Decline";
+            this.btnTurnoverDecline.UseVisualStyleBackColor = false;
+            this.btnTurnoverDecline.Click += new System.EventHandler(this.btnTurnoverDecline_Click);
+            // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnTurnoverDecline);
             this.Controls.Add(this.btnOutstandingCorrespondence);
             this.Controls.Add(this.btnAlert);
             this.Controls.Add(this.btnNonReturningCustomers);
@@ -707,5 +727,6 @@
         private buttonFormatting btnNonReturningCustomers;
         private buttonFormatting btnAlert;
         private buttonFormatting btnOutstandingCorrespondence;
+        private buttonFormatting btnTurnoverDecline;
     }
 }

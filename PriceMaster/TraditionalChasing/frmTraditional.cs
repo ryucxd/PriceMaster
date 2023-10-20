@@ -644,13 +644,13 @@ namespace PriceMaster
 
         private void btnCustomer_Click(object sender, EventArgs e)
         {
-            frmChaseCustomerList frm = new frmChaseCustomerList(0);
+            frmChaseCustomerList frm = new frmChaseCustomerList(0,"");
             frm.ShowDialog();
         }
 
         private void btnNonReturningCustomers_Click(object sender, EventArgs e)
         {
-            frmNonReturningCustomers frm = new frmNonReturningCustomers();
+            frmNonReturningCustomers frm = new frmNonReturningCustomers(0);
             frm.ShowDialog();
         }
 
@@ -663,6 +663,12 @@ namespace PriceMaster
         private void btnOutstandingCorrespondence_Click(object sender, EventArgs e)
         {
             frmOutstandingCustomerCorrespondence frm = new frmOutstandingCustomerCorrespondence(0);
+            frm.ShowDialog();
+        }
+
+        private void btnTurnoverDecline_Click(object sender, EventArgs e)
+        {
+            frmTurnOverDecline frm = new frmTurnOverDecline(0);
             frm.ShowDialog();
         }
     }

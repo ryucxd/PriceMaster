@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.lblTotalCost = new System.Windows.Forms.Label();
@@ -62,6 +62,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.chkChasePriority = new System.Windows.Forms.CheckBox();
+            this.btnCalendar = new PriceMaster.buttonFormatting();
+            this.buttonFormatting2 = new PriceMaster.buttonFormatting();
+            this.btnAlert = new PriceMaster.buttonFormatting();
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             this.btnManagementView = new PriceMaster.buttonFormatting();
             this.btnOutstanding = new PriceMaster.buttonFormatting();
@@ -73,9 +76,8 @@
             this.btnSupplier = new PriceMaster.buttonFormatting();
             this.btnEmail = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
-            this.btnAlert = new PriceMaster.buttonFormatting();
-            this.buttonFormatting2 = new PriceMaster.buttonFormatting();
-            this.btnCalendar = new PriceMaster.buttonFormatting();
+            this.btnNonReturningCustomers = new PriceMaster.buttonFormatting();
+            this.btnTurnoverDecline = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -90,14 +92,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Location = new System.Drawing.Point(12, 143);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -447,6 +449,60 @@
             this.chkChasePriority.UseVisualStyleBackColor = false;
             this.chkChasePriority.CheckedChanged += new System.EventHandler(this.chkChasePriority_CheckedChanged);
             // 
+            // btnCalendar
+            // 
+            this.btnCalendar.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnCalendar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCalendar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCalendar.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalendar.ForeColor = System.Drawing.Color.White;
+            this.btnCalendar.Location = new System.Drawing.Point(360, 9);
+            this.btnCalendar.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnCalendar.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnCalendar.Name = "btnCalendar";
+            this.btnCalendar.Padding = new System.Windows.Forms.Padding(3);
+            this.btnCalendar.Size = new System.Drawing.Size(130, 30);
+            this.btnCalendar.TabIndex = 113;
+            this.btnCalendar.Text = "CALENDAR";
+            this.btnCalendar.UseVisualStyleBackColor = false;
+            this.btnCalendar.Click += new System.EventHandler(this.btnCalendar_Click);
+            // 
+            // buttonFormatting2
+            // 
+            this.buttonFormatting2.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.buttonFormatting2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonFormatting2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFormatting2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFormatting2.ForeColor = System.Drawing.Color.White;
+            this.buttonFormatting2.Location = new System.Drawing.Point(1167, 45);
+            this.buttonFormatting2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonFormatting2.MinimumSize = new System.Drawing.Size(75, 30);
+            this.buttonFormatting2.Name = "buttonFormatting2";
+            this.buttonFormatting2.Padding = new System.Windows.Forms.Padding(3);
+            this.buttonFormatting2.Size = new System.Drawing.Size(243, 30);
+            this.buttonFormatting2.TabIndex = 111;
+            this.buttonFormatting2.Text = "Outstanding Correspondence";
+            this.buttonFormatting2.UseVisualStyleBackColor = false;
+            this.buttonFormatting2.Click += new System.EventHandler(this.buttonFormatting2_Click);
+            // 
+            // btnAlert
+            // 
+            this.btnAlert.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAlert.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnAlert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlert.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAlert.ForeColor = System.Drawing.Color.White;
+            this.btnAlert.Location = new System.Drawing.Point(571, 44);
+            this.btnAlert.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnAlert.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnAlert.Name = "btnAlert";
+            this.btnAlert.Padding = new System.Windows.Forms.Padding(3);
+            this.btnAlert.Size = new System.Drawing.Size(154, 30);
+            this.btnAlert.TabIndex = 110;
+            this.btnAlert.Text = "Management Alert";
+            this.btnAlert.UseVisualStyleBackColor = false;
+            this.btnAlert.Click += new System.EventHandler(this.btnAlert_Click);
+            // 
             // buttonFormatting1
             // 
             this.buttonFormatting1.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -646,65 +702,49 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // btnAlert
+            // btnNonReturningCustomers
             // 
-            this.btnAlert.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAlert.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnAlert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAlert.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAlert.ForeColor = System.Drawing.Color.White;
-            this.btnAlert.Location = new System.Drawing.Point(571, 44);
-            this.btnAlert.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnAlert.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnAlert.Name = "btnAlert";
-            this.btnAlert.Padding = new System.Windows.Forms.Padding(3);
-            this.btnAlert.Size = new System.Drawing.Size(154, 30);
-            this.btnAlert.TabIndex = 110;
-            this.btnAlert.Text = "Management Alert";
-            this.btnAlert.UseVisualStyleBackColor = false;
-            this.btnAlert.Click += new System.EventHandler(this.btnAlert_Click);
+            this.btnNonReturningCustomers.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnNonReturningCustomers.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNonReturningCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNonReturningCustomers.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNonReturningCustomers.ForeColor = System.Drawing.Color.White;
+            this.btnNonReturningCustomers.Location = new System.Drawing.Point(1691, 9);
+            this.btnNonReturningCustomers.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnNonReturningCustomers.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnNonReturningCustomers.Name = "btnNonReturningCustomers";
+            this.btnNonReturningCustomers.Padding = new System.Windows.Forms.Padding(3);
+            this.btnNonReturningCustomers.Size = new System.Drawing.Size(208, 30);
+            this.btnNonReturningCustomers.TabIndex = 114;
+            this.btnNonReturningCustomers.Text = "Non Returning Customers";
+            this.btnNonReturningCustomers.UseVisualStyleBackColor = false;
+            this.btnNonReturningCustomers.Click += new System.EventHandler(this.btnNonReturningCustomers_Click);
             // 
-            // buttonFormatting2
+            // btnTurnoverDecline
             // 
-            this.buttonFormatting2.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.buttonFormatting2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonFormatting2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFormatting2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonFormatting2.ForeColor = System.Drawing.Color.White;
-            this.buttonFormatting2.Location = new System.Drawing.Point(1167, 45);
-            this.buttonFormatting2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonFormatting2.MinimumSize = new System.Drawing.Size(75, 30);
-            this.buttonFormatting2.Name = "buttonFormatting2";
-            this.buttonFormatting2.Padding = new System.Windows.Forms.Padding(3);
-            this.buttonFormatting2.Size = new System.Drawing.Size(243, 30);
-            this.buttonFormatting2.TabIndex = 111;
-            this.buttonFormatting2.Text = "Outstanding Correspondence";
-            this.buttonFormatting2.UseVisualStyleBackColor = false;
-            this.buttonFormatting2.Click += new System.EventHandler(this.buttonFormatting2_Click);
-            // 
-            // btnCalendar
-            // 
-            this.btnCalendar.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnCalendar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnCalendar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCalendar.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalendar.ForeColor = System.Drawing.Color.White;
-            this.btnCalendar.Location = new System.Drawing.Point(360, 9);
-            this.btnCalendar.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnCalendar.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnCalendar.Name = "btnCalendar";
-            this.btnCalendar.Padding = new System.Windows.Forms.Padding(3);
-            this.btnCalendar.Size = new System.Drawing.Size(130, 30);
-            this.btnCalendar.TabIndex = 113;
-            this.btnCalendar.Text = "CALENDAR";
-            this.btnCalendar.UseVisualStyleBackColor = false;
-            this.btnCalendar.Click += new System.EventHandler(this.btnCalendar_Click);
+            this.btnTurnoverDecline.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnTurnoverDecline.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnTurnoverDecline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTurnoverDecline.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTurnoverDecline.ForeColor = System.Drawing.Color.White;
+            this.btnTurnoverDecline.Location = new System.Drawing.Point(1420, 45);
+            this.btnTurnoverDecline.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnTurnoverDecline.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnTurnoverDecline.Name = "btnTurnoverDecline";
+            this.btnTurnoverDecline.Padding = new System.Windows.Forms.Padding(3);
+            this.btnTurnoverDecline.Size = new System.Drawing.Size(145, 30);
+            this.btnTurnoverDecline.TabIndex = 115;
+            this.btnTurnoverDecline.Text = "Turnover Decline";
+            this.btnTurnoverDecline.UseVisualStyleBackColor = false;
+            this.btnTurnoverDecline.Click += new System.EventHandler(this.btnTurnoverDecline_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnTurnoverDecline);
+            this.Controls.Add(this.btnNonReturningCustomers);
             this.Controls.Add(this.btnCalendar);
             this.Controls.Add(this.buttonFormatting2);
             this.Controls.Add(this.btnAlert);
@@ -812,6 +852,8 @@
         private buttonFormatting btnAlert;
         private buttonFormatting buttonFormatting2;
         private buttonFormatting btnCalendar;
+        private buttonFormatting btnNonReturningCustomers;
+        private buttonFormatting btnTurnoverDecline;
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PriceMaster.TraditionalChasing;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -45,7 +46,7 @@ namespace PriceMaster
         public int issue_with_service_index { get; set; }
         public int correspondence_by_index { get; set; }
 
-        public frmChaseCustomerList(int _slimline)
+        public frmChaseCustomerList(int _slimline,string customer)
         {
             InitializeComponent();
 
@@ -69,27 +70,51 @@ namespace PriceMaster
 
 
             fillCombo();
+
+            if (customer == "")
+            { }
+            else
+            {
+                cmbCustomer.Text = customer;
+            }
+
+
         }
         private void fillCombo()
         {
-            string sql = "";
+            string sql = "";// [order_database].dbo.usp_sales_over_years";
+
+            sql = "SELECT [NAME] FROM [order_database].dbo.[SALES_LEDGER] order by NAME ASC";
             cmbCustomer.Items.Clear();
 
-            if (slimline == -1)
-                sql = "select distinct rtrim([name]) as customer from dsl_fitting.dbo.SALES_LEDGER where [NAME] is not null and len([NAME])>1 order by rtrim([name]) asc ";
-            else
-                sql = "select distinct rtrim(customer) from [order_database].dbo.solidworks_quotation_log where customer is not null order by rtrim(customer) asc ";
+            //old code
+            //if (slimline == -1)
+            //    sql = "select distinct rtrim([name]) as customer from dsl_fitting.dbo.SALES_LEDGER where [NAME] is not null and len([NAME])>1 order by rtrim([name]) asc ";
+            //else
+            //    sql = "select distinct rtrim(customer) from [order_database].dbo.solidworks_quotation_log where customer is not null order by rtrim(customer) asc ";
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     conn.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                        cmbCustomer.Items.Add(reader.GetString(0));
-                    reader.Close();
-                    conn.Close();
+
+                    //cmd.CommandType = CommandType.StoredProcedure;
+                    //cmd.Parameters.AddWithValue("@slimline_y_n", SqlDbType.Int).Value = slimline;
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    foreach (DataRow row in dt.Rows)
+                        cmbCustomer.Items.Add(row[0].ToString());
+
+
+                    //SqlDataReader reader = cmd.ExecuteReader();
+                    //while (reader.Read())
+                    //    cmbCustomer.Items.Add(reader.GetString(0));
+                    //reader.Close();
+                    //conn.Close();
                 }
             }
 
@@ -452,6 +477,42 @@ namespace PriceMaster
         {
             frmCorrespondenceMassInsert frm = new frmCorrespondenceMassInsert();
             frm.ShowDialog();
+        }
+
+        private void btnLastOrder_Click(object sender, EventArgs e)
+        {
+
+            string sql = "select  max([Last Door Ordered]) as [last_Door_Ordered] from [order_database].dbo.POWERBI_non_returning_customers a " +
+                "left join (select sum(v.line_total) as [value],[NAME] as customer " +
+                "from [order_database].dbo.door d " +
+                "left join [order_database].dbo.view_door_value v on d.id = v.id " +
+                "left join [order_database].dbo.SALES_LEDGER s  on d.customer_acc_ref = s.ACCOUNT_REF " +
+                "where (status_id = 1 or status_id = 2 or status_id = 3) group by [NAME]) b on a.Customer = b.customer " +
+                "where rtrim(a.Customer) = '" + cmbCustomer.Text + "' AND [Slimline Customer] = ";
+
+
+            if (slimline == -1)
+                sql += "'Yes'";
+            else
+                sql += "'No'";
+
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    conn.Open();
+                    var data = cmd.ExecuteScalar().ToString();
+                    if (string.IsNullOrEmpty(data ) == false)
+                    {
+                        frmTraditionalNonReturningCustomerEmail frm = new frmTraditionalNonReturningCustomerEmail(
+                        Convert.ToInt32(cmd.ExecuteScalar().ToString()));
+                        frm.ShowDialog();
+                    }
+                    else
+                        MessageBox.Show("There is no record for the last order placed by this company. Please see IT if this is an error","Missing Record",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    conn.Close();
+                }
+            }
         }
     }
 }

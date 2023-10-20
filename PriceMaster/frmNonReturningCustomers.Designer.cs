@@ -37,6 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.dteFilter = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
+            this.chkSlimline = new System.Windows.Forms.CheckBox();
             this.btnExcel = new PriceMaster.buttonFormatting();
             this.btnOrder = new PriceMaster.buttonFormatting();
             this.btnValue = new PriceMaster.buttonFormatting();
@@ -87,7 +88,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(395, 37);
+            this.label2.Location = new System.Drawing.Point(331, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 17);
             this.label2.TabIndex = 53;
@@ -100,7 +101,7 @@
             this.cmbCustomerSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbCustomerSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCustomerSearch.FormattingEnabled = true;
-            this.cmbCustomerSearch.Location = new System.Drawing.Point(522, 35);
+            this.cmbCustomerSearch.Location = new System.Drawing.Point(458, 35);
             this.cmbCustomerSearch.Name = "cmbCustomerSearch";
             this.cmbCustomerSearch.Size = new System.Drawing.Size(188, 21);
             this.cmbCustomerSearch.TabIndex = 52;
@@ -121,7 +122,7 @@
             // dteFilter
             // 
             this.dteFilter.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.dteFilter.Location = new System.Drawing.Point(809, 36);
+            this.dteFilter.Location = new System.Drawing.Point(745, 36);
             this.dteFilter.Name = "dteFilter";
             this.dteFilter.Size = new System.Drawing.Size(143, 20);
             this.dteFilter.TabIndex = 58;
@@ -133,12 +134,23 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label4.Location = new System.Drawing.Point(716, 37);
+            this.label4.Location = new System.Drawing.Point(652, 37);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(91, 17);
             this.label4.TabIndex = 59;
             this.label4.Text = "Date Search:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // chkSlimline
+            // 
+            this.chkSlimline.AutoSize = true;
+            this.chkSlimline.Location = new System.Drawing.Point(912, 38);
+            this.chkSlimline.Name = "chkSlimline";
+            this.chkSlimline.Size = new System.Drawing.Size(61, 17);
+            this.chkSlimline.TabIndex = 60;
+            this.chkSlimline.Text = "Slimline";
+            this.chkSlimline.UseVisualStyleBackColor = true;
+            this.chkSlimline.CheckedChanged += new System.EventHandler(this.chkSlimline_CheckedChanged);
             // 
             // btnExcel
             // 
@@ -202,6 +214,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1288, 566);
+            this.Controls.Add(this.chkSlimline);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dteFilter);
             this.Controls.Add(this.btnExcel);
@@ -235,5 +248,6 @@
         private buttonFormatting btnExcel;
         private System.Windows.Forms.DateTimePicker dteFilter;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox chkSlimline;
     }
 }

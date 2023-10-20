@@ -12,6 +12,7 @@ using System.Globalization;
 using System.IO;
 using System.Diagnostics;
 using Excel = Microsoft.Office.Interop.Excel;
+using PriceMaster.TraditionalChasing;
 
 namespace PriceMaster
 {
@@ -908,7 +909,7 @@ namespace PriceMaster
 
         private void buttonFormatting1_Click(object sender, EventArgs e)
         {
-            frmChaseCustomerList frm = new frmChaseCustomerList(-1);
+            frmChaseCustomerList frm = new frmChaseCustomerList(-1,"");
             frm.ShowDialog();
         }
 
@@ -932,6 +933,18 @@ namespace PriceMaster
         private void btnCalendar_Click(object sender, EventArgs e)
         {
             frmCalendar frm = new frmCalendar();
+            frm.ShowDialog();
+        }
+
+        private void btnNonReturningCustomers_Click(object sender, EventArgs e)
+        {
+            frmNonReturningCustomers frm = new frmNonReturningCustomers(-1);
+            frm.ShowDialog();
+        }
+
+        private void btnTurnoverDecline_Click(object sender, EventArgs e)
+        {
+            frmTurnOverDecline frm = new frmTurnOverDecline(-1);
             frm.ShowDialog();
         }
     }
