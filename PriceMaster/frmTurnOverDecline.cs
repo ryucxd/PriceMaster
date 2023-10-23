@@ -269,5 +269,11 @@ namespace PriceMaster.TraditionalChasing
 
             load_grid();
         }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            cmbCustomerSearch.Text = "";
+            load_grid();
+        }
     }
 }
