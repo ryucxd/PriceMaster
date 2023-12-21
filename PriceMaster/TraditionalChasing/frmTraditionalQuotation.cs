@@ -278,12 +278,29 @@ namespace PriceMaster
                                 chkTooExpensive.Visible = true;
                                 chkUnableToMeetSpec.Visible = true;
                                 chkNonResponsive.Visible = true;
+
+                                //prompt the user if they want to mark all chases for this customer as complete!
+
+                                string sql_chase_complete = "";
+
+                                DialogResult result = MessageBox.Show("Would you like to mark all chases as complete for this customer?", "Lost Customer", MessageBoxButtons.YesNo);
+                                
+                                if (result == DialogResult.Yes)
+                                {
+                                    sql_chase_complete = "update [order_database].[dbo].[quotation_chase_log] SET chase_complete = -1 where quote_id = " + quote_id.ToString();
+                                    sql_update(sql_chase_complete);
+                                }
+
+
                             }
                             if (cmbStatus.Text != "Chasing")
                                 btnChase.Visible = false;
                             else
                                 btnChase.Visible = true;
                             sql_update(sql);
+
+
+
                         }
                     }
                 }

@@ -674,12 +674,15 @@
             // 
             this.cmbType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbType.Enabled = false;
             this.cmbType.FormattingEnabled = true;
+            this.cmbType.Items.AddRange(new object[] {
+            "Trade",
+            "Main Contractor"});
             this.cmbType.Location = new System.Drawing.Point(97, 163);
             this.cmbType.Name = "cmbType";
             this.cmbType.Size = new System.Drawing.Size(206, 21);
             this.cmbType.TabIndex = 62;
+            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
             // 
             // label25
             // 

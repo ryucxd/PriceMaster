@@ -46,7 +46,7 @@ namespace PriceMaster.SlimlineChasing
                 if (note.Length > 0)
                     note = note + Environment.NewLine;
 
-                sql = "UPDATE [order_database].dbo.quotation_feed_back  SET custom_feedback = custom_feedback + '" + note + txtCustom.Text + " - "
+                sql = "UPDATE [order_database].dbo.quotation_feed_back  SET custom_feedback = '" + note + txtCustom.Text + " - "
                 + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss") + " - " + CONNECT.staffFullName + "' WHERE quote_id = " + quote_id.ToString();
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     cmd.ExecuteNonQuery();
