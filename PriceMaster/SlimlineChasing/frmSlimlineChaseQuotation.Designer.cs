@@ -55,6 +55,7 @@
             this.lblChase = new System.Windows.Forms.Label();
             this.txtChaseDate = new System.Windows.Forms.TextBox();
             this.txtNextDate = new System.Windows.Forms.TextBox();
+            this.chkCustomerLostTheOrder = new System.Windows.Forms.CheckBox();
             this.btnInsertNote = new PriceMaster.buttonFormatting();
             this.btnAttachments = new PriceMaster.buttonFormatting();
             this.btnRelatedEnquiries = new PriceMaster.buttonFormatting();
@@ -165,13 +166,13 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(963, 20);
             this.label2.TabIndex = 51;
-            this.label2.Text = "Custom Notes:";
+            this.label2.Text = "Internal Notes:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // chkTooExpensive
             // 
             this.chkTooExpensive.AutoSize = true;
-            this.chkTooExpensive.Location = new System.Drawing.Point(694, 128);
+            this.chkTooExpensive.Location = new System.Drawing.Point(671, 128);
             this.chkTooExpensive.Name = "chkTooExpensive";
             this.chkTooExpensive.Size = new System.Drawing.Size(99, 17);
             this.chkTooExpensive.TabIndex = 64;
@@ -195,7 +196,7 @@
             // chkQuoteTookTooLong
             // 
             this.chkQuoteTookTooLong.AutoSize = true;
-            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(694, 155);
+            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(671, 155);
             this.chkQuoteTookTooLong.Name = "chkQuoteTookTooLong";
             this.chkQuoteTookTooLong.Size = new System.Drawing.Size(123, 17);
             this.chkQuoteTookTooLong.TabIndex = 66;
@@ -231,7 +232,7 @@
             // chkNonResponsive
             // 
             this.chkNonResponsive.AutoSize = true;
-            this.chkNonResponsive.Location = new System.Drawing.Point(694, 181);
+            this.chkNonResponsive.Location = new System.Drawing.Point(671, 181);
             this.chkNonResponsive.Name = "chkNonResponsive";
             this.chkNonResponsive.Size = new System.Drawing.Size(152, 17);
             this.chkNonResponsive.TabIndex = 70;
@@ -343,6 +344,18 @@
             this.txtNextDate.Size = new System.Drawing.Size(72, 20);
             this.txtNextDate.TabIndex = 93;
             // 
+            // chkCustomerLostTheOrder
+            // 
+            this.chkCustomerLostTheOrder.AutoSize = true;
+            this.chkCustomerLostTheOrder.Location = new System.Drawing.Point(825, 181);
+            this.chkCustomerLostTheOrder.Name = "chkCustomerLostTheOrder";
+            this.chkCustomerLostTheOrder.Size = new System.Drawing.Size(140, 17);
+            this.chkCustomerLostTheOrder.TabIndex = 94;
+            this.chkCustomerLostTheOrder.Text = "Customer Lost the Order";
+            this.chkCustomerLostTheOrder.UseVisualStyleBackColor = true;
+            this.chkCustomerLostTheOrder.Visible = false;
+            this.chkCustomerLostTheOrder.CheckedChanged += new System.EventHandler(this.chkCustomerLostTheOrder_CheckedChanged);
+            // 
             // btnInsertNote
             // 
             this.btnInsertNote.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -350,14 +363,14 @@
             this.btnInsertNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInsertNote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInsertNote.ForeColor = System.Drawing.Color.White;
-            this.btnInsertNote.Location = new System.Drawing.Point(870, 208);
+            this.btnInsertNote.Location = new System.Drawing.Point(852, 208);
             this.btnInsertNote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnInsertNote.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnInsertNote.Name = "btnInsertNote";
             this.btnInsertNote.Padding = new System.Windows.Forms.Padding(3);
-            this.btnInsertNote.Size = new System.Drawing.Size(106, 30);
+            this.btnInsertNote.Size = new System.Drawing.Size(124, 30);
             this.btnInsertNote.TabIndex = 91;
-            this.btnInsertNote.Text = "Insert Note";
+            this.btnInsertNote.Text = "Internal Notes";
             this.btnInsertNote.UseVisualStyleBackColor = false;
             this.btnInsertNote.Click += new System.EventHandler(this.btnInsertNote_Click);
             // 
@@ -456,6 +469,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1411, 491);
+            this.Controls.Add(this.chkCustomerLostTheOrder);
             this.Controls.Add(this.chkHiddenFollowup);
             this.Controls.Add(this.txtNextDate);
             this.Controls.Add(this.txtChaseDate);
@@ -535,5 +549,6 @@
         private buttonFormatting btnInsertNote;
         private System.Windows.Forms.TextBox txtChaseDate;
         private System.Windows.Forms.TextBox txtNextDate;
+        private System.Windows.Forms.CheckBox chkCustomerLostTheOrder;
     }
 }

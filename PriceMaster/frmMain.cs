@@ -244,7 +244,17 @@ namespace PriceMaster
                 if (row.Cells[chasing_status_index].Value.ToString() == "")
                     row.Cells[chasing_status_index].Value = row.Cells[description_index].Value;
                 if (row.Cells[chase_priority_index].Value.ToString() == "-1")
-                    row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
+                    row.DefaultCellStyle.BackColor = Color.Goldenrod;
+
+                if (row.Cells[chasing_status_index].Value.ToString() == "Won")
+                    row.DefaultCellStyle.BackColor = Color.LightSeaGreen;
+
+                if (row.Cells[chasing_status_index].Value.ToString() == "Lost")
+                    row.DefaultCellStyle.BackColor = Color.PaleVioletRed;
+
+
+               // MessageBox.Show(row.Cells[chasing_status_index].Value.ToString());
+
             }
             lblTotalCost.Text = total_cost.ToString("C");
             //get rid of these
@@ -699,7 +709,8 @@ namespace PriceMaster
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-
+            column_index_refresh();
+            format();
         }
 
         private void btnSupplier_Click(object sender, EventArgs e)
@@ -821,6 +832,8 @@ namespace PriceMaster
                 }
                 conn.Close();
             }
+            column_index_refresh();
+            format();
         }
 
         private void btnAdmin_Click(object sender, EventArgs e)

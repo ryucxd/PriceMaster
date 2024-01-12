@@ -51,6 +51,7 @@ namespace PriceMaster
                 "CASE WHEN q.lead_time_too_long = -1 then ', Lead time too long' ELSE '' end + " +
                 "CASE WHEN q.quote_took_too_long = -1 then ', Quote took too long' ELSE '' end + " +
                 "CASE WHEN q.unable_to_meet_spec = -1 then ', Unable to meet spec' ELSE '' end + " +
+                "CASE WHEN q.customer_lost_the_quote = -1 then ', Customer Lost the order' ELSE '' end + " +
                 "CASE WHEN q.non_responsive_customer = -1 then ', Non Responsive Customer' ELSE '' end) ,1,2,'') as reason_for_loss, " +
                 "case when e.id is null then 'No Related Enquiry' else cast(e.id as nvarchar) end as enquiry_id " +
                 "from [order_database].dbo.solidworks_quotation_log s " +
@@ -105,6 +106,8 @@ namespace PriceMaster
                 sql = sql + "  q.unable_to_meet_spec = -1    AND ";
             if (chkNonResponsive.Checked == true)
                 sql = sql + "  q.non_responsive_customer = -1    AND ";
+            if (chkCustomerLostQuote.Checked == true)
+                sql = sql + "  q.customer_lost_the_quote = -1    AND ";
 
             sql = sql.Substring(0, sql.Length - 6);
 
@@ -188,7 +191,13 @@ namespace PriceMaster
                 total_cost = total_cost + Convert.ToDouble(row.Cells[value_index].Value);
                 //while we are here also we need to highlight any rows lightblue if they are prio chase
                 if (row.Cells[prioritY_chase_index].Value.ToString() == "-1")
-                    row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
+                    row.DefaultCellStyle.BackColor = Color.Goldenrod;
+
+                if (row.Cells[status_index].Value.ToString() == "Won")
+                    row.DefaultCellStyle.BackColor = Color.LightSeaGreen;
+
+                if (row.Cells[status_index].Value.ToString() == "Lost")
+                    row.DefaultCellStyle.BackColor = Color.PaleVioletRed;
             }
             lblTotalCost.Text = total_cost.ToString("C");
 
@@ -250,14 +259,14 @@ namespace PriceMaster
 
         private void dteStart_ValueChanged(object sender, EventArgs e)
         {
-            dateFilter = -1;
-            apply_filter();
+            //dateFilter = -1;
+            //apply_filter();
         }
 
         private void dteEnd_ValueChanged(object sender, EventArgs e)
         {
-            dateFilter = -1;
-            apply_filter();
+            //dateFilter = -1;
+            //apply_filter();
         }
 
 
@@ -581,6 +590,9 @@ namespace PriceMaster
                 }
 
                 conn.Close();
+
+                column_index();
+                format();
             }
         }
 
@@ -670,6 +682,29 @@ namespace PriceMaster
         {
             frmTurnOverDecline frm = new frmTurnOverDecline(0);
             frm.ShowDialog();
+        }
+
+        private void dteStart_CloseUp(object sender, EventArgs e)
+        {
+            dateFilter = -1;
+            apply_filter();
+        }
+
+        private void dteEnd_CloseUp(object sender, EventArgs e)
+        {
+            dateFilter = -1;
+            apply_filter();
+        }
+
+        private void btnCalendar_Click(object sender, EventArgs e)
+        {
+            frmCalendar frm = new frmCalendar();
+            frm.ShowDialog();
+        }
+
+        private void chkCustomerLostQuote_CheckedChanged(object sender, EventArgs e)
+        {
+            apply_filter();
         }
     }
 }

@@ -100,7 +100,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(691, 20);
             this.label2.TabIndex = 50;
-            this.label2.Text = "Custom Feedback:";
+            this.label2.Text = "Internal Feedback:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // chkPriority
@@ -145,9 +145,9 @@
             this.btnInsertNote.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnInsertNote.Name = "btnInsertNote";
             this.btnInsertNote.Padding = new System.Windows.Forms.Padding(3);
-            this.btnInsertNote.Size = new System.Drawing.Size(101, 30);
+            this.btnInsertNote.Size = new System.Drawing.Size(153, 30);
             this.btnInsertNote.TabIndex = 62;
-            this.btnInsertNote.Text = "Insert Note";
+            this.btnInsertNote.Text = "Internal Feedback";
             this.btnInsertNote.UseVisualStyleBackColor = false;
             this.btnInsertNote.Click += new System.EventHandler(this.btnInsertNote_Click);
             // 

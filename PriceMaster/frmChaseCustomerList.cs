@@ -84,6 +84,7 @@ namespace PriceMaster
         {
             string sql = "";// [order_database].dbo.usp_sales_over_years";
 
+            //aaaaaah why are we constantly swapping these
             sql = "SELECT [NAME] FROM [order_database].dbo.[SALES_LEDGER] order by NAME ASC";
             cmbCustomer.Items.Clear();
 

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTraditional));
             this.dteEnd = new System.Windows.Forms.DateTimePicker();
             this.dteStart = new System.Windows.Forms.DateTimePicker();
@@ -62,6 +62,10 @@
             this.chkUnableToMeetSpec = new System.Windows.Forms.CheckBox();
             this.chkTooExpensive = new System.Windows.Forms.CheckBox();
             this.lblLossReasons = new System.Windows.Forms.Label();
+            this.btnCalendar = new PriceMaster.buttonFormatting();
+            this.btnTurnoverDecline = new PriceMaster.buttonFormatting();
+            this.btnOutstandingCorrespondence = new PriceMaster.buttonFormatting();
+            this.btnAlert = new PriceMaster.buttonFormatting();
             this.btnNonReturningCustomers = new PriceMaster.buttonFormatting();
             this.btnCustomer = new PriceMaster.buttonFormatting();
             this.btnManagementView = new PriceMaster.buttonFormatting();
@@ -69,9 +73,7 @@
             this.btnOutstanding = new PriceMaster.buttonFormatting();
             this.btnReport = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
-            this.btnAlert = new PriceMaster.buttonFormatting();
-            this.btnOutstandingCorrespondence = new PriceMaster.buttonFormatting();
-            this.btnTurnoverDecline = new PriceMaster.buttonFormatting();
+            this.chkCustomerLostQuote = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -82,6 +84,7 @@
             this.dteEnd.Name = "dteEnd";
             this.dteEnd.Size = new System.Drawing.Size(121, 20);
             this.dteEnd.TabIndex = 62;
+            this.dteEnd.CloseUp += new System.EventHandler(this.dteEnd_CloseUp);
             this.dteEnd.ValueChanged += new System.EventHandler(this.dteEnd_ValueChanged);
             // 
             // dteStart
@@ -90,6 +93,7 @@
             this.dteStart.Name = "dteStart";
             this.dteStart.Size = new System.Drawing.Size(121, 20);
             this.dteStart.TabIndex = 61;
+            this.dteStart.CloseUp += new System.EventHandler(this.dteStart_CloseUp);
             this.dteStart.ValueChanged += new System.EventHandler(this.dteStart_ValueChanged);
             // 
             // label13
@@ -179,14 +183,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Location = new System.Drawing.Point(12, 143);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -376,7 +380,7 @@
             // chkNonResponsive
             // 
             this.chkNonResponsive.AutoSize = true;
-            this.chkNonResponsive.Location = new System.Drawing.Point(1427, 80);
+            this.chkNonResponsive.Location = new System.Drawing.Point(1427, 77);
             this.chkNonResponsive.Name = "chkNonResponsive";
             this.chkNonResponsive.Size = new System.Drawing.Size(152, 17);
             this.chkNonResponsive.TabIndex = 106;
@@ -388,7 +392,7 @@
             // chkLeadTimeTooLong
             // 
             this.chkLeadTimeTooLong.AutoSize = true;
-            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(1558, 30);
+            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(1585, 27);
             this.chkLeadTimeTooLong.Name = "chkLeadTimeTooLong";
             this.chkLeadTimeTooLong.Size = new System.Drawing.Size(116, 17);
             this.chkLeadTimeTooLong.TabIndex = 105;
@@ -400,7 +404,7 @@
             // chkQuoteTookTooLong
             // 
             this.chkQuoteTookTooLong.AutoSize = true;
-            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(1427, 55);
+            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(1427, 52);
             this.chkQuoteTookTooLong.Name = "chkQuoteTookTooLong";
             this.chkQuoteTookTooLong.Size = new System.Drawing.Size(123, 17);
             this.chkQuoteTookTooLong.TabIndex = 104;
@@ -412,7 +416,7 @@
             // chkUnableToMeetSpec
             // 
             this.chkUnableToMeetSpec.AutoSize = true;
-            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(1558, 55);
+            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(1585, 52);
             this.chkUnableToMeetSpec.Name = "chkUnableToMeetSpec";
             this.chkUnableToMeetSpec.Size = new System.Drawing.Size(127, 17);
             this.chkUnableToMeetSpec.TabIndex = 103;
@@ -424,7 +428,7 @@
             // chkTooExpensive
             // 
             this.chkTooExpensive.AutoSize = true;
-            this.chkTooExpensive.Location = new System.Drawing.Point(1427, 30);
+            this.chkTooExpensive.Location = new System.Drawing.Point(1427, 27);
             this.chkTooExpensive.Name = "chkTooExpensive";
             this.chkTooExpensive.Size = new System.Drawing.Size(99, 17);
             this.chkTooExpensive.TabIndex = 102;
@@ -437,13 +441,85 @@
             // 
             this.lblLossReasons.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblLossReasons.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblLossReasons.Location = new System.Drawing.Point(1424, 4);
+            this.lblLossReasons.Location = new System.Drawing.Point(1424, 1);
             this.lblLossReasons.Name = "lblLossReasons";
-            this.lblLossReasons.Size = new System.Drawing.Size(250, 23);
+            this.lblLossReasons.Size = new System.Drawing.Size(277, 23);
             this.lblLossReasons.TabIndex = 107;
             this.lblLossReasons.Text = "Loss Reasons";
             this.lblLossReasons.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.lblLossReasons.Visible = false;
+            // 
+            // btnCalendar
+            // 
+            this.btnCalendar.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnCalendar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCalendar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCalendar.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalendar.ForeColor = System.Drawing.Color.White;
+            this.btnCalendar.Location = new System.Drawing.Point(445, 9);
+            this.btnCalendar.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnCalendar.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnCalendar.Name = "btnCalendar";
+            this.btnCalendar.Padding = new System.Windows.Forms.Padding(3);
+            this.btnCalendar.Size = new System.Drawing.Size(130, 30);
+            this.btnCalendar.TabIndex = 117;
+            this.btnCalendar.Text = "CALENDAR";
+            this.btnCalendar.UseVisualStyleBackColor = false;
+            this.btnCalendar.Click += new System.EventHandler(this.btnCalendar_Click);
+            // 
+            // btnTurnoverDecline
+            // 
+            this.btnTurnoverDecline.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnTurnoverDecline.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnTurnoverDecline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTurnoverDecline.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTurnoverDecline.ForeColor = System.Drawing.Color.White;
+            this.btnTurnoverDecline.Location = new System.Drawing.Point(1267, 45);
+            this.btnTurnoverDecline.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnTurnoverDecline.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnTurnoverDecline.Name = "btnTurnoverDecline";
+            this.btnTurnoverDecline.Padding = new System.Windows.Forms.Padding(3);
+            this.btnTurnoverDecline.Size = new System.Drawing.Size(145, 30);
+            this.btnTurnoverDecline.TabIndex = 116;
+            this.btnTurnoverDecline.Text = "Turnover Decline";
+            this.btnTurnoverDecline.UseVisualStyleBackColor = false;
+            this.btnTurnoverDecline.Click += new System.EventHandler(this.btnTurnoverDecline_Click);
+            // 
+            // btnOutstandingCorrespondence
+            // 
+            this.btnOutstandingCorrespondence.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnOutstandingCorrespondence.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnOutstandingCorrespondence.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutstandingCorrespondence.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOutstandingCorrespondence.ForeColor = System.Drawing.Color.White;
+            this.btnOutstandingCorrespondence.Location = new System.Drawing.Point(1019, 45);
+            this.btnOutstandingCorrespondence.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnOutstandingCorrespondence.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnOutstandingCorrespondence.Name = "btnOutstandingCorrespondence";
+            this.btnOutstandingCorrespondence.Padding = new System.Windows.Forms.Padding(3);
+            this.btnOutstandingCorrespondence.Size = new System.Drawing.Size(238, 30);
+            this.btnOutstandingCorrespondence.TabIndex = 111;
+            this.btnOutstandingCorrespondence.Text = "Outstanding  Correspondence";
+            this.btnOutstandingCorrespondence.UseVisualStyleBackColor = false;
+            this.btnOutstandingCorrespondence.Click += new System.EventHandler(this.btnOutstandingCorrespondence_Click);
+            // 
+            // btnAlert
+            // 
+            this.btnAlert.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAlert.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnAlert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlert.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAlert.ForeColor = System.Drawing.Color.White;
+            this.btnAlert.Location = new System.Drawing.Point(610, 45);
+            this.btnAlert.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnAlert.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnAlert.Name = "btnAlert";
+            this.btnAlert.Padding = new System.Windows.Forms.Padding(3);
+            this.btnAlert.Size = new System.Drawing.Size(154, 30);
+            this.btnAlert.TabIndex = 110;
+            this.btnAlert.Text = "Management Alert";
+            this.btnAlert.UseVisualStyleBackColor = false;
+            this.btnAlert.Click += new System.EventHandler(this.btnAlert_Click);
             // 
             // btnNonReturningCustomers
             // 
@@ -572,65 +648,25 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // btnAlert
+            // chkCustomerLostQuote
             // 
-            this.btnAlert.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAlert.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnAlert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAlert.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAlert.ForeColor = System.Drawing.Color.White;
-            this.btnAlert.Location = new System.Drawing.Point(610, 45);
-            this.btnAlert.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnAlert.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnAlert.Name = "btnAlert";
-            this.btnAlert.Padding = new System.Windows.Forms.Padding(3);
-            this.btnAlert.Size = new System.Drawing.Size(154, 30);
-            this.btnAlert.TabIndex = 110;
-            this.btnAlert.Text = "Management Alert";
-            this.btnAlert.UseVisualStyleBackColor = false;
-            this.btnAlert.Click += new System.EventHandler(this.btnAlert_Click);
-            // 
-            // btnOutstandingCorrespondence
-            // 
-            this.btnOutstandingCorrespondence.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnOutstandingCorrespondence.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnOutstandingCorrespondence.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOutstandingCorrespondence.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOutstandingCorrespondence.ForeColor = System.Drawing.Color.White;
-            this.btnOutstandingCorrespondence.Location = new System.Drawing.Point(1019, 45);
-            this.btnOutstandingCorrespondence.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnOutstandingCorrespondence.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnOutstandingCorrespondence.Name = "btnOutstandingCorrespondence";
-            this.btnOutstandingCorrespondence.Padding = new System.Windows.Forms.Padding(3);
-            this.btnOutstandingCorrespondence.Size = new System.Drawing.Size(238, 30);
-            this.btnOutstandingCorrespondence.TabIndex = 111;
-            this.btnOutstandingCorrespondence.Text = "Outstanding  Correspondence";
-            this.btnOutstandingCorrespondence.UseVisualStyleBackColor = false;
-            this.btnOutstandingCorrespondence.Click += new System.EventHandler(this.btnOutstandingCorrespondence_Click);
-            // 
-            // btnTurnoverDecline
-            // 
-            this.btnTurnoverDecline.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnTurnoverDecline.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnTurnoverDecline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTurnoverDecline.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTurnoverDecline.ForeColor = System.Drawing.Color.White;
-            this.btnTurnoverDecline.Location = new System.Drawing.Point(1267, 45);
-            this.btnTurnoverDecline.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnTurnoverDecline.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnTurnoverDecline.Name = "btnTurnoverDecline";
-            this.btnTurnoverDecline.Padding = new System.Windows.Forms.Padding(3);
-            this.btnTurnoverDecline.Size = new System.Drawing.Size(145, 30);
-            this.btnTurnoverDecline.TabIndex = 116;
-            this.btnTurnoverDecline.Text = "Turnover Decline";
-            this.btnTurnoverDecline.UseVisualStyleBackColor = false;
-            this.btnTurnoverDecline.Click += new System.EventHandler(this.btnTurnoverDecline_Click);
+            this.chkCustomerLostQuote.AutoSize = true;
+            this.chkCustomerLostQuote.Location = new System.Drawing.Point(1585, 75);
+            this.chkCustomerLostQuote.Name = "chkCustomerLostQuote";
+            this.chkCustomerLostQuote.Size = new System.Drawing.Size(137, 17);
+            this.chkCustomerLostQuote.TabIndex = 118;
+            this.chkCustomerLostQuote.Text = "Customer lost the order.";
+            this.chkCustomerLostQuote.UseVisualStyleBackColor = true;
+            this.chkCustomerLostQuote.Visible = false;
+            this.chkCustomerLostQuote.CheckedChanged += new System.EventHandler(this.chkCustomerLostQuote_CheckedChanged);
             // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.chkCustomerLostQuote);
+            this.Controls.Add(this.btnCalendar);
             this.Controls.Add(this.btnTurnoverDecline);
             this.Controls.Add(this.btnOutstandingCorrespondence);
             this.Controls.Add(this.btnAlert);
@@ -728,5 +764,7 @@
         private buttonFormatting btnAlert;
         private buttonFormatting btnOutstandingCorrespondence;
         private buttonFormatting btnTurnoverDecline;
+        private buttonFormatting btnCalendar;
+        private System.Windows.Forms.CheckBox chkCustomerLostQuote;
     }
 }

@@ -62,7 +62,7 @@ namespace PriceMaster
 
 
                     //if the current status is not pending then we remove it so it cannot be added back
-                    sql = "SELECT [status] ,[custom_feedback] ,[too_expensive] ,[lead_time_too_long] ,[quote_took_too_long] ,[unable_to_meet_spec],[non_responsive_customer],priority_chase " +
+                    sql = "SELECT [status] ,[custom_feedback] ,[too_expensive] ,[lead_time_too_long] ,[quote_took_too_long] ,[unable_to_meet_spec],[non_responsive_customer],priority_chase,customer_lost_the_quote " +
                         "FROM [order_database].[dbo].[quotation_feed_back_slimline] WHERE quote_id = " + quote_id.ToString();
                     using (SqlCommand cmdData = new SqlCommand(sql, conn))
                     {
@@ -103,6 +103,11 @@ namespace PriceMaster
                             chkPriority.Checked = true;
                             reason_for_loss = -1;
                         }
+                        if (dt.Rows[0][8].ToString() == "-1")
+                        {
+                            chkCustomerLostTheOrder.Checked = true;
+                            reason_for_loss = -1;
+                        }
 
                         //change label text
                         if (reason_for_loss == -1)
@@ -122,6 +127,7 @@ namespace PriceMaster
                             chkTooExpensive.Visible = true;
                             chkUnableToMeetSpec.Visible = true;
                             chkNonResponsive.Visible = true;
+                            chkCustomerLostTheOrder.Visible = true;
                         }
 
                         if (cmbStatus.Text != "Chasing")
@@ -307,6 +313,7 @@ namespace PriceMaster
                 chkTooExpensive.Visible = true;
                 chkUnableToMeetSpec.Visible = true;
                 chkNonResponsive.Visible = true;
+                chkCustomerLostTheOrder.Visible = true;
             }
             else
             {
@@ -316,6 +323,7 @@ namespace PriceMaster
                 chkTooExpensive.Visible = false;
                 chkUnableToMeetSpec.Visible = false;
                 chkNonResponsive.Visible = false;
+                chkCustomerLostTheOrder.Visible = false;
             }
             if (cmbStatus.Text != "Chasing")
                 btnChase.Visible = false;
@@ -334,6 +342,7 @@ namespace PriceMaster
             chkTooExpensive.Checked = false;
             chkUnableToMeetSpec.Checked = false;
             chkNonResponsive.Checked = false;
+            chkCustomerLostTheOrder.Checked = false;
 
         }
 
@@ -442,6 +451,8 @@ namespace PriceMaster
                     cancel_close = 0;
                 if (chkNonResponsive.Checked == true)
                     cancel_close = 0;
+                if (chkCustomerLostTheOrder.Checked == true)
+                    cancel_close = 0;
 
                 if (cancel_close == -1)
                 {
@@ -458,6 +469,15 @@ namespace PriceMaster
             if (chkPriority.Checked == true)
                 value = -1;
             string sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET priority_chase = " + value + " WHERE quote_id = " + quote_id.ToString();
+            sql_update(sql);
+        }
+
+        private void chkCustomerLostTheOrder_CheckedChanged(object sender, EventArgs e)
+        {
+            int value = 0;
+            if (chkCustomerLostTheOrder.Checked == true)
+                value = -1;
+            string sql = "UPDATE [order_database].dbo.quotation_feed_back_slimline SET customer_lost_the_quote = " + value + " WHERE quote_id = " + quote_id.ToString();
             sql_update(sql);
         }
     }

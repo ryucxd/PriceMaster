@@ -64,6 +64,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.btnInsert = new PriceMaster.buttonFormatting();
+            this.chkCustomerLostQuote = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,12 +151,12 @@
             this.btnQuote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuote.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQuote.ForeColor = System.Drawing.Color.White;
-            this.btnQuote.Location = new System.Drawing.Point(1123, 511);
+            this.btnQuote.Location = new System.Drawing.Point(1115, 511);
             this.btnQuote.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnQuote.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnQuote.Name = "btnQuote";
             this.btnQuote.Padding = new System.Windows.Forms.Padding(3);
-            this.btnQuote.Size = new System.Drawing.Size(89, 33);
+            this.btnQuote.Size = new System.Drawing.Size(98, 33);
             this.btnQuote.TabIndex = 47;
             this.btnQuote.Text = "Quote";
             this.btnQuote.UseVisualStyleBackColor = false;
@@ -168,12 +169,12 @@
             this.btnDrawings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDrawings.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDrawings.ForeColor = System.Drawing.Color.White;
-            this.btnDrawings.Location = new System.Drawing.Point(1123, 556);
+            this.btnDrawings.Location = new System.Drawing.Point(1115, 556);
             this.btnDrawings.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnDrawings.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnDrawings.Name = "btnDrawings";
             this.btnDrawings.Padding = new System.Windows.Forms.Padding(3);
-            this.btnDrawings.Size = new System.Drawing.Size(89, 33);
+            this.btnDrawings.Size = new System.Drawing.Size(98, 33);
             this.btnDrawings.TabIndex = 48;
             this.btnDrawings.Text = "Drawings";
             this.btnDrawings.UseVisualStyleBackColor = false;
@@ -181,7 +182,7 @@
             // 
             // txtCustom
             // 
-            this.txtCustom.Location = new System.Drawing.Point(424, 451);
+            this.txtCustom.Location = new System.Drawing.Point(416, 451);
             this.txtCustom.Name = "txtCustom";
             this.txtCustom.ReadOnly = true;
             this.txtCustom.Size = new System.Drawing.Size(691, 139);
@@ -193,11 +194,11 @@
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(424, 429);
+            this.label2.Location = new System.Drawing.Point(416, 429);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(691, 20);
             this.label2.TabIndex = 50;
-            this.label2.Text = "Custom Feedback:";
+            this.label2.Text = "Internal Notes:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // cmbStatus
@@ -236,7 +237,7 @@
             // chkUnableToMeetSpec
             // 
             this.chkUnableToMeetSpec.AutoSize = true;
-            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(205, 554);
+            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(232, 554);
             this.chkUnableToMeetSpec.Name = "chkUnableToMeetSpec";
             this.chkUnableToMeetSpec.Size = new System.Drawing.Size(127, 17);
             this.chkUnableToMeetSpec.TabIndex = 54;
@@ -260,7 +261,7 @@
             // chkLeadTimeTooLong
             // 
             this.chkLeadTimeTooLong.AutoSize = true;
-            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(205, 529);
+            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(232, 529);
             this.chkLeadTimeTooLong.Name = "chkLeadTimeTooLong";
             this.chkLeadTimeTooLong.Size = new System.Drawing.Size(116, 17);
             this.chkLeadTimeTooLong.TabIndex = 56;
@@ -479,22 +480,35 @@
             this.btnInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInsert.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInsert.ForeColor = System.Drawing.Color.White;
-            this.btnInsert.Location = new System.Drawing.Point(1123, 451);
+            this.btnInsert.Location = new System.Drawing.Point(1115, 452);
             this.btnInsert.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnInsert.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnInsert.Name = "btnInsert";
             this.btnInsert.Padding = new System.Windows.Forms.Padding(3);
-            this.btnInsert.Size = new System.Drawing.Size(89, 48);
+            this.btnInsert.Size = new System.Drawing.Size(98, 50);
             this.btnInsert.TabIndex = 107;
-            this.btnInsert.Text = "Insert Note";
+            this.btnInsert.Text = "Internal Notes";
             this.btnInsert.UseVisualStyleBackColor = false;
             this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
+            // 
+            // chkCustomerLostQuote
+            // 
+            this.chkCustomerLostQuote.AutoSize = true;
+            this.chkCustomerLostQuote.Location = new System.Drawing.Point(232, 579);
+            this.chkCustomerLostQuote.Name = "chkCustomerLostQuote";
+            this.chkCustomerLostQuote.Size = new System.Drawing.Size(143, 17);
+            this.chkCustomerLostQuote.TabIndex = 119;
+            this.chkCustomerLostQuote.Text = "Customer Lost the Order.";
+            this.chkCustomerLostQuote.UseVisualStyleBackColor = true;
+            this.chkCustomerLostQuote.Visible = false;
+            this.chkCustomerLostQuote.CheckedChanged += new System.EventHandler(this.chkCustomerLostQuote_CheckedChanged);
             // 
             // frmTraditionalQuotation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1640, 599);
+            this.Controls.Add(this.chkCustomerLostQuote);
             this.Controls.Add(this.btnInsert);
             this.Controls.Add(this.chkHiddenFollowup);
             this.Controls.Add(this.txtNextDate);
@@ -578,5 +592,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private buttonFormatting btnInsert;
+        private System.Windows.Forms.CheckBox chkCustomerLostQuote;
     }
 }
