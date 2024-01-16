@@ -215,6 +215,16 @@ namespace PriceMaster
                 chkUnableToMeetSpec.Visible = true;
                 chkNonResponsive.Visible = true;
                 chkCustomerLostQuote.Visible = true;
+
+                DialogResult result = MessageBox.Show("Would you like to add a chase?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    frmTraditionalChase frm = new frmTraditionalChase(quote_id, 0, 0);
+                    frm.ShowDialog();
+                    recent_chase();
+                }
+
+                
             }
             else
             {
@@ -249,8 +259,8 @@ namespace PriceMaster
                 {
                     sql = "UPDATE [order_database].dbo.quotation_feed_back SET status = '" + cmbStatus.Text + "' WHERE quote_id = " + quote_id.ToString();
                     sql_update(sql);
-                    frmTraditionalLossReason frm = new frmTraditionalLossReason(quote_id);
-                    frm.ShowDialog();
+                    //frmTraditionalLossReason frm = new frmTraditionalLossReason(quote_id);
+                    //frm.ShowDialog();
                     sql = "UPDATE [order_database].dbo.quotation_feed_back SET status = '" + cmbStatus.Text + "',too_expensive = 0,lead_time_too_long = 0,quote_took_too_long = 0,unable_to_meet_spec = 0,non_responsive_customer = 0,customer_lost_the_quote = 0 WHERE quote_id = " + quote_id.ToString();
                     using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
                     {
@@ -320,40 +330,44 @@ namespace PriceMaster
 
             skip_loss_check = -1;
 
-            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
-            {
-                conn.Open();
-                string sql = "select count(id) from [order_database].[dbo].quotation_chase_log where quote_id = " + quote_id.ToString();
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
-                {
-                    var temp = Convert.ToInt32(cmd.ExecuteScalar().ToString());
-                    if (temp == null)
-                        temp = 0;
 
-                    if (temp >= 3)
-                    {
-                        DialogResult result = MessageBox.Show("This project has already been chased " + temp.ToString() + " times. Are you sure you want to add a chase?", "Non Responsive Customer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (result == DialogResult.No)
-                        {
-                            //mark customer as non responsive and cancel out the chase
-                            DialogResult lossResult = MessageBox.Show("Would you like to mark this project as lost?", "Project update", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                            if (lossResult == DialogResult.Yes)
-                            {
-                                frmTraditionalMultipleChaseLoss frmTraditional = new frmTraditionalMultipleChaseLoss(quote_id);
-                                frmTraditional.ShowDialog();
-                                this.Close();
-                            }
+            //im taking this out because we removed the "multiple loss" form so theres no point running it from here
 
-                            return;
-                        }
+            //////using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            //////{
+            //////    conn.Open();
+            //////    string sql = "select count(id) from [order_database].[dbo].quotation_chase_log where quote_id = " + quote_id.ToString();
+            //////    using (SqlCommand cmd = new SqlCommand(sql, conn))
+            //////    {
+            //////        var temp = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+            //////        if (temp == null)
+            //////            temp = 0;
 
-                    }
+            //////        //if (temp >= 3)
+            //////        //{
+            //////        //    DialogResult result = MessageBox.Show("This project has already been chased " + temp.ToString() + " times. Are you sure you want to add a chase?", "Non Responsive Customer", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //////        //    if (result == DialogResult.No)
+            //////        //    {
+            //////        //        //mark customer as non responsive and cancel out the chase
+            //////        //        DialogResult lossResult = MessageBox.Show("Would you like to mark this project as lost?", "Project update", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                }
+            //////        //        if (lossResult == DialogResult.Yes)
+            //////        //        {
+            //////        //            frmTraditionalMultipleChaseLoss frmTraditional = new frmTraditionalMultipleChaseLoss(quote_id);
+            //////        //            frmTraditional.ShowDialog();
+            //////        //            this.Close();
+            //////        //        }
 
-                conn.Close();
-            }
+            //////        //        return;
+            //////        //    }
+
+            //////        //}
+
+            //////    }
+
+            //////    conn.Close();
+            //////}
 
             frmTraditionalChase frm = new frmTraditionalChase(quote_id, 0, 0);
             frm.ShowDialog();

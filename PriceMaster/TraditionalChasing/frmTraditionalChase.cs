@@ -164,11 +164,11 @@ namespace PriceMaster
                 conn.Close();
 
 
-
+                //removing this as part of the new update
                 //also update the status to chasing >> incase they forgot 
-                frmTraditionalChaseUpdate frm = new frmTraditionalChaseUpdate(quote_id);
-                frm.ShowDialog();
-                MessageBox.Show("Chase updated!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ////frmTraditionalChaseUpdate frm = new frmTraditionalChaseUpdate(quote_id);
+                ////frm.ShowDialog();
+               // MessageBox.Show("Chase updated!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
         }
@@ -259,9 +259,9 @@ namespace PriceMaster
 
 
                 //also update the status to chasing >> incase they forgot 
-                frmTraditionalChaseUpdate frm = new frmTraditionalChaseUpdate(quote_id);
-                frm.ShowDialog();
-                MessageBox.Show("Chase updated!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //frmTraditionalChaseUpdate frm = new frmTraditionalChaseUpdate(quote_id);
+                //frm.ShowDialog();
+                //MessageBox.Show("Chase updated!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
 

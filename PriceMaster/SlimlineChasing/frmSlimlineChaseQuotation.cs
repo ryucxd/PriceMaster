@@ -314,6 +314,15 @@ namespace PriceMaster
                 chkUnableToMeetSpec.Visible = true;
                 chkNonResponsive.Visible = true;
                 chkCustomerLostTheOrder.Visible = true;
+
+                DialogResult result = MessageBox.Show("Would you like to add a chase?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    frmSlimlineChase frm = new frmSlimlineChase(quote_id, 0, 0);
+                    frm.ShowDialog();
+                    load_data();
+                }
+
             }
             else
             {

@@ -161,9 +161,9 @@ namespace PriceMaster
                 conn.Close();
 
                 //also update the status to chasing >> incase they forgot 
-                frmSlimlineChaseUpdate frm = new frmSlimlineChaseUpdate(quote_id);
-                frm.ShowDialog();
-                MessageBox.Show("Chase updated!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //frmSlimlineChaseUpdate frm = new frmSlimlineChaseUpdate(quote_id);
+                //frm.ShowDialog();
+                //MessageBox.Show("Chase updated!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
         }
@@ -251,9 +251,9 @@ namespace PriceMaster
                 conn.Close();
 
                 //also update the status to chasing >> incase they forgot 
-                frmSlimlineChaseUpdate frm = new frmSlimlineChaseUpdate(quote_id);
-                frm.ShowDialog();
-                MessageBox.Show("Chase updated!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //frmSlimlineChaseUpdate frm = new frmSlimlineChaseUpdate(quote_id);
+                //frm.ShowDialog();
+                //MessageBox.Show("Chase updated!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
         }
