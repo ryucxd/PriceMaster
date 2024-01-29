@@ -504,11 +504,14 @@ namespace PriceMaster
                     //print it
                     //xlWorksheet.PrintOut(Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
 
+                    
+
                     xlWorkbook.Close(true); //close the excel sheet without saving
                                             // xlApp.Quit();
 
 
                     // Manual disposal because of COM
+
                     xlApp.Quit();
 
                     // Now find the process id that was created, and store it.

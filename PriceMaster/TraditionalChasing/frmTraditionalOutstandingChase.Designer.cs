@@ -41,6 +41,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnBanList = new PriceMaster.buttonFormatting();
+            this.btnExportList = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
@@ -197,11 +198,31 @@
             this.btnBanList.UseVisualStyleBackColor = false;
             this.btnBanList.Click += new System.EventHandler(this.btnBanList_Click);
             // 
+            // btnExportList
+            // 
+            this.btnExportList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportList.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnExportList.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnExportList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportList.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportList.ForeColor = System.Drawing.Color.White;
+            this.btnExportList.Location = new System.Drawing.Point(158, 1);
+            this.btnExportList.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnExportList.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnExportList.Name = "btnExportList";
+            this.btnExportList.Padding = new System.Windows.Forms.Padding(3);
+            this.btnExportList.Size = new System.Drawing.Size(103, 30);
+            this.btnExportList.TabIndex = 62;
+            this.btnExportList.Text = "Export List";
+            this.btnExportList.UseVisualStyleBackColor = false;
+            this.btnExportList.Click += new System.EventHandler(this.btnExportList_Click);
+            // 
             // frmOutstandingChase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1017, 518);
+            this.Controls.Add(this.btnExportList);
             this.Controls.Add(this.btnBanList);
             this.Controls.Add(this.chkFuture);
             this.Controls.Add(this.label4);
@@ -238,5 +259,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private buttonFormatting btnBanList;
+        private buttonFormatting btnExportList;
     }
 }

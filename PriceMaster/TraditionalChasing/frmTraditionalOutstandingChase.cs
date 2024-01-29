@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using PriceMaster.TraditionalChasing;
+using System.Diagnostics;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace PriceMaster
 {
@@ -105,7 +107,7 @@ namespace PriceMaster
                 }
                 dataGridView1.Columns[auto_customer_ref_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-                
+
 
                 colourAutoChases();
             }
@@ -114,9 +116,9 @@ namespace PriceMaster
         {
             //cmbCustomerSearch.Items.Clear();
             int column = 0;
-             
+
             if (tabControl1.SelectedIndex == 0)
-               column = 6;
+                column = 6;
             else
                 column = 0;
 
@@ -185,7 +187,7 @@ namespace PriceMaster
 
                 if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                     sql = sql + " AND customer = '" + cmbCustomerSearch.Text + "' ";
-                 sql = sql + "order by customer"; // and q.quote_id is null";
+                sql = sql + "order by customer"; // and q.quote_id is null";
                 using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
                 {
                     conn.Open();
@@ -226,7 +228,7 @@ namespace PriceMaster
             if (tabControl1.SelectedIndex == 1)
             {
                 //add a quote button on the end
-                
+
 
                 column_index();
                 DataGridViewButtonColumn view_button = new DataGridViewButtonColumn();
@@ -300,7 +302,7 @@ namespace PriceMaster
             {
                 try
                 {
-                    string path = @"\\designsvr1\SOLIDWORKS\Door Designer\Specifications\Project " + dataGridView1.Rows[e.RowIndex].Cells[auto_quote_id_index].Value.ToString() 
+                    string path = @"\\designsvr1\SOLIDWORKS\Door Designer\Specifications\Project " + dataGridView1.Rows[e.RowIndex].Cells[auto_quote_id_index].Value.ToString()
                         + @"\Quotations\Revision " + dataGridView1.Rows[e.RowIndex].Cells[auto_revision_index].Value.ToString() +
                         @"\FullQuotation-" + dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString() + "-" +
                         dataGridView1.Rows[e.RowIndex].Cells[auto_revision_index].Value.ToString() + ".pdf";
@@ -310,7 +312,7 @@ namespace PriceMaster
                 {
                     MessageBox.Show("The full quotation does not yet exist for this number.", "No File Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }  
+            }
             else
             {
 
@@ -357,7 +359,7 @@ namespace PriceMaster
                     colourAutoChases();
                 }
             }
-            
+
             //apply_filter();
             //}
             //    catch { }
@@ -425,6 +427,107 @@ namespace PriceMaster
         {
             frmAutoChaseBanList frm = new frmAutoChaseBanList();
             frm.ShowDialog();
+        }
+
+        private void btnExportList_Click(object sender, EventArgs e)
+        {
+            string file = @"C:\temp\outstanding_chases.xlsx";
+
+            //opening method
+            Excel.Application xlApp = new Excel.Application();
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Add(); //xlApp.Workbooks.Open(GT_input_filepath, 0, false); //< to open an already existing file
+            Excel.Worksheet xlWorksheet = xlWorkbook.Worksheets[1];
+
+            xlApp.Visible = true; //make it visible for now
+            xlApp.WindowState = Excel.XlWindowState.xlMaximized;
+
+            //main body of changes and stuff goes here
+
+            xlWorksheet.Cells[1][1].Value2 = "Quote ID";
+            xlWorksheet.Cells[2][1].Value2 = "Chase Date";
+            xlWorksheet.Cells[3][1].Value2 = "Chase Description";
+            xlWorksheet.Cells[4][1].Value2 = "Next Chase Date";
+            xlWorksheet.Cells[5][1].Value2 = "Customer";
+            xlWorksheet.Cells[6][1].Value2 = "Sender Email Address";
+
+            Excel.Range columnRange = xlWorksheet.Columns[2];
+            columnRange.NumberFormat = "dd-MM-yyyy";
+            columnRange = xlWorksheet.Columns[4];
+            columnRange.NumberFormat = "dd-MM-yyyy";
+
+            int excel_row = 2;
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                xlWorksheet.Cells[1][excel_row].Value2 = dataGridView1.Rows[i].Cells[quote_index].Value;
+                xlWorksheet.Cells[2][excel_row].Value2 = dataGridView1.Rows[i].Cells[chase_date_index].Value;
+                xlWorksheet.Cells[3][excel_row].Value2 = dataGridView1.Rows[i].Cells[chase_description_index].Value;
+                xlWorksheet.Cells[4][excel_row].Value2 = dataGridView1.Rows[i].Cells[next_chase_date_index].Value;
+                xlWorksheet.Cells[5][excel_row].Value2 = dataGridView1.Rows[i].Cells[customer_index].Value;
+                xlWorksheet.Cells[6][excel_row].Value2 = dataGridView1.Rows[i].Cells[sender_email_address_index].Value;
+                excel_row++;
+            }
+
+
+            //formatting examples
+
+            //xlWorkSheet.Range["H2:H300"].NumberFormat = "£#,###,###.00"; < formats into currency
+            //xlWorksheet.Range["A1:D1"].Merge(); merging cells
+            xlWorksheet.Range["A1:F1"].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+            xlWorksheet.Range["A1:F1"].Cells.Font.Size = 16;
+            xlWorksheet.Range["A1:F1"].Interior.Color = Color.SkyBlue;
+            //auto fit and rows 
+            //Microsoft.Office.Interop.Excel.Worksheet ws = xlApp.ActiveWorkbook.Worksheets[1];
+            Microsoft.Office.Interop.Excel.Range range = xlWorksheet.UsedRange;
+            //xlWorksheet.Columns.ClearFormats();
+            //xlWorksheet.Rows.ClearFormats();
+            xlWorksheet.Columns.AutoFit();
+            xlWorksheet.Rows.AutoFit();
+            range.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+            range.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+            xlWorksheet.Columns[3].ColumnWidth = 98.14; //size and wrap columns
+            xlWorksheet.Columns[3].WrapText = true;
+
+            //border active cells
+            range.Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            range.Borders.Color = ColorTranslator.ToOle(Color.Black);
+
+            //Set print margins
+            Excel.PageSetup xlPageSetUp = xlWorksheet.PageSetup;
+            xlPageSetUp.Zoom = false;
+            xlPageSetUp.FitToPagesWide = 1;
+            xlPageSetUp.Orientation = Excel.XlPageOrientation.xlLandscape;
+
+            //save the new file
+            xlApp.DisplayAlerts = false;
+            xlWorkbook.SaveAs(file);
+
+            //close the workbook
+            xlWorkbook.Close();
+            xlApp.Quit();
+
+            //release objects from memory
+            releaseObject(xlWorksheet);
+            releaseObject(xlWorkbook);
+            releaseObject(xlApp);
+            Process.Start(file);
+        }
+        private static void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+                Console.WriteLine("Error releasing object: " + ex.Message);
+            }
+            finally
+            {
+                GC.Collect();
+            }
         }
     }
 }
