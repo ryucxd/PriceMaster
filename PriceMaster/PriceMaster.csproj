@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>142</ApplicationRevision>
+    <ApplicationRevision>146</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -182,6 +182,12 @@
     </Compile>
     <Compile Include="frmNonReturningCustomers.Designer.cs">
       <DependentUpon>frmNonReturningCustomers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmMultipleChase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmMultipleChase.Designer.cs">
+      <DependentUpon>frmMultipleChase.cs</DependentUpon>
     </Compile>
     <Compile Include="TraditionalChasing\frmTraditionalEditChase.cs">
       <SubType>Form</SubType>
@@ -445,6 +451,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNonReturningCustomers.resx">
       <DependentUpon>frmNonReturningCustomers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmMultipleChase.resx">
+      <DependentUpon>frmMultipleChase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TraditionalChasing\frmTraditionalEditChase.resx">
       <DependentUpon>frmTraditionalEditChase.cs</DependentUpon>

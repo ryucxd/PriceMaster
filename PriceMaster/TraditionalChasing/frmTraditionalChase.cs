@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Runtime.InteropServices;
+using PriceMaster.TraditionalChasing;
 
 namespace PriceMaster
 {
@@ -29,7 +31,7 @@ namespace PriceMaster
         }
         private void load_data(int id)
         {
-            this.Size = new Size(565, 411);
+            this.Size = new Size(565, 438);
             dteChaseDate.Format = DateTimePickerFormat.Custom;
             dteChaseDate.CustomFormat = "dd/MM/yyyy hh:mm:ss";
             txtDescription.ReadOnly = true;
@@ -104,7 +106,7 @@ namespace PriceMaster
                         dataGridView1.Columns[0].Visible = false;
                     }
                     else
-                        this.Size = new Size(565, 411);
+                        this.Size = new Size(565, 438);
                 }
             }
         }
@@ -161,14 +163,53 @@ namespace PriceMaster
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     cmd.ExecuteNonQuery();
 
-                conn.Close();
+               
 
+
+                //now that we've added the main chase - if the checkbox for multiple quotes == checked we check if there are other potential quotes related to this customer 
+                if (chkMultipleChase.Checked == true)
+                {
+                    //get the customer
+                     sql = "select customer " +
+                        "from [order_database].dbo.solidworks_quotation_log s  " +
+                        "inner join (select quote_id,max(revision_number) as revision_number  " +
+                        "from [order_database].dbo.solidworks_quotation_log group by quote_id) as b on s.quote_id = b.quote_id AND s.revision_number = b.revision_number " +
+                        "WHERE s.quote_id = '" + quote_id.ToString() + "'";
+
+                    string customer = "";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                        customer = (string)cmd.ExecuteScalar();
+
+                    //same sql statement but WHERE CUSTOMER = @customer -- will bring up every 
+                     sql = "select top 50 s.quote_id,customer_ref,customer " +
+                        "from [order_database].dbo.solidworks_quotation_log s  " +
+                        "inner join (select quote_id,max(revision_number) as revision_number  " +
+                        "from [order_database].dbo.solidworks_quotation_log group by quote_id) as b on s.quote_id = b.quote_id AND s.revision_number = b.revision_number " +
+                        "WHERE customer = '" + customer + "' AND s.quote_id <> " + quote_id.ToString() + " ORDER BY s.quote_id desc";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count > 1)
+                        {
+                            frmMultipleChase frm = new frmMultipleChase(quote_id,customer, dt, txtDescription.Text, dont_chase, email, phone, dteNextDate.Value.ToString("yyyyMMdd"));
+                            frm.ShowDialog();
+                        }
+                    }
+
+
+                }
 
                 //removing this as part of the new update
                 //also update the status to chasing >> incase they forgot 
                 ////frmTraditionalChaseUpdate frm = new frmTraditionalChaseUpdate(quote_id);
                 ////frm.ShowDialog();
-               // MessageBox.Show("Chase updated!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // MessageBox.Show("Chase updated!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                conn.Close();
                 this.Close();
             }
         }

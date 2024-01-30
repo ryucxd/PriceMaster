@@ -44,6 +44,7 @@
             this.btnSaveManagement = new PriceMaster.buttonFormatting();
             this.btnCancel = new PriceMaster.buttonFormatting();
             this.btnSave = new PriceMaster.buttonFormatting();
+            this.chkMultipleChase = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -123,7 +124,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(553, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(240, 342);
+            this.dataGridView1.Size = new System.Drawing.Size(240, 365);
             this.dataGridView1.TabIndex = 64;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -187,7 +188,7 @@
             this.btnSaveManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveManagement.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveManagement.ForeColor = System.Drawing.Color.White;
-            this.btnSaveManagement.Location = new System.Drawing.Point(293, 334);
+            this.btnSaveManagement.Location = new System.Drawing.Point(293, 362);
             this.btnSaveManagement.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSaveManagement.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSaveManagement.Name = "btnSaveManagement";
@@ -205,7 +206,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(33, 334);
+            this.btnCancel.Location = new System.Drawing.Point(33, 362);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnCancel.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnCancel.Name = "btnCancel";
@@ -223,7 +224,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(163, 334);
+            this.btnSave.Location = new System.Drawing.Point(163, 362);
             this.btnSave.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSave.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSave.Name = "btnSave";
@@ -234,12 +235,24 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // chkMultipleChase
+            // 
+            this.chkMultipleChase.AutoSize = true;
+            this.chkMultipleChase.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.chkMultipleChase.Location = new System.Drawing.Point(124, 330);
+            this.chkMultipleChase.Name = "chkMultipleChase";
+            this.chkMultipleChase.Size = new System.Drawing.Size(299, 21);
+            this.chkMultipleChase.TabIndex = 101;
+            this.chkMultipleChase.Text = "ADD THIS CHASE TO MULTIPLE QUOTES";
+            this.chkMultipleChase.UseVisualStyleBackColor = true;
+            // 
             // frmTraditionalChase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(798, 373);
+            this.ClientSize = new System.Drawing.Size(798, 399);
             this.ControlBox = false;
+            this.Controls.Add(this.chkMultipleChase);
             this.Controls.Add(this.btnSaveManagement);
             this.Controls.Add(this.chkPhone);
             this.Controls.Add(this.chkEmail);
@@ -282,5 +295,6 @@
         private System.Windows.Forms.CheckBox chkPhone;
         private System.Windows.Forms.CheckBox chkEmail;
         private buttonFormatting btnSaveManagement;
+        private System.Windows.Forms.CheckBox chkMultipleChase;
     }
 }
