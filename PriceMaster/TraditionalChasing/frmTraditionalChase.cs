@@ -194,7 +194,7 @@ namespace PriceMaster
                         DataTable dt = new DataTable();
                         da.Fill(dt);
 
-                        if (dt.Rows.Count > 1)
+                        if (dt.Rows.Count >= 1)
                         {
                             frmMultipleChase frm = new frmMultipleChase(quote_id,customer, dt, txtDescription.Text, dont_chase, email, phone, dteNextDate.Value.ToString("yyyyMMdd"));
                             frm.ShowDialog();

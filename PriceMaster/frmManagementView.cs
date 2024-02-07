@@ -205,6 +205,7 @@ namespace PriceMaster
 
             dgvChase.DataSource = null;
             string sql = "";
+            string sqlCount = "";
 
 
             if (slimline == -1)
@@ -219,34 +220,70 @@ namespace PriceMaster
                     //"right join (select max(id) as id,quote_id FROM [order_database].dbo.quotation_chase_log_slimline group by quote_id) as z on z.id = a.id " +
                     "where  ";
 
+                sqlCount = "SELECT count(distinct s.[NAME])  " +
+                    "FROM [order_database].dbo.quotation_chase_log_slimline a " +
+                    "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
+                    "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
+                    "left join (SELECT * FROM [price_master].dbo.[sl_quotation] where highest_issue = -1 )  sl on sl.quote_id = a.quote_id " +
+                    "left join[EnquiryLog].dbo.[Enquiry_Log] e on sl.enquiry_id = e.id " +
+                    "left join[dsl_fitting].dbo.SALES_LEDGER s on sl.customer_acc_ref = s.ACCOUNT_REF " +
+                    //"right join (select max(id) as id,quote_id FROM [order_database].dbo.quotation_chase_log_slimline group by quote_id) as z on z.id = a.id " +
+                    "where  ";
+
                 if (chkFuture.Checked == true)
+                {
                     sql = sql + " next_chase_date > ";
+                    sqlCount = sqlCount + " next_chase_date > ";
+                }
                 else
+                {
                     sql = sql + " cast(chase_date as date) <= ";
+                    sqlCount = sqlCount + " cast(chase_date as date) <= ";
+                }
 
                 sql = sql + " CAST(GETDATE() as date)   "; // and (dont_chase = 0 or dont_chase is null) and b.[status] = 'Chasing'
-
+                sqlCount = sqlCount + " CAST(GETDATE() as date)   ";
 
                 if (string.IsNullOrEmpty(cmbChaseStatus.Text) == false)
+                {
                     sql = sql + " and b.[status] = '" + cmbChaseStatus.Text + "'    ";
+                    sqlCount = sqlCount + " and b.[status] = '" + cmbChaseStatus.Text + "'    ";
+                }
 
                 if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
+                {
                     sql = sql + " AND rtrim(s.NAME) = '" + cmbCustomerSearch.Text + "'  ";
+                    sqlCount = sqlCount + " AND rtrim(s.NAME) = '" + cmbCustomerSearch.Text + "'  ";
+                }
                 if (string.IsNullOrEmpty(cmbStaffSearch.Text) == false)
+                {
                     sql = sql + " AND u.forename + ' ' + u.surname = '" + cmbStaffSearch.Text + "'  ";
+                    sqlCount = sqlCount + " AND u.forename + ' ' + u.surname = '" + cmbStaffSearch.Text + "'  ";
+                }
 
 
                 if (chkAllChases.Checked == true)
+                {
                     sql = sql + "";//"and  (chase_complete = -1)  ";   -- no filter
+                }
                 else
+                {
                     sql = sql + "and  (chase_complete = 0 or chase_complete is null)  ";
+                    sqlCount = sqlCount + "and  (chase_complete = 0 or chase_complete is null)  ";
+                }
 
                 if (date_filter == -1)
                 {
                     if (chkFuture.Checked == true)
+                    {
                         sql = sql + "and next_chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND next_chase_date  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1)";
+                        sqlCount = sqlCount + "and next_chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND next_chase_date  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1)";
+                    }
                     else
+                    {
                         sql = sql + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1)";
+                        sqlCount = sqlCount + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1)";
+                    }
 
                 }
 
@@ -270,35 +307,76 @@ namespace PriceMaster
                     "WHERE related_quote<> 'No Related Quote' group by LEFT(related_quote, CHARINDEX('-', related_quote) - 1)) el on el.related_quote like '%' + cast(q.quote_id as nvarchar) + '%' " +
                     "left join[EnquiryLog].dbo.[Enquiry_Log] e on el.enquiry_id = e.id " +
                     "where  ";
+                
+                sqlCount = "SELECT count (distinct q.customer) " +
+                    "FROM[order_database].dbo.quotation_chase_log a " +
+                    "left join[order_database].dbo.quotation_feed_back b on a.quote_id = b.quote_id " +
+                    "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
+                    ////"left join(select quote_id, max(revision_number) as revision_number from[order_database].dbo.solidworks_quotation_log group by quote_id) sw on a.quote_id = sw.quote_id " +
+                    ////"left join[order_database].dbo.solidworks_quotation_log q on sw.quote_id = q.quote_id and sw.revision_number = q.revision_number " +
+                    "left join [order_database].dbo.view_solidworks_max_rev q on a.quote_id = q.quote_id " +
+                    "left join(select max(id) as enquiry_id, left(related_quote, CHARINDEX('-', related_quote) - 1) as related_quote from[EnquiryLog].dbo.[Enquiry_Log] " +
+                    "WHERE related_quote<> 'No Related Quote' group by LEFT(related_quote, CHARINDEX('-', related_quote) - 1)) el on el.related_quote like '%' + cast(q.quote_id as nvarchar) + '%' " +
+                    "left join[EnquiryLog].dbo.[Enquiry_Log] e on el.enquiry_id = e.id " +
+                    "where  ";
 
                 if (chkFuture.Checked == true)
+                {
                     sql = sql + "next_chase_date > ";
+                    sqlCount = sqlCount + "next_chase_date > ";
+                }
                 else
+                {
                     sql = sql + "cast(chase_date as date) <= ";
+                    sqlCount = sqlCount + "cast(chase_date as date) <= ";
+                }
 
                 sql = sql + " CAST(GETDATE() as date)    ";//and (dont_chase = 0 or dont_chase is null) and b.[status] = 'Chasing'
+                sqlCount = sqlCount + " CAST(GETDATE() as date)    ";//and (dont_chase = 0 or dont_chase is null) and b.[status] = 'Chasing'
 
                 if (string.IsNullOrEmpty(cmbChaseStatus.Text) == false)
+                {
                     sql = sql + " and b.[status] = '" + cmbChaseStatus.Text + "'    ";
+                    sqlCount = sqlCount + " and b.[status] = '" + cmbChaseStatus.Text + "'    ";
+                }
 
 
 
                 if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
+                {
                     sql = sql + " AND rtrim(q.customer) = '" + cmbCustomerSearch.Text + "'  ";
+                    sqlCount = sqlCount + " AND rtrim(q.customer) = '" + cmbCustomerSearch.Text + "'  ";
+                }
                 if (string.IsNullOrEmpty(cmbStaffSearch.Text) == false)
+                {
                     sql = sql + " AND u.forename + ' ' + u.surname = '" + cmbStaffSearch.Text + "'  ";
+                    sqlCount = sqlCount + " AND u.forename + ' ' + u.surname = '" + cmbStaffSearch.Text + "'  ";
+                }
 
                 if (chkAllChases.Checked == true)
+                {
                     sql = sql + "";//"and  (chase_complete = -1)  ";   -- no filter
+                }
                 else
+                {
                     sql = sql + "and  (chase_complete = 0 or chase_complete is null)  ";
+                    sqlCount = sqlCount + "and  (chase_complete = 0 or chase_complete is null)  ";
+                }
 
                 if (date_filter == -1)
                 {
                     if (chkFuture.Checked == true)
+                    {
                         sql = sql + "and next_chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND next_chase_date  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1)";
+                        sqlCount = sqlCount + "and next_chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND next_chase_date  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1)";
+
+                    }
                     else
+                    {
                         sql = sql + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1)";
+                        sqlCount = sqlCount + "and chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1)";
+
+                    }
 
                 }
 
@@ -321,6 +399,12 @@ namespace PriceMaster
                     da.Fill(dt);
                     dgvChase.DataSource = dt;
                 }
+
+                using (SqlCommand cmd = new SqlCommand(sqlCount, conn))
+                {
+                    lblChaseCount.Text = "Unique Customers Chased: " + cmd.ExecuteScalar().ToString() ?? "0";
+                }
+
 
                 conn.Close();
             }
@@ -354,22 +438,39 @@ namespace PriceMaster
                 "left join [user_info].dbo.[user] u on q.correspondence_by = u.id " +
                 "where q.slimline = ";
 
+            string sqlCount = "select count(distinct customer_name) " +
+                "from [order_database].dbo.quotation_chase_customer q " +
+                "left join [user_info].dbo.[user] u on q.correspondence_by = u.id " +
+                "where q.slimline = ";
 
             if (slimline == -1)
+            {
                 sql = sql + "-1 ";
+                sqlCount = sqlCount + "-1 ";
+            }
             else
+            {
                 sql = sql + "0 ";
+                sqlCount = sqlCount + "0 ";
+            }
 
             if (string.IsNullOrWhiteSpace(cmbCustomerSearch.Text) == false)
+            {
                 sql = sql + " AND customer_name = '" + cmbCustomerSearch.Text + "' ";
+                sqlCount = sqlCount + " AND customer_name = '" + cmbCustomerSearch.Text + "' ";
+            }
 
             if (string.IsNullOrWhiteSpace(cmbStaffSearch.Text) == false)
+            {
                 sql = sql + " AND u.forename + ' ' + u.surname = '" + cmbStaffSearch.Text + "' ";
+                sqlCount = sqlCount + " AND u.forename + ' ' + u.surname = '" + cmbStaffSearch.Text + "' ";
+            }
 
 
             if (date_filter == -1)
             {
                 sql = sql + "AND date_created >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND date_created  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1) ";
+                sqlCount = sqlCount + "AND date_created >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND date_created  <= [order_database].dbo.func_work_days_plus('" + dteEnd.Value.ToString("yyyyMMdd") + "',1) ";
             }
 
 
@@ -387,7 +488,12 @@ namespace PriceMaster
                     dgvCorrespondence.DataSource = dt;
                 }
 
-                conn.Close();
+                using (SqlCommand cmd = new SqlCommand(sqlCount, conn))
+                {
+                    lblCorrespondenceCount.Text = "Unique Correspondence Customers: " + cmd.ExecuteScalar().ToString() ?? "0";
+                }
+
+                    conn.Close();
             }
             column_index_correspondence();
             format_correspondence();

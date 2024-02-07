@@ -50,14 +50,16 @@
             this.dgvCorrespondence = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnShowAll = new PriceMaster.buttonFormatting();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chkboxSlimline = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.lblChaseCount = new System.Windows.Forms.Label();
+            this.lblCorrespondenceCount = new System.Windows.Forms.Label();
+            this.btnLiveChart = new PriceMaster.buttonFormatting();
+            this.btnShowAll = new PriceMaster.buttonFormatting();
             this.btnExcel = new PriceMaster.buttonFormatting();
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
-            this.btnLiveChart = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCorrespondence)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -326,24 +328,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Chase Filters";
             // 
-            // btnShowAll
-            // 
-            this.btnShowAll.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnShowAll.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnShowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowAll.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowAll.ForeColor = System.Drawing.Color.White;
-            this.btnShowAll.Location = new System.Drawing.Point(322, 26);
-            this.btnShowAll.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnShowAll.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnShowAll.Name = "btnShowAll";
-            this.btnShowAll.Padding = new System.Windows.Forms.Padding(3);
-            this.btnShowAll.Size = new System.Drawing.Size(82, 30);
-            this.btnShowAll.TabIndex = 66;
-            this.btnShowAll.Text = "Show All";
-            this.btnShowAll.UseVisualStyleBackColor = false;
-            this.btnShowAll.Click += new System.EventHandler(this.btnShowAll_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.chkboxSlimline);
@@ -386,6 +370,67 @@
             this.label10.Text = "to";
             this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // lblChaseCount
+            // 
+            this.lblChaseCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblChaseCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChaseCount.Location = new System.Drawing.Point(1412, 51);
+            this.lblChaseCount.Name = "lblChaseCount";
+            this.lblChaseCount.Size = new System.Drawing.Size(433, 20);
+            this.lblChaseCount.TabIndex = 76;
+            this.lblChaseCount.Text = "Unique Customers Chased: 0";
+            this.lblChaseCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblCorrespondenceCount
+            // 
+            this.lblCorrespondenceCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCorrespondenceCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCorrespondenceCount.Location = new System.Drawing.Point(1412, 510);
+            this.lblCorrespondenceCount.Name = "lblCorrespondenceCount";
+            this.lblCorrespondenceCount.Size = new System.Drawing.Size(433, 20);
+            this.lblCorrespondenceCount.TabIndex = 77;
+            this.lblCorrespondenceCount.Text = "Unique Correspondence Customers: 0";
+            this.lblCorrespondenceCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnLiveChart
+            // 
+            this.btnLiveChart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLiveChart.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnLiveChart.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnLiveChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLiveChart.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLiveChart.ForeColor = System.Drawing.Color.White;
+            this.btnLiveChart.Location = new System.Drawing.Point(1414, 9);
+            this.btnLiveChart.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnLiveChart.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnLiveChart.Name = "btnLiveChart";
+            this.btnLiveChart.Padding = new System.Windows.Forms.Padding(3);
+            this.btnLiveChart.Size = new System.Drawing.Size(110, 30);
+            this.btnLiveChart.TabIndex = 75;
+            this.btnLiveChart.Text = "Chase Chart";
+            this.btnLiveChart.UseVisualStyleBackColor = false;
+            this.btnLiveChart.Click += new System.EventHandler(this.btnLiveChart_Click);
+            // 
+            // btnShowAll
+            // 
+            this.btnShowAll.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnShowAll.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnShowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowAll.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowAll.ForeColor = System.Drawing.Color.White;
+            this.btnShowAll.Location = new System.Drawing.Point(322, 26);
+            this.btnShowAll.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnShowAll.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnShowAll.Name = "btnShowAll";
+            this.btnShowAll.Padding = new System.Windows.Forms.Padding(3);
+            this.btnShowAll.Size = new System.Drawing.Size(82, 30);
+            this.btnShowAll.TabIndex = 66;
+            this.btnShowAll.Text = "Show All";
+            this.btnShowAll.UseVisualStyleBackColor = false;
+            this.btnShowAll.Click += new System.EventHandler(this.btnShowAll_Click);
+            // 
             // btnExcel
             // 
             this.btnExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -394,7 +439,7 @@
             this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExcel.ForeColor = System.Drawing.Color.White;
-            this.btnExcel.Location = new System.Drawing.Point(1609, 41);
+            this.btnExcel.Location = new System.Drawing.Point(1609, 9);
             this.btnExcel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnExcel.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnExcel.Name = "btnExcel";
@@ -413,7 +458,7 @@
             this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
-            this.buttonFormatting1.Location = new System.Drawing.Point(1744, 41);
+            this.buttonFormatting1.Location = new System.Drawing.Point(1744, 9);
             this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
             this.buttonFormatting1.Name = "buttonFormatting1";
@@ -432,7 +477,7 @@
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(1530, 41);
+            this.btnClear.Location = new System.Drawing.Point(1530, 9);
             this.btnClear.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnClear.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnClear.Name = "btnClear";
@@ -443,30 +488,13 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // btnLiveChart
-            // 
-            this.btnLiveChart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLiveChart.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnLiveChart.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnLiveChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLiveChart.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLiveChart.ForeColor = System.Drawing.Color.White;
-            this.btnLiveChart.Location = new System.Drawing.Point(1414, 41);
-            this.btnLiveChart.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnLiveChart.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnLiveChart.Name = "btnLiveChart";
-            this.btnLiveChart.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLiveChart.Size = new System.Drawing.Size(110, 30);
-            this.btnLiveChart.TabIndex = 75;
-            this.btnLiveChart.Text = "Chase Chart";
-            this.btnLiveChart.UseVisualStyleBackColor = false;
-            this.btnLiveChart.Click += new System.EventHandler(this.btnLiveChart_Click);
-            // 
             // frmManagementView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1859, 613);
+            this.Controls.Add(this.lblCorrespondenceCount);
+            this.Controls.Add(this.lblChaseCount);
             this.Controls.Add(this.btnLiveChart);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -524,5 +552,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox chkboxSlimline;
         private buttonFormatting btnLiveChart;
+        private System.Windows.Forms.Label lblChaseCount;
+        private System.Windows.Forms.Label lblCorrespondenceCount;
     }
 }
