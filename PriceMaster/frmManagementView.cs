@@ -664,7 +664,7 @@ namespace PriceMaster
         {
             string search_dates = "";
             if (date_filter == -1)
-                search_dates = "From: " + dteStart.Value.ToString("dd/MM/yyyy") + " to: " + dteEnd.Value.ToString("dd/MM/yyyy");
+                search_dates = "- From: " + dteStart.Value.ToString("dd/MM/yyyy") + " to: " + dteEnd.Value.ToString("dd/MM/yyyy");
 
 
             Process[] processesBefore = Process.GetProcessesByName("excel");
@@ -742,7 +742,7 @@ namespace PriceMaster
                 //ws.Rows.AutoFit();
 
 
-                xlWorkSheet.Cells[1, 1].Value = "Quotation Chases - " + dgvChase.Rows.Count.ToString() + " " + search_dates;
+                xlWorkSheet.Cells[1, 1].Value = "Total Chases: " + dgvChase.Rows.Count.ToString() + " / " + lblChaseCount.Text + " " + search_dates;
                 xlWorkSheet.Range["A1:H1"].Cells.Font.Size = 20;
                 xlWorkSheet.Range[xlWorkSheet.Cells[1, 1], xlWorkSheet.Cells[1, 8]].Merge();
                 //Make all top/left align
@@ -810,7 +810,7 @@ namespace PriceMaster
 
 
 
-                xlWorkSheet.Cells[1, 1].Value = "Customer Correspondence - " + dgvCorrespondence.Rows.Count.ToString() + " " + search_dates;
+                xlWorkSheet.Cells[1, 1].Value = "Total Correspondence: " + dgvCorrespondence.Rows.Count.ToString() + " / " + lblCorrespondenceCount.Text + " " + search_dates;
                 xlWorkSheet.Range["A1:N1"].Cells.Font.Size = 20;
                 xlWorkSheet.Range[xlWorkSheet.Cells[1, 1], xlWorkSheet.Cells[1, 14]].Merge();
 

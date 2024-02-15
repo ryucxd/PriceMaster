@@ -106,36 +106,42 @@ namespace PriceMaster
                 "from [order_database].dbo.solidworks_quotation_log_details " +
                 "WHERE parent_spec = '" + quote_id.ToString() + "' and rev_num = " + cmbRev.Text + " Order by CAST(parent_spec as nvarchar(max)) + '-' + cast(row_index as nvarchar(max)) + '-' + cast(rev_num as nvarchar(max))";
 
-            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            try
             {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
                 {
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    dataGridView1.DataSource = dt;
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        dataGridView1.DataSource = dt;
+                    }
+                    conn.Close();
                 }
-                conn.Close();
+                //format
+                foreach (DataGridViewColumn col in dataGridView1.Columns)
+                {
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                dataGridView1.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                dataGridView1.Columns[9].DefaultCellStyle.Format = "c2";
+                dataGridView1.Columns[9].DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("en-GB");
+
+                double total_cost = 0;
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                    total_cost = total_cost + Convert.ToDouble(row.Cells[9].Value);
+                lblTotalCost.Text = total_cost.ToString("C");
+
+                lblCount.Text = dataGridView1.Rows.Count.ToString() + " Items";
             }
-            //format
-            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            catch
             {
-                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+
             }
-            dataGridView1.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-            dataGridView1.Columns[9].DefaultCellStyle.Format = "c2";
-            dataGridView1.Columns[9].DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("en-GB");
-
-            double total_cost = 0;
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-                total_cost = total_cost + Convert.ToDouble(row.Cells[9].Value);
-            lblTotalCost.Text = total_cost.ToString("C");
-
-            lblCount.Text = dataGridView1.Rows.Count.ToString() + " Items";
-
             recent_chase();
         }
 
