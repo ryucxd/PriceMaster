@@ -26,10 +26,11 @@ namespace PriceMaster.TraditionalChasing
         public int last_order { get; set; }
         public int total_value { get; set; }
         public int slimline { get; set; }
+        public int dateFilter { get; set; }
         public frmNonReturningCustomers(int _slimline)
         {
             InitializeComponent();
-
+            dateFilter = 0;
             last_order = -1;
             total_value = 0;
             slimline = _slimline;
@@ -68,53 +69,77 @@ namespace PriceMaster.TraditionalChasing
 
             string sql = "";
 
-            if (cmbCustomerSearch.Text.Length > 0)
-            {
-                sql = "select rtrim(a.Customer) as customer,max(cast([Last Date Ordered] as date)) as last_date_ordered, " +
-                   "max([Last Door Ordered]) as [last_Door_Ordered], " +
-                   "max([Slimline Customer]) as slimline,max(round(b.[value],2)) as total_custoemr_value " +
-                   "from [order_database].dbo.POWERBI_non_returning_customers a " +
-                   "left  join (select sum(v.line_total) as [value],[NAME] as customer " +
-                   "	from [order_database].dbo.door d " +
-                   "	left  join [order_database].dbo.view_door_value v on d.id = v.id " +
-                   "	left  join [order_database].dbo.SALES_LEDGER s  on d.customer_acc_ref = s.ACCOUNT_REF " +
-                   "	where (status_id = 1 or status_id = 2 or status_id = 3) group by [NAME]) b on a.Customer = b.customer " +
-                   "where cast([Last Date Ordered] as date) <= '" + dteFilter.Value.ToString("yyyyMMdd") + "' " +
-                   "AND [Slimline Customer] = ";
-            }
-            else
-            {
-                sql = "select rtrim(a.Customer) as customer,max(cast([Last Date Ordered] as date)) as last_date_ordered, " +
-                   "max([Last Door Ordered]) as [last_Door_Ordered], " +
-                   "max([Slimline Customer]) as slimline,max(round(b.[value],2)) as total_custoemr_value " +
-                   "from [order_database].dbo.POWERBI_non_returning_customers a " +
-                   "left merge join (select sum(v.line_total) as [value],[NAME] as customer " +
-                   "	from [order_database].dbo.door d " +
-                   "	left merge join [order_database].dbo.view_door_value v on d.id = v.id " +
-                   "	left merge join [order_database].dbo.SALES_LEDGER s  on d.customer_acc_ref = s.ACCOUNT_REF " +
-                   "	where (status_id = 1 or status_id = 2 or status_id = 3) group by [NAME]) b on a.Customer = b.customer " +
-                   "where cast([Last Date Ordered] as date) <= '" + dteFilter.Value.ToString("yyyyMMdd") + "' " +
-                   "AND [Slimline Customer] = ";
-            }
+            //if (cmbCustomerSearch.Text.Length > 0)
+            //{
+            //    sql = "select rtrim(a.Customer) as customer,max(cast([Last Date Ordered] as date)) as last_date_ordered, " +
+            //       "max([Last Door Ordered]) as [last_Door_Ordered], " +
+            //       "max([Slimline Customer]) as slimline,max(round(b.[value],2)) as total_custoemr_value " +
+            //       "from [order_database].dbo.POWERBI_non_returning_customers a " +
+            //       "left  join (select sum(v.line_total) as [value],[NAME] as customer " +
+            //       "	from [order_database].dbo.door d " +
+            //       "	left  join [order_database].dbo.view_door_value v on d.id = v.id " +
+            //       "	left  join [order_database].dbo.SALES_LEDGER s  on d.customer_acc_ref = s.ACCOUNT_REF " +
+            //       "	where (status_id = 1 or status_id = 2 or status_id = 3) group by [NAME]) b on a.Customer = b.customer " +
+            //       "where cast([Last Date Ordered] as date) <= '" + dteFilter.Value.ToString("yyyyMMdd") + "' " +
+            //       "AND [Slimline Customer] = ";
+            //}
+            //else
+            //{
+            //    sql = "select rtrim(a.Customer) as customer,max(cast([Last Date Ordered] as date)) as last_date_ordered, " +
+            //       "max([Last Door Ordered]) as [last_Door_Ordered], " +
+            //       "max([Slimline Customer]) as slimline,max(round(b.[value],2)) as total_custoemr_value " +
+            //       "from [order_database].dbo.POWERBI_non_returning_customers a " +
+            //       "left merge join (select sum(v.line_total) as [value],[NAME] as customer " +
+            //       "	from [order_database].dbo.door d " +
+            //       "	left merge join [order_database].dbo.view_door_value v on d.id = v.id " +
+            //       "	left merge join [order_database].dbo.SALES_LEDGER s  on d.customer_acc_ref = s.ACCOUNT_REF " +
+            //       "	where (status_id = 1 or status_id = 2 or status_id = 3) group by [NAME]) b on a.Customer = b.customer " +
+            //       "where cast([Last Date Ordered] as date) <= '" + dteFilter.Value.ToString("yyyyMMdd") + "' " +
+            //       "AND [Slimline Customer] = ";
+            //}
 
+            // new string
+            sql = "SELECT * from (SELECT s.[NAME] Customer, max(date_order) as [last_date_ordered],max(d.id) as [last_Door_Ordered],'No' as slimline, " +
+                "sum(v.line_total) as total_custoemr_value from [order_database].dbo.door d " +
+                "INNER JOIN [order_database].DBO.SALES_LEDGER s on d.customer_acc_ref = s.ACCOUNT_REF " +
+                "INNER JOIN [order_database].dbo.view_door_value v on d.id = v.id " +
+                "INNER JOIN [order_database].dbo.door_type dt on d.door_type_id = dt.id " +
+                "WHERE (dt.slimline_y_n = 0 or dt.slimline_y_n is null) and (status_id = 1 or status_id = 2 or status_id = 3) " +
+                "group by s.[NAME] " +
+                "union " +
+                "SELECT s.[NAME] as customer, max(date_order) as [last_date_ordered], max(d.id) as [last_Door_Ordered],'Yes' as slimline, sum(v.line_total) from [order_database].dbo.door d " +
+                "INNER JOIN [order_database].DBO.SALES_LEDGER s on d.customer_acc_ref = s.ACCOUNT_REF " +
+                "INNER JOIN [order_database].dbo.view_door_value v on d.id = v.id " +
+                "INNER JOIN [order_database].dbo.door_type dt on d.door_type_id = dt.id " +
+                "WHERE dt.slimline_y_n = -1 and (status_id = 1 or status_id = 2 or status_id = 3) " +
+                "group by s.[NAME]) as inside " +
+                "where slimline = ";
 
             if (slimline == -1)
                 sql = sql + "'Yes' ";
             else
                 sql = sql + "'No' ";
 
+            if (dateFilter == -1)
+            {
+                sql = sql + " AND inside.last_date_ordered >= '" + dteFilterStart.Value.ToString("yyyyMMdd") + "'" +
+                            " AND inside.last_date_ordered <= '" + dteFilterEnd.Value.ToString("yyyyMMdd") + "'  ";
+            }
+            else
+                sql = sql + " AND inside.last_date_ordered <= GETDATE()  ";
+
             if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
-                sql = sql + "AND a.customer = '" + cmbCustomerSearch.Text + "' ";
+                sql = sql + "AND customer = '" + cmbCustomerSearch.Text + "' ";
 
 
-            sql = sql + " group by rtrim(a.Customer),[Slimline Customer] ";
+            //sql = sql + " group by rtrim(Customer),[Slimline] ";
 
 
             if (last_order == -1)
                 sql = sql + "order by last_date_ordered desc";
 
             if (total_value == -1)
-                sql = sql + "order by max(round(b.[value],2)) desc";
+                sql = sql + "order by total_custoemr_value desc";
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -123,15 +148,15 @@ namespace PriceMaster.TraditionalChasing
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    try
-                    {
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dgvNonReturningCustomers.DataSource = dt;
-                    }
-                    catch
-                    { }
-                    
+                    //try
+                    //{
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dgvNonReturningCustomers.DataSource = dt;
+                    //}
+                    //catch
+                    //{ }
+
                 }
 
                 conn.Close();
@@ -303,6 +328,7 @@ namespace PriceMaster.TraditionalChasing
 
         private void dteFilter_CloseUp(object sender, EventArgs e)
         {
+            dateFilter = -1;
             load_grid();
         }
 
@@ -319,7 +345,13 @@ namespace PriceMaster.TraditionalChasing
         private void btnClear_Click(object sender, EventArgs e)
         {
             cmbCustomerSearch.Text = "";
+            dateFilter = 0;
+            load_grid();
+        }
 
+        private void dteFilterEnd_CloseUp(object sender, EventArgs e)
+        {
+            dateFilter = -1;
             load_grid();
         }
     }

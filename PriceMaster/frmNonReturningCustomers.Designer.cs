@@ -35,13 +35,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbCustomerSearch = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.dteFilter = new System.Windows.Forms.DateTimePicker();
+            this.dteFilterStart = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.chkSlimline = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dteFilterEnd = new System.Windows.Forms.DateTimePicker();
+            this.btnClear = new PriceMaster.buttonFormatting();
             this.btnExcel = new PriceMaster.buttonFormatting();
             this.btnOrder = new PriceMaster.buttonFormatting();
             this.btnValue = new PriceMaster.buttonFormatting();
-            this.btnClear = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNonReturningCustomers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,7 +91,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(396, 37);
+            this.label2.Location = new System.Drawing.Point(213, 34);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 17);
             this.label2.TabIndex = 53;
@@ -102,7 +104,7 @@
             this.cmbCustomerSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbCustomerSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCustomerSearch.FormattingEnabled = true;
-            this.cmbCustomerSearch.Location = new System.Drawing.Point(523, 35);
+            this.cmbCustomerSearch.Location = new System.Drawing.Point(340, 32);
             this.cmbCustomerSearch.Name = "cmbCustomerSearch";
             this.cmbCustomerSearch.Size = new System.Drawing.Size(188, 21);
             this.cmbCustomerSearch.TabIndex = 52;
@@ -120,14 +122,14 @@
             this.label3.Text = "Order By";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // dteFilter
+            // dteFilterStart
             // 
-            this.dteFilter.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.dteFilter.Location = new System.Drawing.Point(810, 36);
-            this.dteFilter.Name = "dteFilter";
-            this.dteFilter.Size = new System.Drawing.Size(143, 20);
-            this.dteFilter.TabIndex = 58;
-            this.dteFilter.CloseUp += new System.EventHandler(this.dteFilter_CloseUp);
+            this.dteFilterStart.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.dteFilterStart.Location = new System.Drawing.Point(630, 36);
+            this.dteFilterStart.Name = "dteFilterStart";
+            this.dteFilterStart.Size = new System.Drawing.Size(143, 20);
+            this.dteFilterStart.TabIndex = 58;
+            this.dteFilterStart.CloseUp += new System.EventHandler(this.dteFilter_CloseUp);
             // 
             // label4
             // 
@@ -135,7 +137,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label4.Location = new System.Drawing.Point(717, 37);
+            this.label4.Location = new System.Drawing.Point(537, 37);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(91, 17);
             this.label4.TabIndex = 59;
@@ -153,6 +155,47 @@
             this.chkSlimline.Text = "Slimline";
             this.chkSlimline.UseVisualStyleBackColor = true;
             this.chkSlimline.CheckedChanged += new System.EventHandler(this.chkSlimline_CheckedChanged);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label5.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label5.Location = new System.Drawing.Point(774, 38);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(24, 17);
+            this.label5.TabIndex = 63;
+            this.label5.Text = "to:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // dteFilterEnd
+            // 
+            this.dteFilterEnd.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.dteFilterEnd.Location = new System.Drawing.Point(796, 37);
+            this.dteFilterEnd.Name = "dteFilterEnd";
+            this.dteFilterEnd.Size = new System.Drawing.Size(143, 20);
+            this.dteFilterEnd.TabIndex = 62;
+            this.dteFilterEnd.CloseUp += new System.EventHandler(this.dteFilterEnd_CloseUp);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnClear.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.ForeColor = System.Drawing.Color.White;
+            this.btnClear.Location = new System.Drawing.Point(1046, 24);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnClear.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Padding = new System.Windows.Forms.Padding(3);
+            this.btnClear.Size = new System.Drawing.Size(75, 30);
+            this.btnClear.TabIndex = 61;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnExcel
             // 
@@ -210,34 +253,16 @@
             this.btnValue.UseVisualStyleBackColor = false;
             this.btnValue.Click += new System.EventHandler(this.btnValue_Click);
             // 
-            // btnClear
-            // 
-            this.btnClear.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnClear.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(1046, 24);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnClear.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Padding = new System.Windows.Forms.Padding(3);
-            this.btnClear.Size = new System.Drawing.Size(75, 30);
-            this.btnClear.TabIndex = 61;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
             // frmNonReturningCustomers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1419, 566);
+            this.Controls.Add(this.dteFilterEnd);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.chkSlimline);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.dteFilter);
+            this.Controls.Add(this.dteFilterStart);
             this.Controls.Add(this.btnExcel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnOrder);
@@ -246,6 +271,7 @@
             this.Controls.Add(this.cmbCustomerSearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvNonReturningCustomers);
+            this.Controls.Add(this.label5);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "frmNonReturningCustomers";
@@ -267,9 +293,11 @@
         private buttonFormatting btnValue;
         private System.Windows.Forms.Label label3;
         private buttonFormatting btnExcel;
-        private System.Windows.Forms.DateTimePicker dteFilter;
+        private System.Windows.Forms.DateTimePicker dteFilterStart;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox chkSlimline;
         private buttonFormatting btnClear;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker dteFilterEnd;
     }
 }
