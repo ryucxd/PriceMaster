@@ -78,6 +78,7 @@
             this.btnClear = new PriceMaster.buttonFormatting();
             this.btnNonReturningCustomers = new PriceMaster.buttonFormatting();
             this.btnTurnoverDecline = new PriceMaster.buttonFormatting();
+            this.btnNonReturningEnquiries = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -738,11 +739,30 @@
             this.btnTurnoverDecline.UseVisualStyleBackColor = false;
             this.btnTurnoverDecline.Click += new System.EventHandler(this.btnTurnoverDecline_Click);
             // 
+            // btnNonReturningEnquiries
+            // 
+            this.btnNonReturningEnquiries.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnNonReturningEnquiries.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNonReturningEnquiries.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNonReturningEnquiries.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNonReturningEnquiries.ForeColor = System.Drawing.Color.White;
+            this.btnNonReturningEnquiries.Location = new System.Drawing.Point(1691, 45);
+            this.btnNonReturningEnquiries.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnNonReturningEnquiries.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnNonReturningEnquiries.Name = "btnNonReturningEnquiries";
+            this.btnNonReturningEnquiries.Padding = new System.Windows.Forms.Padding(3);
+            this.btnNonReturningEnquiries.Size = new System.Drawing.Size(208, 30);
+            this.btnNonReturningEnquiries.TabIndex = 116;
+            this.btnNonReturningEnquiries.Text = "Non Returning Enquiries";
+            this.btnNonReturningEnquiries.UseVisualStyleBackColor = false;
+            this.btnNonReturningEnquiries.Click += new System.EventHandler(this.btnNonReturningEnquiries_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnNonReturningEnquiries);
             this.Controls.Add(this.btnTurnoverDecline);
             this.Controls.Add(this.btnNonReturningCustomers);
             this.Controls.Add(this.btnCalendar);
@@ -854,6 +874,7 @@
         private buttonFormatting btnCalendar;
         private buttonFormatting btnNonReturningCustomers;
         private buttonFormatting btnTurnoverDecline;
+        private buttonFormatting btnNonReturningEnquiries;
     }
 }
 

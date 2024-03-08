@@ -182,7 +182,7 @@ namespace PriceMaster
                         customer = (string)cmd.ExecuteScalar();
 
                     //same sql statement but WHERE CUSTOMER = @customer -- will bring up every 
-                     sql = "select top 50 s.quote_id,customer_ref,customer " +
+                     sql = "select top 250 s.quote_id,customer_ref,customer " +
                         "from [order_database].dbo.solidworks_quotation_log s  " +
                         "inner join (select quote_id,max(revision_number) as revision_number  " +
                         "from [order_database].dbo.solidworks_quotation_log group by quote_id) as b on s.quote_id = b.quote_id AND s.revision_number = b.revision_number " +

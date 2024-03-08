@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>152</ApplicationRevision>
+    <ApplicationRevision>155</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -134,6 +134,12 @@
     </Compile>
     <Compile Include="frmCorrespondenceMassInsert.Designer.cs">
       <DependentUpon>frmCorrespondenceMassInsert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLastCustomerEnquiry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLastCustomerEnquiry.Designer.cs">
+      <DependentUpon>frmLastCustomerEnquiry.cs</DependentUpon>
     </Compile>
     <Compile Include="frmManagementAlert.cs">
       <SubType>Form</SubType>
@@ -427,6 +433,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCorrespondenceMassInsert.resx">
       <DependentUpon>frmCorrespondenceMassInsert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLastCustomerEnquiry.resx">
+      <DependentUpon>frmLastCustomerEnquiry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmManagementAlert.resx">
       <DependentUpon>frmManagementAlert.cs</DependentUpon>

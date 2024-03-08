@@ -74,6 +74,7 @@
             this.btnReport = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
             this.chkCustomerLostQuote = new System.Windows.Forms.CheckBox();
+            this.btnNonReturningEnquiries = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -380,7 +381,7 @@
             // chkNonResponsive
             // 
             this.chkNonResponsive.AutoSize = true;
-            this.chkNonResponsive.Location = new System.Drawing.Point(1427, 77);
+            this.chkNonResponsive.Location = new System.Drawing.Point(1567, 77);
             this.chkNonResponsive.Name = "chkNonResponsive";
             this.chkNonResponsive.Size = new System.Drawing.Size(152, 17);
             this.chkNonResponsive.TabIndex = 106;
@@ -392,7 +393,7 @@
             // chkLeadTimeTooLong
             // 
             this.chkLeadTimeTooLong.AutoSize = true;
-            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(1585, 27);
+            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(1725, 27);
             this.chkLeadTimeTooLong.Name = "chkLeadTimeTooLong";
             this.chkLeadTimeTooLong.Size = new System.Drawing.Size(116, 17);
             this.chkLeadTimeTooLong.TabIndex = 105;
@@ -404,7 +405,7 @@
             // chkQuoteTookTooLong
             // 
             this.chkQuoteTookTooLong.AutoSize = true;
-            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(1427, 52);
+            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(1567, 52);
             this.chkQuoteTookTooLong.Name = "chkQuoteTookTooLong";
             this.chkQuoteTookTooLong.Size = new System.Drawing.Size(123, 17);
             this.chkQuoteTookTooLong.TabIndex = 104;
@@ -416,7 +417,7 @@
             // chkUnableToMeetSpec
             // 
             this.chkUnableToMeetSpec.AutoSize = true;
-            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(1585, 52);
+            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(1725, 52);
             this.chkUnableToMeetSpec.Name = "chkUnableToMeetSpec";
             this.chkUnableToMeetSpec.Size = new System.Drawing.Size(127, 17);
             this.chkUnableToMeetSpec.TabIndex = 103;
@@ -428,7 +429,7 @@
             // chkTooExpensive
             // 
             this.chkTooExpensive.AutoSize = true;
-            this.chkTooExpensive.Location = new System.Drawing.Point(1427, 27);
+            this.chkTooExpensive.Location = new System.Drawing.Point(1567, 27);
             this.chkTooExpensive.Name = "chkTooExpensive";
             this.chkTooExpensive.Size = new System.Drawing.Size(99, 17);
             this.chkTooExpensive.TabIndex = 102;
@@ -441,7 +442,7 @@
             // 
             this.lblLossReasons.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblLossReasons.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblLossReasons.Location = new System.Drawing.Point(1424, 1);
+            this.lblLossReasons.Location = new System.Drawing.Point(1564, 1);
             this.lblLossReasons.Name = "lblLossReasons";
             this.lblLossReasons.Size = new System.Drawing.Size(277, 23);
             this.lblLossReasons.TabIndex = 107;
@@ -651,7 +652,7 @@
             // chkCustomerLostQuote
             // 
             this.chkCustomerLostQuote.AutoSize = true;
-            this.chkCustomerLostQuote.Location = new System.Drawing.Point(1585, 75);
+            this.chkCustomerLostQuote.Location = new System.Drawing.Point(1725, 75);
             this.chkCustomerLostQuote.Name = "chkCustomerLostQuote";
             this.chkCustomerLostQuote.Size = new System.Drawing.Size(137, 17);
             this.chkCustomerLostQuote.TabIndex = 118;
@@ -660,11 +661,30 @@
             this.chkCustomerLostQuote.Visible = false;
             this.chkCustomerLostQuote.CheckedChanged += new System.EventHandler(this.chkCustomerLostQuote_CheckedChanged);
             // 
+            // btnNonReturningEnquiries
+            // 
+            this.btnNonReturningEnquiries.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnNonReturningEnquiries.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNonReturningEnquiries.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNonReturningEnquiries.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNonReturningEnquiries.ForeColor = System.Drawing.Color.White;
+            this.btnNonReturningEnquiries.Location = new System.Drawing.Point(1351, 9);
+            this.btnNonReturningEnquiries.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnNonReturningEnquiries.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnNonReturningEnquiries.Name = "btnNonReturningEnquiries";
+            this.btnNonReturningEnquiries.Padding = new System.Windows.Forms.Padding(3);
+            this.btnNonReturningEnquiries.Size = new System.Drawing.Size(208, 30);
+            this.btnNonReturningEnquiries.TabIndex = 119;
+            this.btnNonReturningEnquiries.Text = "Non Returning Enquiries";
+            this.btnNonReturningEnquiries.UseVisualStyleBackColor = false;
+            this.btnNonReturningEnquiries.Click += new System.EventHandler(this.btnNonReturningEnquiries_Click);
+            // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnNonReturningEnquiries);
             this.Controls.Add(this.chkCustomerLostQuote);
             this.Controls.Add(this.btnCalendar);
             this.Controls.Add(this.btnTurnoverDecline);
@@ -766,5 +786,6 @@
         private buttonFormatting btnTurnoverDecline;
         private buttonFormatting btnCalendar;
         private System.Windows.Forms.CheckBox chkCustomerLostQuote;
+        private buttonFormatting btnNonReturningEnquiries;
     }
 }

@@ -709,5 +709,11 @@ namespace PriceMaster
         {
             apply_filter();
         }
+
+        private void btnNonReturningEnquiries_Click(object sender, EventArgs e)
+        {
+            frmLastCustomerEnquiry frm = new frmLastCustomerEnquiry(0);
+            frm.ShowDialog();
+        }
     }
 }

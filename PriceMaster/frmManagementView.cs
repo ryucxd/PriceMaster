@@ -62,6 +62,10 @@ namespace PriceMaster
                 chkboxSlimline.Checked = false;
             else
                 chkboxSlimline.Checked = true;
+
+            dteStart.Value = dteEnd.Value.AddDays(-30);
+            date_filter = -1;
+
             load_data();
             load_correspondence();
             fillCombo();
@@ -655,6 +659,8 @@ namespace PriceMaster
             cmbCustomerSearch.Text = "";
             cmbChaseStatus.Text = "";
             date_filter = 0;
+            dteStart.Value = dteEnd.Value.AddDays(-30);
+            date_filter = -1;
             load_data();
             load_correspondence();
             fillCombo();

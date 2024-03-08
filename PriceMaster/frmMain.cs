@@ -960,5 +960,11 @@ namespace PriceMaster
             frmTurnOverDecline frm = new frmTurnOverDecline(-1);
             frm.ShowDialog();
         }
+
+        private void btnNonReturningEnquiries_Click(object sender, EventArgs e)
+        {
+            frmLastCustomerEnquiry frm = new frmLastCustomerEnquiry(-1);
+            frm.ShowDialog();
+        }
     }
 }
