@@ -119,7 +119,20 @@ namespace PriceMaster
 
                         DateTime selectedDate = new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, Convert.ToInt32(row.Cells[col.Index].Value));
 
-                        string sql = "SELECT a.id " +
+                        // vvvv the original sql statement for highlighting the calendar (only highlights SL)
+                        ////string sql = "SELECT a.id " +
+                        ////    "FROM [order_database].dbo.quotation_chase_log_slimline a " +
+                        ////    "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
+                        ////    "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
+                        ////    "left join (SELECT * FROM [price_master].dbo.[sl_quotation] where highest_issue = -1 ) sl on sl.quote_id = a.quote_id " +
+                        ////    "left join[EnquiryLog].dbo.[Enquiry_Log] e on sl.enquiry_id = e.id " +
+                        ////    "left join[dsl_fitting].dbo.SALES_LEDGER s on sl.customer_acc_ref = s.ACCOUNT_REF " +
+                        ////    "right join (select max(id) as id,quote_id FROM [order_database].dbo.quotation_chase_log_slimline group by quote_id) as z on z.id = a.id " +
+                        ////    "where next_chase_date  =  CAST('" + selectedDate.ToString("yyyyMMdd") + "' as date) and (dont_chase = 0 or dont_chase is null) AND " +
+                        ////    "(chase_complete = 0 or chase_complete is null) AND " +
+                        ////    "chased_by = " + CONNECT.staffID.ToString();
+
+                        string sql = "SELECT a.id, -1 as slimline " +
                             "FROM [order_database].dbo.quotation_chase_log_slimline a " +
                             "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
                             "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
@@ -128,16 +141,56 @@ namespace PriceMaster
                             "left join[dsl_fitting].dbo.SALES_LEDGER s on sl.customer_acc_ref = s.ACCOUNT_REF " +
                             "right join (select max(id) as id,quote_id FROM [order_database].dbo.quotation_chase_log_slimline group by quote_id) as z on z.id = a.id " +
                             "where next_chase_date  =  CAST('" + selectedDate.ToString("yyyyMMdd") + "' as date) and (dont_chase = 0 or dont_chase is null) AND " +
-                            "(chase_complete = 0 or chase_complete is null) AND " +
-                            "chased_by = " + CONNECT.staffID.ToString();
+                            "(chase_complete = 0 or chase_complete is null) AND chased_by = " + CONNECT.staffID.ToString() + " " +
+                            "union all " +
+                            "SELECT a.id, 0 as slimline " +
+                            "FROM [order_database].dbo.quotation_chase_log a " +
+                            "left join [order_database].dbo.quotation_feed_back b on a.quote_id = b.quote_id " +
+                            "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
+                            "left join (select quote_id,max(revision_number) as revision_number " +
+                            "from [order_database].dbo.solidworks_quotation_log group by quote_id) sw on a.quote_id = sw.quote_id " +
+                            "left join [order_database].dbo.solidworks_quotation_log q on sw.quote_id = q.quote_id and sw.revision_number = q.revision_number " +
+                            "left join (select max(id) as enquiry_id, left(related_quote, CHARINDEX('-', related_quote) - 1) as related_quote " +
+                            "from [EnquiryLog].dbo.[Enquiry_Log] WHERE related_quote <> 'No Related Quote' group by " +
+                            "LEFT(related_quote, CHARINDEX('-', related_quote) - 1)) el on el.related_quote like '%' + cast(q.quote_id as nvarchar) + '%' " +
+                            "left join [EnquiryLog].dbo.[Enquiry_Log] e on el.enquiry_id = e.id " +
+                            "where next_chase_date = CAST('" + selectedDate.ToString("yyyyMMdd") + "' as date) and (dont_chase = 0 or dont_chase is null) AND " +
+                            "(chase_complete = 0 or chase_complete is null) AND chased_by = " + CONNECT.staffID.ToString();
 
-
-                        using  (SqlCommand cmd = new SqlCommand(sql, conn))
+                        using (SqlCommand cmd = new SqlCommand(sql, conn))
                         {
-                            var data = cmd.ExecuteScalar();
+                            //old code
+                            ////////var data = cmd.ExecuteScalar();
 
-                            if (data != null)
-                                row.Cells[col.Index].Style = new DataGridViewCellStyle { ForeColor = Color.Red };
+                            ////////if (data != null)
+                            ////////    row.Cells[col.Index].Style = new DataGridViewCellStyle { ForeColor = Color.Red };
+
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+
+                            int slimline = 0;
+                            int traditional = 0;
+                            for (int i = 0; i < dt.Rows.Count; i++)
+                            {
+                                if (dt.Rows[i][1].ToString() == "-1")
+                                {
+                                    row.Cells[col.Index].Style = new DataGridViewCellStyle { ForeColor = Color.Blue };
+                                    row.Cells[col.Index].Style.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
+                                    slimline++;
+                                }
+                                else
+                                {
+                                    row.Cells[col.Index].Style = new DataGridViewCellStyle { ForeColor = Color.Red };
+                                    row.Cells[col.Index].Style.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
+                                    traditional++;
+                                }
+                            }
+                            if (slimline > 0 && traditional > 0)
+                            {
+                                row.Cells[col.Index].Style = new DataGridViewCellStyle { ForeColor = Color.Green }; //different colour for both
+                                row.Cells[col.Index].Style.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
+                            }
 
                         }
                     }
@@ -193,7 +246,7 @@ namespace PriceMaster
             //get the data (its here because it colours the cell text)
             fillChases();
 
-            
+
 
         }
 
@@ -238,26 +291,50 @@ namespace PriceMaster
                 return;
 
 
-            DateTime selectedDate = new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, 
+            DateTime selectedDate = new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month,
                             Convert.ToInt32(dgvDate.Rows[e.RowIndex].Cells[e.ColumnIndex].Value));
 
-            string sql = "SELECT a.id,a.quote_id,chase_date,chase_description " +
-                            "FROM [order_database].dbo.quotation_chase_log_slimline a " +
-                            "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
-                            "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
-                            "left join (SELECT * FROM [price_master].dbo.[sl_quotation] where highest_issue = -1 ) sl on sl.quote_id = a.quote_id " +
-                            "left join[EnquiryLog].dbo.[Enquiry_Log] e on sl.enquiry_id = e.id " +
-                            "left join[dsl_fitting].dbo.SALES_LEDGER s on sl.customer_acc_ref = s.ACCOUNT_REF " +
-                            "right join (select max(id) as id,quote_id FROM [order_database].dbo.quotation_chase_log_slimline group by quote_id) as z on z.id = a.id " +
-                            "where next_chase_date  =  CAST('" + selectedDate.ToString("yyyyMMdd") + "' as date) and (dont_chase = 0 or dont_chase is null) AND " +
-                            "(chase_complete = 0 or chase_complete is null) AND " +
-                            "chased_by = " + CONNECT.staffID.ToString() + " order by priority_chase desc,chase_date desc,rtrim(s.[NAME]), quote_id ";
+            // vvvv the old 
+            ////string sql = "SELECT a.id,a.quote_id,chase_date,chase_description " +
+            ////                "FROM [order_database].dbo.quotation_chase_log_slimline a " +
+            ////                "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
+            ////                "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
+            ////                "left join (SELECT * FROM [price_master].dbo.[sl_quotation] where highest_issue = -1 ) sl on sl.quote_id = a.quote_id " +
+            ////                "left join[EnquiryLog].dbo.[Enquiry_Log] e on sl.enquiry_id = e.id " +
+            ////                "left join[dsl_fitting].dbo.SALES_LEDGER s on sl.customer_acc_ref = s.ACCOUNT_REF " +
+            ////                "right join (select max(id) as id,quote_id FROM [order_database].dbo.quotation_chase_log_slimline group by quote_id) as z on z.id = a.id " +
+            ////                "where next_chase_date  =  CAST('" + selectedDate.ToString("yyyyMMdd") + "' as date) and (dont_chase = 0 or dont_chase is null) AND " +
+            ////                "(chase_complete = 0 or chase_complete is null) AND " +
+            ////                "chased_by = " + CONNECT.staffID.ToString() + " order by priority_chase desc,chase_date desc,rtrim(s.[NAME]), quote_id ";
 
+            string sql = "SELECT a.id,a.quote_id,chase_date,chase_description,cast(1 AS BIT) as slimline " +
+                "FROM [order_database].dbo.quotation_chase_log_slimline a " +
+                "left join [order_database].dbo.quotation_feed_back_slimline b on a.quote_id = b.quote_id " +
+                "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
+                "left join (SELECT * FROM [price_master].dbo.[sl_quotation] where highest_issue = -1 ) sl on sl.quote_id = a.quote_id " +
+                "left join[EnquiryLog].dbo.[Enquiry_Log] e on sl.enquiry_id = e.id " +
+                "left join[dsl_fitting].dbo.SALES_LEDGER s on sl.customer_acc_ref = s.ACCOUNT_REF " +
+                "right join (select max(id) as id,quote_id FROM [order_database].dbo.quotation_chase_log_slimline group by quote_id) as z on z.id = a.id " +
+                "where next_chase_date  =  CAST('" + selectedDate.ToString("yyyyMMdd") + "' as date) and (dont_chase = 0 or dont_chase is null) AND " +
+                "(chase_complete = 0 or chase_complete is null) AND chased_by = " + CONNECT.staffID.ToString() + " " +
+                "union all " +
+                "SELECT a.id,a.quote_id,chase_date,chase_description, cast(0 AS BIT) as slimline " +
+                "FROM [order_database].dbo.quotation_chase_log a " +
+                "left join [order_database].dbo.quotation_feed_back b on a.quote_id = b.quote_id " +
+                "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
+                "left join (select quote_id,max(revision_number) as revision_number from [order_database].dbo.solidworks_quotation_log group by quote_id) sw on a.quote_id = sw.quote_id " +
+                "left join [order_database].dbo.solidworks_quotation_log q on sw.quote_id = q.quote_id and sw.revision_number = q.revision_number " +
+                "left join (select max(id) as enquiry_id, left(related_quote, CHARINDEX('-', related_quote) - 1) as related_quote " +
+                "from [EnquiryLog].dbo.[Enquiry_Log] WHERE related_quote <> 'No Related Quote' group by " +
+                "LEFT(related_quote, CHARINDEX('-', related_quote) - 1)) el on el.related_quote like '%' + cast(q.quote_id as nvarchar) + '%' " +
+                "left join [EnquiryLog].dbo.[Enquiry_Log] e on el.enquiry_id = e.id " +
+                "where next_chase_date  =  CAST('" + selectedDate.ToString("yyyyMMdd") + "' as date) and (dont_chase = 0 or dont_chase is null) AND " +
+                "(chase_complete = 0 or chase_complete is null) AND chased_by = " + CONNECT.staffID.ToString();
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
 
-                using (SqlCommand cmd = new SqlCommand(sql,conn))
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -268,10 +345,12 @@ namespace PriceMaster
                     dataGridView1.Columns[1].HeaderText = "Quote ID";
                     dataGridView1.Columns[2].HeaderText = "Chase Date";
                     dataGridView1.Columns[3].HeaderText = "Description";
+                    dataGridView1.Columns[4].HeaderText = "Slimline";
 
                     dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 }
 
                 conn.Close();
@@ -286,18 +365,36 @@ namespace PriceMaster
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
                 conn.Open();
-                string sql = "select  rtrim(b.[NAME]) from [price_master].dbo.sl_quotation a " +
-                    "left join[dsl_fitting].dbo.[SALES_LEDGER] b on a.customer_acc_ref = b.ACCOUNT_REF where quote_id = " + dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-
+                string sql = "";
+                if (Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[4].Value) == true)
+                {
+                    sql = "select  rtrim(b.[NAME]) from [price_master].dbo.sl_quotation a " +
+                        "left join[dsl_fitting].dbo.[SALES_LEDGER] b on a.customer_acc_ref = b.ACCOUNT_REF where quote_id = " + dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                }
+                else
+                {
+                    sql = "SELECT customer FROM [order_database].dbo.quotation_chase_log a " +
+                        "left join (select quote_id,max(revision_number) as revision_number from [order_database].dbo.solidworks_quotation_log group by quote_id) sw on a.quote_id = sw.quote_id " +
+                        "left join [order_database].dbo.solidworks_quotation_log q on sw.quote_id = q.quote_id and sw.revision_number = q.revision_number " +
+                        "where a.quote_id = " + dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                }
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     customer = cmd.ExecuteScalar().ToString();
 
                 conn.Close();
             }
 
-            //frmSlimlineQuotation frm = new frmSlimlineQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString()), customer);
-            frmSlimlineChaseQuotation frm = new frmSlimlineChaseQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString()), customer);
-            frm.ShowDialog();
+            if (Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[4].Value) == true)
+            {
+                //frmSlimlineQuotation frm = new frmSlimlineQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString()), customer);
+                frmSlimlineChaseQuotation frm = new frmSlimlineChaseQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString()), customer);
+                frm.ShowDialog();
+            }
+            else
+            {
+                frmTraditionalQuotation frm = new frmTraditionalQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString()), customer);
+                frm.ShowDialog();
+            }
 
             fillCalendar();
         }
