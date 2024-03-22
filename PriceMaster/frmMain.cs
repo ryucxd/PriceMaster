@@ -966,5 +966,11 @@ namespace PriceMaster
             frmLastCustomerEnquiry frm = new frmLastCustomerEnquiry(-1);
             frm.ShowDialog();
         }
+
+        private void btnNewCustomers_Click(object sender, EventArgs e)
+        {
+            frmNewCustomersTraditional frm = new frmNewCustomersTraditional(0);
+            frm.ShowDialog();
+        }
     }
 }

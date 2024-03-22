@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTraditional));
             this.dteEnd = new System.Windows.Forms.DateTimePicker();
             this.dteStart = new System.Windows.Forms.DateTimePicker();
@@ -75,6 +75,7 @@
             this.btnClear = new PriceMaster.buttonFormatting();
             this.chkCustomerLostQuote = new System.Windows.Forms.CheckBox();
             this.btnNonReturningEnquiries = new PriceMaster.buttonFormatting();
+            this.btnnewCustomers = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -184,14 +185,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Location = new System.Drawing.Point(12, 143);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -381,7 +382,7 @@
             // chkNonResponsive
             // 
             this.chkNonResponsive.AutoSize = true;
-            this.chkNonResponsive.Location = new System.Drawing.Point(1567, 77);
+            this.chkNonResponsive.Location = new System.Drawing.Point(1603, 77);
             this.chkNonResponsive.Name = "chkNonResponsive";
             this.chkNonResponsive.Size = new System.Drawing.Size(152, 17);
             this.chkNonResponsive.TabIndex = 106;
@@ -393,7 +394,7 @@
             // chkLeadTimeTooLong
             // 
             this.chkLeadTimeTooLong.AutoSize = true;
-            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(1725, 27);
+            this.chkLeadTimeTooLong.Location = new System.Drawing.Point(1761, 27);
             this.chkLeadTimeTooLong.Name = "chkLeadTimeTooLong";
             this.chkLeadTimeTooLong.Size = new System.Drawing.Size(116, 17);
             this.chkLeadTimeTooLong.TabIndex = 105;
@@ -405,7 +406,7 @@
             // chkQuoteTookTooLong
             // 
             this.chkQuoteTookTooLong.AutoSize = true;
-            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(1567, 52);
+            this.chkQuoteTookTooLong.Location = new System.Drawing.Point(1603, 52);
             this.chkQuoteTookTooLong.Name = "chkQuoteTookTooLong";
             this.chkQuoteTookTooLong.Size = new System.Drawing.Size(123, 17);
             this.chkQuoteTookTooLong.TabIndex = 104;
@@ -417,7 +418,7 @@
             // chkUnableToMeetSpec
             // 
             this.chkUnableToMeetSpec.AutoSize = true;
-            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(1725, 52);
+            this.chkUnableToMeetSpec.Location = new System.Drawing.Point(1761, 52);
             this.chkUnableToMeetSpec.Name = "chkUnableToMeetSpec";
             this.chkUnableToMeetSpec.Size = new System.Drawing.Size(127, 17);
             this.chkUnableToMeetSpec.TabIndex = 103;
@@ -429,7 +430,7 @@
             // chkTooExpensive
             // 
             this.chkTooExpensive.AutoSize = true;
-            this.chkTooExpensive.Location = new System.Drawing.Point(1567, 27);
+            this.chkTooExpensive.Location = new System.Drawing.Point(1603, 27);
             this.chkTooExpensive.Name = "chkTooExpensive";
             this.chkTooExpensive.Size = new System.Drawing.Size(99, 17);
             this.chkTooExpensive.TabIndex = 102;
@@ -442,7 +443,7 @@
             // 
             this.lblLossReasons.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.lblLossReasons.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.lblLossReasons.Location = new System.Drawing.Point(1564, 1);
+            this.lblLossReasons.Location = new System.Drawing.Point(1600, 1);
             this.lblLossReasons.Name = "lblLossReasons";
             this.lblLossReasons.Size = new System.Drawing.Size(277, 23);
             this.lblLossReasons.TabIndex = 107;
@@ -475,7 +476,7 @@
             this.btnTurnoverDecline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTurnoverDecline.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTurnoverDecline.ForeColor = System.Drawing.Color.White;
-            this.btnTurnoverDecline.Location = new System.Drawing.Point(1267, 45);
+            this.btnTurnoverDecline.Location = new System.Drawing.Point(1237, 45);
             this.btnTurnoverDecline.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnTurnoverDecline.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnTurnoverDecline.Name = "btnTurnoverDecline";
@@ -493,7 +494,7 @@
             this.btnOutstandingCorrespondence.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOutstandingCorrespondence.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOutstandingCorrespondence.ForeColor = System.Drawing.Color.White;
-            this.btnOutstandingCorrespondence.Location = new System.Drawing.Point(1019, 45);
+            this.btnOutstandingCorrespondence.Location = new System.Drawing.Point(989, 45);
             this.btnOutstandingCorrespondence.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnOutstandingCorrespondence.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnOutstandingCorrespondence.Name = "btnOutstandingCorrespondence";
@@ -511,7 +512,7 @@
             this.btnAlert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAlert.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAlert.ForeColor = System.Drawing.Color.White;
-            this.btnAlert.Location = new System.Drawing.Point(610, 45);
+            this.btnAlert.Location = new System.Drawing.Point(580, 45);
             this.btnAlert.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnAlert.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnAlert.Name = "btnAlert";
@@ -529,7 +530,7 @@
             this.btnNonReturningCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNonReturningCustomers.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNonReturningCustomers.ForeColor = System.Drawing.Color.White;
-            this.btnNonReturningCustomers.Location = new System.Drawing.Point(1133, 9);
+            this.btnNonReturningCustomers.Location = new System.Drawing.Point(1103, 9);
             this.btnNonReturningCustomers.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnNonReturningCustomers.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnNonReturningCustomers.Name = "btnNonReturningCustomers";
@@ -547,7 +548,7 @@
             this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCustomer.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCustomer.ForeColor = System.Drawing.Color.White;
-            this.btnCustomer.Location = new System.Drawing.Point(788, 45);
+            this.btnCustomer.Location = new System.Drawing.Point(758, 45);
             this.btnCustomer.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnCustomer.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnCustomer.Name = "btnCustomer";
@@ -565,7 +566,7 @@
             this.btnManagementView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnManagementView.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnManagementView.ForeColor = System.Drawing.Color.White;
-            this.btnManagementView.Location = new System.Drawing.Point(610, 12);
+            this.btnManagementView.Location = new System.Drawing.Point(580, 12);
             this.btnManagementView.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnManagementView.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnManagementView.Name = "btnManagementView";
@@ -602,7 +603,7 @@
             this.btnOutstanding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOutstanding.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOutstanding.ForeColor = System.Drawing.Color.White;
-            this.btnOutstanding.Location = new System.Drawing.Point(944, 9);
+            this.btnOutstanding.Location = new System.Drawing.Point(914, 9);
             this.btnOutstanding.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnOutstanding.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnOutstanding.Name = "btnOutstanding";
@@ -620,7 +621,7 @@
             this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReport.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReport.ForeColor = System.Drawing.Color.White;
-            this.btnReport.Location = new System.Drawing.Point(788, 9);
+            this.btnReport.Location = new System.Drawing.Point(758, 9);
             this.btnReport.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnReport.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnReport.Name = "btnReport";
@@ -652,7 +653,7 @@
             // chkCustomerLostQuote
             // 
             this.chkCustomerLostQuote.AutoSize = true;
-            this.chkCustomerLostQuote.Location = new System.Drawing.Point(1725, 75);
+            this.chkCustomerLostQuote.Location = new System.Drawing.Point(1761, 75);
             this.chkCustomerLostQuote.Name = "chkCustomerLostQuote";
             this.chkCustomerLostQuote.Size = new System.Drawing.Size(137, 17);
             this.chkCustomerLostQuote.TabIndex = 118;
@@ -668,7 +669,7 @@
             this.btnNonReturningEnquiries.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNonReturningEnquiries.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNonReturningEnquiries.ForeColor = System.Drawing.Color.White;
-            this.btnNonReturningEnquiries.Location = new System.Drawing.Point(1351, 9);
+            this.btnNonReturningEnquiries.Location = new System.Drawing.Point(1321, 9);
             this.btnNonReturningEnquiries.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnNonReturningEnquiries.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnNonReturningEnquiries.Name = "btnNonReturningEnquiries";
@@ -679,11 +680,30 @@
             this.btnNonReturningEnquiries.UseVisualStyleBackColor = false;
             this.btnNonReturningEnquiries.Click += new System.EventHandler(this.btnNonReturningEnquiries_Click);
             // 
+            // btnnewCustomers
+            // 
+            this.btnnewCustomers.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnnewCustomers.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnnewCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnnewCustomers.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnnewCustomers.ForeColor = System.Drawing.Color.White;
+            this.btnnewCustomers.Location = new System.Drawing.Point(1385, 45);
+            this.btnnewCustomers.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnnewCustomers.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnnewCustomers.Name = "btnnewCustomers";
+            this.btnnewCustomers.Padding = new System.Windows.Forms.Padding(3);
+            this.btnnewCustomers.Size = new System.Drawing.Size(208, 30);
+            this.btnnewCustomers.TabIndex = 120;
+            this.btnnewCustomers.Text = "New Customers";
+            this.btnnewCustomers.UseVisualStyleBackColor = false;
+            this.btnnewCustomers.Click += new System.EventHandler(this.btnnewCustomers_Click);
+            // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnnewCustomers);
             this.Controls.Add(this.btnNonReturningEnquiries);
             this.Controls.Add(this.chkCustomerLostQuote);
             this.Controls.Add(this.btnCalendar);
@@ -787,5 +807,6 @@
         private buttonFormatting btnCalendar;
         private System.Windows.Forms.CheckBox chkCustomerLostQuote;
         private buttonFormatting btnNonReturningEnquiries;
+        private buttonFormatting btnnewCustomers;
     }
 }

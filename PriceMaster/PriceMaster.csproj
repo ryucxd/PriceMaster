@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>155</ApplicationRevision>
+    <ApplicationRevision>156</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -152,6 +152,12 @@
     </Compile>
     <Compile Include="frmManagementAlertAction.Designer.cs">
       <DependentUpon>frmManagementAlertAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewCustomersTraditional.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewCustomersTraditional.Designer.cs">
+      <DependentUpon>frmNewCustomersTraditional.cs</DependentUpon>
     </Compile>
     <Compile Include="frmTurnOverDecline.cs">
       <SubType>Form</SubType>
@@ -442,6 +448,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmManagementAlertAction.resx">
       <DependentUpon>frmManagementAlertAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewCustomersTraditional.resx">
+      <DependentUpon>frmNewCustomersTraditional.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTurnOverDecline.resx">
       <DependentUpon>frmTurnOverDecline.cs</DependentUpon>
