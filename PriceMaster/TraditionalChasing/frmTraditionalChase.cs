@@ -181,6 +181,12 @@ namespace PriceMaster
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                         customer = (string)cmd.ExecuteScalar();
 
+                    //get the chasing status of the parent table
+                    sql = "select [status] FROM dbo.quotation_feed_back  where quote_id = " + quote_id.ToString();
+                    string chase_status = "";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                        chase_status = (string)cmd.ExecuteScalar();
+
                     //same sql statement but WHERE CUSTOMER = @customer -- will bring up every 
                      sql = "select top 250 s.quote_id,customer_ref,customer " +
                         "from [order_database].dbo.solidworks_quotation_log s  " +
@@ -196,7 +202,7 @@ namespace PriceMaster
 
                         if (dt.Rows.Count >= 1)
                         {
-                            frmMultipleChase frm = new frmMultipleChase(quote_id,customer, dt, txtDescription.Text, dont_chase, email, phone, dteNextDate.Value.ToString("yyyyMMdd"));
+                            frmMultipleChase frm = new frmMultipleChase(quote_id,customer, dt, txtDescription.Text, dont_chase, email, phone, dteNextDate.Value.ToString("yyyyMMdd"),chase_status);
                             frm.ShowDialog();
                         }
                     }

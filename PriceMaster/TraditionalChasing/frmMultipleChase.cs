@@ -23,7 +23,8 @@ namespace PriceMaster.TraditionalChasing
         public int email { get; set; }
         public int phone { get; set; }
         public string dteNextDate { get; set; }
-        public frmMultipleChase(int _quote_id, string _customer, DataTable _quote_dt, string _description, int _dont_chase, int _email, int _phone,string _dteNextDate)
+        public string chase_status { get; set; }
+        public frmMultipleChase(int _quote_id, string _customer, DataTable _quote_dt, string _description, int _dont_chase, int _email, int _phone,string _dteNextDate,string _chase_status)
         {
             InitializeComponent();
 
@@ -35,6 +36,7 @@ namespace PriceMaster.TraditionalChasing
             email = _email;
             phone = _phone;
             dteNextDate = _dteNextDate;
+            chase_status = _chase_status;
             lblCustomer.Text = customer;
 
             loadData();
@@ -103,6 +105,7 @@ namespace PriceMaster.TraditionalChasing
                             cmd.Parameters.AddWithValue("@email", SqlDbType.Int).Value = email;
                             cmd.Parameters.AddWithValue("@phone", SqlDbType.Int).Value = phone;
                             cmd.Parameters.AddWithValue("@chase_complete", SqlDbType.Int).Value = dont_chase;
+                            cmd.Parameters.AddWithValue("@status", SqlDbType.NVarChar).Value = chase_status;
                             cmd.ExecuteNonQuery();
                         }
 
