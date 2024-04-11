@@ -302,6 +302,7 @@ namespace PriceMaster
             {
                 sql = "SELECT TOP 500 a.id,a.quote_id,b.[status],chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by," +
                     "rtrim(q.customer) as customer,e.sender_email_address,priority_chase,chase_complete FROM[order_database].dbo.quotation_chase_log a " +
+                    "left join[order_database].dbo.quotation_feed_back b on a.quote_id = b.quote_id " +
                     "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
                     ////"left join(select quote_id, max(revision_number) as revision_number from[order_database].dbo.solidworks_quotation_log group by quote_id) sw on a.quote_id = sw.quote_id " +
                     ////"left join[order_database].dbo.solidworks_quotation_log q on sw.quote_id = q.quote_id and sw.revision_number = q.revision_number " +
