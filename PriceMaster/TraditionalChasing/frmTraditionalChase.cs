@@ -182,7 +182,7 @@ namespace PriceMaster
                         customer = (string)cmd.ExecuteScalar();
 
                     //get the chasing status of the parent table
-                    sql = "select [status] FROM dbo.quotation_feed_back  where quote_id = " + quote_id.ToString();
+                    sql = "select [status] FROM [order_database].dbo.quotation_feed_back  where quote_id = " + quote_id.ToString();
                     string chase_status = "";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                         chase_status = (string)cmd.ExecuteScalar();
