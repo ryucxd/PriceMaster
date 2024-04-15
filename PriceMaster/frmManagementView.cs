@@ -83,7 +83,7 @@ namespace PriceMaster
             dgvChase.Columns[chase_description_index].HeaderText = "Chase Description";
             dgvChase.Columns[next_chase_date_index].HeaderText = "Next Chase Date";
             dgvChase.Columns[customer_index].HeaderText = "Customer";
-            dgvChase.Columns[sender_email_address_index].HeaderText = "Sender Email Address";
+            dgvChase.Columns[sender_email_address_index].Visible = false; //.HeaderText = "Sender Email Address";
             dgvChase.Columns[chase_status_index].HeaderText = "Chase Status";
             dgvChase.Columns[priority_chase_index].Visible = false;
             dgvChase.Columns[chase_complete_index].Visible = false;
@@ -301,27 +301,27 @@ namespace PriceMaster
             else
             {
                 sql = "SELECT TOP 500 a.id,a.quote_id,b.[status],chase_date,chase_description,next_chase_date,u.forename + ' ' + u.surname as chased_by," +
-                    "rtrim(q.customer) as customer,e.sender_email_address,priority_chase,chase_complete FROM[order_database].dbo.quotation_chase_log a " +
-                    "left join[order_database].dbo.quotation_feed_back b on a.quote_id = b.quote_id " +
-                    "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
+                    "rtrim(q.customer) as customer,'e.' as sender_email_address,priority_chase,chase_complete FROM[order_database].dbo.quotation_chase_log a " +
+                    "left merge join[order_database].dbo.quotation_feed_back b on a.quote_id = b.quote_id " +
+                    "left merge join[user_info].dbo.[user] u on a.chased_by = u.id " +
                     ////"left join(select quote_id, max(revision_number) as revision_number from[order_database].dbo.solidworks_quotation_log group by quote_id) sw on a.quote_id = sw.quote_id " +
                     ////"left join[order_database].dbo.solidworks_quotation_log q on sw.quote_id = q.quote_id and sw.revision_number = q.revision_number " +
-                    "left join [order_database].dbo.view_solidworks_max_rev q on a.quote_id = q.quote_id " +
-                    "left join(select max(id) as enquiry_id, left(related_quote, CHARINDEX('-', related_quote) - 1) as related_quote from[EnquiryLog].dbo.[Enquiry_Log] " +
-                    "WHERE related_quote<> 'No Related Quote' group by LEFT(related_quote, CHARINDEX('-', related_quote) - 1)) el on el.related_quote like '%' + cast(q.quote_id as nvarchar) + '%' " +
-                    "left join[EnquiryLog].dbo.[Enquiry_Log] e on el.enquiry_id = e.id " +
+                    "left merge join [order_database].dbo.view_solidworks_max_rev q on a.quote_id = q.quote_id " +
+                    //"left join(select max(id) as enquiry_id, left(related_quote, CHARINDEX('-', related_quote) - 1) as related_quote from[EnquiryLog].dbo.[Enquiry_Log] " +
+                    //"WHERE related_quote<> 'No Related Quote' group by LEFT(related_quote, CHARINDEX('-', related_quote) - 1)) el on el.related_quote like '%' + cast(q.quote_id as nvarchar) + '%' " +
+                    //"left merge join (SELECT top 500 * FROM [EnquiryLog].dbo.[Enquiry_Log]) e on el.enquiry_id = e.id " +
                     "where  ";
                 
                 sqlCount = "SELECT count (distinct q.customer) " +
                     "FROM[order_database].dbo.quotation_chase_log a " +
-                    "left join[order_database].dbo.quotation_feed_back b on a.quote_id = b.quote_id " +
-                    "left join[user_info].dbo.[user] u on a.chased_by = u.id " +
+                    "left merge join[order_database].dbo.quotation_feed_back b on a.quote_id = b.quote_id " +
+                    "left merge join[user_info].dbo.[user] u on a.chased_by = u.id " +
                     ////"left join(select quote_id, max(revision_number) as revision_number from[order_database].dbo.solidworks_quotation_log group by quote_id) sw on a.quote_id = sw.quote_id " +
                     ////"left join[order_database].dbo.solidworks_quotation_log q on sw.quote_id = q.quote_id and sw.revision_number = q.revision_number " +
-                    "left join [order_database].dbo.view_solidworks_max_rev q on a.quote_id = q.quote_id " +
-                    "left join(select max(id) as enquiry_id, left(related_quote, CHARINDEX('-', related_quote) - 1) as related_quote from[EnquiryLog].dbo.[Enquiry_Log] " +
-                    "WHERE related_quote<> 'No Related Quote' group by LEFT(related_quote, CHARINDEX('-', related_quote) - 1)) el on el.related_quote like '%' + cast(q.quote_id as nvarchar) + '%' " +
-                    "left join[EnquiryLog].dbo.[Enquiry_Log] e on el.enquiry_id = e.id " +
+                    "left merge join [order_database].dbo.view_solidworks_max_rev q on a.quote_id = q.quote_id " +
+                    //"left join(select max(id) as enquiry_id, left(related_quote, CHARINDEX('-', related_quote) - 1) as related_quote from [EnquiryLog].dbo.[Enquiry_Log] " +
+                    //"WHERE related_quote<> 'No Related Quote' group by LEFT(related_quote, CHARINDEX('-', related_quote) - 1)) el on el.related_quote like '%' + cast(q.quote_id as nvarchar) + '%' " +
+                    //"left merge join (SELECT top 500 * FROM [EnquiryLog].dbo.[Enquiry_Log]) e on el.enquiry_id = e.id  " +
                     "where  ";
 
                 if (chkFuture.Checked == true)
