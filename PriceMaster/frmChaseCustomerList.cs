@@ -85,7 +85,10 @@ namespace PriceMaster
             string sql = "";// [order_database].dbo.usp_sales_over_years";
 
             //aaaaaah why are we constantly swapping these
-            sql = "SELECT [NAME] FROM [order_database].dbo.[SALES_LEDGER] order by NAME ASC";
+            sql = "SELECT [NAME] FROM [order_database].dbo.[SALES_LEDGER] " +
+                "union all " +
+                "SELECT [NAME] FROM [order_database].dbo.SALES_LEDGER_PROSPECT " +
+                "order by NAME ASC";
             cmbCustomer.Items.Clear();
 
             //old code
@@ -514,6 +517,12 @@ namespace PriceMaster
                     conn.Close();
                 }
             }
+        }
+
+        private void btnNewCustomer_Click(object sender, EventArgs e)
+        {
+            frmAddCustomerToSalesProspect frm = new frmAddCustomerToSalesProspect();
+            frm.ShowDialog();
         }
     }
 }

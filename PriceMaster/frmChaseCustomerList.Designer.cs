@@ -42,6 +42,7 @@
             this.txtInsert = new PriceMaster.buttonFormatting();
             this.btnImport = new PriceMaster.buttonFormatting();
             this.btnLastOrder = new PriceMaster.buttonFormatting();
+            this.btnNewCustomer = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOther)).BeginInit();
             this.SuspendLayout();
@@ -207,7 +208,7 @@
             this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImport.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImport.ForeColor = System.Drawing.Color.White;
-            this.btnImport.Location = new System.Drawing.Point(150, 192);
+            this.btnImport.Location = new System.Drawing.Point(88, 194);
             this.btnImport.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnImport.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnImport.Name = "btnImport";
@@ -236,11 +237,30 @@
             this.btnLastOrder.UseVisualStyleBackColor = false;
             this.btnLastOrder.Click += new System.EventHandler(this.btnLastOrder_Click);
             // 
+            // btnNewCustomer
+            // 
+            this.btnNewCustomer.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnNewCustomer.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNewCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewCustomer.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewCustomer.ForeColor = System.Drawing.Color.White;
+            this.btnNewCustomer.Location = new System.Drawing.Point(229, 194);
+            this.btnNewCustomer.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnNewCustomer.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnNewCustomer.Name = "btnNewCustomer";
+            this.btnNewCustomer.Padding = new System.Windows.Forms.Padding(3);
+            this.btnNewCustomer.Size = new System.Drawing.Size(131, 30);
+            this.btnNewCustomer.TabIndex = 50;
+            this.btnNewCustomer.Text = "New Customer";
+            this.btnNewCustomer.UseVisualStyleBackColor = false;
+            this.btnNewCustomer.Click += new System.EventHandler(this.btnNewCustomer_Click);
+            // 
             // frmChaseCustomerList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1281, 990);
+            this.Controls.Add(this.btnNewCustomer);
             this.Controls.Add(this.btnLastOrder);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.btnExcel);
@@ -279,5 +299,6 @@
         private buttonFormatting btnExcel;
         private buttonFormatting btnImport;
         private buttonFormatting btnLastOrder;
+        private buttonFormatting btnNewCustomer;
     }
 }
