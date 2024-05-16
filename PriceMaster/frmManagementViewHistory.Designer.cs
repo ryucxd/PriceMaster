@@ -45,6 +45,10 @@
             this.btnQuote = new PriceMaster.buttonFormatting();
             this.btnPrint = new PriceMaster.buttonFormatting();
             this.btnEmail = new PriceMaster.buttonFormatting();
+            this.chkManagementAlerted = new System.Windows.Forms.CheckBox();
+            this.txtManagementDate = new System.Windows.Forms.TextBox();
+            this.txtSentTo = new System.Windows.Forms.TextBox();
+            this.lblSentTo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -243,11 +247,52 @@
             this.btnEmail.UseVisualStyleBackColor = false;
             this.btnEmail.Click += new System.EventHandler(this.btnEmail_Click);
             // 
+            // chkManagementAlerted
+            // 
+            this.chkManagementAlerted.AutoSize = true;
+            this.chkManagementAlerted.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.chkManagementAlerted.Location = new System.Drawing.Point(305, 437);
+            this.chkManagementAlerted.Name = "chkManagementAlerted";
+            this.chkManagementAlerted.Size = new System.Drawing.Size(230, 29);
+            this.chkManagementAlerted.TabIndex = 84;
+            this.chkManagementAlerted.Text = "Management Alerted";
+            this.chkManagementAlerted.UseVisualStyleBackColor = true;
+            // 
+            // txtManagementDate
+            // 
+            this.txtManagementDate.Location = new System.Drawing.Point(531, 441);
+            this.txtManagementDate.Name = "txtManagementDate";
+            this.txtManagementDate.Size = new System.Drawing.Size(171, 20);
+            this.txtManagementDate.TabIndex = 86;
+            // 
+            // txtSentTo
+            // 
+            this.txtSentTo.Location = new System.Drawing.Point(364, 472);
+            this.txtSentTo.Name = "txtSentTo";
+            this.txtSentTo.Size = new System.Drawing.Size(338, 20);
+            this.txtSentTo.TabIndex = 87;
+            // 
+            // lblSentTo
+            // 
+            this.lblSentTo.AutoSize = true;
+            this.lblSentTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.lblSentTo.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblSentTo.Location = new System.Drawing.Point(302, 472);
+            this.lblSentTo.Name = "lblSentTo";
+            this.lblSentTo.Size = new System.Drawing.Size(62, 17);
+            this.lblSentTo.TabIndex = 88;
+            this.lblSentTo.Text = "Sent To:";
+            this.lblSentTo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
             // frmManagementViewHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 500);
+            this.Controls.Add(this.lblSentTo);
+            this.Controls.Add(this.txtSentTo);
+            this.Controls.Add(this.txtManagementDate);
+            this.Controls.Add(this.chkManagementAlerted);
             this.Controls.Add(this.btnEmail);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnDrawings);
@@ -294,5 +339,9 @@
         private buttonFormatting btnDrawings;
         private buttonFormatting btnPrint;
         private buttonFormatting btnEmail;
+        private System.Windows.Forms.CheckBox chkManagementAlerted;
+        private System.Windows.Forms.TextBox txtManagementDate;
+        private System.Windows.Forms.TextBox txtSentTo;
+        private System.Windows.Forms.Label lblSentTo;
     }
 }

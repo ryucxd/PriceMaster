@@ -57,6 +57,40 @@ namespace PriceMaster
                     dataGridView1.Columns[0].Visible = false;
                     dataGridView1.Columns[3].ReadOnly = true;
                 }
+
+                //check if this has been management alerted -- this is defaulted to the first selection here
+                sql = "select alert_time,sent_to FROM [order_database].dbo.[quotation_chase_alert] q where chase_id = " + dataGridView1.Rows[0].Cells[0].Value.ToString();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    DataTable dt = new DataTable();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+
+
+                    if (dt.Rows.Count > 0)
+                    {
+
+                        txtManagementDate.Text = dt.Rows[0][0].ToString();
+                        txtManagementDate.Visible = true;
+                        chkManagementAlerted.Checked = true;
+                        chkManagementAlerted.Visible = true;
+                        lblSentTo.Visible = true;
+                        txtSentTo.Text = dt.Rows[0][1].ToString();
+                        txtSentTo.Visible = true;
+                    }
+                    else
+                    {
+
+                        txtManagementDate.Visible = false;
+                        chkManagementAlerted.Checked = false;
+                        chkManagementAlerted.Visible = false;
+                        lblSentTo.Visible = false;
+                        txtSentTo.Visible = false;
+                    }
+                }
+
+
+
                 conn.Close();
             }
 
@@ -128,6 +162,38 @@ namespace PriceMaster
                     if (dt.Rows[0][5].ToString() == "-1")
                         chkEmail.Checked = true;
                 }
+
+                //check if this has been management alerted -- this is defaulted to the first selection here
+                sql = "select alert_time,sent_to FROM [order_database].dbo.[quotation_chase_alert] q where chase_id = " + chase_id.ToString();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    DataTable dt = new DataTable();
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+
+                    
+                    if (dt.Rows.Count > 0)
+                    {
+
+                        txtManagementDate.Text = dt.Rows[0][0].ToString();
+                        txtManagementDate.Visible = true;
+                        chkManagementAlerted.Checked = true;
+                        chkManagementAlerted.Visible = true;
+                        lblSentTo.Visible = true;
+                        txtSentTo.Text = dt.Rows[0][1].ToString();
+                        txtSentTo.Visible = true;
+                    }
+                    else
+                    {
+                        
+                        txtManagementDate.Visible = false;
+                        chkManagementAlerted.Checked = false;
+                        chkManagementAlerted.Visible = false;
+                        lblSentTo.Visible = false;
+                        txtSentTo.Visible = false;
+                    }
+                }
+
 
                 conn.Close();
             }

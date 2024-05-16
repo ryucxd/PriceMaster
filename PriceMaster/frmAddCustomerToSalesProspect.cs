@@ -86,15 +86,15 @@ namespace PriceMaster
                     }
                 }
 
-                int telephone = 0;
+                string telephone = "";
 
                 if (txtTelephone.Text.Length > 0)
-                    telephone = Convert.ToInt32(txtTelephone.Text);
+                    telephone = (txtTelephone.Text);
 
 
                 sql = "insert into [order_database].dbo.SALES_LEDGER_PROSPECT (ACCOUNT_REF,NAME,ADDRESS_1,ADDRESS_2,ADDRESS_3,ADDRESS_4,ADDRESS_5,TELEPHONE) " +
                     "values ('" + txtAccountRef.Text + "','" + txtName.Text + "','" + txtAddress1.Text + "','" + txtAddress2.Text + "'," +
-                    "'" + txtAddress3.Text + "','" + txtAddress4.Text + "','" + txtAddress5.Text + "'," + telephone.ToString() + ")";
+                    "'" + txtAddress3.Text + "','" + txtAddress4.Text + "','" + txtAddress5.Text + "','" + telephone.ToString() + "')";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
