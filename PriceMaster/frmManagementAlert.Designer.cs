@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManagementAlert));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.lblTitle = new System.Windows.Forms.Label();
@@ -40,6 +40,9 @@
             this.dteEnd = new System.Windows.Forms.DateTimePicker();
             this.dteStart = new System.Windows.Forms.DateTimePicker();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnEmail = new PriceMaster.buttonFormatting();
+            this.btnExcel = new PriceMaster.buttonFormatting();
+            this.btnPrint = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -54,14 +57,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Location = new System.Drawing.Point(12, 71);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
@@ -165,6 +168,63 @@
             this.label10.Text = "to";
             this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // btnEmail
+            // 
+            this.btnEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEmail.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnEmail.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEmail.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEmail.ForeColor = System.Drawing.Color.White;
+            this.btnEmail.Location = new System.Drawing.Point(1088, 38);
+            this.btnEmail.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnEmail.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnEmail.Name = "btnEmail";
+            this.btnEmail.Padding = new System.Windows.Forms.Padding(3);
+            this.btnEmail.Size = new System.Drawing.Size(79, 30);
+            this.btnEmail.TabIndex = 84;
+            this.btnEmail.Text = "Email";
+            this.btnEmail.UseVisualStyleBackColor = false;
+            this.btnEmail.Click += new System.EventHandler(this.btnEmail_Click);
+            // 
+            // btnExcel
+            // 
+            this.btnExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExcel.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnExcel.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcel.ForeColor = System.Drawing.Color.White;
+            this.btnExcel.Location = new System.Drawing.Point(944, 38);
+            this.btnExcel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnExcel.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Padding = new System.Windows.Forms.Padding(3);
+            this.btnExcel.Size = new System.Drawing.Size(134, 30);
+            this.btnExcel.TabIndex = 83;
+            this.btnExcel.Text = "Export to Excel";
+            this.btnExcel.UseVisualStyleBackColor = false;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.ForeColor = System.Drawing.Color.White;
+            this.btnPrint.Location = new System.Drawing.Point(1177, 37);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnPrint.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Padding = new System.Windows.Forms.Padding(3);
+            this.btnPrint.Size = new System.Drawing.Size(106, 30);
+            this.btnPrint.TabIndex = 82;
+            this.btnPrint.Text = "Print Sheet";
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // btnClear
             // 
             this.btnClear.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -188,6 +248,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1412, 699);
+            this.Controls.Add(this.btnEmail);
+            this.Controls.Add(this.btnExcel);
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.chkboxSlimline);
             this.Controls.Add(this.label2);
@@ -225,5 +288,8 @@
         private System.Windows.Forms.DateTimePicker dteStart;
         private System.Windows.Forms.Label label10;
         private buttonFormatting btnClear;
+        private buttonFormatting btnPrint;
+        private buttonFormatting btnExcel;
+        private buttonFormatting btnEmail;
     }
 }
