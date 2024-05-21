@@ -73,15 +73,36 @@ namespace PriceMaster
             }
             else
             {
-                sql = "SELECT min_id as [Enquiry ID],REPLACE((REPLACE(customer,'.co.uk','')),'.com','') as [Email Address], " +
+                //sql = "SELECT min_id as [Enquiry ID],REPLACE((REPLACE(customer,'.co.uk','')),'.com','') as [Email Address], " +
+                //    "subject as [Subject],price_qty_required as [Quantity], " +
+                //    "recieved_time as [Recieved Time] FROM [EnquiryLog].dbo.Enquiry_Log e " +
+                //    "right join (select min(id) min_id,right(sender_email_address, " +
+                //    "charindex('@', reverse(sender_email_address)) -1 ) as customer " +
+                //    "FROM [EnquiryLog].dbo.Enquiry_Log " +
+                //    "where sender_email_address LIKE '%@%'  and " + slimline_string + " " +
+                //    "group by right(sender_email_address, charindex('@', reverse(sender_email_address)) -1 ) ) as grouped on e.id = grouped.min_id " +
+                //    "where recieved_time >= '" + dteStart.Value.ToString("yyyyMMdd") + "' and recieved_time <= '" + dteDate.Value.ToString("yyyyMMdd") + "' " +
+                //    "order by " + orderBy + " desc";
+
+                //new sql
+                sql = "select first_id as [Enquiry ID],REPLACE((REPLACE(first_customer,'.co.uk','')),'.com','') as [Email Address]," +
                     "subject as [Subject],price_qty_required as [Quantity], " +
-                    "recieved_time as [Recieved Time] FROM [EnquiryLog].dbo.Enquiry_Log e " +
-                    "right join (select min(id) min_id,right(sender_email_address, " +
-                    "charindex('@', reverse(sender_email_address)) -1 ) as customer " +
-                    "FROM [EnquiryLog].dbo.Enquiry_Log " +
-                    "where sender_email_address LIKE '%@%'  and " + slimline_string +
-                    " group by right(sender_email_address, charindex('@', reverse(sender_email_address)) -1 ) ) as grouped on e.id = grouped.min_id " +
-                    "where recieved_time >= '" + dteStart.Value.ToString("yyyyMMdd") + "' and recieved_time <= '" + dteDate.Value.ToString("yyyyMMdd") + "' " +
+                    "first_recieved_time as [Recieved Time],delay_between_enquiries as [Days between last Enquiry] FROM (" +
+                    "SELECT *,DATEDIFF(DAY,second_recieved_time,first_recieved_time) as delay_between_enquiries FROM (" +
+                    "select max(id) first_id,MAX(recieved_time) as first_recieved_time,right(sender_email_address, " +
+                    "charindex('@', reverse(sender_email_address))  ) as first_customer FROM [EnquiryLog].dbo.Enquiry_Log " +
+                    "where sender_email_address LIKE '%@%'  and " + slimline_string + " " +
+                    "group by right(sender_email_address, charindex('@', reverse(sender_email_address))  )) as first_enquiry " +
+                    "left merge join [EnquiryLog].dbo.[Enquiry_Log] e on first_enquiry.first_id = e.id " +
+                    "left merge join (select max(id) as second_id,MAX(recieved_time) as second_recieved_time ,right(sender_email_address, " +
+                    "charindex('@', reverse(sender_email_address))) as second_customer FROM [EnquiryLog].dbo.Enquiry_Log " +
+                    "where sender_email_address LIKE '%@%'  and  " + slimline_string + " " +
+                    "and id not in (select max(id) max_id FROM [EnquiryLog].dbo.Enquiry_Log where sender_email_address LIKE '%@%'  " +
+                    "and " + slimline_string + " group by right(sender_email_address, " +
+                    "charindex('@', reverse(sender_email_address)) )) group by right(sender_email_address, " +
+                    "charindex('@', reverse(sender_email_address))  )) as second_enquiry on first_enquiry.first_customer = second_enquiry.second_customer " +
+                    ") as main where (delay_between_enquiries > 365 or delay_between_enquiries is null) " +
+                    "and first_recieved_time >= '" + dteStart.Value.ToString("yyyyMMdd") + "' and first_recieved_time <= '" + dteDate.Value.ToString("yyyyMMdd") + "' " +
                     "order by " + orderBy + " desc";
             }
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
