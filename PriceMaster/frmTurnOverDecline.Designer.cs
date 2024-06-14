@@ -170,6 +170,7 @@
             this.Name = "frmTurnOverDecline";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Turn Over Decline";
+            this.Shown += new System.EventHandler(this.frmTurnOverDecline_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTurnOver)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

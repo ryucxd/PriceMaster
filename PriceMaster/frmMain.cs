@@ -526,7 +526,7 @@ namespace PriceMaster
         {
             string temp = "";
             string sql = "select top 150 a.quote_id,rtrim(s.[NAME]) as customer,a.quotation_ref,a.customer_contact,s.TELEPHONE,enquiry_id,e.sender_email_address,e.priority as [priority_class],q.status,last_chase.chase_date,last_chase.chased_by,chase_description as [lase_chase_note], '                                                           ' as notes " +
-                "from dbo.sl_quotation a " +
+                ",COALESCE(price,0) as price from dbo.sl_quotation a " +
                 "left join [dsl_fitting].dbo.SALES_LEDGER s on a.customer_acc_ref = s.ACCOUNT_REF " +
                 "left join[EnquiryLog].dbo.[Enquiry_Log] e on e.id = a.enquiry_id " +
                 "left join[user_info].dbo.[user] u on u.id = a.created_by_id " +
@@ -637,6 +637,7 @@ namespace PriceMaster
                         xlWorksheet.Cells[11][excel_row].Value2 = row[10].ToString();
                         xlWorksheet.Cells[12][excel_row].Value2 = row[11].ToString();
                         xlWorksheet.Cells[13][excel_row].Value2 = row[12].ToString();
+                        xlWorksheet.Cells[14][excel_row].Value2 = row[13].ToString();
                         excel_row++;
                     }
 

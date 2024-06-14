@@ -187,15 +187,21 @@ namespace PriceMaster
 
             column_index();
 
-            //check if this row is completeeeee
-            int alert_comp = 0;
-            if (dataGridView1.Rows[e.RowIndex].Cells[alert_complete_index].Value.ToString() == "1")
-                alert_comp = -1;
-            else
-                alert_comp = 0;
+            //frmManagementAlertView frm = new frmManagementAlertView(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[id_index].Value.ToString()), slimline, 0);
+            //frm.ShowDialog();
 
-            frmManagementAlertAction frm = new frmManagementAlertAction(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[id_index].Value.ToString()), alert_comp);
+            frmManagementViewDetailed frm = new frmManagementViewDetailed(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[id_index].Value.ToString()), slimline);
             frm.ShowDialog();
+
+            //check if this row is completeeeee
+            //int alert_comp = 0;
+            //if (dataGridView1.Rows[e.RowIndex].Cells[alert_complete_index].Value.ToString() == "1")
+            //    alert_comp = -1;
+            //else
+            //    alert_comp = 0;
+
+            //frmManagementAlertAction frm = new frmManagementAlertAction(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[id_index].Value.ToString()), alert_comp);
+            //frm.ShowDialog();
             load_grid();
         }
 

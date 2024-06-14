@@ -22,6 +22,7 @@ namespace PriceMaster.TraditionalChasing
         public int one_years_ago_index { get; set; }
         public int current_year_index { get; set; }
         public int value_decline_index { get; set; }
+        public int chased_index { get; set; }
 
         public int last_order { get; set; }
         public int total_value { get; set; }
@@ -59,7 +60,7 @@ namespace PriceMaster.TraditionalChasing
 
             string customer = cmbCustomerSearch.Text;
 
-            
+
 
 
 
@@ -83,7 +84,7 @@ namespace PriceMaster.TraditionalChasing
                     }
                     catch
                     { }
-                    
+
                 }
 
                 conn.Close();
@@ -98,6 +99,7 @@ namespace PriceMaster.TraditionalChasing
             one_years_ago_index = dgvTurnOver.Columns["one_years_ago"].Index;
             current_year_index = dgvTurnOver.Columns["current_year"].Index;
             value_decline_index = dgvTurnOver.Columns["ValueDecline"].Index;
+            chased_index = dgvTurnOver.Columns["LastChased"].Index;
         }
         private void format()
         {
@@ -118,6 +120,13 @@ namespace PriceMaster.TraditionalChasing
             }
             dgvTurnOver.Columns[customer_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+            //make chased rows yellow
+            foreach (DataGridViewRow row in dgvTurnOver.Rows)
+            {
+                if (row.Cells[chased_index].Value.ToString().Length > 0)
+                    row.DefaultCellStyle.BackColor = Color.PaleGoldenrod;
+            }
+
         }
 
         private void dgvNonReturningCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -137,7 +146,7 @@ namespace PriceMaster.TraditionalChasing
 
         private void cmbCustomerSearch_TextChanged(object sender, EventArgs e)
         {
-           // load_grid();
+            // load_grid();
         }
 
         private void btnOrder_Click(object sender, EventArgs e)
@@ -183,7 +192,7 @@ namespace PriceMaster.TraditionalChasing
 
             //headers
             xlWorksheet.Cells[1, 1].Value2 = "Turn Over Decline";
-            xlWorksheet.Range["A1:E1"].Cells.Font.Size = 20;
+            xlWorksheet.Range["A1:F1"].Cells.Font.Size = 20;
 
 
 
@@ -191,9 +200,24 @@ namespace PriceMaster.TraditionalChasing
             //xlWorksheet.Cells[2, 2].Value2 = "Last Date Ordered";
             //xlWorksheet.Cells[2, 3].Value2 = "Last Door Ordered";
             //xlWorksheet.Cells[2, 4].Value2 = "Historic Order Book Value";
-            xlWorksheet.Range["A2:E2"].Interior.Color = System.Drawing.Color.LightSkyBlue;
-            xlWorksheet.Range["A2:E2"].AutoFilter(1);
-            xlWorksheet.Range["A2:E2"].Cells.Font.Size = 12;
+            xlWorksheet.Range["A2:F2"].Interior.Color = System.Drawing.Color.LightSkyBlue;
+            xlWorksheet.Range["A2:F2"].AutoFilter(1);
+            xlWorksheet.Range["A2:F2"].Cells.Font.Size = 12;
+
+
+            int current_excel_row = 3;
+            for (int date_row = 0; date_row < dgvTurnOver.Rows.Count; date_row++)
+            {
+                if (dgvTurnOver.Rows[date_row].Cells[chased_index].Value.ToString().Length > 0)
+                    xlWorksheet.Range["A" + current_excel_row.ToString() + ":F" + current_excel_row.ToString()].Interior.Color = System.Drawing.Color.Goldenrod;
+
+                current_excel_row++;
+            }
+
+            xlWorksheet.Range[xlWorksheet.Cells[1, 1], xlWorksheet.Cells[1, 6]].Merge();
+            xlWorksheet.Cells[1, 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignGeneral;
+            xlWorksheet.Cells[1, 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+
 
             //formatting
             Microsoft.Office.Interop.Excel.Worksheet ws = xlApp.ActiveWorkbook.Worksheets[1];
@@ -207,11 +231,6 @@ namespace PriceMaster.TraditionalChasing
 
             range.Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
             range.Borders.Color = ColorTranslator.ToOle(Color.Black);
-
-
-            xlWorksheet.Range[xlWorksheet.Cells[1, 1], xlWorksheet.Cells[1, 5]].Merge();
-            xlWorksheet.Cells[1, 1].VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignGeneral;
-            xlWorksheet.Cells[1, 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
 
             //print stuff
             var chase_pagesetup = xlWorksheet.PageSetup;
@@ -274,6 +293,11 @@ namespace PriceMaster.TraditionalChasing
         {
             cmbCustomerSearch.Text = "";
             load_grid();
+        }
+
+        private void frmTurnOverDecline_Shown(object sender, EventArgs e)
+        {
+            format();
         }
     }
 }
