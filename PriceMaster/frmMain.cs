@@ -253,7 +253,7 @@ namespace PriceMaster
                     row.DefaultCellStyle.BackColor = Color.PaleVioletRed;
 
 
-               // MessageBox.Show(row.Cells[chasing_status_index].Value.ToString());
+                // MessageBox.Show(row.Cells[chasing_status_index].Value.ToString());
 
             }
             lblTotalCost.Text = total_cost.ToString("C");
@@ -923,7 +923,7 @@ namespace PriceMaster
 
         private void buttonFormatting1_Click(object sender, EventArgs e)
         {
-            frmChaseCustomerList frm = new frmChaseCustomerList(-1,"");
+            frmChaseCustomerList frm = new frmChaseCustomerList(-1, "");
             frm.ShowDialog();
         }
 

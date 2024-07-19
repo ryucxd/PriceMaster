@@ -1,4 +1,6 @@
-﻿using PriceMaster.TraditionalChasing;
+﻿using LiveCharts.Wpf;
+using LiveCharts;
+using PriceMaster.TraditionalChasing;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +15,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
-
+using LiveCharts.WinForms;
+using LiveCharts.Definitions.Charts;
 namespace PriceMaster
 {
     public partial class frmChaseCustomerList : Form
@@ -46,7 +49,7 @@ namespace PriceMaster
         public int issue_with_service_index { get; set; }
         public int correspondence_by_index { get; set; }
 
-        public frmChaseCustomerList(int _slimline,string customer)
+        public frmChaseCustomerList(int _slimline, string customer)
         {
             InitializeComponent();
 
@@ -69,6 +72,10 @@ namespace PriceMaster
             }
 
 
+
+            load_targets();
+
+
             fillCombo();
 
             if (customer == "")
@@ -77,6 +84,35 @@ namespace PriceMaster
             {
                 cmbCustomer.Text = customer;
             }
+
+
+
+            string sql = "select sum(quote) as quote FROM (" +
+                "select distinct count(quote_id) quote FROM [order_database].dbo.quotation_chase_log " +
+                "where chase_date >= CAST(DATEADD(wk, DATEDIFF(wk,0,GETDATE()), 0) as date) and chased_by = " + CONNECT.staffID + " " +
+                "union all " +
+                "select distinct count(quote_id) quote FROM [order_database].dbo.quotation_chase_log_slimline " +
+                "where chase_date >= CAST(DATEADD(wk, DATEDIFF(wk,0,GETDATE()), 0) as date) and chased_by = " + CONNECT.staffID + ") as a";
+
+                using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+
+                string quotes = "";
+                using (SqlCommand cmd = new SqlCommand(sql,conn))
+                {
+                    var temp = cmd.ExecuteScalar();
+                    if (temp != null)
+                        quotes = cmd.ExecuteScalar().ToString();
+                    else
+                        quotes = "0";
+
+                    lblChasedQuotes.Text = "Total Chased Quotes (Unique): " + quotes;
+                }
+
+                conn.Close();
+            }
+
 
 
         }
@@ -324,6 +360,7 @@ namespace PriceMaster
             frm.ShowDialog();
 
             loadGrid();
+            load_targets();
         }
 
         private void btnExcel_Click(object sender, EventArgs e)
@@ -337,7 +374,7 @@ namespace PriceMaster
 
             //
             int customer_index = 0;
-           // customer_index = dgvOther.Columns["Customer"].Index;
+            // customer_index = dgvOther.Columns["Customer"].Index;
 
             string FileName = @"C:\temp\correspondence" + DateTime.Now.ToString("mmss") + ".xls";
 
@@ -473,7 +510,7 @@ namespace PriceMaster
             if (e.RowIndex < 0)
                 return;
 
-            frmChaseCorrespondenceView frm = new frmChaseCorrespondenceView(Convert.ToInt32(dgvOther.Rows[e.RowIndex].Cells[id_index].Value.ToString()),slimline,0);
+            frmChaseCorrespondenceView frm = new frmChaseCorrespondenceView(Convert.ToInt32(dgvOther.Rows[e.RowIndex].Cells[id_index].Value.ToString()), slimline, 0);
             frm.ShowDialog();
         }
 
@@ -506,14 +543,14 @@ namespace PriceMaster
                 {
                     conn.Open();
                     var data = cmd.ExecuteScalar().ToString();
-                    if (string.IsNullOrEmpty(data ) == false)
+                    if (string.IsNullOrEmpty(data) == false)
                     {
                         frmTraditionalNonReturningCustomerEmail frm = new frmTraditionalNonReturningCustomerEmail(
                         Convert.ToInt32(cmd.ExecuteScalar().ToString()));
                         frm.ShowDialog();
                     }
                     else
-                        MessageBox.Show("There is no record for the last order placed by this company. Please see IT if this is an error","Missing Record",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                        MessageBox.Show("There is no record for the last order placed by this company. Please see IT if this is an error", "Missing Record", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     conn.Close();
                 }
             }
@@ -524,5 +561,182 @@ namespace PriceMaster
             frmAddCustomerToSalesProspect frm = new frmAddCustomerToSalesProspect();
             frm.ShowDialog();
         }
+
+
+
+        private void load_targets()
+        {
+
+            string sql = "select Sector,Achieved,Target FROM [order_database].dbo.view_sales_table_grouped " +
+                "where sector_date = CAST(DATEADD(wk, DATEDIFF(wk,0,GETDATE()), 0) as date) AND sales_member_id = " + CONNECT.staffID;
+
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    dgvTarget.DataSource = dt;
+
+
+
+                }
+
+                conn.Close();
+
+
+
+                format_targets();
+
+            }
+        }
+
+        private void format_targets()
+        {
+            foreach (DataGridViewColumn col in dgvTarget.Columns)
+            {
+                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            dgvTarget.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+
+            //colours
+            for (int i = 0; i < dgvTarget.Rows.Count; i++)
+            {
+                //if achieved is >= target
+                if (Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()) >= Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString()))
+                    dgvTarget.Rows[i].DefaultCellStyle.BackColor = Color.PaleGreen;
+                else
+                    dgvTarget.Rows[i].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+
+            }
+
+
+
+
+
+            dgvTarget.ClearSelection();
+
+            //chart
+            pieChart1.AxisY.Clear();
+            pieChart1.AxisX.Clear();
+
+            int target = 0, achieved = 0;
+
+            List<string> sectorList = new List<string>();
+            List<int> achievedlist = new List<int>();
+
+            for (int i = 0; i < dgvTarget.Rows.Count; i++)
+            {
+
+                //if achieved > the target
+                if (Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()) >= Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString()))
+                {
+                    achieved += Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString());
+
+                    if (Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()) > 0)
+                    {
+                        sectorList.Add(dgvTarget.Rows[i].Cells[0].Value.ToString());
+                        achievedlist.Add(Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString()));
+                    }
+                }
+                else
+                {
+                    achieved += Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString());
+
+                    if (Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()) > 0)
+                    {
+                        sectorList.Add(dgvTarget.Rows[i].Cells[0].Value.ToString());
+                        achievedlist.Add(Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()));
+                    }
+                }
+
+
+                target += Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString());
+
+            }
+
+            //clean up the target 
+            if (achieved >= target)
+                target = 0;
+            else
+                target = target - achieved;
+
+
+            //string[] datearray = datelist.ToArray();
+            string[] sectorArray = sectorList.ToArray();
+            int[] achievedArray = achievedlist.ToArray();
+
+
+
+            //Values = new ChartValues<int>(itemarray)
+
+
+
+            var seriesCollection = new SeriesCollection();
+
+            for (int i = 0; i < sectorArray.Length; i++)
+            {
+                Func<ChartPoint, string> labelPoint = chartPoint =>
+                  string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation); //this is for a percentage
+
+
+                PieSeries ps = new PieSeries
+                {
+                    Title = sectorArray[i],
+                    Values = new ChartValues<double> { achievedArray[i] },
+                    DataLabels = true,
+                   // LabelPoint = labelPoint,
+                    Foreground = System.Windows.Media.Brushes.Black,
+                    PushOut = 15,
+
+                };
+
+                // add this slice to the others
+                seriesCollection.Add(ps);
+            }
+
+            if (target > 0)
+            {
+                PieSeries ps2 = new PieSeries
+                {
+                    Title = "Target",
+                    Values = new ChartValues<double> { target },
+                    DataLabels = true,
+                    Foreground = System.Windows.Media.Brushes.Black,
+
+                };
+                // Add the target to the SeriesCollection
+                seriesCollection.Add(ps2);
+            }
+
+
+
+            pieChart1.Series = seriesCollection;
+
+            pieChart1.LegendLocation = LegendLocation.Bottom;
+
+        }
+
+        private void frmChaseCustomerList_Shown(object sender, EventArgs e)
+        {
+            format_targets();
+        }
+
+        private void btnTarget_Click(object sender, EventArgs e)
+        {
+            frmSalesSetUp frm = new frmSalesSetUp();
+            frm.ShowDialog();
+        }
     }
+
+
 }

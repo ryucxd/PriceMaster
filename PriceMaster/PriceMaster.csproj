@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>169</ApplicationRevision>
+    <ApplicationRevision>173</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -171,6 +171,12 @@
     <Compile Include="frmNewCustomersTraditional.Designer.cs">
       <DependentUpon>frmNewCustomersTraditional.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSalesSetUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSalesSetUp.Designer.cs">
+      <DependentUpon>frmSalesSetUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTurnOverDecline.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +194,12 @@
     </Compile>
     <Compile Include="frmUniqueCustomerChaseCount.Designer.cs">
       <DependentUpon>frmUniqueCustomerChaseCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSalesUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSalesUpdate.Designer.cs">
+      <DependentUpon>frmSalesUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="SlimlineChasing\frmSlimlineChaseQuotation.cs">
       <SubType>Form</SubType>
@@ -470,6 +482,9 @@
     <EmbeddedResource Include="frmNewCustomersTraditional.resx">
       <DependentUpon>frmNewCustomersTraditional.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSalesSetUp.resx">
+      <DependentUpon>frmSalesSetUp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTurnOverDecline.resx">
       <DependentUpon>frmTurnOverDecline.cs</DependentUpon>
     </EmbeddedResource>
@@ -478,6 +493,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmUniqueCustomerChaseCount.resx">
       <DependentUpon>frmUniqueCustomerChaseCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSalesUpdate.resx">
+      <DependentUpon>frmSalesUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineChaseQuotation.resx">
       <DependentUpon>frmSlimlineChaseQuotation.cs</DependentUpon>

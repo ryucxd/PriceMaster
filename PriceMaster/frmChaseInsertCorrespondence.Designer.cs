@@ -47,6 +47,8 @@
             this.dteNextDate = new System.Windows.Forms.DateTimePicker();
             this.chkFollowUp = new System.Windows.Forms.CheckBox();
             this.btnSaveManagement = new PriceMaster.buttonFormatting();
+            this.cmbSector = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // chkPhone
@@ -73,7 +75,7 @@
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(12, 94);
+            this.label2.Location = new System.Drawing.Point(12, 135);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(529, 17);
             this.label2.TabIndex = 77;
@@ -82,7 +84,7 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(13, 114);
+            this.txtDescription.Location = new System.Drawing.Point(13, 155);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(529, 218);
             this.txtDescription.TabIndex = 76;
@@ -102,7 +104,7 @@
             // chkTurnaround
             // 
             this.chkTurnaround.AutoSize = true;
-            this.chkTurnaround.Location = new System.Drawing.Point(280, 346);
+            this.chkTurnaround.Location = new System.Drawing.Point(280, 390);
             this.chkTurnaround.Name = "chkTurnaround";
             this.chkTurnaround.Size = new System.Drawing.Size(179, 17);
             this.chkTurnaround.TabIndex = 88;
@@ -112,7 +114,7 @@
             // chkProduct
             // 
             this.chkProduct.AutoSize = true;
-            this.chkProduct.Location = new System.Drawing.Point(149, 371);
+            this.chkProduct.Location = new System.Drawing.Point(149, 415);
             this.chkProduct.Name = "chkProduct";
             this.chkProduct.Size = new System.Drawing.Size(112, 17);
             this.chkProduct.TabIndex = 87;
@@ -122,7 +124,7 @@
             // chkInstallation
             // 
             this.chkInstallation.AutoSize = true;
-            this.chkInstallation.Location = new System.Drawing.Point(280, 371);
+            this.chkInstallation.Location = new System.Drawing.Point(280, 415);
             this.chkInstallation.Name = "chkInstallation";
             this.chkInstallation.Size = new System.Drawing.Size(125, 17);
             this.chkInstallation.TabIndex = 86;
@@ -132,7 +134,7 @@
             // chkLeadtime
             // 
             this.chkLeadtime.AutoSize = true;
-            this.chkLeadtime.Location = new System.Drawing.Point(149, 346);
+            this.chkLeadtime.Location = new System.Drawing.Point(149, 390);
             this.chkLeadtime.Name = "chkLeadtime";
             this.chkLeadtime.Size = new System.Drawing.Size(115, 17);
             this.chkLeadtime.TabIndex = 85;
@@ -142,7 +144,7 @@
             // chkService
             // 
             this.chkService.AutoSize = true;
-            this.chkService.Location = new System.Drawing.Point(222, 394);
+            this.chkService.Location = new System.Drawing.Point(222, 438);
             this.chkService.Name = "chkService";
             this.chkService.Size = new System.Drawing.Size(110, 17);
             this.chkService.TabIndex = 89;
@@ -184,7 +186,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(71, 467);
+            this.btnCancel.Location = new System.Drawing.Point(71, 511);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnCancel.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnCancel.Name = "btnCancel";
@@ -202,7 +204,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(166, 467);
+            this.btnSave.Location = new System.Drawing.Point(166, 511);
             this.btnSave.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSave.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSave.Name = "btnSave";
@@ -218,7 +220,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label4.Location = new System.Drawing.Point(186, 417);
+            this.label4.Location = new System.Drawing.Point(186, 461);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(183, 17);
             this.label4.TabIndex = 97;
@@ -227,7 +229,7 @@
             // 
             // dteNextDate
             // 
-            this.dteNextDate.Location = new System.Drawing.Point(143, 438);
+            this.dteNextDate.Location = new System.Drawing.Point(143, 482);
             this.dteNextDate.Name = "dteNextDate";
             this.dteNextDate.Size = new System.Drawing.Size(139, 20);
             this.dteNextDate.TabIndex = 96;
@@ -235,7 +237,7 @@
             // chkFollowUp
             // 
             this.chkFollowUp.AutoSize = true;
-            this.chkFollowUp.Location = new System.Drawing.Point(288, 441);
+            this.chkFollowUp.Location = new System.Drawing.Point(288, 485);
             this.chkFollowUp.Name = "chkFollowUp";
             this.chkFollowUp.Size = new System.Drawing.Size(124, 17);
             this.chkFollowUp.TabIndex = 98;
@@ -250,7 +252,7 @@
             this.btnSaveManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveManagement.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveManagement.ForeColor = System.Drawing.Color.White;
-            this.btnSaveManagement.Location = new System.Drawing.Point(261, 467);
+            this.btnSaveManagement.Location = new System.Drawing.Point(261, 511);
             this.btnSaveManagement.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSaveManagement.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSaveManagement.Name = "btnSaveManagement";
@@ -261,12 +263,33 @@
             this.btnSaveManagement.UseVisualStyleBackColor = false;
             this.btnSaveManagement.Click += new System.EventHandler(this.btnSaveManagement_Click);
             // 
+            // cmbSector
+            // 
+            this.cmbSector.FormattingEnabled = true;
+            this.cmbSector.Location = new System.Drawing.Point(111, 109);
+            this.cmbSector.Name = "cmbSector";
+            this.cmbSector.Size = new System.Drawing.Size(348, 21);
+            this.cmbSector.TabIndex = 100;
+            // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label5.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label5.Location = new System.Drawing.Point(113, 89);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(346, 17);
+            this.label5.TabIndex = 101;
+            this.label5.Text = "Sector:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmChaseInsertCorrespondence
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 508);
+            this.ClientSize = new System.Drawing.Size(555, 551);
             this.ControlBox = false;
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.cmbSector);
             this.Controls.Add(this.btnSaveManagement);
             this.Controls.Add(this.chkFollowUp);
             this.Controls.Add(this.label4);
@@ -316,5 +339,7 @@
         private System.Windows.Forms.DateTimePicker dteNextDate;
         private System.Windows.Forms.CheckBox chkFollowUp;
         private buttonFormatting btnSaveManagement;
+        private System.Windows.Forms.ComboBox cmbSector;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -38,13 +38,20 @@
             this.dgvOther = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbType = new System.Windows.Forms.ComboBox();
+            this.dgvTarget = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.elementHost2 = new System.Windows.Forms.Integration.ElementHost();
+            this.pieChart1 = new LiveCharts.Wpf.PieChart();
+            this.btnNewCustomer = new PriceMaster.buttonFormatting();
+            this.btnLastOrder = new PriceMaster.buttonFormatting();
+            this.btnImport = new PriceMaster.buttonFormatting();
             this.btnExcel = new PriceMaster.buttonFormatting();
             this.txtInsert = new PriceMaster.buttonFormatting();
-            this.btnImport = new PriceMaster.buttonFormatting();
-            this.btnLastOrder = new PriceMaster.buttonFormatting();
-            this.btnNewCustomer = new PriceMaster.buttonFormatting();
+            this.btnTarget = new PriceMaster.buttonFormatting();
+            this.lblChasedQuotes = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOther)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTarget)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbCustomer
@@ -53,7 +60,7 @@
             this.cmbCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.cmbCustomer.FormattingEnabled = true;
-            this.cmbCustomer.Location = new System.Drawing.Point(40, 131);
+            this.cmbCustomer.Location = new System.Drawing.Point(40, 112);
             this.cmbCustomer.Name = "cmbCustomer";
             this.cmbCustomer.Size = new System.Drawing.Size(371, 28);
             this.cmbCustomer.TabIndex = 0;
@@ -82,7 +89,7 @@
             // lblCustomer
             // 
             this.lblCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.lblCustomer.Location = new System.Drawing.Point(40, 106);
+            this.lblCustomer.Location = new System.Drawing.Point(40, 87);
             this.lblCustomer.Name = "lblCustomer";
             this.lblCustomer.Size = new System.Drawing.Size(371, 22);
             this.lblCustomer.TabIndex = 9;
@@ -144,7 +151,7 @@
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.label4.Location = new System.Drawing.Point(40, 31);
+            this.label4.Location = new System.Drawing.Point(40, 12);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(371, 22);
             this.label4.TabIndex = 46;
@@ -157,11 +164,97 @@
             this.cmbType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
             this.cmbType.FormattingEnabled = true;
-            this.cmbType.Location = new System.Drawing.Point(40, 56);
+            this.cmbType.Location = new System.Drawing.Point(40, 37);
             this.cmbType.Name = "cmbType";
             this.cmbType.Size = new System.Drawing.Size(371, 28);
             this.cmbType.TabIndex = 45;
             this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
+            // 
+            // dgvTarget
+            // 
+            this.dgvTarget.AllowUserToAddRows = false;
+            this.dgvTarget.AllowUserToDeleteRows = false;
+            this.dgvTarget.AllowUserToResizeColumns = false;
+            this.dgvTarget.AllowUserToResizeRows = false;
+            this.dgvTarget.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTarget.Location = new System.Drawing.Point(12, 260);
+            this.dgvTarget.Name = "dgvTarget";
+            this.dgvTarget.RowHeadersVisible = false;
+            this.dgvTarget.Size = new System.Drawing.Size(428, 356);
+            this.dgvTarget.TabIndex = 51;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.label1.Location = new System.Drawing.Point(12, 235);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(428, 22);
+            this.label1.TabIndex = 52;
+            this.label1.Text = "Target";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // elementHost2
+            // 
+            this.elementHost2.Location = new System.Drawing.Point(12, 655);
+            this.elementHost2.Name = "elementHost2";
+            this.elementHost2.Size = new System.Drawing.Size(428, 323);
+            this.elementHost2.TabIndex = 54;
+            this.elementHost2.Text = "elementHost2";
+            this.elementHost2.Child = this.pieChart1;
+            // 
+            // btnNewCustomer
+            // 
+            this.btnNewCustomer.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnNewCustomer.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNewCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewCustomer.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewCustomer.ForeColor = System.Drawing.Color.White;
+            this.btnNewCustomer.Location = new System.Drawing.Point(230, 152);
+            this.btnNewCustomer.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnNewCustomer.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnNewCustomer.Name = "btnNewCustomer";
+            this.btnNewCustomer.Padding = new System.Windows.Forms.Padding(3);
+            this.btnNewCustomer.Size = new System.Drawing.Size(131, 30);
+            this.btnNewCustomer.TabIndex = 50;
+            this.btnNewCustomer.Text = "New Customer";
+            this.btnNewCustomer.UseVisualStyleBackColor = false;
+            this.btnNewCustomer.Click += new System.EventHandler(this.btnNewCustomer_Click);
+            // 
+            // btnLastOrder
+            // 
+            this.btnLastOrder.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnLastOrder.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnLastOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLastOrder.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLastOrder.ForeColor = System.Drawing.Color.White;
+            this.btnLastOrder.Location = new System.Drawing.Point(134, 193);
+            this.btnLastOrder.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnLastOrder.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnLastOrder.Name = "btnLastOrder";
+            this.btnLastOrder.Padding = new System.Windows.Forms.Padding(3);
+            this.btnLastOrder.Size = new System.Drawing.Size(187, 30);
+            this.btnLastOrder.TabIndex = 49;
+            this.btnLastOrder.Text = "Last Order Details";
+            this.btnLastOrder.UseVisualStyleBackColor = false;
+            this.btnLastOrder.Click += new System.EventHandler(this.btnLastOrder_Click);
+            // 
+            // btnImport
+            // 
+            this.btnImport.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnImport.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImport.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImport.ForeColor = System.Drawing.Color.White;
+            this.btnImport.Location = new System.Drawing.Point(94, 152);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnImport.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Padding = new System.Windows.Forms.Padding(3);
+            this.btnImport.Size = new System.Drawing.Size(131, 30);
+            this.btnImport.TabIndex = 48;
+            this.btnImport.Text = "Mass Import";
+            this.btnImport.UseVisualStyleBackColor = false;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // btnExcel
             // 
@@ -201,65 +294,44 @@
             this.txtInsert.UseVisualStyleBackColor = false;
             this.txtInsert.Click += new System.EventHandler(this.txtInsert_Click);
             // 
-            // btnImport
+            // btnTarget
             // 
-            this.btnImport.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnImport.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImport.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImport.ForeColor = System.Drawing.Color.White;
-            this.btnImport.Location = new System.Drawing.Point(88, 194);
-            this.btnImport.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnImport.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Padding = new System.Windows.Forms.Padding(3);
-            this.btnImport.Size = new System.Drawing.Size(131, 30);
-            this.btnImport.TabIndex = 48;
-            this.btnImport.Text = "Mass Import";
-            this.btnImport.UseVisualStyleBackColor = false;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            this.btnTarget.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnTarget.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnTarget.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTarget.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTarget.ForeColor = System.Drawing.Color.White;
+            this.btnTarget.Location = new System.Drawing.Point(309, 227);
+            this.btnTarget.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnTarget.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnTarget.Name = "btnTarget";
+            this.btnTarget.Padding = new System.Windows.Forms.Padding(3);
+            this.btnTarget.Size = new System.Drawing.Size(131, 30);
+            this.btnTarget.TabIndex = 55;
+            this.btnTarget.Text = "Set Targets";
+            this.btnTarget.UseVisualStyleBackColor = false;
+            this.btnTarget.Click += new System.EventHandler(this.btnTarget_Click);
             // 
-            // btnLastOrder
+            // lblChasedQuotes
             // 
-            this.btnLastOrder.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnLastOrder.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnLastOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLastOrder.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLastOrder.ForeColor = System.Drawing.Color.White;
-            this.btnLastOrder.Location = new System.Drawing.Point(122, 248);
-            this.btnLastOrder.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnLastOrder.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnLastOrder.Name = "btnLastOrder";
-            this.btnLastOrder.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLastOrder.Size = new System.Drawing.Size(187, 30);
-            this.btnLastOrder.TabIndex = 49;
-            this.btnLastOrder.Text = "Last Order Details";
-            this.btnLastOrder.UseVisualStyleBackColor = false;
-            this.btnLastOrder.Click += new System.EventHandler(this.btnLastOrder_Click);
-            // 
-            // btnNewCustomer
-            // 
-            this.btnNewCustomer.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnNewCustomer.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnNewCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNewCustomer.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewCustomer.ForeColor = System.Drawing.Color.White;
-            this.btnNewCustomer.Location = new System.Drawing.Point(229, 194);
-            this.btnNewCustomer.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnNewCustomer.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnNewCustomer.Name = "btnNewCustomer";
-            this.btnNewCustomer.Padding = new System.Windows.Forms.Padding(3);
-            this.btnNewCustomer.Size = new System.Drawing.Size(131, 30);
-            this.btnNewCustomer.TabIndex = 50;
-            this.btnNewCustomer.Text = "New Customer";
-            this.btnNewCustomer.UseVisualStyleBackColor = false;
-            this.btnNewCustomer.Click += new System.EventHandler(this.btnNewCustomer_Click);
+            this.lblChasedQuotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.lblChasedQuotes.Location = new System.Drawing.Point(12, 619);
+            this.lblChasedQuotes.Name = "lblChasedQuotes";
+            this.lblChasedQuotes.Size = new System.Drawing.Size(428, 22);
+            this.lblChasedQuotes.TabIndex = 56;
+            this.lblChasedQuotes.Text = "Total Chased Unique Quotes: 0";
+            this.lblChasedQuotes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmChaseCustomerList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1281, 990);
+            this.Controls.Add(this.lblChasedQuotes);
+            this.Controls.Add(this.btnTarget);
+            this.Controls.Add(this.elementHost2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dgvTarget);
             this.Controls.Add(this.btnNewCustomer);
             this.Controls.Add(this.btnLastOrder);
             this.Controls.Add(this.btnImport);
@@ -278,8 +350,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Customer List";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Shown += new System.EventHandler(this.frmChaseCustomerList_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOther)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTarget)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -300,5 +374,11 @@
         private buttonFormatting btnImport;
         private buttonFormatting btnLastOrder;
         private buttonFormatting btnNewCustomer;
+        private System.Windows.Forms.DataGridView dgvTarget;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Integration.ElementHost elementHost2;
+        private LiveCharts.Wpf.PieChart pieChart1;
+        private buttonFormatting btnTarget;
+        private System.Windows.Forms.Label lblChasedQuotes;
     }
 }
