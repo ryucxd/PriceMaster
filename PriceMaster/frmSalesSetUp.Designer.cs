@@ -31,9 +31,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSalesSetUp));
             this.dgvSalesSetUp = new System.Windows.Forms.DataGridView();
-            this.btnNew = new PriceMaster.buttonFormatting();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnNew = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesSetUp)).BeginInit();
+            this.tabControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvSalesSetUp
@@ -62,6 +65,37 @@
             this.dgvSalesSetUp.TabIndex = 52;
             this.dgvSalesSetUp.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesSetUp_CellClick);
             // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
+            this.label1.Location = new System.Drawing.Point(12, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(1173, 31);
+            this.label1.TabIndex = 54;
+            this.label1.Text = "Sales Team Sectors (Weekly Targets)";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tabControl
+            // 
+            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Location = new System.Drawing.Point(11, 71);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(1018, 18);
+            this.tabControl.TabIndex = 55;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1010, 0);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -81,33 +115,23 @@
             this.btnNew.UseVisualStyleBackColor = false;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
-            this.label1.Location = new System.Drawing.Point(469, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(258, 31);
-            this.label1.TabIndex = 54;
-            this.label1.Text = "Sales Team Sectors";
-            // 
             // frmSalesSetUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1197, 734);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tabControl);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.dgvSalesSetUp);
+            this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "frmSalesSetUp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Sales Sectors";
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesSetUp)).EndInit();
+            this.tabControl.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -116,5 +140,7 @@
         private System.Windows.Forms.DataGridView dgvSalesSetUp;
         private buttonFormatting btnNew;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage tabPage1;
     }
 }

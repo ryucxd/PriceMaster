@@ -8,12 +8,14 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace PriceMaster
 {
     public partial class frmSalesSetUp : Form
     {
+        public int remove_tabs { get; set; }
 
         public List<string> salesMemberList { get; set; }
         public frmSalesSetUp()
@@ -21,8 +23,65 @@ namespace PriceMaster
             InitializeComponent();
 
             salesMemberList = new List<string>();
+            remove_tabs = -1;
+            fill_tabcontrol();
             load_grid();
 
+        }
+
+        private void fill_tabcontrol()
+        {
+            if (remove_tabs == -1)
+            {
+                //tabControl.TabPages.Remove()
+                tabControl.TabPages.Clear();
+
+                string sql = "select distinct sales_member,sales_member_id FROM [order_database].dbo.view_sales_table_grouped " +
+                    "where sector_date = CAST(DATEADD(wk, DATEDIFF(wk,0,GETDATE()), 0) as date) " +
+                    "order by sales_member asc";
+                using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                {
+
+                    conn.Open();
+
+                    DataTable dt = new DataTable();
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dt);
+                    }
+
+                    TabPage tabPageAll = new TabPage
+                    {
+                        Name = "All",
+                        Text = "All"
+                    };
+                    tabControl.TabPages.Add(tabPageAll);
+
+                    //loop max warning and insert a tab page for each one
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        TabPage tabPageLoop = new TabPage
+                        {
+                            Name = dt.Rows[i][0].ToString(),
+                            Text = dt.Rows[i][0].ToString()
+                        };
+                        tabControl.TabPages.Add(tabPageLoop);
+                    }
+                    remove_tabs = 0;
+
+
+                    TabPage tabPageUnallocated = new TabPage
+                    {
+                        Name = "Unallocated",
+                        Text = "Unallocated"
+                    };
+                    tabControl.TabPages.Add(tabPageUnallocated);
+
+                    conn.Close();
+                }
+            }
         }
 
 
@@ -57,8 +116,27 @@ namespace PriceMaster
                       "FROM[order_database].dbo.sales_master_table s " +
                       "left join[user_info].dbo.[user] u_one on s.sales_member_one = u_one.id " +
                       "left join[user_info].dbo.[user] u_two on s.sales_member_two = u_two.id " +
-                      "left join[user_info].dbo.[user] u_three on s.sales_member_three = u_three.id " +
-                      "order by u_one.forename + ' ' + u_one.surname";
+                      "left join[user_info].dbo.[user] u_three on s.sales_member_three = u_three.id ";
+
+                //where statement based on tab control
+
+                if (tabControl.SelectedIndex == 0) //all
+                {
+                    //nothing
+                }
+                else if (tabControl.SelectedIndex == tabControl.TabCount -1) //unallocated
+                {
+                    sql += "WHERE (u_one.forename + ' ' + u_one.surname is null AND u_two.forename + ' ' + u_two.surname is null AND u_three.forename + ' ' + u_three.surname is null) ";
+                }
+                else
+                {
+                    sql += "WHERE (u_one.forename + ' ' + u_one.surname = '" + tabControl.TabPages[tabControl.SelectedIndex].Text + "' OR " +
+                                  "u_two.forename + ' ' + u_two.surname = '" + tabControl.TabPages[tabControl.SelectedIndex].Text + "' OR " +
+                                  "u_three.forename + ' ' + u_three.surname = '" + tabControl.TabPages[tabControl.SelectedIndex].Text + "') ";
+                }
+                
+
+                sql+= "order by u_one.forename + ' ' + u_one.surname";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
@@ -121,6 +199,11 @@ namespace PriceMaster
             frm.ShowDialog();
 
            load_grid();
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            load_grid();
         }
     }
 }

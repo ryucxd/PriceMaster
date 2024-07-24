@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 using PriceMaster.TraditionalChasing;
+using System.Windows.Media.Media3D;
 
 namespace PriceMaster
 {
@@ -156,9 +157,29 @@ namespace PriceMaster
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     cmd.ExecuteNonQuery();
 
+                int sectorID = 0;
+                string sector_sql = "select id FROM [order_database].dbo.sales_table " +
+                    "where sector_date = CAST(DATEADD(wk, DATEDIFF(wk,0,GETDATE()), 0) as date) and " +
+                    "(sales_member_one = " + CONNECT.staffID + " or sales_member_two = " + CONNECT.staffID + " or sales_member_three = " + CONNECT.staffID + ") " +
+                    "and sector = 'Quotation Chasing'";
+
+                    using (SqlCommand cmd = new SqlCommand(sector_sql, conn))
+                    {
+                        var temp = cmd.ExecuteScalar();
+
+                        if (temp != null)
+                            sectorID = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                        else
+                            sectorID = 0;
+                    }
+
+                
+
+
                 // add the new chase
-                sql = "INSERT INTO [order_database].dbo.quotation_chase_log (quote_id,chase_date,chase_description,next_chase_date,chased_by,dont_chase,email,phone,chase_complete) " +
-                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + "," + dont_chase.ToString() + ")";
+                sql = "INSERT INTO [order_database].dbo.quotation_chase_log (quote_id,chase_date,chase_description,next_chase_date,chased_by,dont_chase,email,phone,chase_complete,sector_id) " +
+                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," 
+                + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + "," + dont_chase.ToString() + "," +  sectorID + ")";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     cmd.ExecuteNonQuery();
@@ -284,9 +305,27 @@ namespace PriceMaster
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     cmd.ExecuteNonQuery();
 
+
+                int sectorID = 0;
+                string sector_sql = "select id FROM [order_database].dbo.sales_table " +
+                    "where sector_date = CAST(DATEADD(wk, DATEDIFF(wk,0,GETDATE()), 0) as date) and " +
+                    "(sales_member_one = " + CONNECT.staffID + " or sales_member_two = " + CONNECT.staffID + " or sales_member_three = " + CONNECT.staffID + ") " +
+                    "and sector = 'Quotation Chasing'";
+
+                using (SqlCommand cmd = new SqlCommand(sector_sql, conn))
+                {
+                    var temp = cmd.ExecuteScalar();
+
+                    if (temp != null)
+                        sectorID = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                    else
+                        sectorID = 0;
+                }
+
+
                 // add the new chase
-                sql = "INSERT INTO [order_database].dbo.quotation_chase_log (quote_id,chase_date,chase_description,next_chase_date,chased_by,dont_chase,email,phone,chase_complete) " +
-                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + "," + dont_chase.ToString() + ")";
+                sql = "INSERT INTO [order_database].dbo.quotation_chase_log (quote_id,chase_date,chase_description,next_chase_date,chased_by,dont_chase,email,phone,chase_complete,sector_id) " +
+                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + "," + dont_chase.ToString() + "," + sectorID + ")";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     cmd.ExecuteNonQuery();

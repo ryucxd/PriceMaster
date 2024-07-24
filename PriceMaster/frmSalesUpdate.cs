@@ -22,7 +22,8 @@ namespace PriceMaster
             InitializeComponent();
 
             sector_id = id;
-            
+
+
             if (sector_id == -1)
                 btnDelete.Visible = false;
 
@@ -66,12 +67,24 @@ namespace PriceMaster
 
                         cmbSalesThree.Text = dt.Rows[0][5].ToString();
                         txtTargetThree.Text = dt.Rows[0][6].ToString();
-
-
-
                     }
 
-                    conn.Close();
+
+                    //if this is a permanent sector dont delete (quotation_chasing)
+                    sql = "select permanent_sector FROM [order_database].dbo.[sales_master_table] where id = " + sector_id;
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        var temp = cmd.ExecuteScalar();
+                        if (temp != null)
+                            if (temp.ToString() == "-1")
+                            {
+                                btnDelete.Visible = false;
+                                txtSectorNote.ReadOnly = true;
+                            }
+                    }
+
+
+                        conn.Close();
                 }
             }
 
@@ -309,7 +322,8 @@ namespace PriceMaster
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("ARE YOU SURE YOU WANT TO DELETE THIS SECTOR? THIS IS CAN NOT BE UNDONE", "Delete Sector", MessageBoxButtons.YesNoCancel,MessageBoxIcon.Error);
+
+            DialogResult result = MessageBox.Show("ARE YOU SURE YOU WANT TO DELETE THIS SECTOR? THIS IS CAN NOT BE UNDONE", "Delete Sector", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error);
             if (result == DialogResult.Yes)
             {
                 string sql = " delete from [order_database].dbo.sales_master_table where id = " + sector_id;
