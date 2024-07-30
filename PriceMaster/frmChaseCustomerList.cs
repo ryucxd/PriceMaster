@@ -736,6 +736,12 @@ namespace PriceMaster
             frmSalesSetUp frm = new frmSalesSetUp();
             frm.ShowDialog();
         }
+
+        private void btnLeads_Click(object sender, EventArgs e)
+        {
+            frmLeadList frm = new frmLeadList();
+            frm.ShowDialog();
+        }
     }
 
 

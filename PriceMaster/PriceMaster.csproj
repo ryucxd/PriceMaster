@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>177</ApplicationRevision>
+    <ApplicationRevision>178</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -147,6 +147,12 @@
     <Compile Include="frmLastCustomerEnquiry.Designer.cs">
       <DependentUpon>frmLastCustomerEnquiry.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmLeadList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLeadList.Designer.cs">
+      <DependentUpon>frmLeadList.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmManagementAlert.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +176,12 @@
     </Compile>
     <Compile Include="frmNewCustomersTraditional.Designer.cs">
       <DependentUpon>frmNewCustomersTraditional.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLeadInsert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLeadInsert.Designer.cs">
+      <DependentUpon>frmLeadInsert.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSalesSetUp.cs">
       <SubType>Form</SubType>
@@ -470,6 +482,9 @@
     <EmbeddedResource Include="frmLastCustomerEnquiry.resx">
       <DependentUpon>frmLastCustomerEnquiry.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLeadList.resx">
+      <DependentUpon>frmLeadList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmManagementAlert.resx">
       <DependentUpon>frmManagementAlert.cs</DependentUpon>
     </EmbeddedResource>
@@ -481,6 +496,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewCustomersTraditional.resx">
       <DependentUpon>frmNewCustomersTraditional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLeadInsert.resx">
+      <DependentUpon>frmLeadInsert.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSalesSetUp.resx">
       <DependentUpon>frmSalesSetUp.cs</DependentUpon>

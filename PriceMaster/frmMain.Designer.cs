@@ -80,6 +80,7 @@
             this.btnSupplier = new PriceMaster.buttonFormatting();
             this.btnEmail = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
+            this.btnLeads = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -530,7 +531,7 @@
             this.btnCalendar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCalendar.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCalendar.ForeColor = System.Drawing.Color.White;
-            this.btnCalendar.Location = new System.Drawing.Point(360, 9);
+            this.btnCalendar.Location = new System.Drawing.Point(269, 9);
             this.btnCalendar.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnCalendar.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnCalendar.Name = "btnCalendar";
@@ -776,11 +777,30 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // btnLeads
+            // 
+            this.btnLeads.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnLeads.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnLeads.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLeads.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLeads.ForeColor = System.Drawing.Color.White;
+            this.btnLeads.Location = new System.Drawing.Point(409, 9);
+            this.btnLeads.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnLeads.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnLeads.Name = "btnLeads";
+            this.btnLeads.Padding = new System.Windows.Forms.Padding(3);
+            this.btnLeads.Size = new System.Drawing.Size(130, 30);
+            this.btnLeads.TabIndex = 118;
+            this.btnLeads.Text = "Leads";
+            this.btnLeads.UseVisualStyleBackColor = false;
+            this.btnLeads.Click += new System.EventHandler(this.btnLeads_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnLeads);
             this.Controls.Add(this.btnNewCustomers);
             this.Controls.Add(this.btnNonReturningEnquiries);
             this.Controls.Add(this.btnTurnoverDecline);
@@ -896,6 +916,7 @@
         private buttonFormatting btnTurnoverDecline;
         private buttonFormatting btnNonReturningEnquiries;
         private buttonFormatting btnNewCustomers;
+        private buttonFormatting btnLeads;
     }
 }
 
