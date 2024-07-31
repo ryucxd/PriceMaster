@@ -13,9 +13,11 @@ namespace PriceMaster
 {
     public partial class frmAddCustomerToSalesProspect : Form
     {
-        public frmAddCustomerToSalesProspect()
+        public int lead_customer { get; set; }
+        public frmAddCustomerToSalesProspect(int lead_customer)
         {
             InitializeComponent();
+            this.lead_customer = lead_customer;
         }
 
         private void btnSAve_Click(object sender, EventArgs e)
@@ -100,6 +102,21 @@ namespace PriceMaster
                 {
                     cmd.ExecuteNonQuery();
                 }
+
+                //sector sql statements here
+
+                if (lead_customer > 0)
+                {
+                    sql = "UPDATE [order_database].dbo.sales_new_leads " +
+                        "SET prospect_acc_ref = '" + txtAccountRef.Text + "',prospect_added_by = " + CONNECT.staffID + ", prospect_added_date = GETDATE()  " +
+                        "WHERE id = " + lead_customer;
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
 
                     conn.Close();
             }

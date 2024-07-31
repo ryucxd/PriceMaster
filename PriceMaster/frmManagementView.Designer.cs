@@ -50,16 +50,18 @@
             this.dgvCorrespondence = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnShowAll = new PriceMaster.buttonFormatting();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chkboxSlimline = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.lblChaseCount = new System.Windows.Forms.Label();
             this.lblCorrespondenceCount = new System.Windows.Forms.Label();
             this.btnLiveChart = new PriceMaster.buttonFormatting();
-            this.btnShowAll = new PriceMaster.buttonFormatting();
             this.btnExcel = new PriceMaster.buttonFormatting();
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCorrespondence)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -96,9 +98,9 @@
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(199, 15);
+            this.label2.Location = new System.Drawing.Point(189, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(188, 17);
+            this.label2.Size = new System.Drawing.Size(172, 17);
             this.label2.TabIndex = 53;
             this.label2.Text = "Customer Search:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -108,9 +110,9 @@
             this.cmbCustomerSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbCustomerSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCustomerSearch.FormattingEnabled = true;
-            this.cmbCustomerSearch.Location = new System.Drawing.Point(199, 35);
+            this.cmbCustomerSearch.Location = new System.Drawing.Point(189, 34);
             this.cmbCustomerSearch.Name = "cmbCustomerSearch";
-            this.cmbCustomerSearch.Size = new System.Drawing.Size(188, 23);
+            this.cmbCustomerSearch.Size = new System.Drawing.Size(172, 23);
             this.cmbCustomerSearch.Sorted = true;
             this.cmbCustomerSearch.TabIndex = 52;
             this.cmbCustomerSearch.SelectedIndexChanged += new System.EventHandler(this.cmbCustomerSearch_SelectedIndexChanged);
@@ -132,7 +134,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label3.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label3.Location = new System.Drawing.Point(528, 38);
+            this.label3.Location = new System.Drawing.Point(454, 38);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 17);
             this.label3.TabIndex = 55;
@@ -145,7 +147,7 @@
             this.label4.BackColor = System.Drawing.Color.LightSkyBlue;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label4.Location = new System.Drawing.Point(486, 38);
+            this.label4.Location = new System.Drawing.Point(412, 38);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(36, 17);
             this.label4.TabIndex = 56;
@@ -158,7 +160,7 @@
             this.label5.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.label5.Location = new System.Drawing.Point(5, 15);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(188, 17);
+            this.label5.Size = new System.Drawing.Size(172, 17);
             this.label5.TabIndex = 58;
             this.label5.Text = "Staff Search:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -170,14 +172,14 @@
             this.cmbStaffSearch.FormattingEnabled = true;
             this.cmbStaffSearch.Location = new System.Drawing.Point(5, 35);
             this.cmbStaffSearch.Name = "cmbStaffSearch";
-            this.cmbStaffSearch.Size = new System.Drawing.Size(188, 23);
+            this.cmbStaffSearch.Size = new System.Drawing.Size(172, 23);
             this.cmbStaffSearch.Sorted = true;
             this.cmbStaffSearch.TabIndex = 57;
             this.cmbStaffSearch.SelectedIndexChanged += new System.EventHandler(this.cmbStaffSearch_SelectedIndexChanged);
             // 
             // dteEnd
             // 
-            this.dteEnd.Location = new System.Drawing.Point(547, 33);
+            this.dteEnd.Location = new System.Drawing.Point(703, 36);
             this.dteEnd.Name = "dteEnd";
             this.dteEnd.Size = new System.Drawing.Size(132, 21);
             this.dteEnd.TabIndex = 62;
@@ -185,7 +187,7 @@
             // 
             // dteStart
             // 
-            this.dteStart.Location = new System.Drawing.Point(393, 34);
+            this.dteStart.Location = new System.Drawing.Point(549, 37);
             this.dteStart.Name = "dteStart";
             this.dteStart.Size = new System.Drawing.Size(132, 21);
             this.dteStart.TabIndex = 63;
@@ -195,7 +197,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label1.Location = new System.Drawing.Point(393, 15);
+            this.label1.Location = new System.Drawing.Point(549, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(286, 17);
             this.label1.TabIndex = 64;
@@ -222,7 +224,7 @@
             this.label6.BackColor = System.Drawing.Color.DarkGray;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label6.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label6.Location = new System.Drawing.Point(486, 13);
+            this.label6.Location = new System.Drawing.Point(412, 13);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(36, 17);
             this.label6.TabIndex = 68;
@@ -235,7 +237,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label7.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label7.Location = new System.Drawing.Point(528, 13);
+            this.label7.Location = new System.Drawing.Point(454, 13);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(89, 17);
             this.label7.TabIndex = 67;
@@ -323,14 +325,33 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.groupBox1.Location = new System.Drawing.Point(13, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(618, 65);
+            this.groupBox1.Size = new System.Drawing.Size(546, 65);
             this.groupBox1.TabIndex = 73;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Chase Filters";
             // 
+            // btnShowAll
+            // 
+            this.btnShowAll.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnShowAll.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnShowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowAll.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowAll.ForeColor = System.Drawing.Color.White;
+            this.btnShowAll.Location = new System.Drawing.Point(322, 26);
+            this.btnShowAll.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnShowAll.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnShowAll.Name = "btnShowAll";
+            this.btnShowAll.Padding = new System.Windows.Forms.Padding(3);
+            this.btnShowAll.Size = new System.Drawing.Size(82, 30);
+            this.btnShowAll.TabIndex = 66;
+            this.btnShowAll.Text = "Show All";
+            this.btnShowAll.UseVisualStyleBackColor = false;
+            this.btnShowAll.Click += new System.EventHandler(this.btnShowAll_Click);
+            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.chkboxSlimline);
+            this.groupBox2.Controls.Add(this.comboBox1);
+            this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.cmbCustomerSearch);
             this.groupBox2.Controls.Add(this.label2);
@@ -340,9 +361,9 @@
             this.groupBox2.Controls.Add(this.dteStart);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.groupBox2.Location = new System.Drawing.Point(639, 6);
+            this.groupBox2.Location = new System.Drawing.Point(565, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(767, 65);
+            this.groupBox2.Size = new System.Drawing.Size(841, 65);
             this.groupBox2.TabIndex = 74;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Universal Filters";
@@ -351,7 +372,7 @@
             // 
             this.chkboxSlimline.AutoSize = true;
             this.chkboxSlimline.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.chkboxSlimline.Location = new System.Drawing.Point(685, 34);
+            this.chkboxSlimline.Location = new System.Drawing.Point(1416, 46);
             this.chkboxSlimline.Name = "chkboxSlimline";
             this.chkboxSlimline.Size = new System.Drawing.Size(75, 21);
             this.chkboxSlimline.TabIndex = 75;
@@ -363,7 +384,7 @@
             // 
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label10.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label10.Location = new System.Drawing.Point(523, 34);
+            this.label10.Location = new System.Drawing.Point(679, 37);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(28, 17);
             this.label10.TabIndex = 65;
@@ -412,24 +433,6 @@
             this.btnLiveChart.Text = "Chase Chart";
             this.btnLiveChart.UseVisualStyleBackColor = false;
             this.btnLiveChart.Click += new System.EventHandler(this.btnLiveChart_Click);
-            // 
-            // btnShowAll
-            // 
-            this.btnShowAll.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnShowAll.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnShowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowAll.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowAll.ForeColor = System.Drawing.Color.White;
-            this.btnShowAll.Location = new System.Drawing.Point(322, 26);
-            this.btnShowAll.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnShowAll.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnShowAll.Name = "btnShowAll";
-            this.btnShowAll.Padding = new System.Windows.Forms.Padding(3);
-            this.btnShowAll.Size = new System.Drawing.Size(82, 30);
-            this.btnShowAll.TabIndex = 66;
-            this.btnShowAll.Text = "Show All";
-            this.btnShowAll.UseVisualStyleBackColor = false;
-            this.btnShowAll.Click += new System.EventHandler(this.btnShowAll_Click);
             // 
             // btnExcel
             // 
@@ -488,11 +491,36 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(371, 35);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(172, 23);
+            this.comboBox1.Sorted = true;
+            this.comboBox1.TabIndex = 66;
+            this.comboBox1.Visible = false;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label11.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label11.Location = new System.Drawing.Point(371, 15);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(172, 17);
+            this.label11.TabIndex = 67;
+            this.label11.Text = "Sector Search:";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label11.Visible = false;
+            // 
             // frmManagementView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1859, 613);
+            this.Controls.Add(this.chkboxSlimline);
             this.Controls.Add(this.lblCorrespondenceCount);
             this.Controls.Add(this.lblChaseCount);
             this.Controls.Add(this.btnLiveChart);
@@ -517,7 +545,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -554,5 +581,7 @@
         private buttonFormatting btnLiveChart;
         private System.Windows.Forms.Label lblChaseCount;
         private System.Windows.Forms.Label lblCorrespondenceCount;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label11;
     }
 }

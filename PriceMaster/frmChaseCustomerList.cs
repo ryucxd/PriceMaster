@@ -558,7 +558,7 @@ namespace PriceMaster
 
         private void btnNewCustomer_Click(object sender, EventArgs e)
         {
-            frmAddCustomerToSalesProspect frm = new frmAddCustomerToSalesProspect();
+            frmAddCustomerToSalesProspect frm = new frmAddCustomerToSalesProspect(0);
             frm.ShowDialog();
         }
 

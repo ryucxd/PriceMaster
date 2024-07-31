@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>178</ApplicationRevision>
+    <ApplicationRevision>179</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -188,6 +188,12 @@
     </Compile>
     <Compile Include="frmSalesSetUp.Designer.cs">
       <DependentUpon>frmSalesSetUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSectorManagementView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSectorManagementView.Designer.cs">
+      <DependentUpon>frmSectorManagementView.cs</DependentUpon>
     </Compile>
     <Compile Include="frmTurnOverDecline.cs">
       <SubType>Form</SubType>
@@ -502,6 +508,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSalesSetUp.resx">
       <DependentUpon>frmSalesSetUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSectorManagementView.resx">
+      <DependentUpon>frmSectorManagementView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTurnOverDecline.resx">
       <DependentUpon>frmTurnOverDecline.cs</DependentUpon>

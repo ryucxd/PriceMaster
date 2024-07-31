@@ -99,6 +99,7 @@ namespace PriceMaster
         {
 
             //error checking 
+            txtSectorNote.Text = txtSectorNote.Text.Replace("'", "");
 
             //combobox
             if (cmbSalesOne.SelectedIndex > -1)

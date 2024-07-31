@@ -26,8 +26,15 @@ namespace PriceMaster
         private void fill_leads()
         {
 
+            try
+            {
+                dataGridView1.Columns.Remove("Add Prospect");
+            }
+            catch { }
+
+
             string sql = "select lead_date as [Lead Time],Customer,contact_name as [Contact Name],customer_address as [Customer Address], " +
-                "contact_details as [Contact Details],u.forename + ' ' + u.surname as [Allocated to],Sector,Notes " +
+                "contact_details as [Contact Details],u.forename + ' ' + u.surname as [Allocated to],Sector,Notes,prospect_acc_ref " +
                 "FROM [order_database].dbo.sales_new_leads s " +
                 "left join [user_info].dbo.[user] u on s.allocated_to = u.id " +
                 "left join [order_database].dbo.sales_table st on s.sector_id = st.id " +
@@ -51,6 +58,15 @@ namespace PriceMaster
                     conn.Close();
             }
 
+            DataGridViewButtonColumn prospectButton = new DataGridViewButtonColumn();
+            prospectButton.Name = "Add Prospect";
+            prospectButton.Text = "Add Prospect";
+            prospectButton.UseColumnTextForButtonValue = true;
+            int columnIndex = (dataGridView1.Columns.Count);
+            if (dataGridView1.Columns["Add Prospect"] == null)
+            {
+                dataGridView1.Columns.Insert(columnIndex, prospectButton);
+            }
 
         }
 
