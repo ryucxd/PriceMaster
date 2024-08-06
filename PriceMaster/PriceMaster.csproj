@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>179</ApplicationRevision>
+    <ApplicationRevision>180</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -194,6 +194,18 @@
     </Compile>
     <Compile Include="frmSectorManagementView.Designer.cs">
       <DependentUpon>frmSectorManagementView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSectorManagementViewDetailed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSectorManagementViewDetailed.Designer.cs">
+      <DependentUpon>frmSectorManagementViewDetailed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSectorPowerBi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSectorPowerBi.Designer.cs">
+      <DependentUpon>frmSectorPowerBi.cs</DependentUpon>
     </Compile>
     <Compile Include="frmTurnOverDecline.cs">
       <SubType>Form</SubType>
@@ -511,6 +523,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSectorManagementView.resx">
       <DependentUpon>frmSectorManagementView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSectorManagementViewDetailed.resx">
+      <DependentUpon>frmSectorManagementViewDetailed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSectorPowerBi.resx">
+      <DependentUpon>frmSectorPowerBi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTurnOverDecline.resx">
       <DependentUpon>frmTurnOverDecline.cs</DependentUpon>

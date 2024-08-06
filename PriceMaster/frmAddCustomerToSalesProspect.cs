@@ -14,10 +14,16 @@ namespace PriceMaster
     public partial class frmAddCustomerToSalesProspect : Form
     {
         public int lead_customer { get; set; }
-        public frmAddCustomerToSalesProspect(int lead_customer)
+        public frmAddCustomerToSalesProspect(int lead_customer,string customer)
         {
             InitializeComponent();
             this.lead_customer = lead_customer;
+
+            //populate some of the boxes if this is a lead_customer
+            if (lead_customer > 0)
+            {
+                txtName.Text = customer.ToString();
+            }
         }
 
         private void btnSAve_Click(object sender, EventArgs e)

@@ -33,12 +33,12 @@ namespace PriceMaster
             catch { }
 
 
-            string sql = "select lead_date as [Lead Time],Customer,contact_name as [Contact Name],customer_address as [Customer Address], " +
-                "contact_details as [Contact Details],u.forename + ' ' + u.surname as [Allocated to],Sector,Notes,prospect_acc_ref " +
+            string sql = "select s.id,lead_date as [Lead Time],Customer,contact_name as [Contact Name],customer_address as [Customer Address], " +
+                "contact_details as [Contact Details],u.forename + ' ' + u.surname as [Allocated to],Sector,Notes " +
                 "FROM [order_database].dbo.sales_new_leads s " +
                 "left join [user_info].dbo.[user] u on s.allocated_to = u.id " +
                 "left join [order_database].dbo.sales_table st on s.sector_id = st.id " +
-                "where lead_by = " + CONNECT.staffID;
+                "where prospect_added_by is null"; // lead_by = " + CONNECT.staffID;
 
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
@@ -55,18 +55,15 @@ namespace PriceMaster
 
                 }
 
-                    conn.Close();
+                conn.Close();
             }
 
             DataGridViewButtonColumn prospectButton = new DataGridViewButtonColumn();
             prospectButton.Name = "Add Prospect";
             prospectButton.Text = "Add Prospect";
             prospectButton.UseColumnTextForButtonValue = true;
-            int columnIndex = (dataGridView1.Columns.Count);
-            if (dataGridView1.Columns["Add Prospect"] == null)
-            {
-                dataGridView1.Columns.Insert(columnIndex, prospectButton);
-            }
+            dataGridView1.Columns.Insert(9, prospectButton);
+
 
         }
 
@@ -242,7 +239,11 @@ namespace PriceMaster
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-            dataGridView1.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            dataGridView1.Columns["id"].Visible = false;
 
             dgvTarget.ClearSelection();
             dataGridView1.ClearSelection();
@@ -262,6 +263,22 @@ namespace PriceMaster
 
             fill_leads();
             fill_targets();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.Columns["Add Prospect"].Index == e.ColumnIndex)
+            {
+
+                frmAddCustomerToSalesProspect frm = new frmAddCustomerToSalesProspect(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString()), dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
+                frm.ShowDialog();
+
+            }
         }
     }
 }

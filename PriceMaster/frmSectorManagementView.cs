@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
+using System.Data.SqlTypes;
 
 namespace PriceMaster
 {
@@ -98,7 +100,6 @@ namespace PriceMaster
                     sectorDate = Convert.ToDateTime(dt.Rows[tabControl.SelectedIndex][0].ToString());
                 }
 
-
                 //get a list of each person that has a target for that date
                 List<int> sales_members = new List<int>();
 
@@ -126,6 +127,7 @@ namespace PriceMaster
                 {
                     dgvSalesMemberOne.DataSource = salesMemberData(sales_members[0], sectorDate);
                     lblSalesMemberOne.Text = dgvSalesMemberOne.Rows[0].Cells[3].Value.ToString() ?? "";
+                    lblSalesMemberOnePercent.Text = percent(sales_members[0], sectorDate) ?? "";
                     //format
                     format_dgv(dgvSalesMemberOne,pieChart1);
                     //piechart
@@ -158,6 +160,31 @@ namespace PriceMaster
 
         }
 
+        private string percent(int staff_id,DateTime sector_date)
+        {
+            string temp = "SELECT [target_percent] FROM [order_database].[dbo].[view_sales_target_percent] " +
+                "WHERE sales_member_id = " + staff_id + " AND [sector_date] = '" + sector_date.ToString("yyyyMMdd") + "'";
+
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(temp, conn))
+                {
+                    var data = cmd.ExecuteScalar();
+
+                    if (data != null)
+                        return "Target Percentage: " + cmd.ExecuteScalar().ToString() + "%";
+                }
+
+                    conn.Close();
+            }
+
+
+            return "";
+        }
+
+
         private void format_dgv(DataGridView dgv, PieChart pie)
         {
             
@@ -167,6 +194,7 @@ namespace PriceMaster
             }
             dgv.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv.Columns[0].Visible = false;
+            dgv.Columns[3].Visible = false;
 
             foreach (DataGridViewRow row in dgv.Rows)
             {
@@ -263,17 +291,16 @@ namespace PriceMaster
             {
                 PieSeries ps2 = new PieSeries
                 {
-                    Title = "Target",
+                    Title = "Remaining Target",
                     Values = new ChartValues<double> { target },
                     DataLabels = true,
                     Foreground = System.Windows.Media.Brushes.Black,
+                    Fill = System.Windows.Media.Brushes.PaleVioletRed,
 
                 };
                 // Add the target to the SeriesCollection
                 seriesCollection.Add(ps2);
             }
-
-
 
             pie.Series = seriesCollection;
 
@@ -330,6 +357,60 @@ namespace PriceMaster
             format_dgv(dgvSalesMemberOne, pieChart1);
             format_dgv(dgvSalesMemberTwo, pieChart2);
             format_dgv(dgvSalesMemberThree, pieChart3);
+        }
+
+
+        private void open_sector(int sector_id,string staff)
+        {
+            //get staff id here
+            int staff_id = 0;
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand("Select id FROM [user_info].dbo.[user] WHERE forename + ' ' + surname = '" + staff + "'", conn))
+                    staff_id = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+
+
+                conn.Close();
+            }
+
+            frmSectorManagementViewDetailed frm = new frmSectorManagementViewDetailed(sector_id, staff_id);
+            frm.ShowDialog();
+
+        }
+
+        private void dgvSalesMemberOne_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvSalesMemberOne.Rows[e.RowIndex].Cells[4].Value.ToString() == "0")
+                return;
+
+            open_sector(Convert.ToInt32(dgvSalesMemberOne.Rows[e.RowIndex].Cells[0].Value.ToString()), dgvSalesMemberOne.Rows[e.RowIndex].Cells[3].Value.ToString());
+            
+        }
+
+        private void dgvSalesMemberTwo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvSalesMemberTwo.Rows[e.RowIndex].Cells[4].Value.ToString() == "0")
+                return;
+
+            open_sector(Convert.ToInt32(dgvSalesMemberTwo.Rows[e.RowIndex].Cells[0].Value.ToString()), dgvSalesMemberTwo.Rows[e.RowIndex].Cells[3].Value.ToString());
+
+        }
+
+        private void dgvSalesMemberThree_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvSalesMemberThree.Rows[e.RowIndex].Cells[4].Value.ToString() == "0")
+                return;
+
+            open_sector(Convert.ToInt32(dgvSalesMemberThree.Rows[e.RowIndex].Cells[0].Value.ToString()), dgvSalesMemberThree.Rows[e.RowIndex].Cells[3].Value.ToString());
+
+        }
+
+        private void btnDetailed_Click(object sender, EventArgs e)
+        {
+            frmSectorPowerBi frm = new frmSectorPowerBi(219);
+            frm.ShowDialog();
         }
     }
 }

@@ -873,8 +873,7 @@ namespace PriceMaster
 
         private void btnManagementView_Click(object sender, EventArgs e)
         {
-            //frmManagementView frm = new frmManagementView(-1);
-            frmSectorManagementView frm = new frmSectorManagementView();
+            frmManagementView frm = new frmManagementView(-1);
             frm.ShowDialog();
         }
 

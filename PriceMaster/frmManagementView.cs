@@ -1088,5 +1088,11 @@ namespace PriceMaster
             frmUniqueCustomerChaseCount frm = new frmUniqueCustomerChaseCount();
             frm.ShowDialog();
         }
+
+        private void btnWeekly_Click(object sender, EventArgs e)
+        {
+            frmSectorManagementView frm = new frmSectorManagementView();
+            frm.ShowDialog();
+        }
     }
 }
