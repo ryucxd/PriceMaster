@@ -48,6 +48,12 @@
             this.lblSalesMemberThree = new System.Windows.Forms.Label();
             this.btnDetailed = new PriceMaster.buttonFormatting();
             this.lblSalesMemberOnePercent = new System.Windows.Forms.Label();
+            this.lblSalesMemberTwoPercent = new System.Windows.Forms.Label();
+            this.lblSalesMemberThreePercent = new System.Windows.Forms.Label();
+            this.btnSalesMemberTwoHistoric = new PriceMaster.buttonFormatting();
+            this.btnSalesMemberThreeHistoric = new PriceMaster.buttonFormatting();
+            this.btnPrint = new PriceMaster.buttonFormatting();
+            this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberOne)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberTwo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberThree)).BeginInit();
@@ -63,6 +69,7 @@
             this.dgvSalesMemberOne.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSalesMemberOne.Location = new System.Drawing.Point(12, 143);
             this.dgvSalesMemberOne.Name = "dgvSalesMemberOne";
+            this.dgvSalesMemberOne.ReadOnly = true;
             this.dgvSalesMemberOne.RowHeadersVisible = false;
             this.dgvSalesMemberOne.Size = new System.Drawing.Size(444, 456);
             this.dgvSalesMemberOne.TabIndex = 0;
@@ -75,10 +82,11 @@
             this.dgvSalesMemberTwo.AllowUserToResizeColumns = false;
             this.dgvSalesMemberTwo.AllowUserToResizeRows = false;
             this.dgvSalesMemberTwo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSalesMemberTwo.Location = new System.Drawing.Point(480, 113);
+            this.dgvSalesMemberTwo.Location = new System.Drawing.Point(480, 143);
             this.dgvSalesMemberTwo.Name = "dgvSalesMemberTwo";
+            this.dgvSalesMemberTwo.ReadOnly = true;
             this.dgvSalesMemberTwo.RowHeadersVisible = false;
-            this.dgvSalesMemberTwo.Size = new System.Drawing.Size(444, 486);
+            this.dgvSalesMemberTwo.Size = new System.Drawing.Size(444, 456);
             this.dgvSalesMemberTwo.TabIndex = 1;
             this.dgvSalesMemberTwo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesMemberTwo_CellDoubleClick);
             // 
@@ -89,10 +97,11 @@
             this.dgvSalesMemberThree.AllowUserToResizeColumns = false;
             this.dgvSalesMemberThree.AllowUserToResizeRows = false;
             this.dgvSalesMemberThree.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSalesMemberThree.Location = new System.Drawing.Point(951, 113);
+            this.dgvSalesMemberThree.Location = new System.Drawing.Point(951, 143);
             this.dgvSalesMemberThree.Name = "dgvSalesMemberThree";
+            this.dgvSalesMemberThree.ReadOnly = true;
             this.dgvSalesMemberThree.RowHeadersVisible = false;
-            this.dgvSalesMemberThree.Size = new System.Drawing.Size(444, 486);
+            this.dgvSalesMemberThree.Size = new System.Drawing.Size(444, 456);
             this.dgvSalesMemberThree.TabIndex = 2;
             this.dgvSalesMemberThree.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesMemberThree_CellDoubleClick);
             // 
@@ -109,13 +118,15 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.tabPage1.BackgroundImage = global::PriceMaster.Properties.Resources.fire;
+            this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1375, 0);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // dteStart
             // 
@@ -207,14 +218,14 @@
             this.btnDetailed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDetailed.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDetailed.ForeColor = System.Drawing.Color.White;
-            this.btnDetailed.Location = new System.Drawing.Point(149, 9);
+            this.btnDetailed.Location = new System.Drawing.Point(370, 80);
             this.btnDetailed.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnDetailed.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnDetailed.Name = "btnDetailed";
             this.btnDetailed.Padding = new System.Windows.Forms.Padding(3);
             this.btnDetailed.Size = new System.Drawing.Size(86, 30);
             this.btnDetailed.TabIndex = 62;
-            this.btnDetailed.Text = "detailed";
+            this.btnDetailed.Text = "Historic";
             this.btnDetailed.UseVisualStyleBackColor = false;
             this.btnDetailed.Click += new System.EventHandler(this.btnDetailed_Click);
             // 
@@ -228,11 +239,109 @@
             this.lblSalesMemberOnePercent.Text = " ";
             this.lblSalesMemberOnePercent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblSalesMemberTwoPercent
+            // 
+            this.lblSalesMemberTwoPercent.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.lblSalesMemberTwoPercent.Location = new System.Drawing.Point(483, 113);
+            this.lblSalesMemberTwoPercent.Name = "lblSalesMemberTwoPercent";
+            this.lblSalesMemberTwoPercent.Size = new System.Drawing.Size(441, 27);
+            this.lblSalesMemberTwoPercent.TabIndex = 64;
+            this.lblSalesMemberTwoPercent.Text = " ";
+            this.lblSalesMemberTwoPercent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSalesMemberThreePercent
+            // 
+            this.lblSalesMemberThreePercent.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.lblSalesMemberThreePercent.Location = new System.Drawing.Point(953, 110);
+            this.lblSalesMemberThreePercent.Name = "lblSalesMemberThreePercent";
+            this.lblSalesMemberThreePercent.Size = new System.Drawing.Size(441, 27);
+            this.lblSalesMemberThreePercent.TabIndex = 65;
+            this.lblSalesMemberThreePercent.Text = " ";
+            this.lblSalesMemberThreePercent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnSalesMemberTwoHistoric
+            // 
+            this.btnSalesMemberTwoHistoric.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnSalesMemberTwoHistoric.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSalesMemberTwoHistoric.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalesMemberTwoHistoric.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalesMemberTwoHistoric.ForeColor = System.Drawing.Color.White;
+            this.btnSalesMemberTwoHistoric.Location = new System.Drawing.Point(838, 80);
+            this.btnSalesMemberTwoHistoric.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnSalesMemberTwoHistoric.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnSalesMemberTwoHistoric.Name = "btnSalesMemberTwoHistoric";
+            this.btnSalesMemberTwoHistoric.Padding = new System.Windows.Forms.Padding(3);
+            this.btnSalesMemberTwoHistoric.Size = new System.Drawing.Size(86, 30);
+            this.btnSalesMemberTwoHistoric.TabIndex = 66;
+            this.btnSalesMemberTwoHistoric.Text = "Historic";
+            this.btnSalesMemberTwoHistoric.UseVisualStyleBackColor = false;
+            this.btnSalesMemberTwoHistoric.Click += new System.EventHandler(this.btnSalesMemberTwoHistoric_Click);
+            // 
+            // btnSalesMemberThreeHistoric
+            // 
+            this.btnSalesMemberThreeHistoric.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnSalesMemberThreeHistoric.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSalesMemberThreeHistoric.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalesMemberThreeHistoric.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalesMemberThreeHistoric.ForeColor = System.Drawing.Color.White;
+            this.btnSalesMemberThreeHistoric.Location = new System.Drawing.Point(1308, 80);
+            this.btnSalesMemberThreeHistoric.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnSalesMemberThreeHistoric.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnSalesMemberThreeHistoric.Name = "btnSalesMemberThreeHistoric";
+            this.btnSalesMemberThreeHistoric.Padding = new System.Windows.Forms.Padding(3);
+            this.btnSalesMemberThreeHistoric.Size = new System.Drawing.Size(86, 30);
+            this.btnSalesMemberThreeHistoric.TabIndex = 67;
+            this.btnSalesMemberThreeHistoric.Text = "Historic";
+            this.btnSalesMemberThreeHistoric.UseVisualStyleBackColor = false;
+            this.btnSalesMemberThreeHistoric.Click += new System.EventHandler(this.btnSalesMemberThreeHistoric_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
+            this.btnPrint.ForeColor = System.Drawing.Color.White;
+            this.btnPrint.Location = new System.Drawing.Point(1297, 9);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnPrint.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Padding = new System.Windows.Forms.Padding(3);
+            this.btnPrint.Size = new System.Drawing.Size(99, 36);
+            this.btnPrint.TabIndex = 68;
+            this.btnPrint.Text = "Export";
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // buttonFormatting1
+            // 
+            this.buttonFormatting1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.buttonFormatting1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold);
+            this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
+            this.buttonFormatting1.Location = new System.Drawing.Point(1188, 9);
+            this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
+            this.buttonFormatting1.Name = "buttonFormatting1";
+            this.buttonFormatting1.Padding = new System.Windows.Forms.Padding(3);
+            this.buttonFormatting1.Size = new System.Drawing.Size(99, 36);
+            this.buttonFormatting1.TabIndex = 69;
+            this.buttonFormatting1.Text = "Print";
+            this.buttonFormatting1.UseVisualStyleBackColor = false;
+            this.buttonFormatting1.Click += new System.EventHandler(this.buttonFormatting1_Click);
+            // 
             // frmSectorManagementView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1410, 938);
+            this.Controls.Add(this.buttonFormatting1);
+            this.Controls.Add(this.btnPrint);
+            this.Controls.Add(this.btnSalesMemberThreeHistoric);
+            this.Controls.Add(this.btnSalesMemberTwoHistoric);
+            this.Controls.Add(this.lblSalesMemberThreePercent);
+            this.Controls.Add(this.lblSalesMemberTwoPercent);
             this.Controls.Add(this.lblSalesMemberOnePercent);
             this.Controls.Add(this.btnDetailed);
             this.Controls.Add(this.lblSalesMemberThree);
@@ -286,5 +395,11 @@
         private System.Windows.Forms.Label lblSalesMemberThree;
         private buttonFormatting btnDetailed;
         private System.Windows.Forms.Label lblSalesMemberOnePercent;
+        private System.Windows.Forms.Label lblSalesMemberTwoPercent;
+        private System.Windows.Forms.Label lblSalesMemberThreePercent;
+        private buttonFormatting btnSalesMemberTwoHistoric;
+        private buttonFormatting btnSalesMemberThreeHistoric;
+        private buttonFormatting btnPrint;
+        private buttonFormatting buttonFormatting1;
     }
 }

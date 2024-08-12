@@ -15,6 +15,17 @@ namespace PriceMaster
 {
     public partial class frmLeadList : Form
     {
+        public int id_index { get; set; }
+        public int lead_time_index { get; set; }
+        public int customer_index { get; set; }
+        public int contact_name_index { get; set; }
+        public int customer_address_index { get; set; }
+        public int contact_details_index { get; set; }
+        public int allocated_to_index { get; set; }
+        public int sector_index { get; set; }
+        public int notes_index { get; set; }
+        public int add_prospect_button_index { get; set; }
+        public int _index { get; set; }
         public frmLeadList()
         {
             InitializeComponent();
@@ -26,11 +37,8 @@ namespace PriceMaster
         private void fill_leads()
         {
 
-            try
-            {
+            if (dataGridView1.Columns.Contains("Add Prospect") == true)
                 dataGridView1.Columns.Remove("Add Prospect");
-            }
-            catch { }
 
 
             string sql = "select s.id,lead_date as [Lead Time],Customer,contact_name as [Contact Name],customer_address as [Customer Address], " +
@@ -58,16 +66,35 @@ namespace PriceMaster
                 conn.Close();
             }
 
+            column_index();
+
             DataGridViewButtonColumn prospectButton = new DataGridViewButtonColumn();
             prospectButton.Name = "Add Prospect";
             prospectButton.Text = "Add Prospect";
             prospectButton.UseColumnTextForButtonValue = true;
-            dataGridView1.Columns.Insert(9, prospectButton);
+            dataGridView1.Columns.Insert(notes_index + 1, prospectButton);
+
+            column_index();
 
 
         }
 
+        private void column_index()
+        {
+            if (dataGridView1.Columns.Contains("Add Prospect") == true)
+                add_prospect_button_index = dataGridView1.Columns["Add Prospect"].Index;
 
+            id_index = dataGridView1.Columns["id"].Index;
+            lead_time_index = dataGridView1.Columns["Lead Time"].Index;
+            customer_index = dataGridView1.Columns["Customer"].Index;
+            contact_name_index = dataGridView1.Columns["Contact Name"].Index;
+            customer_address_index = dataGridView1.Columns["Customer Address"].Index;
+            contact_details_index = dataGridView1.Columns["Contact Details"].Index;
+            allocated_to_index = dataGridView1.Columns["Allocated to"].Index;
+            sector_index = dataGridView1.Columns["Sector"].Index;
+            notes_index = dataGridView1.Columns["Notes"].Index;
+            
+        }
         private void fill_targets()
         {
 
@@ -238,12 +265,12 @@ namespace PriceMaster
                 col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+            column_index();
+            dataGridView1.Columns[customer_address_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[sector_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[notes_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-            dataGridView1.Columns["id"].Visible = false;
+            dataGridView1.Columns[id_index].Visible = false;
 
             dgvTarget.ClearSelection();
             dataGridView1.ClearSelection();
@@ -265,20 +292,22 @@ namespace PriceMaster
             fill_targets();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView1.Columns["Add Prospect"].Index == e.ColumnIndex)
             {
 
-                frmAddCustomerToSalesProspect frm = new frmAddCustomerToSalesProspect(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString()), dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
+                frmAddCustomerToSalesProspect frm = new frmAddCustomerToSalesProspect(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[id_index].Value.ToString()), dataGridView1.Rows[e.RowIndex].Cells[customer_index].Value.ToString());
                 frm.ShowDialog();
 
             }
+
+            fill_leads();
+            fill_targets();
+
+            format_targets();
         }
     }
 }

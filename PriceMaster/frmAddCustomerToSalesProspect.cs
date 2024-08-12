@@ -23,6 +23,8 @@ namespace PriceMaster
             if (lead_customer > 0)
             {
                 txtName.Text = customer.ToString();
+                lblTraditionalSlimline.Visible = true;
+                cmbTraditionalSlimline.Visible = true;
             }
         }
 
@@ -64,6 +66,17 @@ namespace PriceMaster
                 MessageBox.Show("This customer name is too long, please enter 60 or less characters", "Customer Name", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            //traditional/slimline combo (only if entering through lead form)
+            if (lead_customer > 0)
+            {
+                if (cmbTraditionalSlimline.Text == "")
+                {
+                    MessageBox.Show("Please select if this customer is Traditional OR Slimline", "Traditional/Slimline", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -121,6 +134,17 @@ namespace PriceMaster
                     {
                         cmd.ExecuteNonQuery();
                     }
+
+                    //open the correspondence chasing with the newly added lead
+                    int slimline = 0;
+
+                    if (cmbTraditionalSlimline.Text == "Slimline")
+                        slimline = -1;
+
+                    frmChaseInsertCorrespondence frm = new frmChaseInsertCorrespondence(txtName.Text, slimline);
+                    frm.ShowDialog();
+
+
                 }
 
 

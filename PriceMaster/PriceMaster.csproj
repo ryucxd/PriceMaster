@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>180</ApplicationRevision>
+    <ApplicationRevision>185</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -206,6 +206,12 @@
     </Compile>
     <Compile Include="frmSectorPowerBi.Designer.cs">
       <DependentUpon>frmSectorPowerBi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSectorViewAll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSectorViewAll.Designer.cs">
+      <DependentUpon>frmSectorViewAll.cs</DependentUpon>
     </Compile>
     <Compile Include="frmTurnOverDecline.cs">
       <SubType>Form</SubType>
@@ -530,6 +536,9 @@
     <EmbeddedResource Include="frmSectorPowerBi.resx">
       <DependentUpon>frmSectorPowerBi.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSectorViewAll.resx">
+      <DependentUpon>frmSectorViewAll.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTurnOverDecline.resx">
       <DependentUpon>frmTurnOverDecline.cs</DependentUpon>
     </EmbeddedResource>
@@ -676,6 +685,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="PriceMaster_TemporaryKey.pfx" />
@@ -706,6 +716,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="pricelog.ico" />
+    <None Include="Resources\fire.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="NewSlimlineChasing\" />

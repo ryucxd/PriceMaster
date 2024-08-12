@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTraditional));
             this.dteEnd = new System.Windows.Forms.DateTimePicker();
             this.dteStart = new System.Windows.Forms.DateTimePicker();
@@ -76,6 +76,7 @@
             this.chkCustomerLostQuote = new System.Windows.Forms.CheckBox();
             this.btnNonReturningEnquiries = new PriceMaster.buttonFormatting();
             this.btnnewCustomers = new PriceMaster.buttonFormatting();
+            this.btnLeads = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -185,14 +186,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(12, 143);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -467,6 +468,7 @@
             this.btnCalendar.TabIndex = 117;
             this.btnCalendar.Text = "CALENDAR";
             this.btnCalendar.UseVisualStyleBackColor = false;
+            this.btnCalendar.Visible = false;
             this.btnCalendar.Click += new System.EventHandler(this.btnCalendar_Click);
             // 
             // btnTurnoverDecline
@@ -584,7 +586,7 @@
             this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
-            this.buttonFormatting1.Location = new System.Drawing.Point(314, 9);
+            this.buttonFormatting1.Location = new System.Drawing.Point(304, 9);
             this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
             this.buttonFormatting1.Name = "buttonFormatting1";
@@ -698,11 +700,30 @@
             this.btnnewCustomers.UseVisualStyleBackColor = false;
             this.btnnewCustomers.Click += new System.EventHandler(this.btnnewCustomers_Click);
             // 
+            // btnLeads
+            // 
+            this.btnLeads.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnLeads.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnLeads.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLeads.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLeads.ForeColor = System.Drawing.Color.White;
+            this.btnLeads.Location = new System.Drawing.Point(404, 12);
+            this.btnLeads.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnLeads.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnLeads.Name = "btnLeads";
+            this.btnLeads.Padding = new System.Windows.Forms.Padding(3);
+            this.btnLeads.Size = new System.Drawing.Size(167, 30);
+            this.btnLeads.TabIndex = 121;
+            this.btnLeads.Text = "Leads";
+            this.btnLeads.UseVisualStyleBackColor = false;
+            this.btnLeads.Click += new System.EventHandler(this.btnLeads_Click);
+            // 
             // frmTraditional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnLeads);
             this.Controls.Add(this.btnnewCustomers);
             this.Controls.Add(this.btnNonReturningEnquiries);
             this.Controls.Add(this.chkCustomerLostQuote);
@@ -808,5 +829,6 @@
         private System.Windows.Forms.CheckBox chkCustomerLostQuote;
         private buttonFormatting btnNonReturningEnquiries;
         private buttonFormatting btnnewCustomers;
+        private buttonFormatting btnLeads;
     }
 }

@@ -46,6 +46,8 @@
             this.txtTelephone = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.lblTraditionalSlimline = new System.Windows.Forms.Label();
+            this.cmbTraditionalSlimline = new System.Windows.Forms.ComboBox();
             this.btnSAve = new PriceMaster.buttonFormatting();
             this.SuspendLayout();
             // 
@@ -204,6 +206,30 @@
             this.label9.TabIndex = 16;
             this.label9.Text = "Please enter the new customer\'s details";
             // 
+            // lblTraditionalSlimline
+            // 
+            this.lblTraditionalSlimline.AutoSize = true;
+            this.lblTraditionalSlimline.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.lblTraditionalSlimline.Location = new System.Drawing.Point(14, 391);
+            this.lblTraditionalSlimline.Name = "lblTraditionalSlimline";
+            this.lblTraditionalSlimline.Size = new System.Drawing.Size(156, 20);
+            this.lblTraditionalSlimline.TabIndex = 18;
+            this.lblTraditionalSlimline.Text = "Slimline/Traditional:";
+            this.lblTraditionalSlimline.Visible = false;
+            // 
+            // cmbTraditionalSlimline
+            // 
+            this.cmbTraditionalSlimline.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.cmbTraditionalSlimline.FormattingEnabled = true;
+            this.cmbTraditionalSlimline.Items.AddRange(new object[] {
+            "Traditional",
+            "Slimline"});
+            this.cmbTraditionalSlimline.Location = new System.Drawing.Point(175, 388);
+            this.cmbTraditionalSlimline.Name = "cmbTraditionalSlimline";
+            this.cmbTraditionalSlimline.Size = new System.Drawing.Size(244, 28);
+            this.cmbTraditionalSlimline.TabIndex = 19;
+            this.cmbTraditionalSlimline.Visible = false;
+            // 
             // btnSAve
             // 
             this.btnSAve.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -211,7 +237,7 @@
             this.btnSAve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSAve.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSAve.ForeColor = System.Drawing.Color.White;
-            this.btnSAve.Location = new System.Drawing.Point(194, 390);
+            this.btnSAve.Location = new System.Drawing.Point(194, 424);
             this.btnSAve.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSAve.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSAve.Name = "btnSAve";
@@ -226,7 +252,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 437);
+            this.ClientSize = new System.Drawing.Size(462, 462);
+            this.Controls.Add(this.cmbTraditionalSlimline);
+            this.Controls.Add(this.lblTraditionalSlimline);
             this.Controls.Add(this.btnSAve);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtTelephone);
@@ -277,5 +305,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private buttonFormatting btnSAve;
+        private System.Windows.Forms.Label lblTraditionalSlimline;
+        private System.Windows.Forms.ComboBox cmbTraditionalSlimline;
     }
 }

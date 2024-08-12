@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dteEnd = new System.Windows.Forms.DateTimePicker();
             this.dteStart = new System.Windows.Forms.DateTimePicker();
+            this.lblPercent = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // elementHost1
@@ -43,7 +44,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.elementHost1.Location = new System.Drawing.Point(12, 68);
             this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(1077, 606);
+            this.elementHost1.Size = new System.Drawing.Size(1122, 606);
             this.elementHost1.TabIndex = 8;
             this.elementHost1.Text = "barChartPercent";
             this.elementHost1.Child = this.cartesianChart1;
@@ -52,7 +53,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.label1.Location = new System.Drawing.Point(496, 9);
+            this.label1.Location = new System.Drawing.Point(519, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(136, 22);
             this.label1.TabIndex = 61;
@@ -60,7 +61,7 @@
             // 
             // dteEnd
             // 
-            this.dteEnd.Location = new System.Drawing.Point(553, 35);
+            this.dteEnd.Location = new System.Drawing.Point(576, 35);
             this.dteEnd.Name = "dteEnd";
             this.dteEnd.Size = new System.Drawing.Size(200, 20);
             this.dteEnd.TabIndex = 60;
@@ -68,17 +69,31 @@
             // 
             // dteStart
             // 
-            this.dteStart.Location = new System.Drawing.Point(347, 35);
+            this.dteStart.Location = new System.Drawing.Point(370, 35);
             this.dteStart.Name = "dteStart";
             this.dteStart.Size = new System.Drawing.Size(200, 20);
             this.dteStart.TabIndex = 59;
             this.dteStart.CloseUp += new System.EventHandler(this.dteStart_CloseUp);
             // 
+            // lblPercent
+            // 
+            this.lblPercent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPercent.BackColor = System.Drawing.Color.White;
+            this.lblPercent.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
+            this.lblPercent.Location = new System.Drawing.Point(367, 68);
+            this.lblPercent.Name = "lblPercent";
+            this.lblPercent.Size = new System.Drawing.Size(412, 56);
+            this.lblPercent.TabIndex = 62;
+            this.lblPercent.Text = "Average %:";
+            this.lblPercent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmSectorPowerBi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1101, 700);
+            this.ClientSize = new System.Drawing.Size(1146, 700);
+            this.Controls.Add(this.lblPercent);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dteEnd);
             this.Controls.Add(this.dteStart);
@@ -99,5 +114,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dteEnd;
         private System.Windows.Forms.DateTimePicker dteStart;
+        private System.Windows.Forms.Label lblPercent;
     }
 }

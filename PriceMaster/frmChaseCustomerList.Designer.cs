@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmbCustomer = new System.Windows.Forms.ComboBox();
             this.lblChase = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,6 +50,7 @@
             this.btnTarget = new PriceMaster.buttonFormatting();
             this.lblChasedQuotes = new System.Windows.Forms.Label();
             this.btnLeads = new PriceMaster.buttonFormatting();
+            this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOther)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarget)).BeginInit();
@@ -106,14 +107,14 @@
             this.dgvChase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvChase.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvChase.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvChase.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvChase.Location = new System.Drawing.Point(462, 34);
             this.dgvChase.Name = "dgvChase";
             this.dgvChase.ReadOnly = true;
@@ -132,14 +133,14 @@
             this.dgvOther.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvOther.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOther.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOther.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvOther.Location = new System.Drawing.Point(462, 524);
             this.dgvOther.Name = "dgvOther";
             this.dgvOther.ReadOnly = true;
@@ -342,11 +343,29 @@
             this.btnLeads.UseVisualStyleBackColor = false;
             this.btnLeads.Click += new System.EventHandler(this.btnLeads_Click);
             // 
+            // buttonFormatting1
+            // 
+            this.buttonFormatting1.BackColor = System.Drawing.Color.Crimson;
+            this.buttonFormatting1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
+            this.buttonFormatting1.Location = new System.Drawing.Point(16, 227);
+            this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
+            this.buttonFormatting1.Name = "buttonFormatting1";
+            this.buttonFormatting1.Padding = new System.Windows.Forms.Padding(3);
+            this.buttonFormatting1.Size = new System.Drawing.Size(152, 30);
+            this.buttonFormatting1.TabIndex = 58;
+            this.buttonFormatting1.Text = "JACK CUSTOMER";
+            this.buttonFormatting1.UseVisualStyleBackColor = false;
+            // 
             // frmChaseCustomerList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1281, 990);
+            this.Controls.Add(this.buttonFormatting1);
             this.Controls.Add(this.btnLeads);
             this.Controls.Add(this.lblChasedQuotes);
             this.Controls.Add(this.btnTarget);
@@ -402,5 +421,6 @@
         private buttonFormatting btnTarget;
         private System.Windows.Forms.Label lblChasedQuotes;
         private buttonFormatting btnLeads;
+        private buttonFormatting buttonFormatting1;
     }
 }
