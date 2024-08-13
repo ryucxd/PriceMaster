@@ -742,6 +742,12 @@ namespace PriceMaster
             frmLeadList frm = new frmLeadList();
             frm.ShowDialog();
         }
+
+        private void btnSectorHistory_Click(object sender, EventArgs e)
+        {
+            frmSectorHistory frm = new frmSectorHistory();
+            frm.ShowDialog();
+        }
     }
 
 

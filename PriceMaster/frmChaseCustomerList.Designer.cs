@@ -50,7 +50,7 @@
             this.btnTarget = new PriceMaster.buttonFormatting();
             this.lblChasedQuotes = new System.Windows.Forms.Label();
             this.btnLeads = new PriceMaster.buttonFormatting();
-            this.buttonFormatting1 = new PriceMaster.buttonFormatting();
+            this.btnSectorHistory = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOther)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarget)).BeginInit();
@@ -343,29 +343,30 @@
             this.btnLeads.UseVisualStyleBackColor = false;
             this.btnLeads.Click += new System.EventHandler(this.btnLeads_Click);
             // 
-            // buttonFormatting1
+            // btnSectorHistory
             // 
-            this.buttonFormatting1.BackColor = System.Drawing.Color.Crimson;
-            this.buttonFormatting1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.buttonFormatting1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFormatting1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonFormatting1.ForeColor = System.Drawing.Color.White;
-            this.buttonFormatting1.Location = new System.Drawing.Point(16, 227);
-            this.buttonFormatting1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonFormatting1.MinimumSize = new System.Drawing.Size(75, 30);
-            this.buttonFormatting1.Name = "buttonFormatting1";
-            this.buttonFormatting1.Padding = new System.Windows.Forms.Padding(3);
-            this.buttonFormatting1.Size = new System.Drawing.Size(152, 30);
-            this.buttonFormatting1.TabIndex = 58;
-            this.buttonFormatting1.Text = "JACK CUSTOMER";
-            this.buttonFormatting1.UseVisualStyleBackColor = false;
+            this.btnSectorHistory.BackColor = System.Drawing.Color.Crimson;
+            this.btnSectorHistory.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSectorHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSectorHistory.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSectorHistory.ForeColor = System.Drawing.Color.White;
+            this.btnSectorHistory.Location = new System.Drawing.Point(16, 227);
+            this.btnSectorHistory.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnSectorHistory.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnSectorHistory.Name = "btnSectorHistory";
+            this.btnSectorHistory.Padding = new System.Windows.Forms.Padding(3);
+            this.btnSectorHistory.Size = new System.Drawing.Size(152, 30);
+            this.btnSectorHistory.TabIndex = 58;
+            this.btnSectorHistory.Text = "JACK CUSTOMER";
+            this.btnSectorHistory.UseVisualStyleBackColor = false;
+            this.btnSectorHistory.Click += new System.EventHandler(this.btnSectorHistory_Click);
             // 
             // frmChaseCustomerList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1281, 990);
-            this.Controls.Add(this.buttonFormatting1);
+            this.Controls.Add(this.btnSectorHistory);
             this.Controls.Add(this.btnLeads);
             this.Controls.Add(this.lblChasedQuotes);
             this.Controls.Add(this.btnTarget);
@@ -421,6 +422,6 @@
         private buttonFormatting btnTarget;
         private System.Windows.Forms.Label lblChasedQuotes;
         private buttonFormatting btnLeads;
-        private buttonFormatting buttonFormatting1;
+        private buttonFormatting btnSectorHistory;
     }
 }
