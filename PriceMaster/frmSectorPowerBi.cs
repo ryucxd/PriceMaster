@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Printing;
 
 namespace PriceMaster
 {
@@ -49,6 +50,10 @@ namespace PriceMaster
             {
                 conn.Open();
 
+                string fullname = "";
+                using (SqlCommand cmd = new SqlCommand("SELECT forename + ' ' + surname FROM [user_info].dbo.[user] WHERE id = " + staff_id, conn))
+                    fullname = cmd.ExecuteScalar().ToString();
+
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
@@ -64,7 +69,7 @@ namespace PriceMaster
                         averagePercent += Convert.ToDouble(dt.Rows[i][1].ToString());
                     }
 
-                    lblPercent.Text = "Average Percent: " + Math.Round(averagePercent / sectorPercent.Count,2) + "%";
+                    lblPercent.Text = fullname + " Average Percent: " + Math.Round(averagePercent / sectorPercent.Count,2) + "%";
                 }
 
                 cartesianChart1.AxisX.Clear();
@@ -132,6 +137,74 @@ namespace PriceMaster
         private void dteEnd_CloseUp(object sender, EventArgs e)
         {
             load_chart(staff_id);
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            printImage();
+        }
+
+        private void printImage()
+        {
+
+            string path = @"C:\temp\temp_" + DateTime.Now.ToString("hh_ss") + ".jpg";
+
+            try
+            {
+                Image bit = new Bitmap(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
+
+                Graphics gs = Graphics.FromImage(bit);
+
+                gs.CopyFromScreen(new Point(0, 0), new Point(0, 0), bit.Size);
+
+                //bit.Save(@"C:\temp\temp.jpg");
+
+
+                Rectangle bounds = this.Bounds;
+                using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
+                {
+                    using (Graphics g = Graphics.FromImage(bitmap))
+                    {
+                        g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
+                    }
+                    bitmap.Save(path);
+                }
+
+
+                //var frm = Form.ActiveForm;
+                //using (var bmp = new Bitmap(frm.Width, frm.Height))
+                //{
+                //    frm.DrawToBitmap(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
+                //    bmp.Save(@"C:\temp\temp.jpg");
+                //}
+
+
+
+                PrintDocument pd = new PrintDocument();
+                pd.PrintPage += (sender, args) =>
+                {
+                    Image i = Image.FromFile(path);
+                    Rectangle m = args.MarginBounds;
+                    if ((double)i.Width / (double)i.Height > (double)m.Width / (double)m.Height) // image is wider
+                    {
+                        m.Height = (int)((double)i.Height / (double)i.Width * (double)m.Width);
+                        m.Height = 700;
+                        m.Width = 1000;
+                    }
+                    else
+                    {
+                        m.Width = (int)((double)i.Width / (double)i.Height * (double)m.Height);
+                    }
+                    args.Graphics.DrawImage(i, m);
+                };
+
+                pd.DefaultPageSettings.Landscape = true;
+                Margins margins = new Margins(50, 50, 50, 50);
+                pd.DefaultPageSettings.Margins = margins;
+                pd.Print();
+            }
+            catch
+            { }
         }
     }
 }

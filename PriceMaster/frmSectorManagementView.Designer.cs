@@ -109,7 +109,7 @@
             // 
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.tabControl.Location = new System.Drawing.Point(11, 58);
+            this.tabControl.Location = new System.Drawing.Point(11, 52);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1383, 29);

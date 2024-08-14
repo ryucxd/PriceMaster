@@ -35,19 +35,60 @@ namespace PriceMaster
         {
             InitializeComponent();
 
+
+            tabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
+            tabControl.DrawItem += new DrawItemEventHandler(tabControl_DrawItem);
+
             //monday
             int temp = DayOfWeek.Monday - DateTime.Now.DayOfWeek;
             DateTime monday = DateTime.Now.AddDays(temp);
 
-            dteStart.Value = monday;
-            dteEnd.Value = monday.AddDays(5);
+            //dteStart.Value = monday;
+            dteStart.Value = monday.AddMonths(-1);
+            dteEnd.Value = monday; ;
+            
             remove_tabs = -1;
 
             pieChartOne.MouseClick += PieChartOne_MouseClick;
 
             fill_tabcontrol();
+            tabControl.SelectedIndex = tabControl.TabPages.Count -1;
             fill_grids();
+
+
+
+
+            
+
         }
+
+        private void tabControl_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            TabControl tabControl = sender as TabControl;
+            TabPage tabPage = tabControl.TabPages[e.Index];
+
+            // Set the background color of the tab (optional)
+            Color tabColor = Color.LightSkyBlue; // Customize this color as needed
+            using (SolidBrush brush = new SolidBrush(tabColor))
+            {
+                e.Graphics.FillRectangle(brush, e.Bounds);
+            }
+
+            // Draw the tab's text
+            TextRenderer.DrawText(e.Graphics, tabPage.Text, tabPage.Font, e.Bounds, tabPage.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
+
+            // Draw a black border around the tab
+            using (Pen pen = new Pen(Color.Black))
+            {
+                Rectangle rect = e.Bounds;
+                rect.Inflate(-1, -1); // Adjust the rectangle to fit inside the tab area
+                e.Graphics.DrawRectangle(pen, rect);
+            }
+
+            // Optional: Draw focus rectangle (if needed)
+            e.DrawFocusRectangle();
+        }
+
 
 
         private void fill_tabcontrol()
@@ -57,9 +98,13 @@ namespace PriceMaster
                 //tabControl.TabPages.Remove()
                 tabControl.TabPages.Clear();
 
-                string sql = "select distinct Convert(varchar,cast(sector_date  as date),103) FROM [order_database].dbo.view_sales_table_grouped " +
-                "where sector_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND sector_date <= '" + dteEnd.Value.ToString("yyyyMMdd") + "' " +
-                "ORDER BY Convert(varchar,cast(sector_date  as date),103) desc";
+                //string sql = "select distinct Convert(varchar,cast(sector_date  as date),103) FROM [order_database].dbo.view_sales_table_grouped " +
+                //"where sector_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND sector_date <= '" + dteEnd.Value.ToString("yyyyMMdd") + "' " +
+                //"ORDER BY sector_date desc";
+
+                string sql = "select distinct sector_date  FROM [order_database].dbo.view_sales_table_grouped " +
+                             "where sector_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND sector_date <= '" + dteEnd.Value.ToString("yyyyMMdd") + "' " +
+                             "ORDER BY sector_date asc";
 
                 using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
                 {
@@ -80,8 +125,8 @@ namespace PriceMaster
                         TabPage tabPageLoop = new TabPage
                         {
                             Name = dt.Rows[i][0].ToString(),
-                            Text = dt.Rows[i][0].ToString(),
-                            BackColor = Color.LightSkyBlue
+                            Text = Convert.ToDateTime(dt.Rows[i][0].ToString()).ToString("dd/MM/yyyy")   ,
+                            BackColor = Color.LightBlue
                         };
                         tabControl.TabPages.Add(tabPageLoop);
                     }
