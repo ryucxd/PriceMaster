@@ -357,7 +357,7 @@
             this.btnSectorHistory.Padding = new System.Windows.Forms.Padding(3);
             this.btnSectorHistory.Size = new System.Drawing.Size(152, 30);
             this.btnSectorHistory.TabIndex = 58;
-            this.btnSectorHistory.Text = "JACK CUSTOMER";
+            this.btnSectorHistory.Text = "Customer Base";
             this.btnSectorHistory.UseVisualStyleBackColor = false;
             this.btnSectorHistory.Click += new System.EventHandler(this.btnSectorHistory_Click);
             // 

@@ -54,6 +54,7 @@
             this.btnSalesMemberThreeHistoric = new PriceMaster.buttonFormatting();
             this.btnPrint = new PriceMaster.buttonFormatting();
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
+            this.lblWeekCommencing = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberOne)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberTwo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberThree)).BeginInit();
@@ -331,11 +332,22 @@
             this.buttonFormatting1.UseVisualStyleBackColor = false;
             this.buttonFormatting1.Click += new System.EventHandler(this.buttonFormatting1_Click);
             // 
+            // lblWeekCommencing
+            // 
+            this.lblWeekCommencing.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.lblWeekCommencing.Location = new System.Drawing.Point(17, 9);
+            this.lblWeekCommencing.Name = "lblWeekCommencing";
+            this.lblWeekCommencing.Size = new System.Drawing.Size(487, 36);
+            this.lblWeekCommencing.TabIndex = 70;
+            this.lblWeekCommencing.Text = "Data for Week Commencing: 2024/08/15";
+            this.lblWeekCommencing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmSectorManagementView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1410, 938);
+            this.Controls.Add(this.lblWeekCommencing);
             this.Controls.Add(this.buttonFormatting1);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnSalesMemberThreeHistoric);
@@ -401,5 +413,6 @@
         private buttonFormatting btnSalesMemberThreeHistoric;
         private buttonFormatting btnPrint;
         private buttonFormatting buttonFormatting1;
+        private System.Windows.Forms.Label lblWeekCommencing;
     }
 }

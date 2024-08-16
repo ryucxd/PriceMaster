@@ -15,6 +15,7 @@ using System.Data.SqlTypes;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Diagnostics;
 using System.Drawing.Printing;
+using System.Windows.Forms.Integration;
 
 namespace PriceMaster
 {
@@ -25,16 +26,12 @@ namespace PriceMaster
         public int salesMemberOne { get; set; }
         public int salesMemberTwo { get; set; }
         public int salesMemberThree { get; set; }
-
         public DataTable excel_headers { get; set; }
 
-        public DataTable MyProperty { get; set; }
-        public DataTable MyProperty1 { get; set; }
 
         public frmSectorManagementView()
         {
             InitializeComponent();
-
 
             tabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
             tabControl.DrawItem += new DrawItemEventHandler(tabControl_DrawItem);
@@ -45,22 +42,16 @@ namespace PriceMaster
 
             //dteStart.Value = monday;
             dteStart.Value = monday.AddMonths(-1);
-            dteEnd.Value = monday; ;
+            dteEnd.Value = monday; 
             
             remove_tabs = -1;
-
-            pieChartOne.MouseClick += PieChartOne_MouseClick;
 
             fill_tabcontrol();
             tabControl.SelectedIndex = tabControl.TabPages.Count -1;
             fill_grids();
-
-
-
-
-            
-
         }
+
+
 
         private void tabControl_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -160,6 +151,8 @@ namespace PriceMaster
                     da.Fill(dt);
 
                     sectorDate = Convert.ToDateTime(dt.Rows[tabControl.SelectedIndex][0].ToString());
+
+                    lblWeekCommencing.Text = "Data for Week Commencing: " + Convert.ToDateTime(dt.Rows[tabControl.SelectedIndex][0].ToString()).ToString("dd/MM/yyyy");
                 }
 
                 //get a list of each person that has a target for that date
@@ -270,6 +263,7 @@ namespace PriceMaster
             }
             dgv.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv.Columns[0].Visible = false;
+            dgv.Columns[1].Visible = false;
             dgv.Columns[3].Visible = false;
 
             foreach (DataGridViewRow row in dgv.Rows)
