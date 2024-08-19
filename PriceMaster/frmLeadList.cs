@@ -46,7 +46,7 @@ namespace PriceMaster
                 "FROM [order_database].dbo.sales_new_leads s " +
                 "left join [user_info].dbo.[user] u on s.allocated_to = u.id " +
                 "left join [order_database].dbo.sales_table st on s.sector_id = st.id " +
-                "where prospect_added_by is null"; // lead_by = " + CONNECT.staffID;
+                "where prospect_added_by is null AND Customer LIKE '%" + txtCustomerSearch.Text + "%'"; // lead_by = " + CONNECT.staffID;
 
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
@@ -308,6 +308,11 @@ namespace PriceMaster
             fill_targets();
 
             format_targets();
+        }
+
+        private void txtCustomerSearch_TextChanged(object sender, EventArgs e)
+        {
+            fill_leads();
         }
     }
 }

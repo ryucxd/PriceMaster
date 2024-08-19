@@ -36,6 +36,8 @@
             this.pieChart1 = new LiveCharts.Wpf.PieChart();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvTarget = new System.Windows.Forms.DataGridView();
+            this.txtCustomerSearch = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnLead = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarget)).BeginInit();
@@ -61,6 +63,7 @@
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Location = new System.Drawing.Point(463, 48);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(822, 701);
             this.dataGridView1.TabIndex = 0;
@@ -113,6 +116,24 @@
             this.dgvTarget.Size = new System.Drawing.Size(428, 356);
             this.dgvTarget.TabIndex = 57;
             // 
+            // txtCustomerSearch
+            // 
+            this.txtCustomerSearch.Location = new System.Drawing.Point(463, 26);
+            this.txtCustomerSearch.Name = "txtCustomerSearch";
+            this.txtCustomerSearch.Size = new System.Drawing.Size(267, 20);
+            this.txtCustomerSearch.TabIndex = 0;
+            this.txtCustomerSearch.TextChanged += new System.EventHandler(this.txtCustomerSearch_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label3.Location = new System.Drawing.Point(463, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(267, 20);
+            this.label3.TabIndex = 62;
+            this.label3.Text = "Customer Search";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // btnLead
             // 
             this.btnLead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -137,6 +158,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1297, 761);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtCustomerSearch);
             this.Controls.Add(this.btnLead);
             this.Controls.Add(this.elementHost2);
             this.Controls.Add(this.label2);
@@ -152,6 +175,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarget)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -164,5 +188,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvTarget;
         private buttonFormatting btnLead;
+        private System.Windows.Forms.TextBox txtCustomerSearch;
+        private System.Windows.Forms.Label label3;
     }
 }
