@@ -319,6 +319,11 @@ namespace PriceMaster
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+
+            if (dgvSector.Rows.Count == 0)
+                return;
+
+
             string file = @"C:\temp\jacks_customers" + DateTime.Now.ToString("mm_ss") + ".xlsx";
 
             int currentExcelRow = 0;
@@ -336,9 +341,6 @@ namespace PriceMaster
 
             xlApp.WindowState = Excel.XlWindowState.xlMaximized;
 
-
-
-
             //xlWorksheet.Range["A1"].Value2 = "Target"; 
 
             //xlWorksheet.Cells[1][excel_row].Value2 = 22; 
@@ -350,7 +352,7 @@ namespace PriceMaster
 
                 xlWorksheet.Cells[currentExcelRow, i + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
                 xlWorksheet.Cells[currentExcelRow, i + 1].Font.Size = 15;
-                xlWorksheet.Cells[currentExcelRow, i + 1].Interior.Color = Color.LightSkyBlue;
+                xlWorksheet.Cells[currentExcelRow, i + 1] .Interior.Color = Color.LightSkyBlue;
 
             }
 

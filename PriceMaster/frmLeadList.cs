@@ -39,6 +39,9 @@ namespace PriceMaster
 
             if (dataGridView1.Columns.Contains("Add Prospect") == true)
                 dataGridView1.Columns.Remove("Add Prospect");
+            
+            if (dataGridView1.Columns.Contains("Delete Lead") == true)
+                dataGridView1.Columns.Remove("Delete Lead");
 
 
             string sql = "select s.id,lead_date as [Lead Time],Customer,contact_name as [Contact Name],customer_address as [Customer Address], " +
@@ -86,6 +89,14 @@ namespace PriceMaster
 
             column_index();
 
+            DataGridViewButtonColumn leadButton = new DataGridViewButtonColumn();
+            leadButton.Name = "Delete Lead";
+            leadButton.Text = "Delete Lead";
+            leadButton.UseColumnTextForButtonValue = true;
+            dataGridView1.Columns.Insert(notes_index + 2, leadButton);
+
+            column_index();
+
 
         }
 
@@ -93,6 +104,9 @@ namespace PriceMaster
         {
             if (dataGridView1.Columns.Contains("Add Prospect") == true)
                 add_prospect_button_index = dataGridView1.Columns["Add Prospect"].Index;
+
+            if (dataGridView1.Columns.Contains("Delete Lead") == true)
+                add_prospect_button_index = dataGridView1.Columns["Delete Lead"].Index;
 
             id_index = dataGridView1.Columns["id"].Index;
             lead_time_index = dataGridView1.Columns["Lead Time"].Index;
@@ -130,9 +144,6 @@ namespace PriceMaster
                 }
 
                 conn.Close();
-
-
-
                 format_targets();
 
             }
@@ -159,10 +170,6 @@ namespace PriceMaster
                     dgvTarget.Rows[i].DefaultCellStyle.BackColor = Color.PaleVioletRed;
 
             }
-
-
-
-
 
             dgvTarget.ClearSelection();
 
@@ -311,6 +318,27 @@ namespace PriceMaster
 
                 frmAddCustomerToSalesProspect frm = new frmAddCustomerToSalesProspect(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[id_index].Value.ToString()), dataGridView1.Rows[e.RowIndex].Cells[customer_index].Value.ToString());
                 frm.ShowDialog();
+
+            }
+
+            if (dataGridView1.Columns["Delete Lead"].Index == e.ColumnIndex)
+            {
+
+                //delete the prospect by adding 'corey' into the acc ref
+                string sql = "UPDATE [order_database].dbo.sales_new_leads " +
+                        "SET prospect_acc_ref = 'corey',prospect_added_by = " + CONNECT.staffID + ", prospect_added_date = GETDATE()  " +
+                        "WHERE id = " + dataGridView1.Rows[e.RowIndex].Cells[id_index].Value.ToString();
+
+                using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    conn.Close();
+
+                }
 
             }
 
