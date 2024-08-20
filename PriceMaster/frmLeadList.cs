@@ -46,7 +46,8 @@ namespace PriceMaster
                 "FROM [order_database].dbo.sales_new_leads s " +
                 "left join [user_info].dbo.[user] u on s.allocated_to = u.id " +
                 "left join [order_database].dbo.sales_table st on s.sector_id = st.id " +
-                "where prospect_added_by is null AND Customer LIKE '%" + txtCustomerSearch.Text + "%'"; // lead_by = " + CONNECT.staffID;
+                "where prospect_added_by is null AND Customer LIKE '%" + txtCustomerSearch.Text + "%' " +
+                " AND u.forename + ' ' + u.surname LIKE '%" + cmbStaff.Text + "%'"; // lead_by = " + CONNECT.staffID;
 
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
@@ -58,6 +59,15 @@ namespace PriceMaster
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
+
+                    // while we are here fill the combobox of all available staff members
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        if (cmbStaff.Items.Contains(dr[6].ToString()) == false)
+                            cmbStaff.Items.Add(dr[6].ToString());
+
+                    }
+
 
                     dataGridView1.DataSource = dt;
 
@@ -311,6 +321,16 @@ namespace PriceMaster
         }
 
         private void txtCustomerSearch_TextChanged(object sender, EventArgs e)
+        {
+            fill_leads();
+        }
+
+        private void cmbStaff_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fill_leads();
+        }
+
+        private void cmbStaff_TextChanged(object sender, EventArgs e)
         {
             fill_leads();
         }

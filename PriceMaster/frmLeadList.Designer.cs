@@ -39,6 +39,8 @@
             this.txtCustomerSearch = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnLead = new PriceMaster.buttonFormatting();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbStaff = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarget)).BeginInit();
             this.SuspendLayout();
@@ -153,11 +155,35 @@
             this.btnLead.UseVisualStyleBackColor = false;
             this.btnLead.Click += new System.EventHandler(this.btnLead_Click);
             // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.label4.Location = new System.Drawing.Point(1019, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(159, 20);
+            this.label4.TabIndex = 63;
+            this.label4.Text = "Staff Member";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbStaff
+            // 
+            this.cmbStaff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbStaff.FormattingEnabled = true;
+            this.cmbStaff.Location = new System.Drawing.Point(1019, 26);
+            this.cmbStaff.Name = "cmbStaff";
+            this.cmbStaff.Size = new System.Drawing.Size(159, 21);
+            this.cmbStaff.TabIndex = 64;
+            this.cmbStaff.SelectedIndexChanged += new System.EventHandler(this.cmbStaff_SelectedIndexChanged);
+            this.cmbStaff.TextChanged += new System.EventHandler(this.cmbStaff_TextChanged);
+            // 
             // frmLeadList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1297, 761);
+            this.Controls.Add(this.cmbStaff);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtCustomerSearch);
             this.Controls.Add(this.btnLead);
@@ -190,5 +216,7 @@
         private buttonFormatting btnLead;
         private System.Windows.Forms.TextBox txtCustomerSearch;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmbStaff;
     }
 }
