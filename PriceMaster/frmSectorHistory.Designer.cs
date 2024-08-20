@@ -33,6 +33,7 @@
             this.dgvSector = new System.Windows.Forms.DataGridView();
             this.cmbSector = new System.Windows.Forms.ComboBox();
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.btnPrint = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSector)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,11 +85,30 @@
             this.tabControl.TabIndex = 6;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnPrint.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.ForeColor = System.Drawing.Color.White;
+            this.btnPrint.Location = new System.Drawing.Point(1225, 16);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnPrint.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Padding = new System.Windows.Forms.Padding(3);
+            this.btnPrint.Size = new System.Drawing.Size(75, 30);
+            this.btnPrint.TabIndex = 7;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // frmSectorHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1314, 918);
+            this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.cmbSector);
             this.Controls.Add(this.dgvSector);
@@ -107,5 +127,6 @@
         private System.Windows.Forms.DataGridView dgvSector;
         private System.Windows.Forms.ComboBox cmbSector;
         private System.Windows.Forms.TabControl tabControl;
+        private buttonFormatting btnPrint;
     }
 }

@@ -1,14 +1,17 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace PriceMaster
 {
@@ -240,7 +243,7 @@ namespace PriceMaster
 
             if (tabControl.SelectedIndex == -1)
                 return;
-            foreach (DataGridViewColumn col in dgvSector.Columns) 
+            foreach (DataGridViewColumn col in dgvSector.Columns)
             {
                 col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -281,13 +284,13 @@ namespace PriceMaster
             clear_tabs = -1;
             validate_tab_pages();
             load_grid();
-            
+
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             //clear_tabs = -1;
-           // validate_tab_pages();
+            // validate_tab_pages();
             load_grid();
             format_grid();
         }
@@ -313,5 +316,195 @@ namespace PriceMaster
 
             }
         }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            string file = @"C:\temp\jacks_customers" + DateTime.Now.ToString("mm_ss") + ".xlsx";
+
+            int currentExcelRow = 0;
+
+
+            //opening method 
+
+            Excel.Application xlApp = new Excel.Application();
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Add(); //xlApp.Workbooks.Open(GT_input_filepath, 0, false); //< to open an already existing file 
+            Excel.Worksheet xlWorksheet = xlWorkbook.Worksheets[1];
+
+
+
+            xlApp.Visible = true; //make it visible for now 
+
+            xlApp.WindowState = Excel.XlWindowState.xlMaximized;
+
+
+
+
+            //xlWorksheet.Range["A1"].Value2 = "Target"; 
+
+            //xlWorksheet.Cells[1][excel_row].Value2 = 22; 
+
+            currentExcelRow++;
+            for (int i = 0; i < dgvSector.Columns.Count; i++)
+            {
+                xlWorksheet.Cells[currentExcelRow, i + 1] = dgvSector.Columns[i].HeaderText;
+
+                xlWorksheet.Cells[currentExcelRow, i + 1].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                xlWorksheet.Cells[currentExcelRow, i + 1].Font.Size = 15;
+                xlWorksheet.Cells[currentExcelRow, i + 1].Interior.Color = Color.LightSkyBlue;
+
+            }
+
+            currentExcelRow++;
+
+            for (int row_loop = 0; row_loop < dgvSector.Rows.Count; row_loop++)
+            {
+                for (int column_loop = 0; column_loop < dgvSector.Columns.Count; column_loop++)
+                {
+
+                    xlWorksheet.Cells[currentExcelRow, column_loop + 1] = dgvSector.Rows[row_loop].Cells[column_loop].Value.ToString();
+
+                }
+                currentExcelRow++;
+            }
+
+
+            //formatting examples 
+
+
+
+            //xlWorkSheet.Range["H2:H300"].NumberFormat = "£#,###,###.00"; < formats into currency 
+
+            //xlWorksheet.Range["A1:D1"].Merge(); merging cells 
+
+            //xlWorksheet.Range["A1"].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft; < alignment 
+
+            //xlWorksheet.Range["A1"].Cells.Font.Size = 22; < font size 
+
+
+
+            //auto fit and rows  
+
+            //Microsoft.Office.Interop.Excel.Worksheet ws = xlApp.ActiveWorkbook.Worksheets[1]; 
+
+            Microsoft.Office.Interop.Excel.Range range = xlWorksheet.UsedRange;
+
+            //xlWorksheet.Columns.ClearFormats(); 
+
+            //xlWorksheet.Rows.ClearFormats(); 
+
+            xlWorksheet.Columns.AutoFit();
+
+            xlWorksheet.Rows.AutoFit();
+
+
+            if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Correspondence")
+            {
+                xlWorksheet.Columns[5].ColumnWidth = 98.14; //size and wrap columns 
+                xlWorksheet.Columns[5].WrapText = true;
+            }
+            else if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Quotation Chasing")
+            {
+                xlWorksheet.Columns[4].ColumnWidth = 98.14; //size and wrap columns 
+                xlWorksheet.Columns[4].WrapText = true;
+            }
+            else if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Leads")
+            {
+                xlWorksheet.Columns[5].ColumnWidth = 98.14; //size and wrap columns 
+                xlWorksheet.Columns[5].WrapText = true;
+            }
+
+
+            //border active cells 
+
+            range.Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous; 
+
+            range.Borders.Color = ColorTranslator.ToOle(Color.Black);
+
+            Microsoft.Office.Interop.Excel.Range columnA = xlWorksheet.Columns["A"];
+            // Delete the column and shift cells to the left
+            columnA.Delete(Microsoft.Office.Interop.Excel.XlDeleteShiftDirection.xlShiftToLeft);
+
+            //xlWorkSheet.Columns[3].ColumnWidth = 98.14; //size and wrap columns 
+
+            //xlWorkSheet.Columns[3].WrapText = true; 
+
+
+
+            //Set print margins 
+
+            Excel.PageSetup xlPageSetUp = xlWorksheet.PageSetup;
+            xlPageSetUp.Zoom = false;
+            xlPageSetUp.FitToPagesWide = 1;
+            xlPageSetUp.Orientation = Excel.XlPageOrientation.xlLandscape;
+
+
+
+            //save the new file 
+
+            xlApp.DisplayAlerts = false;
+
+            xlWorkbook.SaveAs(file);
+
+
+
+            //close the workbook 
+
+            xlWorkbook.Close();
+
+            xlApp.Quit();
+
+
+
+            //release objects from memory 
+
+            releaseObject(xlWorksheet);
+
+            releaseObject(xlWorkbook);
+
+            releaseObject(xlApp);
+
+            Process.Start(file);
+
+
+        }
+
+
+        //release objects void 
+
+        private static void releaseObject(object obj)
+
+        {
+
+            try
+
+            {
+
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+
+                obj = null;
+
+            }
+
+            catch (Exception ex)
+
+            {
+
+                obj = null;
+
+                Console.WriteLine("Error releasing object: " + ex.Message);
+
+            }
+
+            finally
+
+            {
+
+                GC.Collect();
+
+            }
+
+        }
+
+
     }
 }
