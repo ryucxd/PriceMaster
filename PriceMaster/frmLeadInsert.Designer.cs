@@ -45,6 +45,8 @@
             this.btnCancel = new PriceMaster.buttonFormatting();
             this.label8 = new System.Windows.Forms.Label();
             this.cmbAllocatedTo = new System.Windows.Forms.ComboBox();
+            this.chkRotec = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label5
@@ -168,7 +170,7 @@
             this.btnInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInsert.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInsert.ForeColor = System.Drawing.Color.White;
-            this.btnInsert.Location = new System.Drawing.Point(289, 544);
+            this.btnInsert.Location = new System.Drawing.Point(289, 574);
             this.btnInsert.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnInsert.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnInsert.Name = "btnInsert";
@@ -186,7 +188,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(204, 545);
+            this.btnCancel.Location = new System.Drawing.Point(204, 575);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnCancel.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnCancel.Name = "btnCancel";
@@ -219,11 +221,33 @@
             this.cmbAllocatedTo.Size = new System.Drawing.Size(240, 21);
             this.cmbAllocatedTo.TabIndex = 5;
             // 
+            // chkRotec
+            // 
+            this.chkRotec.AutoSize = true;
+            this.chkRotec.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.chkRotec.Location = new System.Drawing.Point(368, 548);
+            this.chkRotec.Name = "chkRotec";
+            this.chkRotec.Size = new System.Drawing.Size(15, 14);
+            this.chkRotec.TabIndex = 120;
+            this.chkRotec.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label1.Location = new System.Drawing.Point(186, 545);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(178, 17);
+            this.label1.TabIndex = 121;
+            this.label1.Text = "Is this a ROTEC customer?";
+            // 
             // frmLeadInsert
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 589);
+            this.ClientSize = new System.Drawing.Size(569, 616);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.chkRotec);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cmbAllocatedTo);
             this.Controls.Add(this.btnCancel);
@@ -269,5 +293,7 @@
         private buttonFormatting btnCancel;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbAllocatedTo;
+        private System.Windows.Forms.CheckBox chkRotec;
+        private System.Windows.Forms.Label label1;
     }
 }

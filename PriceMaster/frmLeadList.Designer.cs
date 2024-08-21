@@ -41,6 +41,7 @@
             this.btnLead = new PriceMaster.buttonFormatting();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbStaff = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarget)).BeginInit();
             this.SuspendLayout();
@@ -67,7 +68,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(822, 701);
+            this.dataGridView1.Size = new System.Drawing.Size(1162, 701);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -78,7 +79,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
             this.label1.Location = new System.Drawing.Point(463, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(822, 33);
+            this.label1.Size = new System.Drawing.Size(1162, 33);
             this.label1.TabIndex = 1;
             this.label1.Text = "Allocated Leads ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -120,18 +121,20 @@
             // 
             // txtCustomerSearch
             // 
-            this.txtCustomerSearch.Location = new System.Drawing.Point(463, 26);
+            this.txtCustomerSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCustomerSearch.Location = new System.Drawing.Point(1155, 27);
             this.txtCustomerSearch.Name = "txtCustomerSearch";
-            this.txtCustomerSearch.Size = new System.Drawing.Size(267, 20);
+            this.txtCustomerSearch.Size = new System.Drawing.Size(198, 20);
             this.txtCustomerSearch.TabIndex = 0;
             this.txtCustomerSearch.TextChanged += new System.EventHandler(this.txtCustomerSearch_TextChanged);
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label3.Location = new System.Drawing.Point(463, 3);
+            this.label3.Location = new System.Drawing.Point(1155, 4);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(267, 20);
+            this.label3.Size = new System.Drawing.Size(198, 20);
             this.label3.TabIndex = 62;
             this.label3.Text = "Customer Search";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -144,7 +147,7 @@
             this.btnLead.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLead.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLead.ForeColor = System.Drawing.Color.White;
-            this.btnLead.Location = new System.Drawing.Point(1186, 12);
+            this.btnLead.Location = new System.Drawing.Point(1526, 12);
             this.btnLead.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnLead.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnLead.Name = "btnLead";
@@ -159,7 +162,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label4.Location = new System.Drawing.Point(1019, 3);
+            this.label4.Location = new System.Drawing.Point(1359, 3);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(159, 20);
             this.label4.TabIndex = 63;
@@ -170,18 +173,30 @@
             // 
             this.cmbStaff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbStaff.FormattingEnabled = true;
-            this.cmbStaff.Location = new System.Drawing.Point(1019, 26);
+            this.cmbStaff.Location = new System.Drawing.Point(1359, 26);
             this.cmbStaff.Name = "cmbStaff";
             this.cmbStaff.Size = new System.Drawing.Size(159, 21);
             this.cmbStaff.TabIndex = 64;
             this.cmbStaff.SelectedIndexChanged += new System.EventHandler(this.cmbStaff_SelectedIndexChanged);
             this.cmbStaff.TextChanged += new System.EventHandler(this.cmbStaff_TextChanged);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Orange;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label5.Location = new System.Drawing.Point(466, 26);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(194, 17);
+            this.label5.TabIndex = 65;
+            this.label5.Text = "              = Rotec\'s Customers";
+            // 
             // frmLeadList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1297, 761);
+            this.ClientSize = new System.Drawing.Size(1637, 761);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.cmbStaff);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -218,5 +233,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbStaff;
+        private System.Windows.Forms.Label label5;
     }
 }

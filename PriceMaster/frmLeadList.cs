@@ -25,7 +25,9 @@ namespace PriceMaster
         public int sector_index { get; set; }
         public int notes_index { get; set; }
         public int add_prospect_button_index { get; set; }
-        public int _index { get; set; }
+        public int delete_lead_index { get; set; }
+
+        public int rotec_customer_index { get; set; }
         public frmLeadList()
         {
             InitializeComponent();
@@ -45,7 +47,7 @@ namespace PriceMaster
 
 
             string sql = "select s.id,lead_date as [Lead Time],Customer,contact_name as [Contact Name],customer_address as [Customer Address], " +
-                "contact_details as [Contact Details],u.forename + ' ' + u.surname as [Allocated to],Sector,Notes " +
+                "contact_details as [Contact Details],u.forename + ' ' + u.surname as [Allocated to],Sector,Notes,rotec_customer " +
                 "FROM [order_database].dbo.sales_new_leads s " +
                 "left join [user_info].dbo.[user] u on s.allocated_to = u.id " +
                 "left join [order_database].dbo.sales_table st on s.sector_id = st.id " +
@@ -85,7 +87,7 @@ namespace PriceMaster
             prospectButton.Name = "Add Prospect";
             prospectButton.Text = "Add Prospect";
             prospectButton.UseColumnTextForButtonValue = true;
-            dataGridView1.Columns.Insert(notes_index + 1, prospectButton);
+            dataGridView1.Columns.Insert(rotec_customer_index + 1, prospectButton);
 
             column_index();
 
@@ -93,11 +95,11 @@ namespace PriceMaster
             leadButton.Name = "Delete Lead";
             leadButton.Text = "Delete Lead";
             leadButton.UseColumnTextForButtonValue = true;
-            dataGridView1.Columns.Insert(notes_index + 2, leadButton);
+            dataGridView1.Columns.Insert(rotec_customer_index + 2, leadButton);
 
             column_index();
 
-
+            format_targets();
         }
 
         private void column_index()
@@ -106,7 +108,7 @@ namespace PriceMaster
                 add_prospect_button_index = dataGridView1.Columns["Add Prospect"].Index;
 
             if (dataGridView1.Columns.Contains("Delete Lead") == true)
-                add_prospect_button_index = dataGridView1.Columns["Delete Lead"].Index;
+                delete_lead_index = dataGridView1.Columns["Delete Lead"].Index;
 
             id_index = dataGridView1.Columns["id"].Index;
             lead_time_index = dataGridView1.Columns["Lead Time"].Index;
@@ -117,7 +119,8 @@ namespace PriceMaster
             allocated_to_index = dataGridView1.Columns["Allocated to"].Index;
             sector_index = dataGridView1.Columns["Sector"].Index;
             notes_index = dataGridView1.Columns["Notes"].Index;
-            
+            rotec_customer_index = dataGridView1.Columns["rotec_customer"].Index;
+
         }
         private void fill_targets()
         {
@@ -151,143 +154,168 @@ namespace PriceMaster
 
         private void format_targets()
         {
-            foreach (DataGridViewColumn col in dgvTarget.Columns)
-            {
-                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                col.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
 
-            dgvTarget.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            if (dgvTarget.Rows.Count == 0 && dataGridView1.Rows.Count == 0)
+                return;
 
 
-            //colours
-            for (int i = 0; i < dgvTarget.Rows.Count; i++)
-            {
-                //if achieved is >= target
-                if (Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()) >= Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString()))
-                    dgvTarget.Rows[i].DefaultCellStyle.BackColor = Color.PaleGreen;
-                else
-                    dgvTarget.Rows[i].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-
-            }
-
-            dgvTarget.ClearSelection();
-
-            //chart
-            pieChart1.AxisY.Clear();
-            pieChart1.AxisX.Clear();
-
-            int target = 0, achieved = 0;
-
-            List<string> sectorList = new List<string>();
-            List<int> achievedlist = new List<int>();
-
-            for (int i = 0; i < dgvTarget.Rows.Count; i++)
+            if (dgvTarget.Rows.Count > 0)
             {
 
-                //if achieved > the target
-                if (Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()) >= Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString()))
+
+
+                foreach (DataGridViewColumn col in dgvTarget.Columns)
                 {
-                    achieved += Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString());
-
-                    if (Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()) > 0)
-                    {
-                        sectorList.Add(dgvTarget.Rows[i].Cells[0].Value.ToString());
-                        achievedlist.Add(Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString()));
-                    }
-                }
-                else
-                {
-                    achieved += Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString());
-
-                    if (Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()) > 0)
-                    {
-                        sectorList.Add(dgvTarget.Rows[i].Cells[0].Value.ToString());
-                        achievedlist.Add(Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()));
-                    }
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
 
-
-                target += Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString());
-
-            }
-
-            //clean up the target 
-            if (achieved >= target)
-                target = 0;
-            else
-                target = target - achieved;
+                dgvTarget.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
 
-            //string[] datearray = datelist.ToArray();
-            string[] sectorArray = sectorList.ToArray();
-            int[] achievedArray = achievedlist.ToArray();
-
-
-
-            //Values = new ChartValues<int>(itemarray)
-
-
-
-            var seriesCollection = new SeriesCollection();
-
-            for (int i = 0; i < sectorArray.Length; i++)
-            {
-                Func<ChartPoint, string> labelPoint = chartPoint =>
-                  string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation); //this is for a percentage
-
-
-                PieSeries ps = new PieSeries
+                //colours
+                for (int i = 0; i < dgvTarget.Rows.Count; i++)
                 {
-                    Title = sectorArray[i],
-                    Values = new ChartValues<double> { achievedArray[i] },
-                    DataLabels = true,
-                    // LabelPoint = labelPoint,
-                    Foreground = System.Windows.Media.Brushes.Black,
-                    PushOut = 15,
+                    //if achieved is >= target
+                    if (Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()) >= Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString()))
+                        dgvTarget.Rows[i].DefaultCellStyle.BackColor = Color.PaleGreen;
+                    else
+                        dgvTarget.Rows[i].DefaultCellStyle.BackColor = Color.PaleVioletRed;
 
-                };
+                }
 
-                // add this slice to the others
-                seriesCollection.Add(ps);
+                dgvTarget.ClearSelection();
+
             }
 
-            if (target > 0)
+
+            if (dataGridView1.Rows.Count > 0)
             {
-                PieSeries ps2 = new PieSeries
+                //chart
+                pieChart1.AxisY.Clear();
+                pieChart1.AxisX.Clear();
+
+                int target = 0, achieved = 0;
+
+                List<string> sectorList = new List<string>();
+                List<int> achievedlist = new List<int>();
+
+                for (int i = 0; i < dgvTarget.Rows.Count; i++)
                 {
-                    Title = "Target",
-                    Values = new ChartValues<double> { target },
-                    DataLabels = true,
-                    Foreground = System.Windows.Media.Brushes.Black,
 
-                };
-                // Add the target to the SeriesCollection
-                seriesCollection.Add(ps2);
+                    //if achieved > the target
+                    if (Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()) >= Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString()))
+                    {
+                        achieved += Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString());
+
+                        if (Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()) > 0)
+                        {
+                            sectorList.Add(dgvTarget.Rows[i].Cells[0].Value.ToString());
+                            achievedlist.Add(Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString()));
+                        }
+                    }
+                    else
+                    {
+                        achieved += Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString());
+
+                        if (Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()) > 0)
+                        {
+                            sectorList.Add(dgvTarget.Rows[i].Cells[0].Value.ToString());
+                            achievedlist.Add(Convert.ToInt32(dgvTarget.Rows[i].Cells[1].Value.ToString()));
+                        }
+                    }
+
+
+                    target += Convert.ToInt32(dgvTarget.Rows[i].Cells[2].Value.ToString());
+
+                }
+
+                //clean up the target 
+                if (achieved >= target)
+                    target = 0;
+                else
+                    target = target - achieved;
+
+
+                //string[] datearray = datelist.ToArray();
+                string[] sectorArray = sectorList.ToArray();
+                int[] achievedArray = achievedlist.ToArray();
+
+
+
+                //Values = new ChartValues<int>(itemarray)
+
+
+
+                var seriesCollection = new SeriesCollection();
+
+                for (int i = 0; i < sectorArray.Length; i++)
+                {
+                    Func<ChartPoint, string> labelPoint = chartPoint =>
+                      string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation); //this is for a percentage
+
+
+                    PieSeries ps = new PieSeries
+                    {
+                        Title = sectorArray[i],
+                        Values = new ChartValues<double> { achievedArray[i] },
+                        DataLabels = true,
+                        // LabelPoint = labelPoint,
+                        Foreground = System.Windows.Media.Brushes.Black,
+                        PushOut = 15,
+
+                    };
+
+                    // add this slice to the others
+                    seriesCollection.Add(ps);
+                }
+
+                if (target > 0)
+                {
+                    PieSeries ps2 = new PieSeries
+                    {
+                        Title = "Target",
+                        Values = new ChartValues<double> { target },
+                        DataLabels = true,
+                        Foreground = System.Windows.Media.Brushes.Black,
+
+                    };
+                    // Add the target to the SeriesCollection
+                    seriesCollection.Add(ps2);
+                }
+
+
+
+                pieChart1.Series = seriesCollection;
+
+                pieChart1.LegendLocation = LegendLocation.Bottom;
+
+
+
+
+                //also format the lead history dgv here
+
+                foreach (DataGridViewColumn col in dataGridView1.Columns)
+                {
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                column_index();
+                dataGridView1.Columns[customer_address_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridView1.Columns[sector_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridView1.Columns[notes_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                dataGridView1.Columns[id_index].Visible = false;
+
+                dataGridView1.Columns[rotec_customer_index].Visible = false;
+
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (row.Cells[rotec_customer_index].Value.ToString() == "-1")
+                        row.DefaultCellStyle.BackColor = Color.Orange;
+                }
             }
-
-
-
-            pieChart1.Series = seriesCollection;
-
-            pieChart1.LegendLocation = LegendLocation.Bottom;
-
-
-
-
-            //also format the lead history dgv here
-
-            foreach (DataGridViewColumn col in dataGridView1.Columns)
-            {
-                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                col.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
-            column_index();
-            dataGridView1.Columns[customer_address_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[sector_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[notes_index].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-            dataGridView1.Columns[id_index].Visible = false;
 
             dgvTarget.ClearSelection();
             dataGridView1.ClearSelection();

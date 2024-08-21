@@ -75,7 +75,6 @@ namespace PriceMaster
             int sectorID = 0;
             if (cmbSector.Visible == true)
             {
-
                 if (cmbSector.Text.Length < 1)
                 {
                     MessageBox.Show("Please select a sector before clicking save! If there is no relevant sector please select 'General Correspondence'", "Missing Sector", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -125,9 +124,14 @@ namespace PriceMaster
 
             //insert the new lead
 
-            sql = "INSERT INTO [order_database].dbo.sales_new_leads (lead_date,lead_by,customer,contact_name,customer_address,contact_details,allocated_to,sector_id,notes) " +
+            int rotec = 0;
+
+            if (chkRotec.Checked == true)
+                rotec = -1;
+
+            sql = "INSERT INTO [order_database].dbo.sales_new_leads (lead_date,lead_by,customer,contact_name,customer_address,contact_details,allocated_to,sector_id,notes,rotec_customer) " +
                 "VALUES ( GETDATE()," + CONNECT.staffID + ",'" + txtCustomer.Text + "','" + txtContactName.Text + "','" + txtCustomerAddress.Text + "'," +
-                "'" + txtContactDetails.Text + "','" + allocated_to + "'," + sectorID + ",'" + txtNotes.Text + "' )";
+                "'" + txtContactDetails.Text + "','" + allocated_to + "'," + sectorID + ",'" + txtNotes.Text + "'," + rotec + " )";
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
