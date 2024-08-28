@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>201</ApplicationRevision>
+    <ApplicationRevision>206</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -182,6 +182,12 @@
     </Compile>
     <Compile Include="frmLeadInsert.Designer.cs">
       <DependentUpon>frmLeadInsert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOutOfOffice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOutOfOffice.Designer.cs">
+      <DependentUpon>frmOutOfOffice.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSalesSetUp.cs">
       <SubType>Form</SubType>
@@ -523,6 +529,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLeadInsert.resx">
       <DependentUpon>frmLeadInsert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOutOfOffice.resx">
+      <DependentUpon>frmOutOfOffice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSalesSetUp.resx">
       <DependentUpon>frmSalesSetUp.cs</DependentUpon>

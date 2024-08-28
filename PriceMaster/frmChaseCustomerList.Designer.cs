@@ -51,6 +51,7 @@
             this.lblChasedQuotes = new System.Windows.Forms.Label();
             this.btnLeads = new PriceMaster.buttonFormatting();
             this.btnSectorHistory = new PriceMaster.buttonFormatting();
+            this.btnOutOfOffice = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOther)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarget)).BeginInit();
@@ -229,12 +230,12 @@
             this.btnLastOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLastOrder.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLastOrder.ForeColor = System.Drawing.Color.White;
-            this.btnLastOrder.Location = new System.Drawing.Point(60, 145);
+            this.btnLastOrder.Location = new System.Drawing.Point(95, 145);
             this.btnLastOrder.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnLastOrder.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnLastOrder.Name = "btnLastOrder";
             this.btnLastOrder.Padding = new System.Windows.Forms.Padding(3);
-            this.btnLastOrder.Size = new System.Drawing.Size(187, 30);
+            this.btnLastOrder.Size = new System.Drawing.Size(152, 30);
             this.btnLastOrder.TabIndex = 49;
             this.btnLastOrder.Text = "Last Order Details";
             this.btnLastOrder.UseVisualStyleBackColor = false;
@@ -332,7 +333,7 @@
             this.btnLeads.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLeads.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLeads.ForeColor = System.Drawing.Color.White;
-            this.btnLeads.Location = new System.Drawing.Point(166, 184);
+            this.btnLeads.Location = new System.Drawing.Point(250, 180);
             this.btnLeads.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnLeads.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnLeads.Name = "btnLeads";
@@ -361,11 +362,30 @@
             this.btnSectorHistory.UseVisualStyleBackColor = false;
             this.btnSectorHistory.Click += new System.EventHandler(this.btnSectorHistory_Click);
             // 
+            // btnOutOfOffice
+            // 
+            this.btnOutOfOffice.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnOutOfOffice.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnOutOfOffice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutOfOffice.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOutOfOffice.ForeColor = System.Drawing.Color.White;
+            this.btnOutOfOffice.Location = new System.Drawing.Point(95, 180);
+            this.btnOutOfOffice.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnOutOfOffice.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnOutOfOffice.Name = "btnOutOfOffice";
+            this.btnOutOfOffice.Padding = new System.Windows.Forms.Padding(3);
+            this.btnOutOfOffice.Size = new System.Drawing.Size(152, 30);
+            this.btnOutOfOffice.TabIndex = 59;
+            this.btnOutOfOffice.Text = "Out of Office";
+            this.btnOutOfOffice.UseVisualStyleBackColor = false;
+            this.btnOutOfOffice.Click += new System.EventHandler(this.btnOutOfOffice_Click);
+            // 
             // frmChaseCustomerList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1281, 990);
+            this.Controls.Add(this.btnOutOfOffice);
             this.Controls.Add(this.btnSectorHistory);
             this.Controls.Add(this.btnLeads);
             this.Controls.Add(this.lblChasedQuotes);
@@ -423,5 +443,6 @@
         private System.Windows.Forms.Label lblChasedQuotes;
         private buttonFormatting btnLeads;
         private buttonFormatting btnSectorHistory;
+        private buttonFormatting btnOutOfOffice;
     }
 }

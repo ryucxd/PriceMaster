@@ -49,8 +49,47 @@ namespace PriceMaster
             fill_tabcontrol();
             tabControl.SelectedIndex = tabControl.TabPages.Count -1;
             fill_grids();
+
         }
 
+
+        private DataTable fill_out_of_office(int staff_id, DateTime sector_date, Label lbl)
+        {
+            DataTable dt = new DataTable();
+
+            string sql = "SELECT  Convert(varchar,cast(out_of_office_date as date),103)  as [Out Of Office Date],out_of_office_reason as [Reason],out_of_office_duration as [Duration (hours)] " +
+                  "FROM [order_database].dbo.sales_table_out_of_office o " +
+                  "where target_date = '" + sector_date.ToString("yyyyMMdd") + "' and out_of_office_staff = " + staff_id;
+
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+
+                }
+
+                conn.Close();
+            }
+
+
+            //sort out the label while we are here
+            double fuga = 0;
+            foreach (DataRow dr in dt.Rows)
+            {
+                fuga += Convert.ToDouble(dr[2].ToString());
+            }
+
+            fuga = (fuga / 39) * 100;
+
+            lbl.Text = "Out of Office: " + Math.Round(fuga,2).ToString() + "%";
+
+
+            return dt;
+        }
 
 
         private void tabControl_DrawItem(object sender, DrawItemEventArgs e)
@@ -186,9 +225,11 @@ namespace PriceMaster
                 {
                     dgvSalesMemberOne.DataSource = salesMemberData(sales_members[0], sectorDate);
                     lblSalesMemberOne.Text = dgvSalesMemberOne.Rows[0].Cells[3].Value.ToString() ?? "";
+                    dgvSalesMemberOneOutOfOffice.DataSource = fill_out_of_office(sales_members[0], sectorDate,lblSalesMemberOneOOO);
                     percent(sales_members[0], sectorDate, lblSalesMemberOnePercent);
                     //format
                     format_dgv(dgvSalesMemberOne, pieChart1);
+                    format_out_of_office(dgvSalesMemberOneOutOfOffice);
 
                     salesMemberOne = sales_members[0];
 
@@ -198,9 +239,11 @@ namespace PriceMaster
                 {
                     dgvSalesMemberTwo.DataSource = salesMemberData(sales_members[1], sectorDate);
                     lblSalesMemberTwo.Text = dgvSalesMemberTwo.Rows[0].Cells[3].Value.ToString() ?? "";
+                    dgvSalesMemberTwoOutOfOffice.DataSource = fill_out_of_office(sales_members[1], sectorDate, lblSalesMemberTwoOOO);
                     percent(sales_members[1], sectorDate, lblSalesMemberTwoPercent);
                     //format
                     format_dgv(dgvSalesMemberTwo, pieChart2);
+                    format_out_of_office(dgvSalesMemberTwoOutOfOffice);
 
                     salesMemberTwo = sales_members[1];
 
@@ -210,10 +253,12 @@ namespace PriceMaster
                 {
                     dgvSalesMemberThree.DataSource = salesMemberData(sales_members[2], sectorDate);
                     lblSalesMemberThree.Text = dgvSalesMemberThree.Rows[0].Cells[3].Value.ToString() ?? "";
+                    dgvSalesMemberThreeOutOfOffice.DataSource = fill_out_of_office(sales_members[2], sectorDate, lblSalesMemberThreeOOO);
                     percent(sales_members[2], sectorDate, lblSalesMemberThreePercent);
                     format_dgv(dgvSalesMemberThree, pieChart3);
 
                     salesMemberThree = sales_members[2];
+                    format_out_of_office(dgvSalesMemberThreeOutOfOffice);
 
                     sales_member_count--;
                 }
@@ -382,6 +427,31 @@ namespace PriceMaster
 
         }
 
+        private void format_out_of_office(DataGridView dgv)
+        {
+
+            try
+            {
+                foreach (DataGridViewColumn col in dgv.Columns)
+                {
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+
+                foreach (DataGridViewRow row in dgv.Rows)
+                    row.DefaultCellStyle.BackColor = Color.PaleVioletRed;
+
+                dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                dgv.ClearSelection();
+            }
+            catch
+            {
+
+            }
+
+        }
+
         private DataTable salesMemberData(int staff_id, DateTime sector_date)
         {
             DataTable dt = new DataTable();
@@ -431,6 +501,10 @@ namespace PriceMaster
             format_dgv(dgvSalesMemberOne, pieChart1);
             format_dgv(dgvSalesMemberTwo, pieChart2);
             format_dgv(dgvSalesMemberThree, pieChart3);
+
+            format_out_of_office(dgvSalesMemberOneOutOfOffice);
+            format_out_of_office(dgvSalesMemberTwoOutOfOffice);
+            format_out_of_office(dgvSalesMemberThreeOutOfOffice);
         }
 
 

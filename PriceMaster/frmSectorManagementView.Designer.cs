@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSectorManagementView));
             this.dgvSalesMemberOne = new System.Windows.Forms.DataGridView();
             this.dgvSalesMemberTwo = new System.Windows.Forms.DataGridView();
@@ -55,10 +58,19 @@
             this.btnPrint = new PriceMaster.buttonFormatting();
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             this.lblWeekCommencing = new System.Windows.Forms.Label();
+            this.dgvSalesMemberOneOutOfOffice = new System.Windows.Forms.DataGridView();
+            this.dgvSalesMemberTwoOutOfOffice = new System.Windows.Forms.DataGridView();
+            this.dgvSalesMemberThreeOutOfOffice = new System.Windows.Forms.DataGridView();
+            this.lblSalesMemberThreeOOO = new System.Windows.Forms.Label();
+            this.lblSalesMemberTwoOOO = new System.Windows.Forms.Label();
+            this.lblSalesMemberOneOOO = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberOne)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberTwo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberThree)).BeginInit();
             this.tabControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberOneOutOfOffice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberTwoOutOfOffice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberThreeOutOfOffice)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvSalesMemberOne
@@ -72,7 +84,7 @@
             this.dgvSalesMemberOne.Name = "dgvSalesMemberOne";
             this.dgvSalesMemberOne.ReadOnly = true;
             this.dgvSalesMemberOne.RowHeadersVisible = false;
-            this.dgvSalesMemberOne.Size = new System.Drawing.Size(444, 456);
+            this.dgvSalesMemberOne.Size = new System.Drawing.Size(444, 301);
             this.dgvSalesMemberOne.TabIndex = 0;
             this.dgvSalesMemberOne.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesMemberOne_CellDoubleClick);
             // 
@@ -87,7 +99,7 @@
             this.dgvSalesMemberTwo.Name = "dgvSalesMemberTwo";
             this.dgvSalesMemberTwo.ReadOnly = true;
             this.dgvSalesMemberTwo.RowHeadersVisible = false;
-            this.dgvSalesMemberTwo.Size = new System.Drawing.Size(444, 456);
+            this.dgvSalesMemberTwo.Size = new System.Drawing.Size(444, 301);
             this.dgvSalesMemberTwo.TabIndex = 1;
             this.dgvSalesMemberTwo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesMemberTwo_CellDoubleClick);
             // 
@@ -102,7 +114,7 @@
             this.dgvSalesMemberThree.Name = "dgvSalesMemberThree";
             this.dgvSalesMemberThree.ReadOnly = true;
             this.dgvSalesMemberThree.RowHeadersVisible = false;
-            this.dgvSalesMemberThree.Size = new System.Drawing.Size(444, 456);
+            this.dgvSalesMemberThree.Size = new System.Drawing.Size(444, 301);
             this.dgvSalesMemberThree.TabIndex = 2;
             this.dgvSalesMemberThree.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesMemberThree_CellDoubleClick);
             // 
@@ -147,7 +159,7 @@
             // 
             // pieChartOne
             // 
-            this.pieChartOne.Location = new System.Drawing.Point(12, 605);
+            this.pieChartOne.Location = new System.Drawing.Point(12, 642);
             this.pieChartOne.Name = "pieChartOne";
             this.pieChartOne.Size = new System.Drawing.Size(444, 323);
             this.pieChartOne.TabIndex = 55;
@@ -156,7 +168,7 @@
             // 
             // pieChartTwo
             // 
-            this.pieChartTwo.Location = new System.Drawing.Point(480, 605);
+            this.pieChartTwo.Location = new System.Drawing.Point(480, 642);
             this.pieChartTwo.Name = "pieChartTwo";
             this.pieChartTwo.Size = new System.Drawing.Size(444, 323);
             this.pieChartTwo.TabIndex = 56;
@@ -165,7 +177,7 @@
             // 
             // pieChartThree
             // 
-            this.pieChartThree.Location = new System.Drawing.Point(951, 605);
+            this.pieChartThree.Location = new System.Drawing.Point(951, 642);
             this.pieChartThree.Name = "pieChartThree";
             this.pieChartThree.Size = new System.Drawing.Size(444, 323);
             this.pieChartThree.TabIndex = 57;
@@ -342,11 +354,113 @@
             this.lblWeekCommencing.Text = "Data for Week Commencing: 2024/08/15";
             this.lblWeekCommencing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // dgvSalesMemberOneOutOfOffice
+            // 
+            this.dgvSalesMemberOneOutOfOffice.AllowUserToAddRows = false;
+            this.dgvSalesMemberOneOutOfOffice.AllowUserToDeleteRows = false;
+            this.dgvSalesMemberOneOutOfOffice.AllowUserToResizeColumns = false;
+            this.dgvSalesMemberOneOutOfOffice.AllowUserToResizeRows = false;
+            this.dgvSalesMemberOneOutOfOffice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.PaleVioletRed;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSalesMemberOneOutOfOffice.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvSalesMemberOneOutOfOffice.Location = new System.Drawing.Point(11, 487);
+            this.dgvSalesMemberOneOutOfOffice.Name = "dgvSalesMemberOneOutOfOffice";
+            this.dgvSalesMemberOneOutOfOffice.ReadOnly = true;
+            this.dgvSalesMemberOneOutOfOffice.RowHeadersVisible = false;
+            this.dgvSalesMemberOneOutOfOffice.Size = new System.Drawing.Size(444, 149);
+            this.dgvSalesMemberOneOutOfOffice.TabIndex = 71;
+            // 
+            // dgvSalesMemberTwoOutOfOffice
+            // 
+            this.dgvSalesMemberTwoOutOfOffice.AllowUserToAddRows = false;
+            this.dgvSalesMemberTwoOutOfOffice.AllowUserToDeleteRows = false;
+            this.dgvSalesMemberTwoOutOfOffice.AllowUserToResizeColumns = false;
+            this.dgvSalesMemberTwoOutOfOffice.AllowUserToResizeRows = false;
+            this.dgvSalesMemberTwoOutOfOffice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.PaleVioletRed;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSalesMemberTwoOutOfOffice.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvSalesMemberTwoOutOfOffice.Location = new System.Drawing.Point(480, 487);
+            this.dgvSalesMemberTwoOutOfOffice.Name = "dgvSalesMemberTwoOutOfOffice";
+            this.dgvSalesMemberTwoOutOfOffice.ReadOnly = true;
+            this.dgvSalesMemberTwoOutOfOffice.RowHeadersVisible = false;
+            this.dgvSalesMemberTwoOutOfOffice.Size = new System.Drawing.Size(444, 149);
+            this.dgvSalesMemberTwoOutOfOffice.TabIndex = 72;
+            // 
+            // dgvSalesMemberThreeOutOfOffice
+            // 
+            this.dgvSalesMemberThreeOutOfOffice.AllowUserToAddRows = false;
+            this.dgvSalesMemberThreeOutOfOffice.AllowUserToDeleteRows = false;
+            this.dgvSalesMemberThreeOutOfOffice.AllowUserToResizeColumns = false;
+            this.dgvSalesMemberThreeOutOfOffice.AllowUserToResizeRows = false;
+            this.dgvSalesMemberThreeOutOfOffice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.PaleVioletRed;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSalesMemberThreeOutOfOffice.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvSalesMemberThreeOutOfOffice.Location = new System.Drawing.Point(952, 487);
+            this.dgvSalesMemberThreeOutOfOffice.Name = "dgvSalesMemberThreeOutOfOffice";
+            this.dgvSalesMemberThreeOutOfOffice.ReadOnly = true;
+            this.dgvSalesMemberThreeOutOfOffice.RowHeadersVisible = false;
+            this.dgvSalesMemberThreeOutOfOffice.Size = new System.Drawing.Size(444, 149);
+            this.dgvSalesMemberThreeOutOfOffice.TabIndex = 73;
+            // 
+            // lblSalesMemberThreeOOO
+            // 
+            this.lblSalesMemberThreeOOO.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.lblSalesMemberThreeOOO.Location = new System.Drawing.Point(955, 449);
+            this.lblSalesMemberThreeOOO.Name = "lblSalesMemberThreeOOO";
+            this.lblSalesMemberThreeOOO.Size = new System.Drawing.Size(441, 27);
+            this.lblSalesMemberThreeOOO.TabIndex = 76;
+            this.lblSalesMemberThreeOOO.Text = " ";
+            this.lblSalesMemberThreeOOO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSalesMemberTwoOOO
+            // 
+            this.lblSalesMemberTwoOOO.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.lblSalesMemberTwoOOO.Location = new System.Drawing.Point(485, 452);
+            this.lblSalesMemberTwoOOO.Name = "lblSalesMemberTwoOOO";
+            this.lblSalesMemberTwoOOO.Size = new System.Drawing.Size(441, 27);
+            this.lblSalesMemberTwoOOO.TabIndex = 75;
+            this.lblSalesMemberTwoOOO.Text = " ";
+            this.lblSalesMemberTwoOOO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSalesMemberOneOOO
+            // 
+            this.lblSalesMemberOneOOO.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.lblSalesMemberOneOOO.Location = new System.Drawing.Point(17, 452);
+            this.lblSalesMemberOneOOO.Name = "lblSalesMemberOneOOO";
+            this.lblSalesMemberOneOOO.Size = new System.Drawing.Size(441, 27);
+            this.lblSalesMemberOneOOO.TabIndex = 74;
+            this.lblSalesMemberOneOOO.Text = " ";
+            this.lblSalesMemberOneOOO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmSectorManagementView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1410, 938);
+            this.ClientSize = new System.Drawing.Size(1410, 986);
+            this.Controls.Add(this.lblSalesMemberThreeOOO);
+            this.Controls.Add(this.lblSalesMemberTwoOOO);
+            this.Controls.Add(this.lblSalesMemberOneOOO);
+            this.Controls.Add(this.dgvSalesMemberThreeOutOfOffice);
+            this.Controls.Add(this.dgvSalesMemberTwoOutOfOffice);
+            this.Controls.Add(this.dgvSalesMemberOneOutOfOffice);
             this.Controls.Add(this.lblWeekCommencing);
             this.Controls.Add(this.buttonFormatting1);
             this.Controls.Add(this.btnPrint);
@@ -381,6 +495,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberTwo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberThree)).EndInit();
             this.tabControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberOneOutOfOffice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberTwoOutOfOffice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberThreeOutOfOffice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -414,5 +531,11 @@
         private buttonFormatting btnPrint;
         private buttonFormatting buttonFormatting1;
         private System.Windows.Forms.Label lblWeekCommencing;
+        private System.Windows.Forms.DataGridView dgvSalesMemberOneOutOfOffice;
+        private System.Windows.Forms.DataGridView dgvSalesMemberTwoOutOfOffice;
+        private System.Windows.Forms.DataGridView dgvSalesMemberThreeOutOfOffice;
+        private System.Windows.Forms.Label lblSalesMemberThreeOOO;
+        private System.Windows.Forms.Label lblSalesMemberTwoOOO;
+        private System.Windows.Forms.Label lblSalesMemberOneOOO;
     }
 }

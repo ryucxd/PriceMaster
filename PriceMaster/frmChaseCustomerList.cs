@@ -748,6 +748,12 @@ namespace PriceMaster
             frmSectorHistory frm = new frmSectorHistory();
             frm.ShowDialog();
         }
+
+        private void btnOutOfOffice_Click(object sender, EventArgs e)
+        {
+            frmOutOfOffice frm = new frmOutOfOffice();
+            frm.ShowDialog();
+        }
     }
 
 
