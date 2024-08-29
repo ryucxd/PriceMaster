@@ -96,7 +96,7 @@
             this.txtQuoteRef.Location = new System.Drawing.Point(97, 193);
             this.txtQuoteRef.Name = "txtQuoteRef";
             this.txtQuoteRef.Size = new System.Drawing.Size(206, 20);
-            this.txtQuoteRef.TabIndex = 0;
+            this.txtQuoteRef.TabIndex = 3;
             this.txtQuoteRef.TextChanged += new System.EventHandler(this.txtQuoteRef_TextChanged);
             this.txtQuoteRef.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtQuoteRef_KeyDown);
             this.txtQuoteRef.Leave += new System.EventHandler(this.txtQuoteRef_Leave);
@@ -106,7 +106,7 @@
             this.txtCustomerContact.Location = new System.Drawing.Point(97, 226);
             this.txtCustomerContact.Name = "txtCustomerContact";
             this.txtCustomerContact.Size = new System.Drawing.Size(206, 20);
-            this.txtCustomerContact.TabIndex = 1;
+            this.txtCustomerContact.TabIndex = 4;
             this.txtCustomerContact.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCustomerContact_KeyDown);
             this.txtCustomerContact.Leave += new System.EventHandler(this.txtCustomerContact_Leave);
             // 
@@ -115,7 +115,7 @@
             this.txtCustomerEmail.Location = new System.Drawing.Point(97, 259);
             this.txtCustomerEmail.Name = "txtCustomerEmail";
             this.txtCustomerEmail.Size = new System.Drawing.Size(206, 20);
-            this.txtCustomerEmail.TabIndex = 2;
+            this.txtCustomerEmail.TabIndex = 5;
             this.txtCustomerEmail.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCustomerEmail_KeyDown);
             this.txtCustomerEmail.Leave += new System.EventHandler(this.txtCustomerEmail_Leave);
             // 
@@ -124,7 +124,7 @@
             this.txtFittingQuote.Location = new System.Drawing.Point(97, 292);
             this.txtFittingQuote.Name = "txtFittingQuote";
             this.txtFittingQuote.Size = new System.Drawing.Size(206, 20);
-            this.txtFittingQuote.TabIndex = 3;
+            this.txtFittingQuote.TabIndex = 6;
             this.txtFittingQuote.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFittingQuote_KeyDown);
             this.txtFittingQuote.Leave += new System.EventHandler(this.txtFittingQuote_Leave);
             // 
@@ -133,7 +133,7 @@
             this.txtPrice.Location = new System.Drawing.Point(97, 325);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(206, 20);
-            this.txtPrice.TabIndex = 4;
+            this.txtPrice.TabIndex = 7;
             this.txtPrice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPrice_KeyDown);
             this.txtPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrice_KeyPress);
             this.txtPrice.Leave += new System.EventHandler(this.txtPrice_Leave);
@@ -143,7 +143,7 @@
             this.txtSupplierRef.Location = new System.Drawing.Point(409, 296);
             this.txtSupplierRef.Name = "txtSupplierRef";
             this.txtSupplierRef.Size = new System.Drawing.Size(206, 20);
-            this.txtSupplierRef.TabIndex = 7;
+            this.txtSupplierRef.TabIndex = 18;
             this.txtSupplierRef.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSupplierRef_KeyDown);
             this.txtSupplierRef.Leave += new System.EventHandler(this.txtSupplierRef_Leave);
             // 
@@ -155,7 +155,7 @@
             this.cmbCustomer.Location = new System.Drawing.Point(97, 134);
             this.cmbCustomer.Name = "cmbCustomer";
             this.cmbCustomer.Size = new System.Drawing.Size(206, 21);
-            this.cmbCustomer.TabIndex = 8;
+            this.cmbCustomer.TabIndex = 0;
             this.cmbCustomer.SelectedIndexChanged += new System.EventHandler(this.cmbCustomer_SelectedIndexChanged);
             // 
             // cmbPriority
@@ -166,7 +166,7 @@
             this.cmbPriority.Location = new System.Drawing.Point(97, 358);
             this.cmbPriority.Name = "cmbPriority";
             this.cmbPriority.Size = new System.Drawing.Size(206, 21);
-            this.cmbPriority.TabIndex = 9;
+            this.cmbPriority.TabIndex = 8;
             this.cmbPriority.SelectedIndexChanged += new System.EventHandler(this.cmbPriority_SelectedIndexChanged);
             // 
             // cmbQuotedBy
@@ -176,7 +176,7 @@
             this.cmbQuotedBy.Location = new System.Drawing.Point(97, 392);
             this.cmbQuotedBy.Name = "cmbQuotedBy";
             this.cmbQuotedBy.Size = new System.Drawing.Size(206, 21);
-            this.cmbQuotedBy.TabIndex = 10;
+            this.cmbQuotedBy.TabIndex = 9;
             this.cmbQuotedBy.SelectedIndexChanged += new System.EventHandler(this.cmbQuotedBy_SelectedIndexChanged);
             // 
             // cmbStatus
@@ -190,7 +190,7 @@
             this.cmbStatus.Location = new System.Drawing.Point(409, 163);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(206, 21);
-            this.cmbStatus.TabIndex = 11;
+            this.cmbStatus.TabIndex = 14;
             this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
             // 
             // cmbLoss
@@ -201,7 +201,7 @@
             this.cmbLoss.Location = new System.Drawing.Point(409, 196);
             this.cmbLoss.Name = "cmbLoss";
             this.cmbLoss.Size = new System.Drawing.Size(206, 21);
-            this.cmbLoss.TabIndex = 12;
+            this.cmbLoss.TabIndex = 15;
             this.cmbLoss.SelectedIndexChanged += new System.EventHandler(this.cmbLoss_SelectedIndexChanged);
             // 
             // cmbMatieralType
@@ -212,7 +212,7 @@
             this.cmbMatieralType.Location = new System.Drawing.Point(409, 229);
             this.cmbMatieralType.Name = "cmbMatieralType";
             this.cmbMatieralType.Size = new System.Drawing.Size(206, 21);
-            this.cmbMatieralType.TabIndex = 13;
+            this.cmbMatieralType.TabIndex = 16;
             this.cmbMatieralType.SelectedIndexChanged += new System.EventHandler(this.cmbMatieralType_SelectedIndexChanged);
             // 
             // cmbMatieralSupplier
@@ -223,7 +223,7 @@
             this.cmbMatieralSupplier.Location = new System.Drawing.Point(409, 262);
             this.cmbMatieralSupplier.Name = "cmbMatieralSupplier";
             this.cmbMatieralSupplier.Size = new System.Drawing.Size(206, 21);
-            this.cmbMatieralSupplier.TabIndex = 14;
+            this.cmbMatieralSupplier.TabIndex = 17;
             this.cmbMatieralSupplier.SelectedIndexChanged += new System.EventHandler(this.cmbMatieralSupplier_SelectedIndexChanged);
             // 
             // cmbSys1
@@ -234,7 +234,7 @@
             this.cmbSys1.Location = new System.Drawing.Point(409, 328);
             this.cmbSys1.Name = "cmbSys1";
             this.cmbSys1.Size = new System.Drawing.Size(206, 21);
-            this.cmbSys1.TabIndex = 15;
+            this.cmbSys1.TabIndex = 19;
             this.cmbSys1.SelectedIndexChanged += new System.EventHandler(this.cmbSys1_SelectedIndexChanged);
             // 
             // cmbSys2
@@ -245,7 +245,7 @@
             this.cmbSys2.Location = new System.Drawing.Point(409, 362);
             this.cmbSys2.Name = "cmbSys2";
             this.cmbSys2.Size = new System.Drawing.Size(206, 21);
-            this.cmbSys2.TabIndex = 16;
+            this.cmbSys2.TabIndex = 20;
             this.cmbSys2.SelectedIndexChanged += new System.EventHandler(this.cmbSys2_SelectedIndexChanged);
             // 
             // cmbSys3
@@ -256,7 +256,7 @@
             this.cmbSys3.Location = new System.Drawing.Point(409, 396);
             this.cmbSys3.Name = "cmbSys3";
             this.cmbSys3.Size = new System.Drawing.Size(206, 21);
-            this.cmbSys3.TabIndex = 17;
+            this.cmbSys3.TabIndex = 21;
             this.cmbSys3.SelectedIndexChanged += new System.EventHandler(this.cmbSys3_SelectedIndexChanged);
             // 
             // cmbSys4
@@ -267,7 +267,7 @@
             this.cmbSys4.Location = new System.Drawing.Point(409, 429);
             this.cmbSys4.Name = "cmbSys4";
             this.cmbSys4.Size = new System.Drawing.Size(206, 21);
-            this.cmbSys4.TabIndex = 18;
+            this.cmbSys4.TabIndex = 22;
             this.cmbSys4.SelectedIndexChanged += new System.EventHandler(this.cmbSys4_SelectedIndexChanged);
             // 
             // cmbSys5
@@ -278,7 +278,7 @@
             this.cmbSys5.Location = new System.Drawing.Point(409, 462);
             this.cmbSys5.Name = "cmbSys5";
             this.cmbSys5.Size = new System.Drawing.Size(206, 21);
-            this.cmbSys5.TabIndex = 19;
+            this.cmbSys5.TabIndex = 23;
             this.cmbSys5.SelectedIndexChanged += new System.EventHandler(this.cmbSys5_SelectedIndexChanged);
             // 
             // label1
@@ -467,7 +467,7 @@
             this.chkFollowUp.Location = new System.Drawing.Point(201, 458);
             this.chkFollowUp.Name = "chkFollowUp";
             this.chkFollowUp.Size = new System.Drawing.Size(15, 14);
-            this.chkFollowUp.TabIndex = 40;
+            this.chkFollowUp.TabIndex = 11;
             this.chkFollowUp.UseVisualStyleBackColor = true;
             this.chkFollowUp.CheckedChanged += new System.EventHandler(this.chkFollowUp_CheckedChanged);
             // 
@@ -486,7 +486,7 @@
             this.txtNote.Location = new System.Drawing.Point(12, 538);
             this.txtNote.Name = "txtNote";
             this.txtNote.Size = new System.Drawing.Size(603, 207);
-            this.txtNote.TabIndex = 42;
+            this.txtNote.TabIndex = 25;
             this.txtNote.Text = "";
             // 
             // dteFollowUp
@@ -512,7 +512,7 @@
             this.txtFollowUp.Location = new System.Drawing.Point(97, 481);
             this.txtFollowUp.Name = "txtFollowUp";
             this.txtFollowUp.Size = new System.Drawing.Size(189, 20);
-            this.txtFollowUp.TabIndex = 50;
+            this.txtFollowUp.TabIndex = 12;
             // 
             // pictureBox1
             // 
@@ -550,7 +550,7 @@
             this.dteQuoteDate.Location = new System.Drawing.Point(97, 425);
             this.dteQuoteDate.Name = "dteQuoteDate";
             this.dteQuoteDate.Size = new System.Drawing.Size(206, 20);
-            this.dteQuoteDate.TabIndex = 56;
+            this.dteQuoteDate.TabIndex = 10;
             // 
             // label23
             // 
@@ -566,7 +566,7 @@
             this.txtEnquiry.Location = new System.Drawing.Point(409, 134);
             this.txtEnquiry.Name = "txtEnquiry";
             this.txtEnquiry.Size = new System.Drawing.Size(149, 20);
-            this.txtEnquiry.TabIndex = 60;
+            this.txtEnquiry.TabIndex = 13;
             this.txtEnquiry.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEnquiry_KeyDown);
             this.txtEnquiry.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEnquiry_KeyPress);
             this.txtEnquiry.Leave += new System.EventHandler(this.txtEnquiry_Leave);
@@ -681,7 +681,7 @@
             this.cmbType.Location = new System.Drawing.Point(97, 163);
             this.cmbType.Name = "cmbType";
             this.cmbType.Size = new System.Drawing.Size(206, 21);
-            this.cmbType.TabIndex = 62;
+            this.cmbType.TabIndex = 1;
             this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
             // 
             // label25
@@ -701,7 +701,7 @@
             this.chkLewis.Location = new System.Drawing.Point(465, 505);
             this.chkLewis.Name = "chkLewis";
             this.chkLewis.Size = new System.Drawing.Size(15, 14);
-            this.chkLewis.TabIndex = 64;
+            this.chkLewis.TabIndex = 24;
             this.chkLewis.UseVisualStyleBackColor = true;
             this.chkLewis.CheckedChanged += new System.EventHandler(this.chkLewis_CheckedChanged);
             // 
