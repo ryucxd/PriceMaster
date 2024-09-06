@@ -78,15 +78,16 @@ namespace PriceMaster
 
             //sort out the label while we are here
             double fuga = 0;
+            double hours = 0;
             foreach (DataRow dr in dt.Rows)
             {
                 fuga += Convert.ToDouble(dr[2].ToString());
+                hours += Convert.ToDouble(dr[2].ToString());
             }
 
             fuga = (fuga / 39) * 100;
 
-            lbl.Text = "Out of Office: " + Math.Round(fuga,2).ToString() + "%";
-
+            lbl.Text = "Out of Office: " + Math.Round(fuga,2).ToString() + "% (" + hours.ToString() + " hours)";
 
             return dt;
         }
@@ -1191,5 +1192,24 @@ namespace PriceMaster
             { }
         }
 
+        public void messageboxAbsence(DataGridView dgv,int row_index)
+        {
+            MessageBox.Show(dgv.Rows[row_index].Cells[1].Value.ToString(),"Absence Reason",MessageBoxButtons.OK);
+        }
+
+        private void dgvSalesMemberOneOutOfOffice_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            messageboxAbsence(dgvSalesMemberOneOutOfOffice, e.RowIndex);
+        }
+
+        private void dgvSalesMemberTwoOutOfOffice_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            messageboxAbsence(dgvSalesMemberTwoOutOfOffice, e.RowIndex);
+        }
+
+        private void dgvSalesMemberThreeOutOfOffice_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            messageboxAbsence(dgvSalesMemberThreeOutOfOffice, e.RowIndex);
+        }
     }
 }

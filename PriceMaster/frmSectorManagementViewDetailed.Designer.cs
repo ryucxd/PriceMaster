@@ -75,6 +75,7 @@
             this.dgvSector.RowHeadersVisible = false;
             this.dgvSector.Size = new System.Drawing.Size(1435, 907);
             this.dgvSector.TabIndex = 4;
+            this.dgvSector.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSector_CellDoubleClick);
             // 
             // lblSector
             // 

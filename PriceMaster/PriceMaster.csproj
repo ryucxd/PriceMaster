@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>207</ApplicationRevision>
+    <ApplicationRevision>210</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -194,6 +194,12 @@
     </Compile>
     <Compile Include="frmSalesSetUp.Designer.cs">
       <DependentUpon>frmSalesSetUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSectorChaseCorrespondenceHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSectorChaseCorrespondenceHistory.Designer.cs">
+      <DependentUpon>frmSectorChaseCorrespondenceHistory.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSectorManagementView.cs">
       <SubType>Form</SubType>
@@ -535,6 +541,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSalesSetUp.resx">
       <DependentUpon>frmSalesSetUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSectorChaseCorrespondenceHistory.resx">
+      <DependentUpon>frmSectorChaseCorrespondenceHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSectorManagementView.resx">
       <DependentUpon>frmSectorManagementView.cs</DependentUpon>

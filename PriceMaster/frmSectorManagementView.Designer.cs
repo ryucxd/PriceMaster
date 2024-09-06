@@ -84,7 +84,7 @@
             this.dgvSalesMemberOne.Name = "dgvSalesMemberOne";
             this.dgvSalesMemberOne.ReadOnly = true;
             this.dgvSalesMemberOne.RowHeadersVisible = false;
-            this.dgvSalesMemberOne.Size = new System.Drawing.Size(444, 301);
+            this.dgvSalesMemberOne.Size = new System.Drawing.Size(444, 213);
             this.dgvSalesMemberOne.TabIndex = 0;
             this.dgvSalesMemberOne.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesMemberOne_CellDoubleClick);
             // 
@@ -99,7 +99,7 @@
             this.dgvSalesMemberTwo.Name = "dgvSalesMemberTwo";
             this.dgvSalesMemberTwo.ReadOnly = true;
             this.dgvSalesMemberTwo.RowHeadersVisible = false;
-            this.dgvSalesMemberTwo.Size = new System.Drawing.Size(444, 301);
+            this.dgvSalesMemberTwo.Size = new System.Drawing.Size(444, 213);
             this.dgvSalesMemberTwo.TabIndex = 1;
             this.dgvSalesMemberTwo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesMemberTwo_CellDoubleClick);
             // 
@@ -114,7 +114,7 @@
             this.dgvSalesMemberThree.Name = "dgvSalesMemberThree";
             this.dgvSalesMemberThree.ReadOnly = true;
             this.dgvSalesMemberThree.RowHeadersVisible = false;
-            this.dgvSalesMemberThree.Size = new System.Drawing.Size(444, 301);
+            this.dgvSalesMemberThree.Size = new System.Drawing.Size(444, 213);
             this.dgvSalesMemberThree.TabIndex = 2;
             this.dgvSalesMemberThree.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesMemberThree_CellDoubleClick);
             // 
@@ -369,12 +369,13 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvSalesMemberOneOutOfOffice.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvSalesMemberOneOutOfOffice.Location = new System.Drawing.Point(11, 487);
+            this.dgvSalesMemberOneOutOfOffice.Location = new System.Drawing.Point(11, 401);
             this.dgvSalesMemberOneOutOfOffice.Name = "dgvSalesMemberOneOutOfOffice";
             this.dgvSalesMemberOneOutOfOffice.ReadOnly = true;
             this.dgvSalesMemberOneOutOfOffice.RowHeadersVisible = false;
-            this.dgvSalesMemberOneOutOfOffice.Size = new System.Drawing.Size(444, 149);
+            this.dgvSalesMemberOneOutOfOffice.Size = new System.Drawing.Size(444, 235);
             this.dgvSalesMemberOneOutOfOffice.TabIndex = 71;
+            this.dgvSalesMemberOneOutOfOffice.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesMemberOneOutOfOffice_CellDoubleClick);
             // 
             // dgvSalesMemberTwoOutOfOffice
             // 
@@ -391,12 +392,13 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvSalesMemberTwoOutOfOffice.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvSalesMemberTwoOutOfOffice.Location = new System.Drawing.Point(480, 487);
+            this.dgvSalesMemberTwoOutOfOffice.Location = new System.Drawing.Point(480, 401);
             this.dgvSalesMemberTwoOutOfOffice.Name = "dgvSalesMemberTwoOutOfOffice";
             this.dgvSalesMemberTwoOutOfOffice.ReadOnly = true;
             this.dgvSalesMemberTwoOutOfOffice.RowHeadersVisible = false;
-            this.dgvSalesMemberTwoOutOfOffice.Size = new System.Drawing.Size(444, 149);
+            this.dgvSalesMemberTwoOutOfOffice.Size = new System.Drawing.Size(444, 235);
             this.dgvSalesMemberTwoOutOfOffice.TabIndex = 72;
+            this.dgvSalesMemberTwoOutOfOffice.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesMemberTwoOutOfOffice_CellDoubleClick);
             // 
             // dgvSalesMemberThreeOutOfOffice
             // 
@@ -413,17 +415,18 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvSalesMemberThreeOutOfOffice.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvSalesMemberThreeOutOfOffice.Location = new System.Drawing.Point(952, 487);
+            this.dgvSalesMemberThreeOutOfOffice.Location = new System.Drawing.Point(952, 401);
             this.dgvSalesMemberThreeOutOfOffice.Name = "dgvSalesMemberThreeOutOfOffice";
             this.dgvSalesMemberThreeOutOfOffice.ReadOnly = true;
             this.dgvSalesMemberThreeOutOfOffice.RowHeadersVisible = false;
-            this.dgvSalesMemberThreeOutOfOffice.Size = new System.Drawing.Size(444, 149);
+            this.dgvSalesMemberThreeOutOfOffice.Size = new System.Drawing.Size(444, 235);
             this.dgvSalesMemberThreeOutOfOffice.TabIndex = 73;
+            this.dgvSalesMemberThreeOutOfOffice.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesMemberThreeOutOfOffice_CellDoubleClick);
             // 
             // lblSalesMemberThreeOOO
             // 
             this.lblSalesMemberThreeOOO.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.lblSalesMemberThreeOOO.Location = new System.Drawing.Point(955, 449);
+            this.lblSalesMemberThreeOOO.Location = new System.Drawing.Point(955, 359);
             this.lblSalesMemberThreeOOO.Name = "lblSalesMemberThreeOOO";
             this.lblSalesMemberThreeOOO.Size = new System.Drawing.Size(441, 27);
             this.lblSalesMemberThreeOOO.TabIndex = 76;
@@ -433,7 +436,7 @@
             // lblSalesMemberTwoOOO
             // 
             this.lblSalesMemberTwoOOO.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.lblSalesMemberTwoOOO.Location = new System.Drawing.Point(485, 452);
+            this.lblSalesMemberTwoOOO.Location = new System.Drawing.Point(485, 362);
             this.lblSalesMemberTwoOOO.Name = "lblSalesMemberTwoOOO";
             this.lblSalesMemberTwoOOO.Size = new System.Drawing.Size(441, 27);
             this.lblSalesMemberTwoOOO.TabIndex = 75;
@@ -443,7 +446,7 @@
             // lblSalesMemberOneOOO
             // 
             this.lblSalesMemberOneOOO.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.lblSalesMemberOneOOO.Location = new System.Drawing.Point(17, 452);
+            this.lblSalesMemberOneOOO.Location = new System.Drawing.Point(17, 362);
             this.lblSalesMemberOneOOO.Name = "lblSalesMemberOneOOO";
             this.lblSalesMemberOneOOO.Size = new System.Drawing.Size(441, 27);
             this.lblSalesMemberOneOOO.TabIndex = 74;

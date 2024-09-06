@@ -105,7 +105,10 @@ namespace PriceMaster
                     da.Fill(dt);
 
                     foreach (DataRow row in dt.Rows)
+                    {
+                        if (salesMemberList.Contains(row[0].ToString()) == false)
                         salesMemberList.Add(row[0].ToString());
+                    }
                 }
 
 
