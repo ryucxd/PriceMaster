@@ -333,9 +333,12 @@ namespace PriceMaster
             int validation = 0;
 
 
-            int phone = 0, email = 0, in_person = 0;
+            int phone = 0, email = 0, in_person = 0, failed_contact = 0 ;
 
             int lead_time = 0, turnaround = 0, product = 0, installation = 0, service = 0;
+
+            if (chkFailed.Checked == true)
+                failed_contact = -1;
 
             if (chkPhone.Checked == true)
             {
@@ -450,10 +453,10 @@ namespace PriceMaster
             //insert 
             string sql = "INSERT INTO [order_database].[dbo].[quotation_chase_customer] " +
                 "([customer_name],[slimline],[date_created],[body],[email],[phone],[inPerson],[contact],[issue_with_leadtime],[issue_with_quote_turnaround_time]" +
-                ",[issue_with_product],[issue_with_installation],[issue_with_service],correspondence_by,next_correspondence_date,no_follow_up,complete,sector_id,email_domain) VALUES (" +
+                ",[issue_with_product],[issue_with_installation],[issue_with_service],correspondence_by,next_correspondence_date,no_follow_up,complete,sector_id,email_domain,failed_contact) VALUES (" +
                 "'" + customer + "'," + slimline + ",GETDATE(),'" + txtDescription.Text + "'," + email + "," + phone + "," + in_person + "," +
                 "'" + txtContact.Text + "'," + lead_time + "," + turnaround + "," + product + "," + installation + "," + service + "," + CONNECT.staffID + "," +
-                "" + next_correspondence_date + "," + no_follow_up + "," + no_follow_up + "," + sectorID + ",'" + txtEmailCustomer.Text + "' )";
+                "" + next_correspondence_date + "," + no_follow_up + "," + no_follow_up + "," + sectorID + ",'" + txtEmailCustomer.Text + "'," + failed_contact + " )";
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {

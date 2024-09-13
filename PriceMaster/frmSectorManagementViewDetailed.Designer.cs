@@ -33,6 +33,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvSector = new System.Windows.Forms.DataGridView();
             this.lblSector = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSector)).BeginInit();
             this.SuspendLayout();
@@ -89,11 +90,25 @@
             this.lblSector.Text = "Sector: X";
             this.lblSector.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.BackColor = System.Drawing.Color.PaleVioletRed;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.label1.Location = new System.Drawing.Point(1236, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(212, 25);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "       = Failed contact";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmSectorManagementViewDetailed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1460, 993);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblSector);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.dgvSector);
@@ -116,5 +131,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.DataGridView dgvSector;
         private System.Windows.Forms.Label lblSector;
+        private System.Windows.Forms.Label label1;
     }
 }

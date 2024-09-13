@@ -21,7 +21,7 @@ namespace PriceMaster
         {
             InitializeComponent();
 
-            validate_tab_pages(sector_id,staff_id);
+            validate_tab_pages(sector_id, staff_id);
 
             load_grid(sector_id, staff_id);
 
@@ -30,7 +30,7 @@ namespace PriceMaster
 
         }
 
-        private void validate_tab_pages(int sector_id,int staff_id)
+        private void validate_tab_pages(int sector_id, int staff_id)
         {
 
             tabControl.TabPages.Clear();
@@ -64,18 +64,18 @@ namespace PriceMaster
                 //    "left join [order_database].dbo.solidworks_quotation_log sq on q.quote_id = sq.quote_id " +
                 //    "where sector_id = " + sector_id + " AND chased_by = " + staff_id;
 
-               string sql_quotations = "select q.id " +
-                "FROM [order_database].dbo.quotation_chase_log_slimline q " +
-                "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
-                "left join[price_master].dbo.[sl_quotation] sq on q.quote_id = sq.quote_id " +
-                "left join[dsl_fitting].dbo.sales_ledger sl on sq.customer_acc_ref = sl.ACCOUNT_REF " +
-                "where sector_id = " + sector_id + " AND chased_by = " + staff_id + " " +
-                "union all " +
-                "select q.id " +
-                "FROM [order_database].dbo.quotation_chase_log q " +
-                "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
-                "left join [order_database].dbo.solidworks_quotation_log sq on q.quote_id = sq.quote_id " +
-                "where sector_id = " + sector_id + " AND chased_by = " + staff_id;
+                string sql_quotations = "select q.id " +
+                 "FROM [order_database].dbo.quotation_chase_log_slimline q " +
+                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
+                 "left join[price_master].dbo.[sl_quotation] sq on q.quote_id = sq.quote_id " +
+                 "left join[dsl_fitting].dbo.sales_ledger sl on sq.customer_acc_ref = sl.ACCOUNT_REF " +
+                 "where sector_id = " + sector_id + " AND chased_by = " + staff_id + " " +
+                 "union all " +
+                 "select q.id " +
+                 "FROM [order_database].dbo.quotation_chase_log q " +
+                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
+                 "left join [order_database].dbo.solidworks_quotation_log sq on q.quote_id = sq.quote_id " +
+                 "where sector_id = " + sector_id + " AND chased_by = " + staff_id;
 
                 using (SqlCommand cmd = new SqlCommand(sql_quotations, conn))
                 {
@@ -118,7 +118,7 @@ namespace PriceMaster
 
         }
 
-        private void load_grid( int sector_id, int staff)
+        private void load_grid(int sector_id, int staff)
         {
             if (tabControl.SelectedIndex < 0)
                 return;
@@ -129,7 +129,7 @@ namespace PriceMaster
                 "CASE WHEN issue_with_product = 0 THEN CAST(0 AS BIT) WHEN issue_with_product IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Product Issue]," +
                 "CASE WHEN issue_with_installation = 0 THEN CAST(0 AS BIT) WHEN issue_with_installation IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Installation Issue]," +
                 "CASE WHEN issue_with_service = 0 THEN CAST(0 AS BIT) WHEN issue_with_service IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Service Issue]," +
-                "next_correspondence_date [Next Correspondence], Sector ,slimline " +
+                "next_correspondence_date [Next Correspondence], Sector ,slimline,failed_contact " +
                 "FROM [order_database].dbo.quotation_chase_customer q " +
                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
                 "where sector_id = " + sector_id + " and correspondence_by = " + staff;
@@ -150,7 +150,7 @@ namespace PriceMaster
                 "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Phone, " +
                 "CASE WHEN email = 0 THEN CAST(0 AS BIT) WHEN email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Email, " +
                 "CASE WHEN chase_complete = 0 THEN CAST(0 AS BIT) WHEN chase_complete IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END as [Chase Complete], " +
-                "Sector " +
+                "Sector,failed_contact " +
                 "FROM [order_database].dbo.quotation_chase_log_slimline q " +
                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
                 "left join [price_master].dbo.[sl_quotation] sq on q.quote_id = sq.quote_id " +
@@ -161,7 +161,7 @@ namespace PriceMaster
                 "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Phone, " +
                 "CASE WHEN email = 0 THEN CAST(0 AS BIT) WHEN email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Email, " +
                 "CASE WHEN chase_complete = 0 THEN CAST(0 AS BIT) WHEN chase_complete IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END as [Chase Complete], " +
-                "Sector " +
+                "Sector,failed_contact " +
                 "FROM [order_database].dbo.quotation_chase_log q " +
                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
                 "left join (select q.quote_id,q.customer FROM [order_database].dbo.solidworks_quotation_log q " +
@@ -205,7 +205,7 @@ namespace PriceMaster
             format_grid();
         }
 
-        
+
 
         private void format_grid()
         {
@@ -222,7 +222,16 @@ namespace PriceMaster
 
             foreach (DataGridViewRow row in dgvSector.Rows)
             {
-                
+                if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Correspondence")
+                {
+                    if (row.Cells[13].Value.ToString() == "-1")
+                        row.DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                }
+                else if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Quotation Chasing")
+                {
+                    if (row.Cells[9].Value.ToString() == "-1")
+                        row.DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                }
             }
 
             //distinct formatting
@@ -234,6 +243,7 @@ namespace PriceMaster
                 dgvSector.Columns[11].Visible = false;
                 dgvSector.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvSector.Columns[12].Visible = false;
+                dgvSector.Columns[13].Visible = false; //failed contact
             }
             else if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Quotation Chasing")
             {
@@ -242,6 +252,7 @@ namespace PriceMaster
                 dgvSector.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvSector.Columns[0].Visible = false;
                 dgvSector.Columns[8].Visible = false;
+                dgvSector.Columns[9].Visible = false; //failed_contact
             }
             else if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Leads")
             {
@@ -263,7 +274,7 @@ namespace PriceMaster
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            load_grid(_sector_id,_staff_id);
+            load_grid(_sector_id, _staff_id);
             format_grid();
         }
 
@@ -287,9 +298,9 @@ namespace PriceMaster
                 return;
 
 
-           
 
-            frmSectorChaseCorrespondenceHistory frm = new frmSectorChaseCorrespondenceHistory(correspondence, dgvSector.Rows[e.RowIndex].Cells[2].Value.ToString(), _staff_id, dgvSector.Rows[e.RowIndex].Cells[0].Value.ToString(),slimline);
+
+            frmSectorChaseCorrespondenceHistory frm = new frmSectorChaseCorrespondenceHistory(correspondence, dgvSector.Rows[e.RowIndex].Cells[2].Value.ToString(), _staff_id, dgvSector.Rows[e.RowIndex].Cells[0].Value.ToString(), slimline);
             frm.ShowDialog();
         }
     }

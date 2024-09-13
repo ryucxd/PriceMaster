@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dteChaseDate = new System.Windows.Forms.DateTimePicker();
             this.dteNextDate = new System.Windows.Forms.DateTimePicker();
             this.lblChase = new System.Windows.Forms.Label();
@@ -44,6 +44,7 @@
             this.chkEmail = new System.Windows.Forms.CheckBox();
             this.chkPhone = new System.Windows.Forms.CheckBox();
             this.btnSaveManagement = new PriceMaster.buttonFormatting();
+            this.chkFailed = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -148,14 +149,14 @@
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Location = new System.Drawing.Point(553, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
@@ -234,12 +235,24 @@
             this.btnSaveManagement.UseVisualStyleBackColor = false;
             this.btnSaveManagement.Click += new System.EventHandler(this.btnSaveManagement_Click);
             // 
+            // chkFailed
+            // 
+            this.chkFailed.AutoSize = true;
+            this.chkFailed.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.chkFailed.Location = new System.Drawing.Point(362, 32);
+            this.chkFailed.Name = "chkFailed";
+            this.chkFailed.Size = new System.Drawing.Size(153, 22);
+            this.chkFailed.TabIndex = 103;
+            this.chkFailed.Text = "FAILED CONTACT";
+            this.chkFailed.UseVisualStyleBackColor = true;
+            // 
             // frmSlimlineChase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(798, 373);
             this.ControlBox = false;
+            this.Controls.Add(this.chkFailed);
             this.Controls.Add(this.btnSaveManagement);
             this.Controls.Add(this.chkPhone);
             this.Controls.Add(this.chkEmail);
@@ -282,5 +295,6 @@
         private System.Windows.Forms.CheckBox chkEmail;
         private System.Windows.Forms.CheckBox chkPhone;
         private buttonFormatting btnSaveManagement;
+        private System.Windows.Forms.CheckBox chkFailed;
     }
 }

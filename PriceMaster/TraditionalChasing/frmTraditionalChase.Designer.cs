@@ -45,6 +45,7 @@
             this.btnCancel = new PriceMaster.buttonFormatting();
             this.btnSave = new PriceMaster.buttonFormatting();
             this.chkMultipleChase = new System.Windows.Forms.CheckBox();
+            this.chkFailed = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -246,12 +247,24 @@
             this.chkMultipleChase.Text = "ADD THIS CHASE TO MULTIPLE QUOTES";
             this.chkMultipleChase.UseVisualStyleBackColor = true;
             // 
+            // chkFailed
+            // 
+            this.chkFailed.AutoSize = true;
+            this.chkFailed.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.chkFailed.Location = new System.Drawing.Point(377, 30);
+            this.chkFailed.Name = "chkFailed";
+            this.chkFailed.Size = new System.Drawing.Size(153, 22);
+            this.chkFailed.TabIndex = 102;
+            this.chkFailed.Text = "FAILED CONTACT";
+            this.chkFailed.UseVisualStyleBackColor = true;
+            // 
             // frmTraditionalChase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(798, 399);
             this.ControlBox = false;
+            this.Controls.Add(this.chkFailed);
             this.Controls.Add(this.chkMultipleChase);
             this.Controls.Add(this.btnSaveManagement);
             this.Controls.Add(this.chkPhone);
@@ -296,5 +309,6 @@
         private System.Windows.Forms.CheckBox chkEmail;
         private buttonFormatting btnSaveManagement;
         private System.Windows.Forms.CheckBox chkMultipleChase;
+        private System.Windows.Forms.CheckBox chkFailed;
     }
 }

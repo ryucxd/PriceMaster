@@ -124,6 +124,11 @@ namespace PriceMaster
             int validation = 0;
             int phone = 0;
             int email = 0;
+            int failed_check = 0;
+
+            if (chkFailed.Checked == true)
+                failed_check = -1;
+
             if (chkEmail.Checked == true)
             {
                 validation = -1;
@@ -173,13 +178,13 @@ namespace PriceMaster
                             sectorID = 0;
                     }
 
-                
-
 
                 // add the new chase
-                sql = "INSERT INTO [order_database].dbo.quotation_chase_log (quote_id,chase_date,chase_description,next_chase_date,chased_by,dont_chase,email,phone,chase_complete,sector_id) " +
+                sql = "INSERT INTO [order_database].dbo.quotation_chase_log (quote_id,chase_date,chase_description,next_chase_date," +
+                    "chased_by,dont_chase,email,phone,chase_complete,sector_id,failed_contact) " +
                 "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," 
-                + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + "," + dont_chase.ToString() + "," +  sectorID + ")";
+                + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + 
+                "," + dont_chase.ToString() + "," +  sectorID + "," + failed_check.ToString() + ")";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     cmd.ExecuteNonQuery();
@@ -223,7 +228,7 @@ namespace PriceMaster
 
                         if (dt.Rows.Count >= 1)
                         {
-                            frmMultipleChase frm = new frmMultipleChase(quote_id,customer, dt, txtDescription.Text, dont_chase, email, phone, dteNextDate.Value.ToString("yyyyMMdd"),chase_status);
+                            frmMultipleChase frm = new frmMultipleChase(quote_id,customer, dt, txtDescription.Text, dont_chase, email, phone, dteNextDate.Value.ToString("yyyyMMdd"),chase_status,failed_check);
                             frm.ShowDialog();
                         }
                     }
@@ -272,6 +277,11 @@ namespace PriceMaster
             int validation = 0;
             int phone = 0;
             int email = 0;
+            int failed_contact = 0;
+
+            if (chkFailed.Checked == true)
+                failed_contact = -1;
+
             if (chkEmail.Checked == true)
             {
                 validation = -1;
@@ -324,8 +334,8 @@ namespace PriceMaster
 
 
                 // add the new chase
-                sql = "INSERT INTO [order_database].dbo.quotation_chase_log (quote_id,chase_date,chase_description,next_chase_date,chased_by,dont_chase,email,phone,chase_complete,sector_id) " +
-                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + "," + dont_chase.ToString() + "," + sectorID + ")";
+                sql = "INSERT INTO [order_database].dbo.quotation_chase_log (quote_id,chase_date,chase_description,next_chase_date,chased_by,dont_chase,email,phone,chase_complete,sector_id,failed_contact) " +
+                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + "," + dont_chase.ToString() + "," + sectorID + "," + failed_contact + ")";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     cmd.ExecuteNonQuery();

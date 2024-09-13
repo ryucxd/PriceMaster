@@ -51,6 +51,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtEmailCustomer = new System.Windows.Forms.TextBox();
             this.lblEmail = new System.Windows.Forms.Label();
+            this.chkFailed = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // chkPhone
@@ -188,7 +189,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(71, 574);
+            this.btnCancel.Location = new System.Drawing.Point(71, 607);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnCancel.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnCancel.Name = "btnCancel";
@@ -206,7 +207,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(166, 574);
+            this.btnSave.Location = new System.Drawing.Point(166, 607);
             this.btnSave.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSave.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSave.Name = "btnSave";
@@ -254,7 +255,7 @@
             this.btnSaveManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveManagement.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveManagement.ForeColor = System.Drawing.Color.White;
-            this.btnSaveManagement.Location = new System.Drawing.Point(261, 574);
+            this.btnSaveManagement.Location = new System.Drawing.Point(261, 607);
             this.btnSaveManagement.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSaveManagement.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSaveManagement.Name = "btnSaveManagement";
@@ -302,12 +303,24 @@
             this.lblEmail.Text = "Customer Email Domain: (Example: \'@designandsupply\')";
             this.lblEmail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // chkFailed
+            // 
+            this.chkFailed.AutoSize = true;
+            this.chkFailed.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.chkFailed.Location = new System.Drawing.Point(182, 578);
+            this.chkFailed.Name = "chkFailed";
+            this.chkFailed.Size = new System.Drawing.Size(153, 22);
+            this.chkFailed.TabIndex = 104;
+            this.chkFailed.Text = "FAILED CONTACT";
+            this.chkFailed.UseVisualStyleBackColor = true;
+            // 
             // frmChaseInsertCorrespondence
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 613);
+            this.ClientSize = new System.Drawing.Size(555, 646);
             this.ControlBox = false;
+            this.Controls.Add(this.chkFailed);
             this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.txtEmailCustomer);
             this.Controls.Add(this.label5);
@@ -365,5 +378,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtEmailCustomer;
         private System.Windows.Forms.Label lblEmail;
+        private System.Windows.Forms.CheckBox chkFailed;
     }
 }
