@@ -266,6 +266,16 @@ namespace PriceMaster
             }
             dgvLost.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+            //also add the value to the total order label
+            double money = 0;
+            foreach (DataGridViewRow row in dgvWon.Rows)
+            {
+
+                money += Convert.ToDouble(row.Cells[5].Value.ToString());
+
+            }
+
+            lblValue.Text = "Total Order Value: £" + money.ToString("N0");
         }
 
 

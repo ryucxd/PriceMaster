@@ -468,9 +468,9 @@
             this.btnSalesMemberOneEfficency.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSalesMemberOneEfficency.Name = "btnSalesMemberOneEfficency";
             this.btnSalesMemberOneEfficency.Padding = new System.Windows.Forms.Padding(3);
-            this.btnSalesMemberOneEfficency.Size = new System.Drawing.Size(86, 30);
+            this.btnSalesMemberOneEfficency.Size = new System.Drawing.Size(125, 30);
             this.btnSalesMemberOneEfficency.TabIndex = 77;
-            this.btnSalesMemberOneEfficency.Text = "Efficency";
+            this.btnSalesMemberOneEfficency.Text = "Chase Efficency";
             this.btnSalesMemberOneEfficency.UseVisualStyleBackColor = false;
             this.btnSalesMemberOneEfficency.Click += new System.EventHandler(this.btnSalesMemberOneEfficency_Click);
             // 
@@ -486,9 +486,9 @@
             this.btnSalesMemberTwoEfficency.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSalesMemberTwoEfficency.Name = "btnSalesMemberTwoEfficency";
             this.btnSalesMemberTwoEfficency.Padding = new System.Windows.Forms.Padding(3);
-            this.btnSalesMemberTwoEfficency.Size = new System.Drawing.Size(86, 30);
+            this.btnSalesMemberTwoEfficency.Size = new System.Drawing.Size(125, 30);
             this.btnSalesMemberTwoEfficency.TabIndex = 78;
-            this.btnSalesMemberTwoEfficency.Text = "Efficency";
+            this.btnSalesMemberTwoEfficency.Text = "Chase Efficency";
             this.btnSalesMemberTwoEfficency.UseVisualStyleBackColor = false;
             this.btnSalesMemberTwoEfficency.Click += new System.EventHandler(this.btnSalesMemberTwoEfficency_Click);
             // 
@@ -504,9 +504,9 @@
             this.btnSalesMemberThreeEfficency.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSalesMemberThreeEfficency.Name = "btnSalesMemberThreeEfficency";
             this.btnSalesMemberThreeEfficency.Padding = new System.Windows.Forms.Padding(3);
-            this.btnSalesMemberThreeEfficency.Size = new System.Drawing.Size(86, 30);
+            this.btnSalesMemberThreeEfficency.Size = new System.Drawing.Size(125, 30);
             this.btnSalesMemberThreeEfficency.TabIndex = 79;
-            this.btnSalesMemberThreeEfficency.Text = "Efficency";
+            this.btnSalesMemberThreeEfficency.Text = "Chase Efficency";
             this.btnSalesMemberThreeEfficency.UseVisualStyleBackColor = false;
             this.btnSalesMemberThreeEfficency.Click += new System.EventHandler(this.btnSalesMemberThreeEfficency_Click);
             // 

@@ -43,6 +43,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.lblValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLost)).BeginInit();
             this.SuspendLayout();
@@ -176,11 +177,22 @@
             this.label4.Text = "to";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblValue
+            // 
+            this.lblValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.lblValue.Location = new System.Drawing.Point(12, 700);
+            this.lblValue.Name = "lblValue";
+            this.lblValue.Size = new System.Drawing.Size(591, 200);
+            this.lblValue.TabIndex = 67;
+            this.lblValue.Text = "Total Won Order Value: £0";
+            this.lblValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmChaseEfficency
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1473, 912);
+            this.Controls.Add(this.lblValue);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -216,5 +228,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblValue;
     }
 }
