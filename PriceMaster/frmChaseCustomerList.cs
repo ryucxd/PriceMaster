@@ -157,7 +157,6 @@ namespace PriceMaster
                     //conn.Close();
                 }
             }
-
         }
 
         private void loadGrid()
@@ -583,17 +582,11 @@ namespace PriceMaster
                     da.Fill(dt);
 
                     dgvTarget.DataSource = dt;
-
-
-
                 }
 
                 conn.Close();
 
-
-
                 format_targets();
-
             }
         }
 

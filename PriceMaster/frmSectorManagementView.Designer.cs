@@ -64,6 +64,9 @@
             this.lblSalesMemberThreeOOO = new System.Windows.Forms.Label();
             this.lblSalesMemberTwoOOO = new System.Windows.Forms.Label();
             this.lblSalesMemberOneOOO = new System.Windows.Forms.Label();
+            this.btnSalesMemberOneEfficency = new PriceMaster.buttonFormatting();
+            this.btnSalesMemberTwoEfficency = new PriceMaster.buttonFormatting();
+            this.btnSalesMemberThreeEfficency = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberOne)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberTwo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberThree)).BeginInit();
@@ -453,11 +456,68 @@
             this.lblSalesMemberOneOOO.Text = " ";
             this.lblSalesMemberOneOOO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnSalesMemberOneEfficency
+            // 
+            this.btnSalesMemberOneEfficency.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnSalesMemberOneEfficency.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSalesMemberOneEfficency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalesMemberOneEfficency.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalesMemberOneEfficency.ForeColor = System.Drawing.Color.White;
+            this.btnSalesMemberOneEfficency.Location = new System.Drawing.Point(11, 80);
+            this.btnSalesMemberOneEfficency.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnSalesMemberOneEfficency.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnSalesMemberOneEfficency.Name = "btnSalesMemberOneEfficency";
+            this.btnSalesMemberOneEfficency.Padding = new System.Windows.Forms.Padding(3);
+            this.btnSalesMemberOneEfficency.Size = new System.Drawing.Size(86, 30);
+            this.btnSalesMemberOneEfficency.TabIndex = 77;
+            this.btnSalesMemberOneEfficency.Text = "Efficency";
+            this.btnSalesMemberOneEfficency.UseVisualStyleBackColor = false;
+            this.btnSalesMemberOneEfficency.Click += new System.EventHandler(this.btnSalesMemberOneEfficency_Click);
+            // 
+            // btnSalesMemberTwoEfficency
+            // 
+            this.btnSalesMemberTwoEfficency.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnSalesMemberTwoEfficency.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSalesMemberTwoEfficency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalesMemberTwoEfficency.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalesMemberTwoEfficency.ForeColor = System.Drawing.Color.White;
+            this.btnSalesMemberTwoEfficency.Location = new System.Drawing.Point(480, 79);
+            this.btnSalesMemberTwoEfficency.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnSalesMemberTwoEfficency.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnSalesMemberTwoEfficency.Name = "btnSalesMemberTwoEfficency";
+            this.btnSalesMemberTwoEfficency.Padding = new System.Windows.Forms.Padding(3);
+            this.btnSalesMemberTwoEfficency.Size = new System.Drawing.Size(86, 30);
+            this.btnSalesMemberTwoEfficency.TabIndex = 78;
+            this.btnSalesMemberTwoEfficency.Text = "Efficency";
+            this.btnSalesMemberTwoEfficency.UseVisualStyleBackColor = false;
+            this.btnSalesMemberTwoEfficency.Click += new System.EventHandler(this.btnSalesMemberTwoEfficency_Click);
+            // 
+            // btnSalesMemberThreeEfficency
+            // 
+            this.btnSalesMemberThreeEfficency.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnSalesMemberThreeEfficency.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSalesMemberThreeEfficency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalesMemberThreeEfficency.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalesMemberThreeEfficency.ForeColor = System.Drawing.Color.White;
+            this.btnSalesMemberThreeEfficency.Location = new System.Drawing.Point(952, 79);
+            this.btnSalesMemberThreeEfficency.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnSalesMemberThreeEfficency.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnSalesMemberThreeEfficency.Name = "btnSalesMemberThreeEfficency";
+            this.btnSalesMemberThreeEfficency.Padding = new System.Windows.Forms.Padding(3);
+            this.btnSalesMemberThreeEfficency.Size = new System.Drawing.Size(86, 30);
+            this.btnSalesMemberThreeEfficency.TabIndex = 79;
+            this.btnSalesMemberThreeEfficency.Text = "Efficency";
+            this.btnSalesMemberThreeEfficency.UseVisualStyleBackColor = false;
+            this.btnSalesMemberThreeEfficency.Click += new System.EventHandler(this.btnSalesMemberThreeEfficency_Click);
+            // 
             // frmSectorManagementView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1410, 986);
+            this.Controls.Add(this.btnSalesMemberThreeEfficency);
+            this.Controls.Add(this.btnSalesMemberTwoEfficency);
+            this.Controls.Add(this.btnSalesMemberOneEfficency);
             this.Controls.Add(this.lblSalesMemberThreeOOO);
             this.Controls.Add(this.lblSalesMemberTwoOOO);
             this.Controls.Add(this.lblSalesMemberOneOOO);
@@ -540,5 +600,8 @@
         private System.Windows.Forms.Label lblSalesMemberThreeOOO;
         private System.Windows.Forms.Label lblSalesMemberTwoOOO;
         private System.Windows.Forms.Label lblSalesMemberOneOOO;
+        private buttonFormatting btnSalesMemberOneEfficency;
+        private buttonFormatting btnSalesMemberTwoEfficency;
+        private buttonFormatting btnSalesMemberThreeEfficency;
     }
 }

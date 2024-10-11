@@ -42,12 +42,12 @@ namespace PriceMaster
 
             //dteStart.Value = monday;
             dteStart.Value = monday.AddMonths(-1);
-            dteEnd.Value = monday; 
-            
+            dteEnd.Value = monday;
+
             remove_tabs = -1;
 
             fill_tabcontrol();
-            tabControl.SelectedIndex = tabControl.TabPages.Count -1;
+            tabControl.SelectedIndex = tabControl.TabPages.Count - 1;
             fill_grids();
 
         }
@@ -87,7 +87,7 @@ namespace PriceMaster
 
             fuga = (fuga / 39) * 100;
 
-            lbl.Text = "Out of Office: " + Math.Round(fuga,2).ToString() + "% (" + hours.ToString() + " hours)";
+            lbl.Text = "Out of Office: " + Math.Round(fuga, 2).ToString() + "% (" + hours.ToString() + " hours)";
 
             return dt;
         }
@@ -156,7 +156,7 @@ namespace PriceMaster
                         TabPage tabPageLoop = new TabPage
                         {
                             Name = dt.Rows[i][0].ToString(),
-                            Text = Convert.ToDateTime(dt.Rows[i][0].ToString()).ToString("dd/MM/yyyy")   ,
+                            Text = Convert.ToDateTime(dt.Rows[i][0].ToString()).ToString("dd/MM/yyyy"),
                             BackColor = Color.LightBlue
                         };
                         tabControl.TabPages.Add(tabPageLoop);
@@ -226,7 +226,7 @@ namespace PriceMaster
                 {
                     dgvSalesMemberOne.DataSource = salesMemberData(sales_members[0], sectorDate);
                     lblSalesMemberOne.Text = dgvSalesMemberOne.Rows[0].Cells[3].Value.ToString() ?? "";
-                    dgvSalesMemberOneOutOfOffice.DataSource = fill_out_of_office(sales_members[0], sectorDate,lblSalesMemberOneOOO);
+                    dgvSalesMemberOneOutOfOffice.DataSource = fill_out_of_office(sales_members[0], sectorDate, lblSalesMemberOneOOO);
                     percent(sales_members[0], sectorDate, lblSalesMemberOnePercent);
                     //format
                     format_dgv(dgvSalesMemberOne, pieChart1);
@@ -459,7 +459,7 @@ namespace PriceMaster
 
             string sql = "select id,sector_date as [Sector Date],Sector,sales_member as [Sales Member],Achieved,[Target] " +
                 "FROM [order_database].dbo.view_sales_table_grouped " +
-                "where sales_member_id = " + staff_id + " AND sector_date = '" + sector_date.ToString("yyyyMMdd") + "'";
+                "where sales_member_id = " + staff_id + " AND sector_date = '" + sector_date.ToString("yyyyMMdd") + "' order by Target desc,Achieved desc";
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -667,9 +667,9 @@ namespace PriceMaster
                 xlWorksheet.Name = get_staff_name(staff_id);
                 xlWorksheet.Range["A" + currentExcelRow].Value2 = get_staff_name(staff_id) + " Sectors";
                 xlWorksheet.Range["A" + currentExcelRow + ":E" + currentExcelRow].Merge();
-                
-                xlWorksheet.Range["A" + currentExcelRow + ":E" + currentExcelRow].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter; 
-                xlWorksheet.Range["A" + currentExcelRow + ":E" + currentExcelRow].Cells.Font.Size = 22; 
+
+                xlWorksheet.Range["A" + currentExcelRow + ":E" + currentExcelRow].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                xlWorksheet.Range["A" + currentExcelRow + ":E" + currentExcelRow].Cells.Font.Size = 22;
 
 
                 currentExcelRow++;
@@ -691,7 +691,7 @@ namespace PriceMaster
                     xlWorksheet.Range["A" + currentExcelRow + ":E" + currentExcelRow].Cells.Font.Size = 15;
                     xlWorksheet.Range["A" + currentExcelRow + ":E" + currentExcelRow].Interior.Color = Color.LightSkyBlue;
 
-                   currentExcelRow++;
+                    currentExcelRow++;
                     //now we go through each of the items logged for this sector
                     DataTable items_logged_dt = fill_sector_dt(Convert.ToInt32(dgv.Rows[sector_loop].Cells[0].Value.ToString()), staff_id);
 
@@ -702,7 +702,7 @@ namespace PriceMaster
                     //add all of the headers to the sheet
                     List<string> sector_headers = get_sector_headers(Convert.ToInt32(dgv.Rows[sector_loop].Cells[0].Value.ToString()), staff_id);
 
-                    for (int sector_header_count = 0;sector_header_count < sector_headers.Count;sector_header_count++)
+                    for (int sector_header_count = 0; sector_header_count < sector_headers.Count; sector_header_count++)
                     {
                         xlWorksheet.Cells[currentExcelRow, sector_header_count + 1] = sector_headers[sector_header_count];
                     }
@@ -724,7 +724,7 @@ namespace PriceMaster
 
                     }
 
-                    
+
                     xlWorksheet.Range["A" + currentExcelRow].Value2 = " ";
                     xlWorksheet.Range["A" + currentExcelRow + ":E" + currentExcelRow].Merge();
                     currentExcelRow++;
@@ -998,7 +998,7 @@ namespace PriceMaster
 
 
 
-        private static List<string> get_sector_headers (int sector_id, int staff)
+        private static List<string> get_sector_headers(int sector_id, int staff)
         {
             //headers for each table
             List<string> correspondence_headers = new List<string>()
@@ -1192,9 +1192,9 @@ namespace PriceMaster
             { }
         }
 
-        public void messageboxAbsence(DataGridView dgv,int row_index)
+        public void messageboxAbsence(DataGridView dgv, int row_index)
         {
-            MessageBox.Show(dgv.Rows[row_index].Cells[1].Value.ToString(),"Absence Reason",MessageBoxButtons.OK);
+            MessageBox.Show(dgv.Rows[row_index].Cells[1].Value.ToString(), "Absence Reason", MessageBoxButtons.OK);
         }
 
         private void dgvSalesMemberOneOutOfOffice_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -1211,5 +1211,47 @@ namespace PriceMaster
         {
             messageboxAbsence(dgvSalesMemberThreeOutOfOffice, e.RowIndex);
         }
+
+        private void btnSalesMemberOneEfficency_Click(object sender, EventArgs e)
+        {
+            chaseEffiency(lblSalesMemberOne.Text);
+        }
+
+        private void btnSalesMemberTwoEfficency_Click(object sender, EventArgs e)
+        {
+            chaseEffiency(lblSalesMemberTwo.Text);
+        }
+
+        private void btnSalesMemberThreeEfficency_Click(object sender, EventArgs e)
+        {
+            chaseEffiency(lblSalesMemberThree.Text);
+        }
+
+        private void chaseEffiency(string label)
+        {
+            DateTime sectorDate = DateTime.Now;
+            //get the date from the tabcontrol
+            string sql = "select distinct sector_date  FROM [order_database].dbo.view_sales_table_grouped " +
+                "where sector_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND sector_date <= '" + dteEnd.Value.ToString("yyyyMMdd") + "' ";
+
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+
+                DataTable dt = new DataTable();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+
+                    sectorDate = Convert.ToDateTime(dt.Rows[tabControl.SelectedIndex][0].ToString());}
+            }
+
+            frmChaseEfficency frm = new frmChaseEfficency(label,sectorDate);
+            frm.ShowDialog();
+
+        }
+
     }
 }
