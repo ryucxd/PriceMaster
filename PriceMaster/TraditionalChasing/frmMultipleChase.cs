@@ -151,7 +151,7 @@ namespace PriceMaster.TraditionalChasing
                         using (SqlCommand cmd = new SqlCommand("[order_database].dbo.usp_quotation_chase_log_multiple_chase", conn))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@quote_id", SqlDbType.Int).Value = Convert.ToInt32(quote_dt.Rows[i][0].ToString());
+                            cmd.Parameters.AddWithValue("@quote_id", SqlDbType.Int).Value = Convert.ToInt32(dgvSelectedQuotes.Rows[i].Cells[0].Value.ToString());
                             cmd.Parameters.AddWithValue("@description", SqlDbType.NVarChar).Value = description;
                             cmd.Parameters.AddWithValue("@date_next", SqlDbType.NVarChar).Value = dteNextDate;
                             cmd.Parameters.AddWithValue("@staff_id", SqlDbType.Int).Value = CONNECT.staffID;
