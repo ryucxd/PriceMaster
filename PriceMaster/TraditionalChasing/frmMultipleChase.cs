@@ -25,7 +25,10 @@ namespace PriceMaster.TraditionalChasing
         public string dteNextDate { get; set; }
         public string chase_status { get; set; }
         public int failed_contact { get; set; }
-        public frmMultipleChase(int _quote_id, string _customer, DataTable _quote_dt, string _description, int _dont_chase, int _email, int _phone,string _dteNextDate,string _chase_status,int failed_contact)
+
+        public DataTable selected_dt { get; set; }
+
+        public frmMultipleChase(int _quote_id, string _customer, DataTable _quote_dt, string _description, int _dont_chase, int _email, int _phone, string _dteNextDate, string _chase_status, int failed_contact)
         {
             InitializeComponent();
 
@@ -42,29 +45,81 @@ namespace PriceMaster.TraditionalChasing
 
             this.failed_contact = failed_contact;
 
+            dgvSelectedQuotes.Columns.Add("selected_quote", "Quote ID");
+            dgvSelectedQuotes.Columns.Add("selected_ref", "Customer Ref");
+
             loadData();
 
         }
 
         private void loadData()
         {
-            dataGridView1.DataSource = quote_dt;
+
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+
+                string sql = "select top 250 s.quote_id,customer_ref,customer " +
+                        "from [order_database].dbo.solidworks_quotation_log s  " +
+                        "inner join (select quote_id,max(revision_number) as revision_number  " +
+                        "from [order_database].dbo.solidworks_quotation_log group by quote_id) as b on s.quote_id = b.quote_id AND s.revision_number = b.revision_number " +
+                        "WHERE customer = '" + customer + "' AND s.quote_id <> " + quote_id.ToString() + " AND s.quote_id like '%" + txtQuote.Text + "%' " +
+                        " ORDER BY s.quote_id desc";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+
+                    da.Fill(dt);
+                    dataGridView1.DataSource = dt;
+
+                }
+
+                conn.Close();
+            }
+
 
             dataGridView1.Columns[2].Visible = false;
 
             dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+            dataGridView1.Columns[0].HeaderText = "Quote ID";
+            dataGridView1.Columns[1].HeaderText = "Customer Ref";
+
+
+
+            dgvSelectedQuotes.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvSelectedQuotes.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+
+            dgvSelectedQuotes.DataSource = selected_dt;
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Empty)
-                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightSkyBlue;
-            else
-                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Empty;
+            //if (dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Empty)
+            //    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightSkyBlue;
+            //else
+            //    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Empty;
+
+            int validation = -1;
+            foreach (DataGridViewRow row in dgvSelectedQuotes.Rows)
+            {
+
+                if (dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() == row.Cells[0].Value.ToString())
+                    validation = 0;
+
+
+            }
+
+
+            if (validation == -1)
+                dgvSelectedQuotes.Rows.Add(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString(), dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
 
             dataGridView1.ClearSelection();
+            dgvSelectedQuotes.ClearSelection();
 
         }
 
@@ -72,11 +127,9 @@ namespace PriceMaster.TraditionalChasing
         {
             int validation = 0;
             //check if any of the chases are marked as blue
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
-            {
-                if (dataGridView1.Rows[i].DefaultCellStyle.BackColor == Color.LightSkyBlue)
+               if (dgvSelectedQuotes.Rows.Count > 0)
                     validation++;
-            }
+            
 
             if (validation == 0)
             {
@@ -85,13 +138,11 @@ namespace PriceMaster.TraditionalChasing
             }
 
             //add the chase for each of these 
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            for (int i = 0; i < dgvSelectedQuotes.Rows.Count; i++)
             {
 
-                if (dataGridView1.Rows[i].DefaultCellStyle.BackColor == Color.LightSkyBlue)
-                {
                     //same as below
-                   ///////// string sql = "SELECT CAST(quote_id as nvarchar(max)) FROM [order_database].dbo.quotation_feed_back WHERE quote_id = " + quote_dt.Rows[i][0].ToString();
+                    ///////// string sql = "SELECT CAST(quote_id as nvarchar(max)) FROM [order_database].dbo.quotation_feed_back WHERE quote_id = " + quote_dt.Rows[i][0].ToString();
 
                     using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
                     {
@@ -142,7 +193,7 @@ namespace PriceMaster.TraditionalChasing
 
                         conn.Close();
                     }
-                }
+                
             }
             this.Close();
 
@@ -151,6 +202,16 @@ namespace PriceMaster.TraditionalChasing
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtQuote_TextChanged(object sender, EventArgs e)
+        {
+            loadData();
+        }
+
+        private void dgvSelectedQuotes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dgvSelectedQuotes.Rows.RemoveAt(e.RowIndex);
         }
     }
 }

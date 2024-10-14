@@ -44,6 +44,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lblValue = new System.Windows.Forms.Label();
+            this.lblChaseCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLost)).BeginInit();
             this.SuspendLayout();
@@ -134,7 +135,7 @@
             this.lblLost.Name = "lblLost";
             this.lblLost.Size = new System.Drawing.Size(829, 23);
             this.lblLost.TabIndex = 62;
-            this.lblLost.Text = "Lost Chases";
+            this.lblLost.Text = "Chases Marked as Lost";
             this.lblLost.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
@@ -144,7 +145,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(829, 25);
             this.label1.TabIndex = 63;
-            this.label1.Text = "Won Chases";
+            this.label1.Text = "Chases Won (Booked in)";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
@@ -182,16 +183,27 @@
             this.lblValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
             this.lblValue.Location = new System.Drawing.Point(12, 700);
             this.lblValue.Name = "lblValue";
-            this.lblValue.Size = new System.Drawing.Size(591, 200);
+            this.lblValue.Size = new System.Drawing.Size(591, 96);
             this.lblValue.TabIndex = 67;
             this.lblValue.Text = "Total Won Order Value: £0";
             this.lblValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblChaseCount
+            // 
+            this.lblChaseCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.25F);
+            this.lblChaseCount.Location = new System.Drawing.Point(12, 796);
+            this.lblChaseCount.Name = "lblChaseCount";
+            this.lblChaseCount.Size = new System.Drawing.Size(591, 107);
+            this.lblChaseCount.TabIndex = 67;
+            this.lblChaseCount.Text = "Total Chases: 0";
+            this.lblChaseCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmChaseEfficency
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1473, 912);
+            this.Controls.Add(this.lblChaseCount);
             this.Controls.Add(this.lblValue);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -229,5 +241,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblValue;
+        private System.Windows.Forms.Label lblChaseCount;
     }
 }

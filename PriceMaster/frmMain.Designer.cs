@@ -81,6 +81,7 @@
             this.btnEmail = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
             this.btnLeads = new PriceMaster.buttonFormatting();
+            this.btnryucxd = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -795,11 +796,31 @@
             this.btnLeads.UseVisualStyleBackColor = false;
             this.btnLeads.Click += new System.EventHandler(this.btnLeads_Click);
             // 
+            // btnryucxd
+            // 
+            this.btnryucxd.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnryucxd.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnryucxd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnryucxd.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnryucxd.ForeColor = System.Drawing.Color.White;
+            this.btnryucxd.Location = new System.Drawing.Point(12, 645);
+            this.btnryucxd.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnryucxd.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnryucxd.Name = "btnryucxd";
+            this.btnryucxd.Padding = new System.Windows.Forms.Padding(3);
+            this.btnryucxd.Size = new System.Drawing.Size(154, 30);
+            this.btnryucxd.TabIndex = 119;
+            this.btnryucxd.Text = "testing button";
+            this.btnryucxd.UseVisualStyleBackColor = false;
+            this.btnryucxd.Visible = false;
+            this.btnryucxd.Click += new System.EventHandler(this.btnryucxd_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1901, 673);
+            this.Controls.Add(this.btnryucxd);
             this.Controls.Add(this.btnLeads);
             this.Controls.Add(this.btnNewCustomers);
             this.Controls.Add(this.btnNonReturningEnquiries);
@@ -917,6 +938,7 @@
         private buttonFormatting btnNonReturningEnquiries;
         private buttonFormatting btnNewCustomers;
         private buttonFormatting btnLeads;
+        private buttonFormatting btnryucxd;
     }
 }
 

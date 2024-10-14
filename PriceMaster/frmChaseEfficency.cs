@@ -276,6 +276,28 @@ namespace PriceMaster
             }
 
             lblValue.Text = "Total Order Value: £" + money.ToString("N0");
+
+
+            string sql = "SELECT id FROM [user_info].dbo.[user] WHERE forename + ' ' + surname = '" + cmbStaff.Text + "'";
+
+            DataTable dt = new DataTable();
+            dt = runSQL(sql, dt);
+
+            int user_id = Convert.ToInt32(dt.Rows[0][0]);
+
+            //count the chases
+            DataTable dt_chases = new DataTable();
+            sql = "select count(chased_by) FROM (" +
+                "select * FROM [order_database].dbo.quotation_chase_log " +
+                "union all " +
+                "select * FROM [order_database].dbo.quotation_chase_log_slimline " +
+                ") as a where chased_by = " + user_id + " and " +
+                "chase_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND chase_date <= '" + dteEnd.Value.ToString("yyyyMMdd") + "'";
+
+            dt_chases = runSQL(sql, dt_chases);
+
+            lblChaseCount.Text = "Total Chases: " + dt_chases.Rows[0][0].ToString();
+
         }
 
 

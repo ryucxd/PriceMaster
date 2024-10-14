@@ -979,5 +979,13 @@ namespace PriceMaster
             frmLeadList frm = new frmLeadList();
             frm.ShowDialog();
         }
+
+        private void btnryucxd_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            frmMultipleChase frm = new frmMultipleChase(87266, "STRONGDOR LIMITED", dt, "aaa", -1, -1, -1, "", "", -1);
+            frm.ShowDialog();
+
+        }
     }
 }
