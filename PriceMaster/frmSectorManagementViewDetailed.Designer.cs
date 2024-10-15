@@ -34,6 +34,8 @@
             this.dgvSector = new System.Windows.Forms.DataGridView();
             this.lblSector = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtFilter = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSector)).BeginInit();
             this.SuspendLayout();
@@ -103,11 +105,35 @@
             this.label1.Text = "       = Failed contact";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // txtFilter
+            // 
+            this.txtFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.txtFilter.Location = new System.Drawing.Point(93, 14);
+            this.txtFilter.Name = "txtFilter";
+            this.txtFilter.Size = new System.Drawing.Size(165, 26);
+            this.txtFilter.TabIndex = 8;
+            this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
+            this.txtFilter.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFilter_KeyPress);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.label2.Location = new System.Drawing.Point(10, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 25);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Filter:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmSectorManagementViewDetailed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1460, 993);
+            this.Controls.Add(this.txtFilter);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblSector);
             this.Controls.Add(this.tabControl);
@@ -122,6 +148,7 @@
             this.tabControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSector)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -132,5 +159,7 @@
         private System.Windows.Forms.DataGridView dgvSector;
         private System.Windows.Forms.Label lblSector;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtFilter;
+        private System.Windows.Forms.Label label2;
     }
 }

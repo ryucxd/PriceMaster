@@ -132,7 +132,8 @@ namespace PriceMaster
                 "next_correspondence_date [Next Correspondence], Sector ,slimline,failed_contact " +
                 "FROM [order_database].dbo.quotation_chase_customer q " +
                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
-                "where sector_id = " + sector_id + " and correspondence_by = " + staff;
+                "where sector_id = " + sector_id + " and correspondence_by = " + staff + " AND " +
+                "body LIKE '%" + txtFilter.Text + "%' ";
 
 
             //string sql_quotations = "select q.id,chase_date,q.quote_id,customer,chase_description, " +
@@ -155,7 +156,8 @@ namespace PriceMaster
                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
                 "left join [price_master].dbo.[sl_quotation] sq on q.quote_id = sq.quote_id " +
                 "left join [dsl_fitting].dbo.sales_ledger sl on sq.customer_acc_ref = sl.ACCOUNT_REF " +
-                "where sector_id = " + sector_id + " AND chased_by = " + staff + " AND sq.highest_issue = -1" +
+                "where sector_id = " + sector_id + " AND chased_by = " + staff + " AND sq.highest_issue = -1 AND " +
+                "chase_description LIKE '%" + txtFilter.Text + "%'" +
                 "union all " +
                 "select q.id,chase_date as [Chase Date],Customer,CAST(q.quote_id as nvarchar(max)) as [Quote ID],chase_description as [Chase Notes], " +
                 "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Phone, " +
@@ -166,14 +168,18 @@ namespace PriceMaster
                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
                 "left join (select q.quote_id,q.customer FROM [order_database].dbo.solidworks_quotation_log q " +
                         "right join [order_database].dbo.view_solidworks_max_rev r on q.quote_id = r.quote_id AND q.revision_number = r.revision_number) sq on q.quote_id = sq.quote_id " +
-                "where sector_id = " + sector_id + " AND chased_by = " + staff;
+                "where sector_id = " + sector_id + " AND chased_by = " + staff + " AND " +
+                "chase_description LIKE '%" + txtFilter.Text + "%' " +
+                "order by chase_date desc";
 
             string sql_lead = "select s.id,lead_date as [Lead Date],Customer,contact_name as [Contact Name],contact_details as [Contact Details]," +
                 "u.forename + ' ' + u.surname as [Allocated to],sector,notes as [Lead Notes]" +
                 "FROM [order_database].dbo.sales_new_leads s " +
                 "left join [user_info].dbo.[user] u on s.allocated_to = u.id " +
                 "left join [order_database].dbo.sales_table st on s.sector_id = st.id " +
-                "where sector_id = " + sector_id + " AND lead_by = " + staff;
+                "where sector_id = " + sector_id + " AND lead_by = " + staff + " AND " +
+                "customer LIKE '%" + txtFilter.Text + "%' " +
+                "order by lead_date desc";
 
 
             string sql = "";
@@ -209,6 +215,8 @@ namespace PriceMaster
 
         private void format_grid()
         {
+            if (dgvSector.Rows.Count == 0)
+                return;
 
             if (tabControl.SelectedIndex == -1)
                 return;
@@ -302,6 +310,22 @@ namespace PriceMaster
 
             frmSectorChaseCorrespondenceHistory frm = new frmSectorChaseCorrespondenceHistory(correspondence, dgvSector.Rows[e.RowIndex].Cells[2].Value.ToString(), _staff_id, dgvSector.Rows[e.RowIndex].Cells[0].Value.ToString(), slimline);
             frm.ShowDialog();
+        }
+
+        private void txtFilter_TextChanged(object sender, EventArgs e)
+        {
+
+            if (txtFilter.Text.Length == 0)
+                load_grid(_sector_id, _staff_id);
+
+        }
+
+        private void txtFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                load_grid(_sector_id, _staff_id);
+            }
         }
     }
 }
