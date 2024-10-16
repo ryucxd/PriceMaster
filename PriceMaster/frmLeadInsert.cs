@@ -69,10 +69,33 @@ namespace PriceMaster
                 return;
             }
 
+            //check if this has been added before! 
+            sql = "select id FROM [order_database].dbo.sales_new_leads where customer = '" + txtCustomer.Text + "' AND contact_name = '" + txtContactName.Text + "'";
+
+            using (SqlConnection connDouble = new SqlConnection(CONNECT.ConnectionString))
+            {
+                connDouble.Open();
+
+                using (SqlCommand cmdDouble = new SqlCommand(sql, connDouble))
+                {
+                    var temp = cmdDouble.ExecuteScalar();
+
+                    if (temp != null)
+                    {
+                        MessageBox.Show("You have already added this contact for this customer!", "Duplicate Entry", MessageBoxButtons.OK);
+                        return;
+                    }
+
+                }
 
 
-            //get the sector (if the box is visible!!!!)
-            int sectorID = 0;
+                    connDouble.Close();
+            }
+
+
+
+                //get the sector (if the box is visible!!!!)
+                int sectorID = 0;
             if (cmbSector.Visible == true)
             {
                 if (cmbSector.Text.Length < 1)

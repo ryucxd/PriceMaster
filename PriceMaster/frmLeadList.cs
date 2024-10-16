@@ -52,7 +52,8 @@ namespace PriceMaster
                 "left join [user_info].dbo.[user] u on s.allocated_to = u.id " +
                 "left join [order_database].dbo.sales_table st on s.sector_id = st.id " +
                 "where prospect_added_by is null AND Customer LIKE '%" + txtCustomerSearch.Text + "%' " +
-                " AND u.forename + ' ' + u.surname LIKE '%" + cmbStaff.Text + "%'"; // lead_by = " + CONNECT.staffID;
+                " AND u.forename + ' ' + u.surname LIKE '%" + cmbStaff.Text + "%'" +
+                " ORDER BY rotec_customer DESC,lead_date desc"; // lead_by = " + CONNECT.staffID;
 
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
