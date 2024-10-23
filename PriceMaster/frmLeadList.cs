@@ -74,9 +74,7 @@ namespace PriceMaster
 
                     }
 
-
                     dataGridView1.DataSource = dt;
-
                 }
 
                 conn.Close();

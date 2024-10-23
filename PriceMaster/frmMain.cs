@@ -52,6 +52,10 @@ namespace PriceMaster
         public frmMain()
         {
             InitializeComponent();
+
+            if (CONNECT.staffID == 260)
+                btnryucxd.Visible = true;
+
             dateFilter = 0;
             loadData();
         }
@@ -982,8 +986,12 @@ namespace PriceMaster
 
         private void btnryucxd_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            frmMultipleChase frm = new frmMultipleChase(87266, "A & C SLATTERY", dt, "test test aaa", -1, -1, -1, "", "", -1);
+            //DataTable dt = new DataTable();
+            //frmMultipleChase frm = new frmMultipleChase(87266, "A & C SLATTERY", dt, "test test aaa", -1, -1, -1, "", "", -1);
+            //frm.ShowDialog();
+
+
+            frmCorrespondenceExport frm = new frmCorrespondenceExport();
             frm.ShowDialog();
 
         }

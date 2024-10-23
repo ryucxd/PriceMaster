@@ -133,7 +133,8 @@ namespace PriceMaster
                 "FROM [order_database].dbo.quotation_chase_customer q " +
                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
                 "where sector_id = " + sector_id + " and correspondence_by = " + staff + " AND " +
-                "body LIKE '%" + txtFilter.Text + "%' ";
+                "body LIKE '%" + txtFilter.Text + "%' " +
+                "ORDER BY date_created desc";
 
 
             //string sql_quotations = "select q.id,chase_date,q.quote_id,customer,chase_description, " +

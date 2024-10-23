@@ -1094,5 +1094,14 @@ namespace PriceMaster
             frmSectorManagementView frm = new frmSectorManagementView();
             frm.ShowDialog();
         }
+
+        private void btnCorrespondenceExport_Click(object sender, EventArgs e)
+        {
+
+            frmCorrespondenceExport frm = new frmCorrespondenceExport();
+            frm.ShowDialog();
+
+
+        }
     }
 }

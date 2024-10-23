@@ -52,8 +52,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnShowAll = new PriceMaster.buttonFormatting();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.chkboxSlimline = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.lblChaseCount = new System.Windows.Forms.Label();
             this.lblCorrespondenceCount = new System.Windows.Forms.Label();
             this.btnLiveChart = new PriceMaster.buttonFormatting();
@@ -61,6 +61,7 @@
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
             this.btnWeekly = new PriceMaster.buttonFormatting();
+            this.btnCorrespondenceExport = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCorrespondence)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -362,17 +363,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Universal Filters";
             // 
-            // label10
-            // 
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label10.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label10.Location = new System.Drawing.Point(497, 37);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(28, 17);
-            this.label10.TabIndex = 65;
-            this.label10.Text = "to";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
             // chkboxSlimline
             // 
             this.chkboxSlimline.AutoSize = true;
@@ -384,6 +374,17 @@
             this.chkboxSlimline.Text = "Slimline";
             this.chkboxSlimline.UseVisualStyleBackColor = true;
             this.chkboxSlimline.CheckedChanged += new System.EventHandler(this.chkboxSlimline_CheckedChanged);
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label10.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label10.Location = new System.Drawing.Point(497, 37);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(28, 17);
+            this.label10.TabIndex = 65;
+            this.label10.Text = "to";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // lblChaseCount
             // 
@@ -504,11 +505,30 @@
             this.btnWeekly.UseVisualStyleBackColor = false;
             this.btnWeekly.Click += new System.EventHandler(this.btnWeekly_Click);
             // 
+            // btnCorrespondenceExport
+            // 
+            this.btnCorrespondenceExport.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnCorrespondenceExport.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCorrespondenceExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCorrespondenceExport.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCorrespondenceExport.ForeColor = System.Drawing.Color.White;
+            this.btnCorrespondenceExport.Location = new System.Drawing.Point(1331, 506);
+            this.btnCorrespondenceExport.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnCorrespondenceExport.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnCorrespondenceExport.Name = "btnCorrespondenceExport";
+            this.btnCorrespondenceExport.Padding = new System.Windows.Forms.Padding(3);
+            this.btnCorrespondenceExport.Size = new System.Drawing.Size(194, 30);
+            this.btnCorrespondenceExport.TabIndex = 79;
+            this.btnCorrespondenceExport.Text = "Correspondence Export";
+            this.btnCorrespondenceExport.UseVisualStyleBackColor = false;
+            this.btnCorrespondenceExport.Click += new System.EventHandler(this.btnCorrespondenceExport_Click);
+            // 
             // frmManagementView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1859, 613);
+            this.Controls.Add(this.btnCorrespondenceExport);
             this.Controls.Add(this.btnWeekly);
             this.Controls.Add(this.lblCorrespondenceCount);
             this.Controls.Add(this.lblChaseCount);
@@ -576,5 +596,6 @@
         private System.Windows.Forms.Label lblChaseCount;
         private System.Windows.Forms.Label lblCorrespondenceCount;
         private buttonFormatting btnWeekly;
+        private buttonFormatting btnCorrespondenceExport;
     }
 }
