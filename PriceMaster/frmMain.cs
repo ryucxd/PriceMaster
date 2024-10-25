@@ -991,7 +991,7 @@ namespace PriceMaster
             //frm.ShowDialog();
 
 
-            frmCorrespondenceExport frm = new frmCorrespondenceExport();
+            frmLeadReport frm = new frmLeadReport();
             frm.ShowDialog();
 
         }

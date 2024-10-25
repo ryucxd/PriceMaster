@@ -28,6 +28,7 @@ namespace PriceMaster
         public int customer_index { get; set; }
         public int sender_email_address_index { get; set; }
         public int priority_chase_index { get; set; }
+        public int remove_button_index { get; set; }
 
         //auto chase index
         public int auto_customer_index { get; set; }
@@ -228,8 +229,6 @@ namespace PriceMaster
             if (tabControl1.SelectedIndex == 1)
             {
                 //add a quote button on the end
-
-
                 column_index();
                 DataGridViewButtonColumn view_button = new DataGridViewButtonColumn();
                 view_button.Name = "Quote";
@@ -240,6 +239,23 @@ namespace PriceMaster
                     dataGridView1.Columns.Insert(auto_item_count_index + 1, view_button);
                 }
             }
+
+            if (dataGridView1.Columns.Contains("Complete") == true)
+                dataGridView1.Columns.Remove("Complete");
+            if (tabControl1.SelectedIndex == 0)
+            {
+                //add a remove button on the end
+                column_index();
+                DataGridViewButtonColumn view_button = new DataGridViewButtonColumn();
+                view_button.Name = "Complete";
+                view_button.Text = "Mark Complete";
+                view_button.UseColumnTextForButtonValue = true;
+                if (dataGridView1.Columns["Complete"] == null)
+                {
+                    dataGridView1.Columns.Insert(priority_chase_index + 1, view_button);
+                }
+            }
+
         }
 
         private void column_index()
@@ -276,64 +292,69 @@ namespace PriceMaster
         {
             if (e.RowIndex == -1)
                 return;
+
+            //get the customer
+            string customer = "";
             column_index();
-            //if (e.ColumnIndex == button_index)
-            //{
-            //    DialogResult result = MessageBox.Show("Are you sure you want to mark this chase as completed?", "Completed Chase Entry", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            //    if (result == DialogResult.Yes)
-            //    {
-            //        string sql = "UPDATE [order_database].dbo.[quotation_chase_log] SET chase_followed_up = -1,chase_followed_up_date = GETDATE() WHERE id = " + dataGridView1.Rows[e.RowIndex].Cells[id_index].Value.ToString();
-            //        using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
-            //        {
-            //            conn.Open();
-            //            using (SqlCommand cmd = new SqlCommand(sql, conn))
-            //                cmd.ExecuteNonQuery();
-            //            conn.Close();
-            //            load_data();
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //try
-            //{
-
-            if (e.ColumnIndex == auto_quote_button)
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
-                try
-                {
-                    string path = @"\\designsvr1\SOLIDWORKS\Door Designer\Specifications\Project " + dataGridView1.Rows[e.RowIndex].Cells[auto_quote_id_index].Value.ToString()
-                        + @"\Quotations\Revision " + dataGridView1.Rows[e.RowIndex].Cells[auto_revision_index].Value.ToString() +
-                        @"\FullQuotation-" + dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString() + "-" +
-                        dataGridView1.Rows[e.RowIndex].Cells[auto_revision_index].Value.ToString() + ".pdf";
-                    System.Diagnostics.Process.Start(path);
-                }
-                catch
-                {
-                    MessageBox.Show("The full quotation does not yet exist for this number.", "No File Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                conn.Open();
+                string sql = "select customer from [order_database].dbo.solidworks_quotation_log where quote_id = " + dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    customer = cmd.ExecuteScalar().ToString();
+
+                conn.Close();
             }
-            else
+
+           
+
+
+
+            if (tabControl1.SelectedIndex == 0)
             {
-
-                //get the customer
-                string customer = "";
-                using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                if (e.ColumnIndex == button_index)
                 {
-                    conn.Open();
-                    string sql = "select customer from [order_database].dbo.solidworks_quotation_log where quote_id = " + dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString();
-
-                    using (SqlCommand cmd = new SqlCommand(sql, conn))
-                        customer = cmd.ExecuteScalar().ToString();
-
-                    conn.Close();
+                    DialogResult result = MessageBox.Show("Are you sure you want to mark this chase as completed?", "Completed Chase Entry", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (result == DialogResult.Yes)
+                    {
+                        //string sql = "UPDATE [order_database].dbo.[quotation_chase_log] SET chase_followed_up = -1,chase_followed_up_date = GETDATE() WHERE id = " + dataGridView1.Rows[e.RowIndex].Cells[id_index].Value.ToString();
+                        string sql = "update [order_database].dbo.quotation_chase_log SET chase_complete = -1, chase_followed_up_date = GETDATE() where quote_id = " + dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString() + " AND chased_by = " + CONNECT.staffID + " AND chase_complete = 0";
+                        using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                        {
+                            conn.Open();
+                            using (SqlCommand cmd = new SqlCommand(sql, conn))
+                                cmd.ExecuteNonQuery();
+                            conn.Close();
+                            load_data();
+                        }
+                    }
                 }
-
-                if (tabControl1.SelectedIndex == 0)
+                else
                 {
                     frmTraditionalQuotation frm = new frmTraditionalQuotation(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString()), customer);
                     frm.ShowDialog();
                     load_data();
+                }
+            }
+
+
+            if (tabControl1.SelectedIndex == 1)
+            {
+                if (e.ColumnIndex == auto_quote_button)
+                {
+                    try
+                    {
+                        string path = @"\\designsvr1\SOLIDWORKS\Door Designer\Specifications\Project " + dataGridView1.Rows[e.RowIndex].Cells[auto_quote_id_index].Value.ToString()
+                            + @"\Quotations\Revision " + dataGridView1.Rows[e.RowIndex].Cells[auto_revision_index].Value.ToString() +
+                            @"\FullQuotation-" + dataGridView1.Rows[e.RowIndex].Cells[quote_index].Value.ToString() + "-" +
+                            dataGridView1.Rows[e.RowIndex].Cells[auto_revision_index].Value.ToString() + ".pdf";
+                        System.Diagnostics.Process.Start(path);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("The full quotation does not yet exist for this number.", "No File Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
@@ -359,6 +380,8 @@ namespace PriceMaster
                     colourAutoChases();
                 }
             }
+
+
 
             //apply_filter();
             //}
