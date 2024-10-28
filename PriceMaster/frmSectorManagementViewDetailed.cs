@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace PriceMaster
 {
@@ -326,6 +328,204 @@ namespace PriceMaster
             if (e.KeyChar == (char)13)
             {
                 load_grid(_sector_id, _staff_id);
+            }
+        }
+
+        private void btn_Click(object sender, EventArgs e)
+        {
+            //export 
+
+
+
+            int excel_row = 1;
+            string file = @"C:\temp\sector_" + DateTime.Now.ToString("mss") + ".xlsx";
+
+            //opening method 
+            Excel.Application xlApp = new Excel.Application();
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Add();
+            Excel.Worksheet xlWorksheet = xlWorkbook.Worksheets[1];
+
+
+
+            xlApp.Visible = false; //make it visible
+            //xlApp.WindowState = Excel.XlWindowState.xlMaximized;
+            //get the users name
+            string user = "select forename + ' ' + surname FROM [user_info].dbo.[user] where id = " + _staff_id;
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(user, conn))
+                    user = cmd.ExecuteScalar().ToString();
+
+                conn.Close();
+            }
+
+            xlWorksheet.Cells[1][excel_row].Value2 = user + " - " + lblSector.Text;
+            //make the header blue
+            xlWorksheet.Cells[1][excel_row].Interior.Color = Excel.XlRgbColor.rgbLightSkyBlue;
+            //font formats
+            xlWorksheet.Cells[1][excel_row].Font.Size = 15;
+
+            xlWorksheet.Cells[1][excel_row].HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+            //merge this ^^^
+            xlWorksheet.Range[xlWorksheet.Cells[1, 1], xlWorksheet.Cells[1, dgvSector.Columns.Count]].Merge();
+
+
+
+            //main body of changes and stuff goes here 
+
+            //first row needs to sector label + person
+
+
+            excel_row++;
+
+            //fill the first row with the dt headers
+            for (int column_index = 0; column_index < dgvSector.Columns.Count; column_index++)
+            {
+                xlWorksheet.Cells[column_index + 1][excel_row].Value2 = dgvSector.Columns[column_index].HeaderText.ToString();
+
+                //make the header blue
+                xlWorksheet.Cells[column_index + 1][excel_row].Interior.Color = Excel.XlRgbColor.rgbLightSkyBlue;
+                //font formats
+                xlWorksheet.Cells[column_index + 1][excel_row].Font.Size = 12;
+            }
+
+            //add the filter
+            // xlWorksheet.Cells[2][excel_row].Autofilter(1);
+
+
+            //int contact_name_index = dgvSector.Columns["Contact Name"].Index + 1;
+            //int allocated_to_index = dgvSector.Columns["Allocated to"].Index + 1;
+            //int sector_index = dgvSector.Columns["Sector"].Index + 1;
+            //int customer_added_by_index = dgvSector.Columns["Customer Added By"].Index + 1;
+            //int customer_added_date_index = dgvSector.Columns["Customer Added Date"].Index + 1;
+            //int correspondence_date_index = dgvSector.Columns["Correspondence Date"].Index + 1;
+
+            excel_row++;
+
+            //fill the sheet with the data from the datatable
+            for (int row_index = 0; row_index < dgvSector.Rows.Count; row_index++)
+            {
+
+                for (int col_index = 0; col_index < dgvSector.Columns.Count; col_index++)
+                {
+                    xlWorksheet.Cells[col_index + 1][excel_row].Value2 = dgvSector.Rows[row_index].Cells[col_index].Value.ToString();
+                    if (dgvSector.Rows[row_index].DefaultCellStyle.BackColor != Color.Empty)
+                        xlWorksheet.Cells[col_index + 1][excel_row].Interior.Color = dgvSector.Rows[row_index].DefaultCellStyle.BackColor;
+
+                }
+
+                excel_row++;
+            }
+
+            //vv change cell values 
+
+
+
+            //formatting examples 
+
+            //xlWorkSheet.Range["H2:H300"].NumberFormat = "£#,###,###.00"; < formats into currency 
+
+            //xlWorksheet.Range["A1:D1"].Merge(); merging cells 
+
+            //xlWorksheet.Range["A1"].Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft; < alignment 
+
+            //xlWorksheet.Range["A1"].Cells.Font.Size = 22; < font size 
+
+
+
+            ////auto fit and rows  
+            //Microsoft.Office.Interop.Excel.Worksheet ws = xlApp.ActiveWorkbook.Worksheets[1]; 
+            Microsoft.Office.Interop.Excel.Range range = xlWorksheet.UsedRange;
+
+            //xlWorksheet.Columns.ClearFormats(); 
+            //xlWorksheet.Rows.ClearFormats(); 
+
+            xlWorksheet.Columns.AutoFit();
+            xlWorksheet.Rows.AutoFit();
+
+            //get the index of
+            if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Correspondence")
+            {
+                int notes_index = dgvSector.Columns["Notes"].Index + 1;
+                xlWorksheet.Columns[notes_index].ColumnWidth = 50;
+                xlWorksheet.Columns[notes_index].WrapText = true;
+            }
+            else if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Quotation Chasing")
+            {
+                int chase_notes_index = dgvSector.Columns["Chase Notes"].Index + 1;
+                xlWorksheet.Columns[chase_notes_index].ColumnWidth = 50;
+                xlWorksheet.Columns[chase_notes_index].WrapText = true;
+            }
+
+
+
+            //colours and other formatting
+            //reset excel row for the formatting
+
+
+            //border active cells 
+            range.Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            range.Borders.Color = ColorTranslator.ToOle(Color.Black);
+
+
+
+            xlWorksheet.Activate();
+            xlWorksheet.Application.ActiveSheet.Rows[3].Select();
+            xlWorksheet.Application.ActiveWindow.FreezePanes = true;
+
+
+            //Set print margins 
+            Excel.PageSetup xlPageSetUp = xlWorksheet.PageSetup;
+            xlPageSetUp.Zoom = false;
+            xlPageSetUp.FitToPagesWide = 1;
+            xlPageSetUp.FitToPagesTall = false;
+            xlPageSetUp.Orientation = Excel.XlPageOrientation.xlLandscape;
+
+
+
+            //save the new file 
+
+            xlApp.DisplayAlerts = false;
+            xlWorkbook.SaveAs(file);
+
+            //close the workbook 
+
+            xlWorkbook.Close();
+            xlApp.Quit();
+
+
+
+            //release objects from memory 
+            releaseObject(xlWorksheet);
+            releaseObject(xlWorkbook);
+            releaseObject(xlApp);
+            Process.Start(file);
+
+        }
+
+
+
+
+        //release objects void 
+
+        private static void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+                Console.WriteLine("Error releasing object: " + ex.Message);
+            }
+            finally
+            {
+                GC.Collect();
             }
         }
     }

@@ -426,7 +426,7 @@ namespace PriceMaster
             string sql = "";
 
             //load the correspondence 
-            sql = "select q.id,customer_name,u.forename + ' ' + u.surname as fullname,q.slimline,date_created,body," +
+            sql = "select q.id,rtrim(customer_name) as customer_name,u.forename + ' ' + u.surname as fullname,q.slimline,date_created,body," +
                 "CASE WHEN no_follow_up = 0 then convert(varchar(10),next_correspondence_date , 103)  else 'No follow Up'end as next_correspondence," +
                 "CASE WHEN q.email = 0 THEN CAST(0 AS BIT) WHEN q.email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Email] ," +
                 "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Phone] ," +
@@ -1101,7 +1101,12 @@ namespace PriceMaster
             frmCorrespondenceExport frm = new frmCorrespondenceExport();
             frm.ShowDialog();
 
+        }
 
+        private void btnLeads_Click(object sender, EventArgs e)
+        {
+            frmLeadReport frm = new frmLeadReport();
+            frm.ShowDialog();
         }
     }
 }

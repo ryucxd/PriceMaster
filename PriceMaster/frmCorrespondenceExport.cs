@@ -208,10 +208,8 @@ namespace PriceMaster
             Excel.Workbook xlWorkbook = xlApp.Workbooks.Add();
             Excel.Worksheet xlWorksheet = xlWorkbook.Worksheets[1];
 
-
-
-            xlApp.Visible = true; //make it visible
-            xlApp.WindowState = Excel.XlWindowState.xlMaximized;
+            //xlApp.Visible = true; //make it visible
+            //xlApp.WindowState = Excel.XlWindowState.xlMaximized;
 
 
 
@@ -228,6 +226,8 @@ namespace PriceMaster
                 xlWorksheet.Cells[column_index + 1][excel_row].Font.Size = 12;
             }
 
+            //add the filter
+            xlWorksheet.Cells[1][excel_row].Autofilter(1);
 
             //get the index of
             int customer_index = dt.Columns.IndexOf("Customer") + 1;
@@ -238,6 +238,7 @@ namespace PriceMaster
             int product_index = dt.Columns.IndexOf("Issue with product") + 1;
             int installation_index = dt.Columns.IndexOf("Issue with installation") + 1;
             int service_index = dt.Columns.IndexOf("Issue with service") + 1;
+            int contact_index = dt.Columns.IndexOf("Contact") + 1;
 
             excel_row++;
 
@@ -296,7 +297,7 @@ namespace PriceMaster
             xlWorksheet.Columns[coresspondence_by_index].WrapText = true;
 
 
-            xlWorksheet.Columns[correspondence_notes_index].ColumnWidth = 75; //size and wrap columns 
+            xlWorksheet.Columns[correspondence_notes_index].ColumnWidth = 60; //size and wrap columns 
             xlWorksheet.Columns[correspondence_notes_index].WrapText = true;
 
 
@@ -318,6 +319,9 @@ namespace PriceMaster
 
             xlWorksheet.Columns[service_index].ColumnWidth = 9.14; //size and wrap columns 
             xlWorksheet.Columns[service_index].WrapText = true;
+
+            xlWorksheet.Columns[contact_index].ColumnWidth = 12.29; //size and wrap columns 
+            xlWorksheet.Columns[contact_index].WrapText = true;
 
 
 

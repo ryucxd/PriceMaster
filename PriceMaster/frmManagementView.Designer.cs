@@ -50,18 +50,19 @@
             this.dgvCorrespondence = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnShowAll = new PriceMaster.buttonFormatting();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chkboxSlimline = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.lblChaseCount = new System.Windows.Forms.Label();
             this.lblCorrespondenceCount = new System.Windows.Forms.Label();
+            this.btnLeads = new PriceMaster.buttonFormatting();
+            this.btnCorrespondenceExport = new PriceMaster.buttonFormatting();
+            this.btnWeekly = new PriceMaster.buttonFormatting();
             this.btnLiveChart = new PriceMaster.buttonFormatting();
+            this.btnShowAll = new PriceMaster.buttonFormatting();
             this.btnExcel = new PriceMaster.buttonFormatting();
             this.buttonFormatting1 = new PriceMaster.buttonFormatting();
             this.btnClear = new PriceMaster.buttonFormatting();
-            this.btnWeekly = new PriceMaster.buttonFormatting();
-            this.btnCorrespondenceExport = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCorrespondence)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -96,23 +97,27 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.label2.Location = new System.Drawing.Point(189, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(172, 17);
+            this.label2.Size = new System.Drawing.Size(221, 17);
             this.label2.TabIndex = 53;
             this.label2.Text = "Customer Search:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // cmbCustomerSearch
             // 
+            this.cmbCustomerSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCustomerSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.cmbCustomerSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCustomerSearch.FormattingEnabled = true;
             this.cmbCustomerSearch.Location = new System.Drawing.Point(189, 34);
             this.cmbCustomerSearch.Name = "cmbCustomerSearch";
-            this.cmbCustomerSearch.Size = new System.Drawing.Size(172, 23);
+            this.cmbCustomerSearch.Size = new System.Drawing.Size(221, 23);
             this.cmbCustomerSearch.Sorted = true;
             this.cmbCustomerSearch.TabIndex = 52;
             this.cmbCustomerSearch.SelectedIndexChanged += new System.EventHandler(this.cmbCustomerSearch_SelectedIndexChanged);
@@ -179,7 +184,8 @@
             // 
             // dteEnd
             // 
-            this.dteEnd.Location = new System.Drawing.Point(521, 36);
+            this.dteEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dteEnd.Location = new System.Drawing.Point(570, 35);
             this.dteEnd.Name = "dteEnd";
             this.dteEnd.Size = new System.Drawing.Size(132, 21);
             this.dteEnd.TabIndex = 62;
@@ -187,7 +193,8 @@
             // 
             // dteStart
             // 
-            this.dteStart.Location = new System.Drawing.Point(367, 37);
+            this.dteStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dteStart.Location = new System.Drawing.Point(416, 36);
             this.dteStart.Name = "dteStart";
             this.dteStart.Size = new System.Drawing.Size(132, 21);
             this.dteStart.TabIndex = 63;
@@ -195,9 +202,10 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label1.Location = new System.Drawing.Point(367, 18);
+            this.label1.Location = new System.Drawing.Point(416, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(286, 17);
             this.label1.TabIndex = 64;
@@ -326,26 +334,10 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Chase Filters";
             // 
-            // btnShowAll
-            // 
-            this.btnShowAll.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnShowAll.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnShowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowAll.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowAll.ForeColor = System.Drawing.Color.White;
-            this.btnShowAll.Location = new System.Drawing.Point(322, 26);
-            this.btnShowAll.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnShowAll.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnShowAll.Name = "btnShowAll";
-            this.btnShowAll.Padding = new System.Windows.Forms.Padding(3);
-            this.btnShowAll.Size = new System.Drawing.Size(82, 30);
-            this.btnShowAll.TabIndex = 66;
-            this.btnShowAll.Text = "Show All";
-            this.btnShowAll.UseVisualStyleBackColor = false;
-            this.btnShowAll.Click += new System.EventHandler(this.btnShowAll_Click);
-            // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.chkboxSlimline);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.cmbCustomerSearch);
@@ -358,16 +350,17 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
             this.groupBox2.Location = new System.Drawing.Point(617, 7);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(740, 65);
+            this.groupBox2.Size = new System.Drawing.Size(789, 65);
             this.groupBox2.TabIndex = 74;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Universal Filters";
             // 
             // chkboxSlimline
             // 
+            this.chkboxSlimline.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chkboxSlimline.AutoSize = true;
             this.chkboxSlimline.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.chkboxSlimline.Location = new System.Drawing.Point(659, 36);
+            this.chkboxSlimline.Location = new System.Drawing.Point(708, 35);
             this.chkboxSlimline.Name = "chkboxSlimline";
             this.chkboxSlimline.Size = new System.Drawing.Size(75, 21);
             this.chkboxSlimline.TabIndex = 75;
@@ -377,9 +370,10 @@
             // 
             // label10
             // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.label10.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label10.Location = new System.Drawing.Point(497, 37);
+            this.label10.Location = new System.Drawing.Point(546, 36);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(28, 17);
             this.label10.TabIndex = 65;
@@ -391,9 +385,9 @@
             this.lblChaseCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblChaseCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChaseCount.Location = new System.Drawing.Point(1557, 51);
+            this.lblChaseCount.Location = new System.Drawing.Point(1557, 46);
             this.lblChaseCount.Name = "lblChaseCount";
-            this.lblChaseCount.Size = new System.Drawing.Size(288, 20);
+            this.lblChaseCount.Size = new System.Drawing.Size(288, 25);
             this.lblChaseCount.TabIndex = 76;
             this.lblChaseCount.Text = "Unique Customers Chased: 0";
             this.lblChaseCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -409,6 +403,61 @@
             this.lblCorrespondenceCount.TabIndex = 77;
             this.lblCorrespondenceCount.Text = "Unique Correspondence Customers: 0";
             this.lblCorrespondenceCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnLeads
+            // 
+            this.btnLeads.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnLeads.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnLeads.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLeads.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLeads.ForeColor = System.Drawing.Color.White;
+            this.btnLeads.Location = new System.Drawing.Point(1127, 505);
+            this.btnLeads.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnLeads.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnLeads.Name = "btnLeads";
+            this.btnLeads.Padding = new System.Windows.Forms.Padding(3);
+            this.btnLeads.Size = new System.Drawing.Size(194, 30);
+            this.btnLeads.TabIndex = 80;
+            this.btnLeads.Text = "Leads Export";
+            this.btnLeads.UseVisualStyleBackColor = false;
+            this.btnLeads.Click += new System.EventHandler(this.btnLeads_Click);
+            // 
+            // btnCorrespondenceExport
+            // 
+            this.btnCorrespondenceExport.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnCorrespondenceExport.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCorrespondenceExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCorrespondenceExport.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCorrespondenceExport.ForeColor = System.Drawing.Color.White;
+            this.btnCorrespondenceExport.Location = new System.Drawing.Point(1331, 506);
+            this.btnCorrespondenceExport.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnCorrespondenceExport.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnCorrespondenceExport.Name = "btnCorrespondenceExport";
+            this.btnCorrespondenceExport.Padding = new System.Windows.Forms.Padding(3);
+            this.btnCorrespondenceExport.Size = new System.Drawing.Size(194, 30);
+            this.btnCorrespondenceExport.TabIndex = 79;
+            this.btnCorrespondenceExport.Text = "Correspondence Export";
+            this.btnCorrespondenceExport.UseVisualStyleBackColor = false;
+            this.btnCorrespondenceExport.Click += new System.EventHandler(this.btnCorrespondenceExport_Click);
+            // 
+            // btnWeekly
+            // 
+            this.btnWeekly.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnWeekly.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnWeekly.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnWeekly.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWeekly.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWeekly.ForeColor = System.Drawing.Color.White;
+            this.btnWeekly.Location = new System.Drawing.Point(1414, 44);
+            this.btnWeekly.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnWeekly.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnWeekly.Name = "btnWeekly";
+            this.btnWeekly.Padding = new System.Windows.Forms.Padding(3);
+            this.btnWeekly.Size = new System.Drawing.Size(135, 30);
+            this.btnWeekly.TabIndex = 78;
+            this.btnWeekly.Text = "Weekly Targets";
+            this.btnWeekly.UseVisualStyleBackColor = false;
+            this.btnWeekly.Click += new System.EventHandler(this.btnWeekly_Click);
             // 
             // btnLiveChart
             // 
@@ -428,6 +477,24 @@
             this.btnLiveChart.Text = "Chase Chart";
             this.btnLiveChart.UseVisualStyleBackColor = false;
             this.btnLiveChart.Click += new System.EventHandler(this.btnLiveChart_Click);
+            // 
+            // btnShowAll
+            // 
+            this.btnShowAll.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnShowAll.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnShowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowAll.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowAll.ForeColor = System.Drawing.Color.White;
+            this.btnShowAll.Location = new System.Drawing.Point(322, 26);
+            this.btnShowAll.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnShowAll.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnShowAll.Name = "btnShowAll";
+            this.btnShowAll.Padding = new System.Windows.Forms.Padding(3);
+            this.btnShowAll.Size = new System.Drawing.Size(82, 30);
+            this.btnShowAll.TabIndex = 66;
+            this.btnShowAll.Text = "Show All";
+            this.btnShowAll.UseVisualStyleBackColor = false;
+            this.btnShowAll.Click += new System.EventHandler(this.btnShowAll_Click);
             // 
             // btnExcel
             // 
@@ -486,48 +553,12 @@
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // btnWeekly
-            // 
-            this.btnWeekly.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWeekly.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnWeekly.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnWeekly.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWeekly.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnWeekly.ForeColor = System.Drawing.Color.White;
-            this.btnWeekly.Location = new System.Drawing.Point(1414, 44);
-            this.btnWeekly.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnWeekly.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnWeekly.Name = "btnWeekly";
-            this.btnWeekly.Padding = new System.Windows.Forms.Padding(3);
-            this.btnWeekly.Size = new System.Drawing.Size(135, 30);
-            this.btnWeekly.TabIndex = 78;
-            this.btnWeekly.Text = "Weekly Targets";
-            this.btnWeekly.UseVisualStyleBackColor = false;
-            this.btnWeekly.Click += new System.EventHandler(this.btnWeekly_Click);
-            // 
-            // btnCorrespondenceExport
-            // 
-            this.btnCorrespondenceExport.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnCorrespondenceExport.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnCorrespondenceExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCorrespondenceExport.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCorrespondenceExport.ForeColor = System.Drawing.Color.White;
-            this.btnCorrespondenceExport.Location = new System.Drawing.Point(1331, 506);
-            this.btnCorrespondenceExport.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.btnCorrespondenceExport.MinimumSize = new System.Drawing.Size(75, 30);
-            this.btnCorrespondenceExport.Name = "btnCorrespondenceExport";
-            this.btnCorrespondenceExport.Padding = new System.Windows.Forms.Padding(3);
-            this.btnCorrespondenceExport.Size = new System.Drawing.Size(194, 30);
-            this.btnCorrespondenceExport.TabIndex = 79;
-            this.btnCorrespondenceExport.Text = "Correspondence Export";
-            this.btnCorrespondenceExport.UseVisualStyleBackColor = false;
-            this.btnCorrespondenceExport.Click += new System.EventHandler(this.btnCorrespondenceExport_Click);
-            // 
             // frmManagementView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1859, 613);
+            this.Controls.Add(this.btnLeads);
             this.Controls.Add(this.btnCorrespondenceExport);
             this.Controls.Add(this.btnWeekly);
             this.Controls.Add(this.lblCorrespondenceCount);
@@ -597,5 +628,6 @@
         private System.Windows.Forms.Label lblCorrespondenceCount;
         private buttonFormatting btnWeekly;
         private buttonFormatting btnCorrespondenceExport;
+        private buttonFormatting btnLeads;
     }
 }

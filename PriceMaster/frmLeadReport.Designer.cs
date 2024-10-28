@@ -36,6 +36,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbProspectAddedBy = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblAdded = new System.Windows.Forms.Label();
+            this.lblCorrespondence = new System.Windows.Forms.Label();
+            this.btnExport = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,7 +110,7 @@
             // 
             this.cmbProspectAddedBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.cmbProspectAddedBy.FormattingEnabled = true;
-            this.cmbProspectAddedBy.Location = new System.Drawing.Point(649, 31);
+            this.cmbProspectAddedBy.Location = new System.Drawing.Point(592, 31);
             this.cmbProspectAddedBy.Name = "cmbProspectAddedBy";
             this.cmbProspectAddedBy.Size = new System.Drawing.Size(210, 25);
             this.cmbProspectAddedBy.TabIndex = 6;
@@ -116,18 +119,59 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label3.Location = new System.Drawing.Point(649, 9);
+            this.label3.Location = new System.Drawing.Point(592, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(210, 16);
             this.label3.TabIndex = 7;
             this.label3.Text = "Prospect Added By";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblAdded
+            // 
+            this.lblAdded.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.lblAdded.Location = new System.Drawing.Point(825, 9);
+            this.lblAdded.Name = "lblAdded";
+            this.lblAdded.Size = new System.Drawing.Size(287, 21);
+            this.lblAdded.TabIndex = 8;
+            this.lblAdded.Text = "Leads added: 0%";
+            this.lblAdded.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblCorrespondence
+            // 
+            this.lblCorrespondence.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.lblCorrespondence.Location = new System.Drawing.Point(825, 35);
+            this.lblCorrespondence.Name = "lblCorrespondence";
+            this.lblCorrespondence.Size = new System.Drawing.Size(287, 21);
+            this.lblCorrespondence.TabIndex = 9;
+            this.lblCorrespondence.Text = "Leads added and contacted: 0%";
+            this.lblCorrespondence.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnExport
+            // 
+            this.btnExport.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnExport.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.ForeColor = System.Drawing.Color.White;
+            this.btnExport.Location = new System.Drawing.Point(1240, 23);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.btnExport.MinimumSize = new System.Drawing.Size(75, 30);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Padding = new System.Windows.Forms.Padding(3);
+            this.btnExport.Size = new System.Drawing.Size(75, 30);
+            this.btnExport.TabIndex = 10;
+            this.btnExport.Text = "Export";
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // frmLeadReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1327, 745);
+            this.Controls.Add(this.btnExport);
+            this.Controls.Add(this.lblCorrespondence);
+            this.Controls.Add(this.lblAdded);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmbProspectAddedBy);
             this.Controls.Add(this.label2);
@@ -155,5 +199,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbProspectAddedBy;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblAdded;
+        private System.Windows.Forms.Label lblCorrespondence;
+        private buttonFormatting btnExport;
     }
 }
