@@ -566,8 +566,9 @@ namespace PriceMaster
         private void load_targets()
         {
 
-            string sql = "select Sector,Achieved,Target FROM [order_database].dbo.view_sales_table_grouped " +
-                "where sector_date = CAST(DATEADD(wk, DATEDIFF(wk,0,GETDATE()), 0) as date) AND sales_member_id = " + CONNECT.staffID;
+            string sql = "select Sector,Achieved,Target,id FROM [order_database].dbo.view_sales_table_grouped " +
+                "where sector_date = CAST(DATEADD(wk, DATEDIFF(wk,0,GETDATE()), 0) as date) AND sales_member_id = " + CONNECT.staffID +"" +
+                "order by Target desc,Achieved desc";
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -582,6 +583,7 @@ namespace PriceMaster
                     da.Fill(dt);
 
                     dgvTarget.DataSource = dt;
+                    dgvTarget.Columns[3].Visible = false;
                 }
 
                 conn.Close();
@@ -746,6 +748,17 @@ namespace PriceMaster
         {
             frmOutOfOffice frm = new frmOutOfOffice();
             frm.ShowDialog();
+        }
+
+        private void dgvTarget_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (Convert.ToInt32(dgvTarget.Rows[e.RowIndex].Cells[1].Value.ToString()) > 0)
+            {
+
+                frmSectorManagementViewDetailed frm = new frmSectorManagementViewDetailed(Convert.ToInt32(dgvTarget.Rows[e.RowIndex].Cells[3].Value.ToString()), CONNECT.staffID);
+                frm.ShowDialog();
+            }
         }
     }
 

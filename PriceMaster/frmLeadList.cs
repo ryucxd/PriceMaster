@@ -366,6 +366,11 @@ namespace PriceMaster
                 frmAddCustomerToSalesProspect frm = new frmAddCustomerToSalesProspect(Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[id_index].Value.ToString()), dataGridView1.Rows[e.RowIndex].Cells[customer_index].Value.ToString());
                 frm.ShowDialog();
 
+                fill_leads();
+                fill_targets();
+
+                format_targets();
+
             }
 
             if (dataGridView1.Columns["Delete Lead"].Index == e.ColumnIndex)
@@ -386,6 +391,11 @@ namespace PriceMaster
                     conn.Close();
 
                 }
+
+                fill_leads();
+                fill_targets();
+
+                format_targets();
 
             }
 
@@ -417,10 +427,7 @@ namespace PriceMaster
 
             }
 
-            fill_leads();
-            fill_targets();
-
-            format_targets();
+            
         }
 
         private void txtCustomerSearch_TextChanged(object sender, EventArgs e)

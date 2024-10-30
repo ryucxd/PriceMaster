@@ -185,6 +185,7 @@
             this.dgvTarget.RowHeadersVisible = false;
             this.dgvTarget.Size = new System.Drawing.Size(428, 356);
             this.dgvTarget.TabIndex = 51;
+            this.dgvTarget.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTarget_CellClick);
             // 
             // label1
             // 

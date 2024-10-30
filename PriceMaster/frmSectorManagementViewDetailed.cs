@@ -281,6 +281,7 @@ namespace PriceMaster
         private void frmSectorManagementViewDetailed_Shown(object sender, EventArgs e)
         {
             format_grid();
+            dgvSector.ClearSelection();
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
