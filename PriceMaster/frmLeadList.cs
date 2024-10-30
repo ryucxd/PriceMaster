@@ -24,6 +24,7 @@ namespace PriceMaster
         public int allocated_to_index { get; set; }
         public int sector_index { get; set; }
         public int notes_index { get; set; }
+        public int contacted_index { get; set; }
         public int add_prospect_button_index { get; set; }
         public int delete_lead_index { get; set; }
 
@@ -41,13 +42,16 @@ namespace PriceMaster
 
             if (dataGridView1.Columns.Contains("Add Prospect") == true)
                 dataGridView1.Columns.Remove("Add Prospect");
-            
+
             if (dataGridView1.Columns.Contains("Delete Lead") == true)
                 dataGridView1.Columns.Remove("Delete Lead");
 
+            if (dataGridView1.Columns.Contains("Contacted") == true)
+                dataGridView1.Columns.Remove("Contacted");
+
 
             string sql = "select s.id,lead_date as [Lead Time],Customer,contact_name as [Contact Name],customer_address as [Customer Address], " +
-                "contact_details as [Contact Details],u.forename + ' ' + u.surname as [Allocated to],Sector,Notes,rotec_customer " +
+                "contact_details as [Contact Details],u.forename + ' ' + u.surname as [Allocated to],Sector,Notes,contacted_on_linked_in,rotec_customer " +
                 "FROM [order_database].dbo.sales_new_leads s " +
                 "left join [user_info].dbo.[user] u on s.allocated_to = u.id " +
                 "left join [order_database].dbo.sales_table st on s.sector_id = st.id " +
@@ -98,6 +102,14 @@ namespace PriceMaster
 
             column_index();
 
+            DataGridViewButtonColumn ContactedButton = new DataGridViewButtonColumn();
+            ContactedButton.Name = "Contacted";
+            ContactedButton.Text = "Contacted";
+            ContactedButton.UseColumnTextForButtonValue = true;
+            dataGridView1.Columns.Insert(rotec_customer_index + 3, ContactedButton);
+
+            column_index();
+
             format_targets();
         }
 
@@ -109,6 +121,9 @@ namespace PriceMaster
             if (dataGridView1.Columns.Contains("Delete Lead") == true)
                 delete_lead_index = dataGridView1.Columns["Delete Lead"].Index;
 
+            if (dataGridView1.Columns.Contains("Contacted") == true)
+                delete_lead_index = dataGridView1.Columns["Contacted"].Index;
+
             id_index = dataGridView1.Columns["id"].Index;
             lead_time_index = dataGridView1.Columns["Lead Time"].Index;
             customer_index = dataGridView1.Columns["Customer"].Index;
@@ -118,6 +133,7 @@ namespace PriceMaster
             allocated_to_index = dataGridView1.Columns["Allocated to"].Index;
             sector_index = dataGridView1.Columns["Sector"].Index;
             notes_index = dataGridView1.Columns["Notes"].Index;
+            contacted_index = dataGridView1.Columns["contacted_on_linked_in"].Index;
             rotec_customer_index = dataGridView1.Columns["rotec_customer"].Index;
 
         }
@@ -308,11 +324,15 @@ namespace PriceMaster
 
                 dataGridView1.Columns[rotec_customer_index].Visible = false;
 
+                dataGridView1.Columns[contacted_index].Visible = false;
+
 
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     if (row.Cells[rotec_customer_index].Value.ToString() == "-1")
                         row.DefaultCellStyle.BackColor = Color.Orange;
+                    else if (row.Cells[contacted_index].Value.ToString() == "-1")
+                        row.DefaultCellStyle.BackColor = Color.LightSkyBlue;
                 }
             }
 
@@ -365,6 +385,34 @@ namespace PriceMaster
                     }
                     conn.Close();
 
+                }
+
+            }
+
+            if (dataGridView1.Columns["Contacted"].Index == e.ColumnIndex)
+            {
+                //mark this as contacted
+                int value = -1;
+
+                if (dataGridView1.Rows[e.RowIndex].Cells[contacted_index].Value.ToString() == "-1")
+                    value = 0;
+
+                string sql = "UPDATE [order_database].dbo.[sales_new_leads] " +
+                    "SET contacted_on_linked_in = " + value + " WHERE id = " + dataGridView1.Rows[e.RowIndex].Cells[id_index].Value.ToString();
+
+                using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                {
+                    conn.Open();
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                        cmd.ExecuteNonQuery();
+
+                    if (value == -1)
+                        dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightSkyBlue;
+                    else
+                        dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Empty;
+
+                    conn.Close();
                 }
 
             }

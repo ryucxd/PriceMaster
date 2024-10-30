@@ -42,6 +42,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmbStaff = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarget)).BeginInit();
             this.SuspendLayout();
@@ -191,11 +192,23 @@
             this.label5.TabIndex = 65;
             this.label5.Text = "              = Rotec\'s Customers";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label6.Location = new System.Drawing.Point(666, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(221, 17);
+            this.label6.TabIndex = 66;
+            this.label6.Text = "              = Contacted on Linked in";
+            // 
             // frmLeadList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1637, 761);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cmbStaff);
             this.Controls.Add(this.label4);
@@ -234,5 +247,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbStaff;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
