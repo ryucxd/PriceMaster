@@ -348,8 +348,8 @@ namespace PriceMaster
 
                 if (string.IsNullOrEmpty(cmbCustomerSearch.Text) == false)
                 {
-                    sql = sql + " AND rtrim(q.customer) = '" + cmbCustomerSearch.Text + "'  ";
-                    sqlCount = sqlCount + " AND rtrim(q.customer) = '" + cmbCustomerSearch.Text + "'  ";
+                    sql = sql + " AND replace(rtrim(q.customer),'''','') = '" + cmbCustomerSearch.Text.Replace("'","") + "'  ";
+                    sqlCount = sqlCount + " AND replace(rtrim(q.customer),'''','') = '" + cmbCustomerSearch.Text.Replace("'", "") + "'  ";
                 }
                 if (string.IsNullOrEmpty(cmbStaffSearch.Text) == false)
                 {
@@ -460,8 +460,8 @@ namespace PriceMaster
 
             if (string.IsNullOrWhiteSpace(cmbCustomerSearch.Text) == false)
             {
-                sql = sql + " AND customer_name = '" + cmbCustomerSearch.Text + "' ";
-                sqlCount = sqlCount + " AND customer_name = '" + cmbCustomerSearch.Text + "' ";
+                sql = sql + " AND REPLACE(customer_name,'''','') = '" + cmbCustomerSearch.Text.Replace("'","") + "' ";
+                sqlCount = sqlCount + " AND REPLACE(customer_name,'''','') = '" + cmbCustomerSearch.Text.Replace("'", "") + "' ";
             }
 
             if (string.IsNullOrWhiteSpace(cmbStaffSearch.Text) == false)
