@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -150,7 +151,7 @@ namespace PriceMaster
             //    "where sector_id = " + sector_id + " AND chased_by = " + staff;
 
 
-            string sql_quotations = "select q.id,chase_date as [Chase Date],Name as Customer,'SL' + CAST(q.quote_id as nvarchar(max)) as [Quote ID],chase_description as [Chase Notes]," +
+            string sql_quotations = "select q.id,chase_date as [Chase Date],Name as Customer,'SL' + CAST(q.quote_id as nvarchar(max)) as [Quote ID],coalesce(sq.price,0) as [Value],chase_description as [Chase Notes]," +
                 "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Phone, " +
                 "CASE WHEN email = 0 THEN CAST(0 AS BIT) WHEN email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Email, " +
                 "CASE WHEN chase_complete = 0 THEN CAST(0 AS BIT) WHEN chase_complete IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END as [Chase Complete], " +
@@ -162,14 +163,14 @@ namespace PriceMaster
                 "where sector_id = " + sector_id + " AND chased_by = " + staff + " AND sq.highest_issue = -1 AND " +
                 "chase_description LIKE '%" + txtFilter.Text + "%'" +
                 "union all " +
-                "select q.id,chase_date as [Chase Date],Customer,CAST(q.quote_id as nvarchar(max)) as [Quote ID],chase_description as [Chase Notes], " +
+                "select q.id,chase_date as [Chase Date],Customer,CAST(q.quote_id as nvarchar(max)) as [Quote ID],coalesce(total_quotation_value,0) as [Value],chase_description as [Chase Notes], " +
                 "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Phone, " +
                 "CASE WHEN email = 0 THEN CAST(0 AS BIT) WHEN email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Email, " +
                 "CASE WHEN chase_complete = 0 THEN CAST(0 AS BIT) WHEN chase_complete IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END as [Chase Complete], " +
                 "Sector,failed_contact " +
                 "FROM [order_database].dbo.quotation_chase_log q " +
                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
-                "left join (select q.quote_id,q.customer FROM [order_database].dbo.solidworks_quotation_log q " +
+                "left join (select q.quote_id,q.customer,total_quotation_value FROM [order_database].dbo.solidworks_quotation_log q " +
                         "right join [order_database].dbo.view_solidworks_max_rev r on q.quote_id = r.quote_id AND q.revision_number = r.revision_number) sq on q.quote_id = sq.quote_id " +
                 "where sector_id = " + sector_id + " AND chased_by = " + staff + " AND " +
                 "chase_description LIKE '%" + txtFilter.Text + "%' " +
@@ -240,7 +241,7 @@ namespace PriceMaster
                 }
                 else if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Quotation Chasing")
                 {
-                    if (row.Cells[9].Value.ToString() == "-1")
+                    if (row.Cells[10].Value.ToString() == "-1")
                         row.DefaultCellStyle.BackColor = Color.PaleVioletRed;
                 }
             }
@@ -258,12 +259,13 @@ namespace PriceMaster
             }
             else if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Quotation Chasing")
             {
-                lblSector.Text = "Sector: " + dgvSector.Rows[0].Cells[8].Value.ToString();
+                lblSector.Text = "Sector: " + dgvSector.Rows[0].Cells[9].Value.ToString();
 
-                dgvSector.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dgvSector.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvSector.Columns[0].Visible = false;
-                dgvSector.Columns[8].Visible = false;
-                dgvSector.Columns[9].Visible = false; //failed_contact
+                dgvSector.Columns[9].Visible = false;
+                dgvSector.Columns[10].Visible = false; //failed_contact
+                dgvSector.Columns[4].DefaultCellStyle.Format = "c";
             }
             else if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Leads")
             {
@@ -459,6 +461,12 @@ namespace PriceMaster
                 int chase_notes_index = dgvSector.Columns["Chase Notes"].Index + 1;
                 xlWorksheet.Columns[chase_notes_index].ColumnWidth = 50;
                 xlWorksheet.Columns[chase_notes_index].WrapText = true;
+
+                int value_index = dgvSector.Columns["Value"].Index + 1;
+                xlWorksheet.Columns[value_index].Style = "Currency";
+
+
+
             }
 
 
