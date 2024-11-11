@@ -46,6 +46,7 @@
             this.btnSave = new PriceMaster.buttonFormatting();
             this.chkMultipleChase = new System.Windows.Forms.CheckBox();
             this.chkFailed = new System.Windows.Forms.CheckBox();
+            this.chkSlimlineQuote = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -189,7 +190,7 @@
             this.btnSaveManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveManagement.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveManagement.ForeColor = System.Drawing.Color.White;
-            this.btnSaveManagement.Location = new System.Drawing.Point(293, 362);
+            this.btnSaveManagement.Location = new System.Drawing.Point(293, 380);
             this.btnSaveManagement.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSaveManagement.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSaveManagement.Name = "btnSaveManagement";
@@ -207,7 +208,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(33, 362);
+            this.btnCancel.Location = new System.Drawing.Point(33, 380);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnCancel.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnCancel.Name = "btnCancel";
@@ -225,7 +226,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(163, 362);
+            this.btnSave.Location = new System.Drawing.Point(163, 380);
             this.btnSave.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.btnSave.MinimumSize = new System.Drawing.Size(75, 30);
             this.btnSave.Name = "btnSave";
@@ -240,11 +241,11 @@
             // 
             this.chkMultipleChase.AutoSize = true;
             this.chkMultipleChase.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.chkMultipleChase.Location = new System.Drawing.Point(124, 330);
+            this.chkMultipleChase.Location = new System.Drawing.Point(85, 329);
             this.chkMultipleChase.Name = "chkMultipleChase";
-            this.chkMultipleChase.Size = new System.Drawing.Size(299, 21);
+            this.chkMultipleChase.Size = new System.Drawing.Size(394, 21);
             this.chkMultipleChase.TabIndex = 101;
-            this.chkMultipleChase.Text = "ADD THIS CHASE TO MULTIPLE QUOTES";
+            this.chkMultipleChase.Text = "ADD THIS CHASE TO MULTIPLE TRADITIONAL QUOTES";
             this.chkMultipleChase.UseVisualStyleBackColor = true;
             // 
             // chkFailed
@@ -258,12 +259,24 @@
             this.chkFailed.Text = "FAILED CONTACT";
             this.chkFailed.UseVisualStyleBackColor = true;
             // 
+            // chkSlimlineQuote
+            // 
+            this.chkSlimlineQuote.AutoSize = true;
+            this.chkSlimlineQuote.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.chkSlimlineQuote.Location = new System.Drawing.Point(124, 356);
+            this.chkSlimlineQuote.Name = "chkSlimlineQuote";
+            this.chkSlimlineQuote.Size = new System.Drawing.Size(297, 21);
+            this.chkSlimlineQuote.TabIndex = 103;
+            this.chkSlimlineQuote.Text = "ADD THIS CHASE TO A SLIMLINE QUOTE";
+            this.chkSlimlineQuote.UseVisualStyleBackColor = true;
+            // 
             // frmTraditionalChase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(798, 399);
+            this.ClientSize = new System.Drawing.Size(798, 411);
             this.ControlBox = false;
+            this.Controls.Add(this.chkSlimlineQuote);
             this.Controls.Add(this.chkFailed);
             this.Controls.Add(this.chkMultipleChase);
             this.Controls.Add(this.btnSaveManagement);
@@ -310,5 +323,6 @@
         private buttonFormatting btnSaveManagement;
         private System.Windows.Forms.CheckBox chkMultipleChase;
         private System.Windows.Forms.CheckBox chkFailed;
+        private System.Windows.Forms.CheckBox chkSlimlineQuote;
     }
 }

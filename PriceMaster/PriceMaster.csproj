@@ -285,6 +285,12 @@
     <Compile Include="frmNonReturningCustomers.Designer.cs">
       <DependentUpon>frmNonReturningCustomers.cs</DependentUpon>
     </Compile>
+    <Compile Include="TraditionalChasing\frmMultipleSlimline.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TraditionalChasing\frmMultipleSlimline.Designer.cs">
+      <DependentUpon>frmMultipleSlimline.cs</DependentUpon>
+    </Compile>
     <Compile Include="TraditionalChasing\frmMultipleChase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -604,6 +610,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNonReturningCustomers.resx">
       <DependentUpon>frmNonReturningCustomers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TraditionalChasing\frmMultipleSlimline.resx">
+      <DependentUpon>frmMultipleSlimline.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TraditionalChasing\frmMultipleChase.resx">
       <DependentUpon>frmMultipleChase.cs</DependentUpon>
