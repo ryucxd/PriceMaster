@@ -41,12 +41,12 @@
             this.chkHiddenFollowup = new System.Windows.Forms.CheckBox();
             this.chkPhone = new System.Windows.Forms.CheckBox();
             this.chkEmail = new System.Windows.Forms.CheckBox();
-            this.btnSaveManagement = new PriceMaster.buttonFormatting();
-            this.btnCancel = new PriceMaster.buttonFormatting();
-            this.btnSave = new PriceMaster.buttonFormatting();
             this.chkMultipleChase = new System.Windows.Forms.CheckBox();
             this.chkFailed = new System.Windows.Forms.CheckBox();
             this.chkSlimlineQuote = new System.Windows.Forms.CheckBox();
+            this.btnSaveManagement = new PriceMaster.buttonFormatting();
+            this.btnCancel = new PriceMaster.buttonFormatting();
+            this.btnSave = new PriceMaster.buttonFormatting();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,7 +126,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(553, 22);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(240, 365);
+            this.dataGridView1.Size = new System.Drawing.Size(240, 381);
             this.dataGridView1.TabIndex = 64;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -183,6 +183,39 @@
             this.chkEmail.Text = "Email";
             this.chkEmail.UseVisualStyleBackColor = true;
             // 
+            // chkMultipleChase
+            // 
+            this.chkMultipleChase.AutoSize = true;
+            this.chkMultipleChase.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.chkMultipleChase.Location = new System.Drawing.Point(85, 329);
+            this.chkMultipleChase.Name = "chkMultipleChase";
+            this.chkMultipleChase.Size = new System.Drawing.Size(394, 21);
+            this.chkMultipleChase.TabIndex = 101;
+            this.chkMultipleChase.Text = "ADD THIS CHASE TO MULTIPLE TRADITIONAL QUOTES";
+            this.chkMultipleChase.UseVisualStyleBackColor = true;
+            // 
+            // chkFailed
+            // 
+            this.chkFailed.AutoSize = true;
+            this.chkFailed.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.chkFailed.Location = new System.Drawing.Point(377, 30);
+            this.chkFailed.Name = "chkFailed";
+            this.chkFailed.Size = new System.Drawing.Size(153, 22);
+            this.chkFailed.TabIndex = 102;
+            this.chkFailed.Text = "FAILED CONTACT";
+            this.chkFailed.UseVisualStyleBackColor = true;
+            // 
+            // chkSlimlineQuote
+            // 
+            this.chkSlimlineQuote.AutoSize = true;
+            this.chkSlimlineQuote.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.chkSlimlineQuote.Location = new System.Drawing.Point(124, 356);
+            this.chkSlimlineQuote.Name = "chkSlimlineQuote";
+            this.chkSlimlineQuote.Size = new System.Drawing.Size(297, 21);
+            this.chkSlimlineQuote.TabIndex = 103;
+            this.chkSlimlineQuote.Text = "ADD THIS CHASE TO A SLIMLINE QUOTE";
+            this.chkSlimlineQuote.UseVisualStyleBackColor = true;
+            // 
             // btnSaveManagement
             // 
             this.btnSaveManagement.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -237,44 +270,11 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // chkMultipleChase
-            // 
-            this.chkMultipleChase.AutoSize = true;
-            this.chkMultipleChase.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.chkMultipleChase.Location = new System.Drawing.Point(85, 329);
-            this.chkMultipleChase.Name = "chkMultipleChase";
-            this.chkMultipleChase.Size = new System.Drawing.Size(394, 21);
-            this.chkMultipleChase.TabIndex = 101;
-            this.chkMultipleChase.Text = "ADD THIS CHASE TO MULTIPLE TRADITIONAL QUOTES";
-            this.chkMultipleChase.UseVisualStyleBackColor = true;
-            // 
-            // chkFailed
-            // 
-            this.chkFailed.AutoSize = true;
-            this.chkFailed.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.chkFailed.Location = new System.Drawing.Point(377, 30);
-            this.chkFailed.Name = "chkFailed";
-            this.chkFailed.Size = new System.Drawing.Size(153, 22);
-            this.chkFailed.TabIndex = 102;
-            this.chkFailed.Text = "FAILED CONTACT";
-            this.chkFailed.UseVisualStyleBackColor = true;
-            // 
-            // chkSlimlineQuote
-            // 
-            this.chkSlimlineQuote.AutoSize = true;
-            this.chkSlimlineQuote.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.chkSlimlineQuote.Location = new System.Drawing.Point(124, 356);
-            this.chkSlimlineQuote.Name = "chkSlimlineQuote";
-            this.chkSlimlineQuote.Size = new System.Drawing.Size(297, 21);
-            this.chkSlimlineQuote.TabIndex = 103;
-            this.chkSlimlineQuote.Text = "ADD THIS CHASE TO A SLIMLINE QUOTE";
-            this.chkSlimlineQuote.UseVisualStyleBackColor = true;
-            // 
             // frmTraditionalChase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(798, 411);
+            this.ClientSize = new System.Drawing.Size(798, 415);
             this.ControlBox = false;
             this.Controls.Add(this.chkSlimlineQuote);
             this.Controls.Add(this.chkFailed);

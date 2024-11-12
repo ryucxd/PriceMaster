@@ -32,7 +32,7 @@ namespace PriceMaster
         }
         private void load_data(int id)
         {
-            this.Size = new Size(565, 438);
+            this.Size = new Size(565, 454);
             dteChaseDate.Format = DateTimePickerFormat.Custom;
             dteChaseDate.CustomFormat = "dd/MM/yyyy hh:mm:ss";
             txtDescription.ReadOnly = true;
@@ -107,7 +107,7 @@ namespace PriceMaster
                         dataGridView1.Columns[0].Visible = false;
                     }
                     else
-                        this.Size = new Size(565, 438);
+                        this.Size = new Size(565, 454);
                 }
             }
         }
@@ -168,39 +168,39 @@ namespace PriceMaster
                     "(sales_member_one = " + CONNECT.staffID + " or sales_member_two = " + CONNECT.staffID + " or sales_member_three = " + CONNECT.staffID + ") " +
                     "and sector = 'Quotation Chasing'";
 
-                    using (SqlCommand cmd = new SqlCommand(sector_sql, conn))
-                    {
-                        var temp = cmd.ExecuteScalar();
+                using (SqlCommand cmd = new SqlCommand(sector_sql, conn))
+                {
+                    var temp = cmd.ExecuteScalar();
 
-                        if (temp != null)
-                            sectorID = Convert.ToInt32(cmd.ExecuteScalar().ToString());
-                        else
-                            sectorID = 0;
-                    }
+                    if (temp != null)
+                        sectorID = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                    else
+                        sectorID = 0;
+                }
 
 
                 // add the new chase
                 sql = "INSERT INTO [order_database].dbo.quotation_chase_log (quote_id,chase_date,chase_description,next_chase_date," +
                     "chased_by,dont_chase,email,phone,chase_complete,sector_id,failed_contact) " +
-                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "'," 
-                + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() + 
-                "," + dont_chase.ToString() + "," +  sectorID + "," + failed_check.ToString() + ")";
+                "VALUES (" + quote_id + ",GETDATE(),'" + txtDescription.Text + "','" + dteNextDate.Value.ToString("yyyyMMdd") + "',"
+                + CONNECT.staffID + "," + dont_chase.ToString() + "," + email.ToString() + "," + phone.ToString() +
+                "," + dont_chase.ToString() + "," + sectorID + "," + failed_check.ToString() + ")";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                     cmd.ExecuteNonQuery();
 
-               
+
 
 
                 //now that we've added the main chase - if the checkbox for multiple quotes == checked we check if there are other potential quotes related to this customer 
                 if (chkMultipleChase.Checked == true)
                 {
                     //get the customer
-                     sql = "select customer " +
-                        "from [order_database].dbo.solidworks_quotation_log s  " +
-                        "inner join (select quote_id,max(revision_number) as revision_number  " +
-                        "from [order_database].dbo.solidworks_quotation_log group by quote_id) as b on s.quote_id = b.quote_id AND s.revision_number = b.revision_number " +
-                        "WHERE s.quote_id = '" + quote_id.ToString() + "'";
+                    sql = "select customer " +
+                       "from [order_database].dbo.solidworks_quotation_log s  " +
+                       "inner join (select quote_id,max(revision_number) as revision_number  " +
+                       "from [order_database].dbo.solidworks_quotation_log group by quote_id) as b on s.quote_id = b.quote_id AND s.revision_number = b.revision_number " +
+                       "WHERE s.quote_id = '" + quote_id.ToString() + "'";
 
                     string customer = "";
 
@@ -214,11 +214,11 @@ namespace PriceMaster
                         chase_status = (string)cmd.ExecuteScalar();
 
                     //same sql statement but WHERE CUSTOMER = @customer -- will bring up every 
-                     sql = "select top 250 s.quote_id,customer_ref,customer " +
-                        "from [order_database].dbo.solidworks_quotation_log s  " +
-                        "inner join (select quote_id,max(revision_number) as revision_number  " +
-                        "from [order_database].dbo.solidworks_quotation_log group by quote_id) as b on s.quote_id = b.quote_id AND s.revision_number = b.revision_number " +
-                        "WHERE customer = '" + customer + "' AND s.quote_id <> " + quote_id.ToString() + " ORDER BY s.quote_id desc";
+                    sql = "select top 250 s.quote_id,customer_ref,customer " +
+                       "from [order_database].dbo.solidworks_quotation_log s  " +
+                       "inner join (select quote_id,max(revision_number) as revision_number  " +
+                       "from [order_database].dbo.solidworks_quotation_log group by quote_id) as b on s.quote_id = b.quote_id AND s.revision_number = b.revision_number " +
+                       "WHERE customer = '" + customer + "' AND s.quote_id <> " + quote_id.ToString() + " ORDER BY s.quote_id desc";
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
@@ -228,10 +228,40 @@ namespace PriceMaster
 
                         if (dt.Rows.Count >= 1)
                         {
-                            frmMultipleChase frm = new frmMultipleChase(quote_id,customer, dt, txtDescription.Text, dont_chase, email, phone, dteNextDate.Value.ToString("yyyyMMdd"),chase_status,failed_check);
+                            frmMultipleChase frm = new frmMultipleChase(quote_id, customer, dt, txtDescription.Text, dont_chase, email, phone, dteNextDate.Value.ToString("yyyyMMdd"), chase_status, failed_check);
                             frm.ShowDialog();
                         }
                     }
+
+
+                }
+
+                //check for the slimline chase
+                //now that we've added the main chase - if the checkbox for multiple quotes == checked we check if there are other potential quotes related to this customer 
+                if (chkSlimlineQuote.Checked == true)
+                {
+                    //get the customer
+                    sql = "select customer " +
+                       "from [order_database].dbo.solidworks_quotation_log s  " +
+                       "inner join (select quote_id,max(revision_number) as revision_number  " +
+                       "from [order_database].dbo.solidworks_quotation_log group by quote_id) as b on s.quote_id = b.quote_id AND s.revision_number = b.revision_number " +
+                       "WHERE s.quote_id = '" + quote_id.ToString() + "'";
+
+                    string customer = "";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                        customer = (string)cmd.ExecuteScalar();
+
+                    //get the chasing status of the parent table
+                    sql = "select [status] FROM [order_database].dbo.quotation_feed_back  where quote_id = " + quote_id.ToString();
+                    string chase_status = "";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                        chase_status = (string)cmd.ExecuteScalar();
+
+
+                    frmMultipleSlimline frm = new frmMultipleSlimline(quote_id, customer, txtDescription.Text, dont_chase, email, phone, dteNextDate.Value.ToString("yyyyMMdd"), chase_status, failed_check);
+                    frm.ShowDialog();
+
 
 
                 }

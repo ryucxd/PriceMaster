@@ -17,7 +17,6 @@ namespace PriceMaster.TraditionalChasing
     {
         public int quote_id { get; set; }
         public string customer { get; set; }
-        public DataTable quote_dt { get; set; }
         public string description { get; set; }
         public int dont_chase { get; set; }
         public int email { get; set; }
@@ -28,13 +27,12 @@ namespace PriceMaster.TraditionalChasing
 
         public DataTable selected_dt { get; set; }
 
-        public frmMultipleSlimline(int _quote_id, string _customer, DataTable _quote_dt, string _description, int _dont_chase, int _email, int _phone, string _dteNextDate, string _chase_status, int failed_contact)
+        public frmMultipleSlimline(int _quote_id, string _customer, string _description, int _dont_chase, int _email, int _phone, string _dteNextDate, string _chase_status, int failed_contact)
         {
             InitializeComponent();
 
             quote_id = _quote_id;
             customer = _customer;
-            quote_dt = _quote_dt;
             description = _description;
             dont_chase = _dont_chase;
             email = _email;
