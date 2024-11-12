@@ -267,6 +267,12 @@
     <Compile Include="frmSalesUpdate.Designer.cs">
       <DependentUpon>frmSalesUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmWeeklyTargetSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWeeklyTargetSearch.Designer.cs">
+      <DependentUpon>frmWeeklyTargetSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="SlimlineChasing\frmSlimlineChaseQuotation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -601,6 +607,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSalesUpdate.resx">
       <DependentUpon>frmSalesUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWeeklyTargetSearch.resx">
+      <DependentUpon>frmWeeklyTargetSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineChaseQuotation.resx">
       <DependentUpon>frmSlimlineChaseQuotation.cs</DependentUpon>
