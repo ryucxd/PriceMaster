@@ -756,7 +756,7 @@ namespace PriceMaster
             if (Convert.ToInt32(dgvTarget.Rows[e.RowIndex].Cells[1].Value.ToString()) > 0)
             {
 
-                frmSectorManagementViewDetailed frm = new frmSectorManagementViewDetailed(Convert.ToInt32(dgvTarget.Rows[e.RowIndex].Cells[3].Value.ToString()), CONNECT.staffID);
+                frmSectorManagementViewDetailed frm = new frmSectorManagementViewDetailed(Convert.ToInt32(dgvTarget.Rows[e.RowIndex].Cells[3].Value.ToString()), CONNECT.staffID, DateTime.Now, DateTime.Now.AddDays(-7),"");                
                 frm.ShowDialog();
             }
         }

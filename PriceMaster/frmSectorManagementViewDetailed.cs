@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -16,27 +10,98 @@ namespace PriceMaster
 {
     public partial class frmSectorManagementViewDetailed : Form
     {
-
-        public int _sector_id { get; set; }
         public int _staff_id { get; set; }
+        public int skip_load { get; set; }
+        public int skip_tab_load { get; set; }
 
-        public frmSectorManagementViewDetailed(int sector_id, int staff_id)
+        public frmSectorManagementViewDetailed(int sector_id, int staff_id, DateTime dteStartTemp, DateTime dteEndTemp,string customer)
         {
             InitializeComponent();
 
-            validate_tab_pages(sector_id, staff_id);
+            //load the comboboxes
+            skip_load = -1;
+            load_combobox();
 
-            load_grid(sector_id, staff_id);
 
-            _sector_id = sector_id;
-            _staff_id = staff_id;
+
+            //convert the sector_id and staff_id into strings
+            if (sector_id > 0 && staff_id > 0)
+            {
+                using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                {
+                    conn.Open();
+                    string sql = "SELECT forename + ' ' + surname FROM [user_info].dbo.[user] WHERE id = " + staff_id;
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmbStaff.Text = cmd.ExecuteScalar().ToString();
+                    }
+
+                    //sector
+                    sql = "select sector FROM [order_database].dbo.view_sales_table_grouped where id =  " + sector_id;
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmbSector.Text = cmd.ExecuteScalar().ToString();
+                    }
+
+                    conn.Close();
+                }
+            }
+
+            dteStart.Value = dteStartTemp;
+            dteEnd.Value = dteEndTemp;
+            txtCustomer.Text = customer;
+
+
+            //cmbSector.Text = sector_id;
+            //cmbStaff.Text = staff_id;
+
+            validate_tab_pages();
+            load_grid();
+
+
 
         }
 
-        private void validate_tab_pages(int sector_id, int staff_id)
+        private void load_combobox()
+        {
+            string sql = "select distinct sales_member FROM [order_database].dbo.view_sales_table_grouped";
+
+            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    foreach (DataRow row in dt.Rows)
+                        cmbStaff.Items.Add(row[0].ToString());
+                }
+                sql = "select distinct sector FROM [order_database].dbo.view_sales_table_grouped";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    foreach (DataRow row in dt.Rows)
+                        cmbSector.Items.Add(row[0].ToString());
+                }
+                conn.Close();
+            }
+
+        }
+
+        private void validate_tab_pages()
         {
 
-            tabControl.TabPages.Clear();
+            string start_date = dteStart.Value.ToString("yyyyMMdd");
+            string end_date = dteEnd.Value.ToString("yyyyMMdd");
+
+            if (tabControl.TabPages.Count > 0)
+                tabControl.TabPages.Clear();
 
             using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
             {
@@ -44,7 +109,13 @@ namespace PriceMaster
 
                 string sql_correspondence = "select q.id FROM [order_database].dbo.quotation_chase_customer q " +
                     "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
-                    "where sector_id = " + sector_id + " and correspondence_by = " + staff_id;
+                    "left join [user_info].dbo.[user] u on q.correspondence_by = u.id " +
+                    "where " +
+                    "sector like '%" + cmbSector.Text + "%' and " +
+                    "u.forename + ' ' + u.surname like '%" + cmbStaff.Text + "%' and " +
+                    "q.body like '%" + txtFilter.Text + "%' and " +
+                    "customer_name like '%" + txtCustomer.Text + "%' AND " +
+                    "date_created >= '" + start_date + "' AND date_created <= '" + end_date + "'";
 
                 using (SqlCommand cmd = new SqlCommand(sql_correspondence, conn))
                 {
@@ -58,6 +129,7 @@ namespace PriceMaster
                             Text = "Correspondence"
                         };
                         tabControl.TabPages.Add(tabPageCorrespondence);
+                        skip_tab_load = -1;
                     }
                 }
 
@@ -72,13 +144,26 @@ namespace PriceMaster
                  "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
                  "left join[price_master].dbo.[sl_quotation] sq on q.quote_id = sq.quote_id " +
                  "left join[dsl_fitting].dbo.sales_ledger sl on sq.customer_acc_ref = sl.ACCOUNT_REF " +
-                 "where sector_id = " + sector_id + " AND chased_by = " + staff_id + " " +
+                 "left join [user_info].dbo.[user] u on q.chased_by = u.id " +
+                 "where " +
+                 "sector like '%" + cmbSector.Text + "%' and " +
+                 "u.forename + ' ' + u.surname like '%" + cmbStaff.Text + "%' and " +
+                 "q.chase_description like '%" + txtFilter.Text + "%' and " +
+                 "Name like '%" + txtCustomer.Text + "%' AND " +
+                 "sq.highest_issue = -1 AND " +
+                 "chase_date >= '" + start_date + "' AND chase_date <= '" + end_date + "' " +
                  "union all " +
                  "select q.id " +
                  "FROM [order_database].dbo.quotation_chase_log q " +
+                 "left join [user_info].dbo.[user] u on q.chased_by = u.id " +
                  "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
                  "left join [order_database].dbo.solidworks_quotation_log sq on q.quote_id = sq.quote_id " +
-                 "where sector_id = " + sector_id + " AND chased_by = " + staff_id;
+                 "where " +
+                 "sector like '%" + cmbSector.Text + "%' and " +
+                 "u.forename + ' ' + u.surname like '%" + cmbStaff.Text + "%' and " +
+                 "q.chase_description like '%" + txtFilter.Text + "%' and " +
+                 "customer like '%" + txtCustomer.Text + "%' AND " +
+                 "chase_date >= '" + start_date + "' AND chase_date <= '" + end_date + "' ";
 
                 using (SqlCommand cmd = new SqlCommand(sql_quotations, conn))
                 {
@@ -92,13 +177,19 @@ namespace PriceMaster
                             Text = "Quotation Chasing"
                         };
                         tabControl.TabPages.Add(tabPageQuotation);
+                        skip_tab_load = -1;
                     }
                 }
 
 
                 string sql_lead = "select s.id FROM .[order_database].dbo.sales_new_leads s " +
                     "left join [user_info].dbo.[user] u on s.allocated_to = u.id " +
-                    "where sector_id = " + sector_id + " AND lead_by = " + staff_id;
+                    "left join [order_database].dbo.sales_table st on s.sector_id = st.id " +
+                    "where sector like '%" + cmbSector.Text + "%' and " +
+                    "u.forename + ' ' + u.surname like '%" + cmbStaff.Text + "%' and " +
+                    "s.notes like '%" + txtFilter.Text + "%' and " +
+                    "customer like '%" + txtCustomer.Text + "%' AND " +
+                    "lead_date >= '" + start_date + "' AND lead_date <= '" + end_date + "'";
 
                 using (SqlCommand cmd = new SqlCommand(sql_lead, conn))
                 {
@@ -112,31 +203,48 @@ namespace PriceMaster
                             Text = "Leads"
                         };
                         tabControl.TabPages.Add(tabPageLead);
+                        skip_tab_load = -1;
                     }
                 }
 
-
+                skip_load = 0;
                 conn.Close();
             }
 
         }
 
-        private void load_grid(int sector_id, int staff)
+        private void load_grid()
         {
+            string start_date = dteStart.Value.ToString("yyyyMMdd");
+            string end_date = dteEnd.Value.ToString("yyyyMMdd");
+
+          
+
             if (tabControl.SelectedIndex < 0)
+            {
+                dgvSector.DataSource = null;
+                return;
+            }
+
+            if (skip_load == -1)
                 return;
 
-            string sql_correspondence = "select q.id,date_created [Correspondence Date], rtrim(customer_name) as [Customer],Contact,body as [Notes]," +
+            string sql_correspondence = "select top 200 q.id,date_created [Correspondence Date], rtrim(customer_name) as [Customer],Contact,body as [Notes]," +
                 "CASE WHEN issue_with_leadtime = 0 THEN CAST(0 AS BIT) WHEN issue_with_leadtime IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Leadtime Issue]," +
                 "CASE WHEN issue_with_quote_turnaround_time = 0 THEN CAST(0 AS BIT) WHEN issue_with_quote_turnaround_time IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Quote Turnaround Issue]," +
                 "CASE WHEN issue_with_product = 0 THEN CAST(0 AS BIT) WHEN issue_with_product IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Product Issue]," +
                 "CASE WHEN issue_with_installation = 0 THEN CAST(0 AS BIT) WHEN issue_with_installation IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Installation Issue]," +
                 "CASE WHEN issue_with_service = 0 THEN CAST(0 AS BIT) WHEN issue_with_service IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS [Service Issue]," +
-                "next_correspondence_date [Next Correspondence], Sector ,slimline,failed_contact " +
+                "next_correspondence_date [Next Correspondence], Sector ,q.slimline,failed_contact,u.forename + ' ' + u.surname as [Correspondence By] " +
                 "FROM [order_database].dbo.quotation_chase_customer q " +
                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
-                "where sector_id = " + sector_id + " and correspondence_by = " + staff + " AND " +
-                "body LIKE '%" + txtFilter.Text + "%' " +
+                "left join [user_info].dbo.[user] u on q.correspondence_by = u.id " +
+                "where " +
+                "sector like '%" + cmbSector.Text + "%' and " +
+                "u.forename + ' ' + u.surname like '%" + cmbStaff.Text + "%' and " +
+                "q.body like '%" + txtFilter.Text + "%' and " +
+                "customer_name like '%" + txtCustomer.Text + "%' AND " +
+                "date_created >= '" + start_date + "' AND date_created <= '" + end_date + "' " +
                 "ORDER BY date_created desc";
 
 
@@ -151,38 +259,52 @@ namespace PriceMaster
             //    "where sector_id = " + sector_id + " AND chased_by = " + staff;
 
 
-            string sql_quotations = "select q.id,chase_date as [Chase Date],Name as Customer,'SL' + CAST(q.quote_id as nvarchar(max)) as [Quote ID],coalesce(sq.price,0) as [Value],chase_description as [Chase Notes]," +
+            string sql_quotations = "select top 200 q.id,chase_date as [Chase Date],Name as Customer,'SL' + CAST(q.quote_id as nvarchar(max)) as [Quote ID],coalesce(sq.price,0) as [Value],chase_description as [Chase Notes]," +
                 "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Phone, " +
-                "CASE WHEN email = 0 THEN CAST(0 AS BIT) WHEN email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Email, " +
+                "CASE WHEN q.email = 0 THEN CAST(0 AS BIT) WHEN q.email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Email, " +
                 "CASE WHEN chase_complete = 0 THEN CAST(0 AS BIT) WHEN chase_complete IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END as [Chase Complete], " +
-                "Sector,failed_contact " +
+                "Sector,failed_contact,u.forename + ' ' + u.surname as [Quotation By] " +
                 "FROM [order_database].dbo.quotation_chase_log_slimline q " +
                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
                 "left join [price_master].dbo.[sl_quotation] sq on q.quote_id = sq.quote_id " +
                 "left join [dsl_fitting].dbo.sales_ledger sl on sq.customer_acc_ref = sl.ACCOUNT_REF " +
-                "where sector_id = " + sector_id + " AND chased_by = " + staff + " AND sq.highest_issue = -1 AND " +
-                "chase_description LIKE '%" + txtFilter.Text + "%'" +
+                "left join [user_info].dbo.[user] u on q.chased_by = u.id " +
+                "where " +
+                "sector like '%" + cmbSector.Text + "%' and " +
+                "u.forename + ' ' + u.surname like '%" + cmbStaff.Text + "%' and " +
+                "q.chase_description like '%" + txtFilter.Text + "%' and " +
+                "Name like '%" + txtCustomer.Text + "%' AND " +
+                "sq.highest_issue = -1 AND " +
+                "chase_date >= '" + start_date + "' AND chase_date <= '" + end_date + "' " +
                 "union all " +
                 "select q.id,chase_date as [Chase Date],Customer,CAST(q.quote_id as nvarchar(max)) as [Quote ID],coalesce(total_quotation_value,0) as [Value],chase_description as [Chase Notes], " +
                 "CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Phone, " +
-                "CASE WHEN email = 0 THEN CAST(0 AS BIT) WHEN email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Email, " +
+                "CASE WHEN q.email = 0 THEN CAST(0 AS BIT) WHEN q.email IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Email, " +
                 "CASE WHEN chase_complete = 0 THEN CAST(0 AS BIT) WHEN chase_complete IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END as [Chase Complete], " +
-                "Sector,failed_contact " +
+                "Sector,failed_contact,u.forename + ' ' + u.surname as [Quotation By] " +
                 "FROM [order_database].dbo.quotation_chase_log q " +
+                "left join [user_info].dbo.[user] u on q.chased_by = u.id " +
                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
                 "left join (select q.quote_id,q.customer,total_quotation_value FROM [order_database].dbo.solidworks_quotation_log q " +
                         "right join [order_database].dbo.view_solidworks_max_rev r on q.quote_id = r.quote_id AND q.revision_number = r.revision_number) sq on q.quote_id = sq.quote_id " +
-                "where sector_id = " + sector_id + " AND chased_by = " + staff + " AND " +
-                "chase_description LIKE '%" + txtFilter.Text + "%' " +
-                "order by chase_date desc";
+                "where " +
+                 "sector like '%" + cmbSector.Text + "%' and " +
+                 "u.forename + ' ' + u.surname like '%" + cmbStaff.Text + "%' and " +
+                 "q.chase_description like '%" + txtFilter.Text + "%' and " +
+                 "sq.customer like '%" + txtCustomer.Text + "%' AND " +
+                 "chase_date >= '" + start_date + "' AND chase_date <= '" + end_date + "' " +
+                 "ORDER BY chase_date desc";
 
-            string sql_lead = "select s.id,lead_date as [Lead Date],Customer,contact_name as [Contact Name],contact_details as [Contact Details]," +
+            string sql_lead = "select top 200 s.id,lead_date as [Lead Date],Customer,contact_name as [Contact Name],contact_details as [Contact Details]," +
                 "u.forename + ' ' + u.surname as [Allocated to],sector,notes as [Lead Notes]" +
                 "FROM [order_database].dbo.sales_new_leads s " +
                 "left join [user_info].dbo.[user] u on s.allocated_to = u.id " +
                 "left join [order_database].dbo.sales_table st on s.sector_id = st.id " +
-                "where sector_id = " + sector_id + " AND lead_by = " + staff + " AND " +
-                "customer LIKE '%" + txtFilter.Text + "%' " +
+                "where sector like '%" + cmbSector.Text + "%' and " +
+                "u.forename + ' ' + u.surname like '%" + cmbStaff.Text + "%' and " +
+                "s.notes like '%" + txtFilter.Text + "%' and " +
+                "customer like '%" + txtCustomer.Text + "%' AND " +
+                "lead_date >= '" + start_date + "' AND lead_date <= '" + end_date + "' " + 
                 "order by lead_date desc";
 
 
@@ -213,6 +335,8 @@ namespace PriceMaster
             }
 
             format_grid();
+            skip_load = -1;
+            skip_tab_load = 0;
         }
 
 
@@ -249,31 +373,31 @@ namespace PriceMaster
             //distinct formatting
             if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Correspondence")
             {
-                lblSector.Text = "Sector: " + dgvSector.Rows[0].Cells[11].Value.ToString();
+                //lblSector.Text = "Sector: " + dgvSector.Rows[0].Cells[11].Value.ToString();
 
                 dgvSector.Columns[0].Visible = false;
-                dgvSector.Columns[11].Visible = false;
+                //dgvSector.Columns[11].Visible = false;
                 dgvSector.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvSector.Columns[12].Visible = false;
                 dgvSector.Columns[13].Visible = false; //failed contact
             }
             else if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Quotation Chasing")
             {
-                lblSector.Text = "Sector: " + dgvSector.Rows[0].Cells[9].Value.ToString();
+                // lblSector.Text = "Sector: " + dgvSector.Rows[0].Cells[9].Value.ToString();
 
                 dgvSector.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvSector.Columns[0].Visible = false;
-                dgvSector.Columns[9].Visible = false;
+                //dgvSector.Columns[9].Visible = false;
                 dgvSector.Columns[10].Visible = false; //failed_contact
                 dgvSector.Columns[4].DefaultCellStyle.Format = "c";
             }
             else if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Leads")
             {
-                lblSector.Text = "Sector: " + dgvSector.Rows[0].Cells[6].Value.ToString();
+                // lblSector.Text = "Sector: " + dgvSector.Rows[0].Cells[6].Value.ToString();
 
                 dgvSector.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvSector.Columns[0].Visible = false;
-                dgvSector.Columns[6].Visible = false;
+               // dgvSector.Columns[6].Visible = false;
 
             }
             dgvSector.ClearSelection();
@@ -288,14 +412,22 @@ namespace PriceMaster
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            load_grid(_sector_id, _staff_id);
+            if (skip_tab_load == -1)
+            {
+                skip_tab_load = 0;
+                return;
+            }
+            skip_load = 0;
+            load_grid();
             format_grid();
+            //skip_tab_load = -1;
         }
 
         private void dgvSector_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int correspondence = 0;
             int slimline = 0;
+
 
             if (tabControl.TabPages[tabControl.SelectedIndex].Text == "Correspondence")
             {
@@ -312,8 +444,6 @@ namespace PriceMaster
                 return;
 
 
-
-
             frmSectorChaseCorrespondenceHistory frm = new frmSectorChaseCorrespondenceHistory(correspondence, dgvSector.Rows[e.RowIndex].Cells[2].Value.ToString(), _staff_id, dgvSector.Rows[e.RowIndex].Cells[0].Value.ToString(), slimline);
             frm.ShowDialog();
         }
@@ -321,8 +451,8 @@ namespace PriceMaster
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
 
-            if (txtFilter.Text.Length == 0)
-                load_grid(_sector_id, _staff_id);
+            //if (txtFilter.Text.Length == 0)
+            //    load_grid();
 
         }
 
@@ -330,7 +460,8 @@ namespace PriceMaster
         {
             if (e.KeyChar == (char)13)
             {
-                load_grid(_sector_id, _staff_id);
+                validate_tab_pages();
+                load_grid();
             }
         }
 
@@ -353,18 +484,21 @@ namespace PriceMaster
             xlApp.Visible = false; //make it visible
             //xlApp.WindowState = Excel.XlWindowState.xlMaximized;
             //get the users name
-            string user = "select forename + ' ' + surname FROM [user_info].dbo.[user] where id = " + _staff_id;
-            using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
-            {
-                conn.Open();
+            //string user = "select forename + ' ' + surname FROM [user_info].dbo.[user] where id = " + _staff_id;
+            //using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+            //{
+            //    conn.Open();
 
-                using (SqlCommand cmd = new SqlCommand(user, conn))
-                    user = cmd.ExecuteScalar().ToString();
+            //    using (SqlCommand cmd = new SqlCommand(user, conn))
+            //        user = cmd.ExecuteScalar().ToString();
 
-                conn.Close();
-            }
+            //    conn.Close();
+            //}
 
-            xlWorksheet.Cells[1][excel_row].Value2 = user + " - " + lblSector.Text;
+            //xlWorksheet.Cells[1][excel_row].Value2 = user + " - "; // + lblSector.Text;
+
+            xlWorksheet.Cells[1][excel_row].Value2 = "Sector Management - " + tabControl.SelectedTab.Text;
+
             //make the header blue
             xlWorksheet.Cells[1][excel_row].Interior.Color = Excel.XlRgbColor.rgbLightSkyBlue;
             //font formats
@@ -536,6 +670,82 @@ namespace PriceMaster
             {
                 GC.Collect();
             }
+        }
+
+        private void cmbStaff_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            validate_tab_pages();
+            skip_load = 0;
+            load_grid();
+
+        }
+
+        private void txtCustomer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+            if (e.KeyChar == (char)13)
+            {
+                validate_tab_pages();
+                skip_load = 0;
+                load_grid();
+            }
+        }
+
+        private void cmbSector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            validate_tab_pages();
+            skip_load = 0;
+            load_grid();
+        }
+
+        private void txtCustomer_TextChanged(object sender, EventArgs e)
+        {
+            //if (skip_load == 0)
+            //    load_grid();
+        }
+
+        private void btnSector_Click(object sender, EventArgs e)
+        {
+            cmbSector.Text = "";
+            validate_tab_pages();
+            skip_load = 0;
+            load_grid();
+
+        }
+
+        private void btnStaff_Click(object sender, EventArgs e)
+        {
+            cmbStaff.Text = "";
+            validate_tab_pages();
+            skip_load = 0;
+            load_grid();
+        }
+
+        private void btnCustomer_Click(object sender, EventArgs e)
+        {
+            txtCustomer.Text = "";
+            validate_tab_pages();
+            skip_load = 0;
+            load_grid();
+        }
+
+        private void btnUser_Click(object sender, EventArgs e)
+        {
+            btnUser.Text = "";
+            validate_tab_pages();
+            skip_load = 0;
+            load_grid();
+        }
+
+        private void btnClearAll_Click(object sender, EventArgs e)
+        {
+            cmbSector.Text = "";
+            cmbStaff.Text = "";
+            txtCustomer.Text = "";
+            txtFilter.Text = "";
+            validate_tab_pages();
+            skip_load = 0;
+            load_grid();
         }
     }
 }

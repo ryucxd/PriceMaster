@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>250</ApplicationRevision>
+    <ApplicationRevision>254</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -266,12 +266,6 @@
     </Compile>
     <Compile Include="frmSalesUpdate.Designer.cs">
       <DependentUpon>frmSalesUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmWeeklyTargetSearch.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmWeeklyTargetSearch.Designer.cs">
-      <DependentUpon>frmWeeklyTargetSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="SlimlineChasing\frmSlimlineChaseQuotation.cs">
       <SubType>Form</SubType>
@@ -607,9 +601,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSalesUpdate.resx">
       <DependentUpon>frmSalesUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmWeeklyTargetSearch.resx">
-      <DependentUpon>frmWeeklyTargetSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SlimlineChasing\frmSlimlineChaseQuotation.resx">
       <DependentUpon>frmSlimlineChaseQuotation.cs</DependentUpon>

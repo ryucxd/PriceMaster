@@ -67,6 +67,8 @@
             this.btnSalesMemberOneEfficency = new PriceMaster.buttonFormatting();
             this.btnSalesMemberTwoEfficency = new PriceMaster.buttonFormatting();
             this.btnSalesMemberThreeEfficency = new PriceMaster.buttonFormatting();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberOne)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberTwo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesMemberThree)).BeginInit();
@@ -352,7 +354,7 @@
             this.lblWeekCommencing.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
             this.lblWeekCommencing.Location = new System.Drawing.Point(17, 9);
             this.lblWeekCommencing.Name = "lblWeekCommencing";
-            this.lblWeekCommencing.Size = new System.Drawing.Size(487, 36);
+            this.lblWeekCommencing.Size = new System.Drawing.Size(479, 36);
             this.lblWeekCommencing.TabIndex = 70;
             this.lblWeekCommencing.Text = "Data for Week Commencing: 2024/08/15";
             this.lblWeekCommencing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -510,11 +512,31 @@
             this.btnSalesMemberThreeEfficency.UseVisualStyleBackColor = false;
             this.btnSalesMemberThreeEfficency.Click += new System.EventHandler(this.btnSalesMemberThreeEfficency_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(960, 35);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(210, 20);
+            this.textBox1.TabIndex = 80;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.label2.Location = new System.Drawing.Point(988, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(154, 22);
+            this.label2.TabIndex = 81;
+            this.label2.Text = "Customer Search:";
+            // 
             // frmSectorManagementView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1410, 986);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnSalesMemberThreeEfficency);
             this.Controls.Add(this.btnSalesMemberTwoEfficency);
             this.Controls.Add(this.btnSalesMemberOneEfficency);
@@ -603,5 +625,7 @@
         private buttonFormatting btnSalesMemberOneEfficency;
         private buttonFormatting btnSalesMemberTwoEfficency;
         private buttonFormatting btnSalesMemberThreeEfficency;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label2;
     }
 }

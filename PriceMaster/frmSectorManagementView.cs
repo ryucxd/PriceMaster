@@ -16,6 +16,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using System.Diagnostics;
 using System.Drawing.Printing;
 using System.Windows.Forms.Integration;
+using System.Windows.Input;
 
 namespace PriceMaster
 {
@@ -27,6 +28,7 @@ namespace PriceMaster
         public int salesMemberTwo { get; set; }
         public int salesMemberThree { get; set; }
         public DataTable excel_headers { get; set; }
+        public int skip_tab_load { get; set; }
 
 
         public frmSectorManagementView()
@@ -160,6 +162,7 @@ namespace PriceMaster
                             BackColor = Color.LightBlue
                         };
                         tabControl.TabPages.Add(tabPageLoop);
+                        skip_tab_load = -1;
                     }
                     remove_tabs = 0;
 
@@ -267,7 +270,7 @@ namespace PriceMaster
 
 
             }
-
+            skip_tab_load = 0;
         }
 
         private void percent(int staff_id, DateTime sector_date, Label lbl)
@@ -494,6 +497,11 @@ namespace PriceMaster
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (skip_tab_load == -1)
+            {
+                skip_tab_load = 0;
+                return;
+            }
             fill_grids();
         }
 
@@ -521,11 +529,28 @@ namespace PriceMaster
                     staff_id = Convert.ToInt32(cmd.ExecuteScalar().ToString());
 
 
+                string sql = "select distinct sector_date  FROM [order_database].dbo.view_sales_table_grouped " +
+                    "where sector_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND sector_date <= '" + dteEnd.Value.ToString("yyyyMMdd") + "' ";
+
+
+                DataTable dt = new DataTable();
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+
+                    DateTime sectorDate = Convert.ToDateTime(dt.Rows[tabControl.SelectedIndex][0].ToString());
+
+
+                    frmSectorManagementViewDetailed frm = new frmSectorManagementViewDetailed(sector_id, staff_id, sectorDate, sectorDate.AddDays(7),"");
+                    frm.ShowDialog();
+
+                }
                 conn.Close();
             }
 
-            frmSectorManagementViewDetailed frm = new frmSectorManagementViewDetailed(sector_id, staff_id);
-            frm.ShowDialog();
+
 
         }
 
@@ -567,13 +592,11 @@ namespace PriceMaster
         }
 
 
-        private void PieChartOne_MouseClick(object sender, MouseEventArgs e)
-        {
-            frmSectorManagementViewDetailed frm = new frmSectorManagementViewDetailed(1, 2);
-            frm.ShowDialog();
-
-
-        }
+        //private void PieChartOne_MouseClick(object sender, MouseEventArgs e)
+        //{
+        //    frmSectorManagementViewDetailed frm = new frmSectorManagementViewDetailed(1, 2, Convert.ToDateTime("20241101"), Convert.ToDateTime("20241113"));
+        //    frm.ShowDialog();
+        //}
 
         private void btnSalesMemberTwoHistoric_Click(object sender, EventArgs e)
         {
@@ -1245,13 +1268,50 @@ namespace PriceMaster
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     da.Fill(dt);
 
-                    sectorDate = Convert.ToDateTime(dt.Rows[tabControl.SelectedIndex][0].ToString());}
+                    sectorDate = Convert.ToDateTime(dt.Rows[tabControl.SelectedIndex][0].ToString());
+                }
             }
 
-            frmChaseEfficency frm = new frmChaseEfficency(label,sectorDate);
+            frmChaseEfficency frm = new frmChaseEfficency(label, sectorDate);
             frm.ShowDialog();
 
         }
 
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+
+
+            if (e.KeyChar == (char)13)
+            {
+                DateTime sectorDate = DateTime.Now;
+                //get the date from the tabcontrol
+                string sql = "select distinct sector_date  FROM [order_database].dbo.view_sales_table_grouped " +
+                    "where sector_date >= '" + dteStart.Value.ToString("yyyyMMdd") + "' AND sector_date <= '" + dteEnd.Value.ToString("yyyyMMdd") + "' ";
+
+                using (SqlConnection conn = new SqlConnection(CONNECT.ConnectionString))
+                {
+                    conn.Open();
+
+                    DataTable dt = new DataTable();
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        da.Fill(dt);
+
+                        sectorDate = Convert.ToDateTime(dt.Rows[tabControl.SelectedIndex][0].ToString());
+                    }
+                }
+
+                frmSectorManagementViewDetailed frm = new frmSectorManagementViewDetailed(0, 0, sectorDate, sectorDate.AddDays(7),textBox1.Text);
+                frm.ShowDialog();
+            }
+        }
+
+        private void txtCustomer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
     }
 }

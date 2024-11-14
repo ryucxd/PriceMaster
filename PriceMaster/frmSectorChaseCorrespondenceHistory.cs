@@ -25,7 +25,32 @@ namespace PriceMaster
 
             this.correspondence = correspondence;
             this.customer = customer;
-            this.staff_id = staff_id;
+            //if the passed over staff_id = 0 then we need to find out who made the correspondence/chase and make it them
+            if (staff_id > 0)
+                this.staff_id = staff_id;
+            else
+            {
+                string sql = "";
+
+                if (correspondence == -1)
+                    sql = "select correspondence_by FROM [order_database].dbo.quotation_chase_customer where id = " + default_quote_id;
+                else
+                    sql = "select chased_by FROM [order_database].dbo.quotation_chase_log where id = " + default_quote_id;
+
+                using (SqlConnection conn = new SqlConnection (CONNECT.ConnectionString))
+                {
+                    conn.Open ();
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        this.staff_id = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+
+                    conn.Close();
+                
+                }
+
+            }
             this.default_quote_id = default_quote_id;
             this.slimline = slimline;
             fillHistory();
@@ -163,7 +188,7 @@ namespace PriceMaster
 
                     if (correspondence == -1)
                         dgvHistory.Columns[2].Visible = false;
-               
+
 
                 }
 
