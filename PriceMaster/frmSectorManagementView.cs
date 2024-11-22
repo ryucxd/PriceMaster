@@ -865,7 +865,8 @@ namespace PriceMaster
                "case when no_follow_up = -1 then 'No follow up' else Convert(varchar,cast(next_correspondence_date as date),103)   end  as [Next Correspondence], Sector " +
                "FROM [order_database].dbo.quotation_chase_customer q " +
                "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
-                "where sector_id = " + sector_id + " and correspondence_by = " + staff;
+                "where sector_id = " + sector_id + " and correspondence_by = " + staff  + " " +
+                "Order by date_created desc";
 
 
 
@@ -878,7 +879,7 @@ namespace PriceMaster
                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
                 "left join[price_master].dbo.[sl_quotation] sq on q.quote_id = sq.quote_id " +
                 "left join[dsl_fitting].dbo.sales_ledger sl on sq.customer_acc_ref = sl.ACCOUNT_REF " +
-                "where sector_id = " + sector_id + " AND chased_by = " + staff + " AND sq.highest_issue = -1" +
+                "where sector_id = " + sector_id + " AND chased_by = " + staff + " AND sq.highest_issue = -1 " +
                 "union all " +
                 "select chase_date as [Chase Date],CAST(q.quote_id as nvarchar(max)) as [Quote ID],Customer,chase_description as [Chase Notes], " +
                 //"CASE WHEN phone = 0 THEN CAST(0 AS BIT) WHEN phone IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS Phone, " +
@@ -889,14 +890,16 @@ namespace PriceMaster
                 "left join [order_database].dbo.sales_table s on q.sector_id = s.id " +
                 "left join (select q.quote_id,q.customer FROM [order_database].dbo.solidworks_quotation_log q " +
                         "right join [order_database].dbo.view_solidworks_max_rev r on q.quote_id = r.quote_id AND q.revision_number = r.revision_number) sq on q.quote_id = sq.quote_id " +
-                "where sector_id = " + sector_id + " AND chased_by = " + staff;
+                "where sector_id = " + sector_id + " AND chased_by = " + staff + " " +
+                "Order by chase_date desc";
 
             string sql_lead = "select lead_date as [Lead Date],Customer,contact_name as [Contact Name]," +
                 "notes as [Lead Notes], u.forename + ' ' + u.surname as [Allocated to]" +
                 "FROM [order_database].dbo.sales_new_leads s " +
                 "left join [user_info].dbo.[user] u on s.allocated_to = u.id " +
                 "left join [order_database].dbo.sales_table st on s.sector_id = st.id " +
-                "where sector_id = " + sector_id + " AND lead_by = " + staff;
+                "where sector_id = " + sector_id + " AND lead_by = " + staff + " " +
+                "ORDER BY lead_date desc";
 
 
 
